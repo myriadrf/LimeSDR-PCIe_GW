@@ -36,6 +36,8 @@
 *.jdi
 *.pin
 *.sld
+output_files/
+!*.cof
 #--------------
 # other files
 #--------------
