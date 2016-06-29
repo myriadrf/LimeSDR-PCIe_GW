@@ -60,3 +60,4 @@ alt_sld_fab_wrapper_hw.tcl
 #--------------
 simulation/
 incremental_db/
+db/

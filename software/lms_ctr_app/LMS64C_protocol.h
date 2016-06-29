@@ -66,7 +66,7 @@ enum eEXP_BOARD {
 
 #define CMD_LMS_LNA			0x2A
 #define CMD_LMS_PA			0x2B
-#define CMD_PROG_MCU		0x2C //LMS7 MCU FW write
+#define CMD_LMS_MCU_FW_WR	0x2C //LMS7 MCU FW write
 #define CMD_WR_MCU			0x2D //testing
 #define CMD_RD_MCU			0x2E //testing
 

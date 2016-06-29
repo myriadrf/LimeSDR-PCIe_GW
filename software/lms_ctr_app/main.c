@@ -26,13 +26,27 @@
 //#define FW_VER				1 //Initial version
 //#define FW_VER				2 //FLASH programming added
 //#define FW_VER				3 //Temperature and Si5351C control added
-#define FW_VER				4 //LM75 configured to control fan; I2C speed increased up to 400kHz; ADF/DAC control implementation.
+//#define FW_VER				4 //LM75 configured to control fan; I2C speed increased up to 400kHz; ADF/DAC control implementation.
+#define FW_VER				5 //LMS7 MCU programming feature added
 
 #define SPI_NR_LMS7002M 0
 #define SPI_NR_FPGA     1
 #define SPI_NR_DAC      0
 #define SPI_NR_ADF4002  0
 #define SPI_NR_FLASH    0
+
+//CMD_PROG_MCU
+#define PROG_EEPROM 1
+#define PROG_SRAM	2
+#define BOOT_MCU	3
+
+///CMD_PROG_MCU
+#define MCU_CONTROL_REG	0x02
+#define MCU_STATUS_REG	0x03
+#define MCU_FIFO_WR_REG	0x04
+
+#define MAX_MCU_RETRIES	30
+uint8_t MCU_retries;
 
 uint8_t test, block, cmd_errors, glEp0Buffer_Rx[64], glEp0Buffer_Tx[64];
 tLMS_Ctrl_Packet *LMS_Ctrl_Packet_Tx = (tLMS_Ctrl_Packet*)glEp0Buffer_Tx;
@@ -45,8 +59,9 @@ signed short int converted_val = 300;
 
 int flash_page = 0, flash_page_data_cnt = 0, flash_data_cnt_free = 0, flash_data_counter_to_copy = 0;
 //FPGA conf
-unsigned long int current_portion, fpga_data;
+unsigned long int last_portion, current_portion, fpga_data;
 unsigned char data_cnt;
+unsigned char sc_brdg_data[4];
 unsigned char flash_page_data[FLASH_PAGE_SIZE];
 tBoard_Config_FPGA *Board_Config_FPGA = (tBoard_Config_FPGA*) flash_page_data;
 unsigned long int fpga_byte;
@@ -791,10 +806,192 @@ int main()
  				break;
 
 
+				case CMD_LMS_MCU_FW_WR:
+
+					current_portion = LMS_Ctrl_Packet_Rx->Data_field[1];
+
+					//check if portions are send in correct order
+					if(current_portion != 0) //not first portion?
+					{
+						if(last_portion != (current_portion - 1)) //portion number increments?
+						{
+							LMS_Ctrl_Packet_Tx->Header.Status = STATUS_WRONG_ORDER_CMD;
+							break;
+						}
+					}
+
+					if (current_portion == 0) //PORTION_NR = first fifo
+					{
+						//reset mcu
+						//write reg addr - mSPI_REG2 (Controls MCU input pins)
+						sc_brdg_data[0] = (0x80); //reg addr MSB with write bit
+						sc_brdg_data[1] = (MCU_CONTROL_REG); //reg addr LSB
+
+						sc_brdg_data[2] = (0x00); //reg data MSB
+						sc_brdg_data[3] = (0x00); //reg data LSB //8
+
+						spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_LMS7002M, 4, &sc_brdg_data[0], 0, NULL, 0);
+
+						//set mode
+						//write reg addr - mSPI_REG2 (Controls MCU input pins)
+						sc_brdg_data[0] = (0x80); //reg addr MSB with write bit
+						sc_brdg_data[1] = (MCU_CONTROL_REG); //reg addr LSB
+
+						sc_brdg_data[2] = (0x00); //reg data MSB
+
+						//reg data LSB
+						switch (LMS_Ctrl_Packet_Rx->Data_field[0]) //PROG_MODE
+						{
+							case PROG_EEPROM:
+								sc_brdg_data[3] = (0x01); //Programming both EEPROM and SRAM  //8
+								spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_LMS7002M, 4, &sc_brdg_data[0], 0, NULL, 0);
+								break;
+
+							case PROG_SRAM:
+								sc_brdg_data[3] =(0x02); //Programming only SRAM  //8
+								spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_LMS7002M, 4, &sc_brdg_data[0], 0, NULL, 0);
+								break;
+
+
+							case BOOT_MCU:
+								sc_brdg_data[3] = (0x03); //Programming both EEPROM and SRAM  //8
+								spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_LMS7002M, 4, &sc_brdg_data[0], 0, NULL, 0);
+
+								//spi read
+								//write reg addr
+								sc_brdg_data[0] = (0x00); //reg addr MSB
+								sc_brdg_data[1] = (MCU_STATUS_REG); //reg addr LSB
+
+								spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_LMS7002M, 2, &sc_brdg_data[0], 2, &sc_brdg_data[0], 0);
+
+								goto BOOTING;
+
+								break;
+						}
+					}
+
+					MCU_retries = 0;
+
+					//wait till EMPTY_WRITE_BUFF = 1
+					while (MCU_retries < MAX_MCU_RETRIES)
+					{
+						//read status reg
+
+						//spi read
+						//write reg addr
+						sc_brdg_data[0] = (0x00); //reg addr MSB
+						sc_brdg_data[1] = (MCU_STATUS_REG); //reg addr LSB
+
+						spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_LMS7002M, 2, &sc_brdg_data[0], 2, &sc_brdg_data[0], 0);
+
+						if (sc_brdg_data[1] &0x01) break; //EMPTY_WRITE_BUFF = 1
+
+						MCU_retries++;
+						usleep (30);
+					}
+
+					//write 32 bytes to FIFO
+					for(block = 0; block < 32; block++)
+					{
+						/*
+						//wait till EMPTY_WRITE_BUFF = 1
+						while (MCU_retries < MAX_MCU_RETRIES)
+						{
+							//read status reg
+
+							//spi read
+							//write reg addr
+							SPI_SendByte(0x00); //reg addr MSB
+							SPI_SendByte(MCU_STATUS_REG); //reg addr LSB
+
+							//read reg data
+							SPI_TransferByte(0x00); //reg data MSB
+							temp_status = SPI_TransferByte(0x00); //reg data LSB
+
+							if (temp_status &0x01) break;
+
+							MCU_retries++;
+							Delay_us (30);
+						}*/
+
+						//write reg addr - mSPI_REG4 (Writes one byte of data to MCU  )
+						sc_brdg_data[0] = (0x80); //reg addr MSB with write bit
+						sc_brdg_data[1] = (MCU_FIFO_WR_REG); //reg addr LSB
+
+						sc_brdg_data[2] = (0x00); //reg data MSB
+						sc_brdg_data[3] = (LMS_Ctrl_Packet_Rx->Data_field[2 + block]); //reg data LSB //8
+
+						spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_LMS7002M, 4, &sc_brdg_data[0], 0, NULL, 0);
+
+						MCU_retries = 0;
+					}
+
+					/*sbi (PORTB, SAEN); //Enable LMS's SPI
+					cbi (PORTB, SAEN); //Enable LMS's SPI*/
+
+
+					MCU_retries = 0;
+
+					//wait till EMPTY_WRITE_BUFF = 1
+					while (MCU_retries < 500)
+					{
+						//read status reg
+
+						//spi read
+						//write reg addr
+						sc_brdg_data[0] = (0x00); //reg addr MSB
+						sc_brdg_data[1] = (MCU_STATUS_REG); //reg addr LSB
+
+						spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_LMS7002M, 2, &sc_brdg_data[0], 2, &sc_brdg_data[0], 0);
+
+						if (sc_brdg_data[1] &0x01) break; //EMPTY_WRITE_BUFF = 1
+
+						MCU_retries++;
+						usleep (30);
+					}
+
+
+					if (current_portion  == 255) //PORTION_NR = last fifo
+					{
+						//chek programmed bit
+
+						MCU_retries = 0;
+
+						//wait till PROGRAMMED = 1
+						while (MCU_retries < MAX_MCU_RETRIES)
+						{
+							//read status reg
+
+							//spi read
+							//write reg addr
+							sc_brdg_data[0] = (0x00); //reg addr MSB
+							sc_brdg_data[1] = (MCU_STATUS_REG); //reg addr LSB
+
+							spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_LMS7002M, 2, &sc_brdg_data[0], 2, &sc_brdg_data[0], 0);
+
+							if (sc_brdg_data[1] &0x40) break; //PROGRAMMED = 1
+
+							MCU_retries++;
+							usleep (30);
+						}
+
+						if (MCU_retries == MAX_MCU_RETRIES) cmd_errors++;
+					}
+
+					last_portion = current_portion; //save last portion number
+
+					BOOTING:
+
+					if(cmd_errors) LMS_Ctrl_Packet_Tx->Header.Status = STATUS_ERROR_CMD;
+					else LMS_Ctrl_Packet_Tx->Header.Status = STATUS_COMPLETED_CMD;
+
+				break;
+
 
  				default:
  					/* This is unknown request. */
  					//isHandled = CyFalse;
+ 					LMS_Ctrl_Packet_Tx->Header.Status = STATUS_UNKNOWN_CMD;
  				break;
      		}
 
