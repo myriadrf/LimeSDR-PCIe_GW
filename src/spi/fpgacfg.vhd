@@ -188,7 +188,7 @@ begin
 			--Read only registers
 			mem(0)	<= "0000000000001111"; -- 00 frre, Board ID (LimeSDR-PCIe)
 			mem(1)	<= "0000000000000001"; -- 00 free, Function (1)
-			mem(2)	<= "0000000000000010"; -- 00 free, GW wersion (2)
+			mem(2)	<= "0000000000000011"; -- 00 free, GW wersion (3)
 			mem(3)	<= "0000000000000000"; -- 16 free, (Reserved)
 			--FPGA direct clocking
 			mem(4)	<= "0000000000000000"; --  0 free, phase_reg_sel

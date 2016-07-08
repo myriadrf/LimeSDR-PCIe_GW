@@ -1,4 +1,4 @@
-//altpll bandwidth_type="AUTO" CBX_DECLARE_ALL_CONNECTED_PORTS="OFF" clk0_divide_by=1 clk0_duty_cycle=50 clk0_multiply_by=1 clk0_phase_shift="0" clk1_divide_by=1 clk1_duty_cycle=50 clk1_multiply_by=1 clk1_phase_shift="0" compensate_clock="CLK0" device_family="Cyclone IV GX" inclk0_input_frequency=57142 intended_device_family="Cyclone IV GX" lpm_hint="CBX_MODULE_PREFIX=pll" operation_mode="normal" pll_type="AUTO" port_clk0="PORT_USED" port_clk1="PORT_USED" port_clk2="PORT_UNUSED" port_clk3="PORT_UNUSED" port_clk4="PORT_UNUSED" port_clk5="PORT_UNUSED" port_extclk0="PORT_UNUSED" port_extclk1="PORT_UNUSED" port_extclk2="PORT_UNUSED" port_extclk3="PORT_UNUSED" port_inclk1="PORT_UNUSED" port_phasecounterselect="PORT_USED" port_phasedone="PORT_USED" port_scandata="PORT_USED" port_scandataout="PORT_USED" scan_chain_mif_file="61p44_zero_deg.mif" self_reset_on_loss_lock="OFF" width_clock=5 width_phasecounterselect=3 areset clk configupdate inclk locked pfdena phasecounterselect phasedone phasestep phaseupdown scanclk scanclkena scandata scandataout scandone CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48
+//altpll bandwidth_type="AUTO" CBX_DECLARE_ALL_CONNECTED_PORTS="OFF" clk0_divide_by=1 clk0_duty_cycle=50 clk0_multiply_by=1 clk0_phase_shift="0" clk1_divide_by=1 clk1_duty_cycle=50 clk1_multiply_by=1 clk1_phase_shift="0" compensate_clock="CLK1" device_family="Cyclone IV GX" inclk0_input_frequency=5000 intended_device_family="Cyclone IV GX" lpm_hint="CBX_MODULE_PREFIX=pll" operation_mode="source_synchronous" pll_type="AUTO" port_clk0="PORT_USED" port_clk1="PORT_USED" port_clk2="PORT_UNUSED" port_clk3="PORT_UNUSED" port_clk4="PORT_UNUSED" port_clk5="PORT_UNUSED" port_extclk0="PORT_UNUSED" port_extclk1="PORT_UNUSED" port_extclk2="PORT_UNUSED" port_extclk3="PORT_UNUSED" port_inclk1="PORT_UNUSED" port_phasecounterselect="PORT_USED" port_phasedone="PORT_USED" port_scandata="PORT_USED" port_scandataout="PORT_USED" scan_chain_mif_file="61p44_zero_deg.mif" self_reset_on_loss_lock="OFF" width_clock=5 width_phasecounterselect=3 areset clk configupdate inclk locked pfdena phasecounterselect phasedone phasestep phaseupdown scanclk scanclkena scandata scandataout scandone CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48
 //VERSION_BEGIN 15.1 cbx_altclkbuf 2016:02:01:19:04:59:SJ cbx_altiobuf_bidir 2016:02:01:19:04:59:SJ cbx_altiobuf_in 2016:02:01:19:04:59:SJ cbx_altiobuf_out 2016:02:01:19:04:59:SJ cbx_altpll 2016:02:01:19:04:59:SJ cbx_cycloneii 2016:02:01:19:04:59:SJ cbx_lpm_add_sub 2016:02:01:19:04:59:SJ cbx_lpm_compare 2016:02:01:19:04:59:SJ cbx_lpm_counter 2016:02:01:19:04:59:SJ cbx_lpm_decode 2016:02:01:19:04:59:SJ cbx_lpm_mux 2016:02:01:19:04:59:SJ cbx_mgl 2016:02:01:19:07:00:SJ cbx_nadder 2016:02:01:19:04:59:SJ cbx_stratix 2016:02:01:19:05:00:SJ cbx_stratixii 2016:02:01:19:05:00:SJ cbx_stratixiii 2016:02:01:19:05:00:SJ cbx_stratixv 2016:02:01:19:05:00:SJ cbx_util_mgl 2016:02:01:19:04:59:SJ  VERSION_END
 //CBXI_INSTANCE_NAME="lms7_trx_top_pll_block_inst18_pll_inst35_altpll_altpll_component"
 // synthesis VERILOG_INPUT_VERSION VERILOG_2001
@@ -625,9 +625,9 @@ module  pll_altpll
 		pll1.clk1_duty_cycle = 50,
 		pll1.clk1_multiply_by = 1,
 		pll1.clk1_phase_shift = "0",
-		pll1.compensate_clock = "clk0",
-		pll1.inclk0_input_frequency = 57142,
-		pll1.operation_mode = "normal",
+		pll1.compensate_clock = "clk1",
+		pll1.inclk0_input_frequency = 5000,
+		pll1.operation_mode = "source_synchronous",
 		pll1.pll_type = "auto",
 		pll1.scan_chain_mif_file = "61p44_zero_deg.mif",
 		pll1.self_reset_on_loss_lock = "off",
