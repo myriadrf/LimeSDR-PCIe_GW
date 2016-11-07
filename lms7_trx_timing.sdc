@@ -8,11 +8,11 @@ set_time_format -unit ns -decimal_places 3
 set MCLK2_period	5
 set MCLK1_period	5
 	#Setup and hold times from datasheet
-set LMS7_Tsu	1.5
+set LMS7_Tsu	1
 set LMS7_Th		.2
 	#Calculated expresions
-set LMS7_max_dly [expr $MCLK2_period/4 - $LMS7_Tsu]
-set LMS7_min_dly [expr $LMS7_Th - $MCLK2_period/4]
+set LMS7_max_dly [expr $LMS7_Tsu]
+set LMS7_min_dly [expr $LMS7_Th]
 
 #=======================Base clocks=====================================
 #FPGA pll
@@ -37,6 +37,13 @@ create_generated_clock -name LMS_FCLK2 \
 create_generated_clock -name LMS_LATCH_CLK \
 								-source [get_pins inst18|inst35|altpll_component|auto_generated|pll1|inclk[0]] \
 								-phase 90 [get_pins inst18|inst35|altpll_component|auto_generated|pll1|clk[1]]
+								
+create_generated_clock -name TX_PLL_C0 \
+								-source [get_pins inst20|inst35|altpll_component|auto_generated|pll1|inclk[0]] \
+								-phase 0 [get_pins inst20|inst35|altpll_component|auto_generated|pll1|clk[0]]
+create_generated_clock -name TX_PLL_C1 \
+								-source [get_pins inst20|inst35|altpll_component|auto_generated|pll1|inclk[0]] \
+								-phase 90 [get_pins inst20|inst35|altpll_component|auto_generated|pll1|clk[1]]								
 #======================Set Input Delay==========================================
 #LMS7
 set_input_delay	-max $LMS7_max_dly \
@@ -57,10 +64,12 @@ derive_pll_clocks
 derive_clock_uncertainty
 
 # Set clkA and clkB to be mutually exclusive clocks.
-set_clock_groups -exclusive -group [get_clocks {CLK50_FPGA_1}] \
-									-group [get_clocks {CLK50_FPGA_2}] \
-										-group [get_clocks {LMS_MCLK1}] \
-										-group [get_clocks {LMS_MCLK2}]
+set_clock_groups -asynchronous 	-group [get_clocks {CLK50_FPGA_1}] \
+											-group [get_clocks {CLK50_FPGA_2}] \
+											-group [get_clocks {CLK100_FPGA}] \
+											-group [get_clocks {PCIE_REFCLK}] \
+											-group [get_clocks {LMS_MCLK1 TX_PLL_C0 TX_PLL_C1}] \
+											-group [get_clocks {LMS_MCLK2 LMS_FCLK2 LMS_LATCH_CLK}]
 
 #set false paths
 # LED's

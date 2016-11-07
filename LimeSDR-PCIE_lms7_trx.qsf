@@ -37,6 +37,7 @@
 # -------------------------------------------------------------------------- #
 
 
+set_global_assignment -name PRE_FLOW_SCRIPT_FILE "quartus_sh:gui.tcl"
 set_global_assignment -name FAMILY "Cyclone IV GX"
 set_global_assignment -name DEVICE EP4CGX30CF23C7
 set_global_assignment -name TOP_LEVEL_ENTITY lms7_trx_top
@@ -255,14 +256,21 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to LM75_OS
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to ADF_MUXOUT
 set_location_assignment PIN_F18 -to ADF_MUXOUT
 set_global_assignment -name POST_FLOW_SCRIPT_FILE "quartus_sh:gen_prg_files.tcl"
+set_global_assignment -name SEARCH_PATH symbols/
+set_global_assignment -name VHDL_FILE src/revision/revision.vhd
+set_global_assignment -name VHDL_FILE src/rx_path/wr_rx_fifo_v3.vhd
+set_global_assignment -name VHDL_FILE src/rx_path/rx_pct_data_v2.vhd
+set_global_assignment -name VHDL_FILE src/rx_path/rx_path.vhd
+set_global_assignment -name VHDL_FILE src/rx_path/lms7002_ddin.vhd
+set_global_assignment -name VHDL_FILE src/rx_path/diq2_sampling.vhd
+set_global_assignment -name VHDL_FILE src/rx_path/diq2_samples.vhd
+set_global_assignment -name VHDL_FILE src/rx_path/compress_v2.vhd
+set_global_assignment -name VHDL_FILE src/general/fifo_inst.vhd
 set_global_assignment -name QXP_FILE "limesdr-pcie_xillybus_core/xillybus_core.qxp"
 set_global_assignment -name VERILOG_FILE "limesdr-pcie_xillybus_core/xillybus.v"
 set_global_assignment -name VHDL_FILE src/tx_packets/tx_pct_data_mimo_v3.vhd
 set_global_assignment -name VHDL_FILE src/tx_modules/rd_tx_fifo.vhd
 set_global_assignment -name VHDL_FILE src/tx_modules/lms7002_ddout.vhd
-set_global_assignment -name VHDL_FILE src/rx_modules/wr_rx_fifo_v3.vhd
-set_global_assignment -name VHDL_FILE src/rx_modules/lms7002_ddin.vhd
-set_global_assignment -name VHDL_FILE src/rx_modules/fifo_inst.vhd
 set_global_assignment -name VHDL_FILE src/reg_phase_shift/simple_reg.vhd
 set_global_assignment -name VHDL_FILE src/reg_phase_shift/phase_shift.vhd
 set_global_assignment -name VHDL_FILE src/pll_reconfig_ctrl/pll_reconfig_status.vhd
@@ -274,8 +282,6 @@ set_global_assignment -name VHDL_FILE src/spi/fpgacfg.vhd
 set_global_assignment -name QIP_FILE ip/pll_reconfig_module/pll_reconfig_module.qip
 set_global_assignment -name VHDL_FILE src/nios_cpu/nios_cpu.vhd
 set_global_assignment -name VHDL_FILE src/testing/pct_transfer_v2.vhd
-set_global_assignment -name VHDL_FILE src/rx_packets/compress_v2.vhd
-set_global_assignment -name QIP_FILE ip/clkctrl/clkctrl/synthesis/clkctrl.qip
 set_global_assignment -name QIP_FILE software/lms_ctr_app/mem_init/meminit.qip
 set_global_assignment -name QIP_FILE lms_ctr/synthesis/lms_ctr.qip
 set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_uart.v -library lms_ctr
@@ -331,11 +337,7 @@ set_global_assignment -name VHDL_FILE src/data_manipulation/decompress.vhd
 set_global_assignment -name VHDL_FILE src/tx_packets/tx_pct_data_mimo.vhd
 set_global_assignment -name VHDL_FILE src/tx_packets/sample_nr_cnt_mimo.vhd
 set_global_assignment -name VHDL_FILE src/testing/test_data.vhd
-set_global_assignment -name VHDL_FILE src/rx_packets/compress.vhd
-set_global_assignment -name VHDL_FILE src/rx_packets/rx_pct_data.vhd
-set_global_assignment -name VHDL_FILE src/rx_packets/wr_rx_fifo_v2.vhd
 set_global_assignment -name QIP_FILE ip/fpga_infifo/fpga_infifo.qip
-set_global_assignment -name VHDL_FILE src/wfm_ram_buffer/sl_ctrl.vhd
 set_global_assignment -name VHDL_FILE src/tx_packets/sync_fifo_rw.vhd
 set_global_assignment -name SDC_FILE lms7_trx_timing.sdc
 set_global_assignment -name VHDL_FILE src/dyn_ps/pll_ps_cntrl.vhd
@@ -345,7 +347,6 @@ set_global_assignment -name VHDL_FILE src/spi/txtspcfg.vhd
 set_global_assignment -name VHDL_FILE src/spi/mem_package.vhd
 set_global_assignment -name VHDL_FILE src/spi/mcfg32wm_fsm.vhd
 set_global_assignment -name VHDL_FILE src/spi/mcfg_components.vhd
-set_global_assignment -name VHDL_FILE src/fx3/slaveFIFO2b_stream.vhd
 set_global_assignment -name VHDL_FILE src/general/alive.vhd
 set_global_assignment -name VHDL_FILE src/general/debounce.vhd
 set_global_assignment -name BDF_FILE lms7_trx_top.bdf
@@ -373,7 +374,6 @@ set_global_assignment -name BDF_FILE symbols/tx_synchronizers.bdf
 set_global_assignment -name QIP_FILE ip/tx_outfifo_mimo/tx_outfifo_32_to_32.qip
 set_global_assignment -name BDF_FILE symbols/LTE_rx_path.bdf
 set_global_assignment -name QIP_FILE ip/lte_rx_fifo/rx_fifo.qip
-set_global_assignment -name VHDL_FILE src/rx_packets/rx_pct_data_v2.vhd
 set_global_assignment -name QIP_FILE ip/sim_pll/sim_pll_rx.qip
 set_global_assignment -name BDF_FILE symbols/LTE_tx_path.bdf
 set_global_assignment -name VHDL_FILE src/testing/test_data_dd.vhd

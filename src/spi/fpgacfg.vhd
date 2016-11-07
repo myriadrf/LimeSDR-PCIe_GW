@@ -10,6 +10,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.mem_package.all;
+use work.revisions.all;
 
 -- ----------------------------------------------------------------------------
 -- Entity declaration
@@ -164,6 +165,8 @@ begin
 			-- Load operation
 			elsif dout_reg_len = '1' then
 				case inst_reg(4 downto 0) is	-- mux read-only outputs
+					when "00001" => dout_reg <= x"0001";
+					when "00010" => dout_reg <= (15 downto 8 => '0') & std_logic_vector(to_unsigned(COMPILE_REV, 8));
 					when others  => dout_reg <= mem(to_integer(unsigned(inst_reg(4 downto 0))));
 				end case;
 			end if;			      
@@ -187,8 +190,8 @@ begin
 		if mreset = '0' then	
 			--Read only registers
 			mem(0)	<= "0000000000001111"; -- 00 frre, Board ID (LimeSDR-PCIe)
-			mem(1)	<= "0000000000000001"; -- 00 free, Function (1)
-			mem(2)	<= "0000000000000011"; -- 00 free, GW wersion (3)
+			mem(1)	<= "0000000000000000"; -- 00 free, GW version
+			mem(2)	<= "0000000000000000"; -- 00 free, GW revision
 			mem(3)	<= "0000000000000000"; -- 16 free, (Reserved)
 			--FPGA direct clocking
 			mem(4)	<= "0000000000000000"; --  0 free, phase_reg_sel

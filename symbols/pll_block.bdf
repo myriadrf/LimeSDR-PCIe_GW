@@ -1393,11 +1393,6 @@ agreement for further details.
 	(pt 536 240)
 )
 (connector
-	(text "inclk0" (rect 1736 336 1785 350)(font "Arial" ))
-	(pt 1832 352)
-	(pt 1728 352)
-)
-(connector
 	(text "scanclk" (rect 1584 928 1641 942)(font "Arial" ))
 	(pt 1696 944)
 	(pt 1584 944)
@@ -1601,6 +1596,11 @@ agreement for further details.
 	(text "scandone" (rect 2224 384 2290 398)(font "Arial" ))
 	(pt 2208 400)
 	(pt 2352 400)
+)
+(connector
+	(text "inclk0" (rect 1736 336 1785 350)(font "Arial" ))
+	(pt 1832 352)
+	(pt 1728 352)
 )
 (text "PLL and pll control" (rect 504 168 907 196)(font "Arial" (font_size 16)(bold)))
 (rectangle (rect 480 160 2920 1352)(color 0 85 0)(line_width 2))

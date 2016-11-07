@@ -16,8 +16,9 @@ USE altera_mf.altera_mf_components.all;
 -- Entity declaration
 -- ----------------------------------------------------------------------------
 entity lms7002_ddin is
-	generic( dev_family	: string := "Cyclone IV E";
-				iq_width		: integer :=12
+	generic( dev_family				: string := "Cyclone IV E";
+				iq_width					: integer :=12;
+				invert_input_clocks	: string := "ON"
 	);
 	port (
       --input ports 
@@ -37,8 +38,11 @@ end lms7002_ddin;
 -- ----------------------------------------------------------------------------
 architecture arch of lms7002_ddin is
 --declare signals,  components here
-signal aclr 	: std_logic;
-signal datain	: std_logic_vector(iq_width downto 0);
+signal aclr 				: std_logic;
+signal datain				: std_logic_vector(iq_width downto 0);
+signal data_h				: std_logic_vector(iq_width downto 0);
+signal data_l				: std_logic_vector(iq_width downto 0);		
+signal data_h_reg			: std_logic_vector(iq_width downto 0);
 
 begin
 
@@ -49,7 +53,7 @@ aclr<=not reset_n;
 	ALTDDIO_IN_component : ALTDDIO_IN
 	GENERIC MAP (
 		intended_device_family 	=> dev_family,
-		invert_input_clocks 		=> "ON",
+		invert_input_clocks 		=> invert_input_clocks,
 		lpm_hint 					=> "UNUSED",
 		lpm_type 					=> "altddio_in",
 		power_up_high 				=> "OFF",
@@ -59,9 +63,22 @@ aclr<=not reset_n;
 		aclr 			=> aclr,
 		datain 		=> datain,
 		inclock 		=> clk,
-		dataout_h 	=> data_out_h,
-		dataout_l 	=> data_out_l
+		dataout_h 	=> data_h,
+		dataout_l 	=> data_l
 	);
+	
+	process(reset_n, clk) is 
+	begin 
+		if reset_n='0' then 
+			data_h_reg<=(others=>'0');
+		elsif (clk'event and clk='1' ) then 
+			data_h_reg<=data_h;
+		end if;
+	end process;
+	
+	data_out_h<=data_h_reg;
+	data_out_l<=data_l;
+			
   
 end arch;   
 
