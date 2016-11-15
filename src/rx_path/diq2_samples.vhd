@@ -120,7 +120,7 @@ lms7002_ddin_inst1 : diq2_sampling
 GENERIC MAP(dev_family 			=> dev_family,
 				diq_width 			=> diq_width,
 				fifo_size			=> 9,
-				invert_ddio_clk	=> "OFF"
+				invert_ddio_clk	=> "ON"
 			)
 PORT MAP(
 		clk_io 		=> clk_iopll,

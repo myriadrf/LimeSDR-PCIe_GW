@@ -42,7 +42,6 @@ signal aclr 				: std_logic;
 signal datain				: std_logic_vector(iq_width downto 0);
 signal data_h				: std_logic_vector(iq_width downto 0);
 signal data_l				: std_logic_vector(iq_width downto 0);		
-signal data_h_reg			: std_logic_vector(iq_width downto 0);
 
 begin
 
@@ -67,16 +66,8 @@ aclr<=not reset_n;
 		dataout_l 	=> data_l
 	);
 	
-	process(reset_n, clk) is 
-	begin 
-		if reset_n='0' then 
-			data_h_reg<=(others=>'0');
-		elsif (clk'event and clk='1' ) then 
-			data_h_reg<=data_h;
-		end if;
-	end process;
 	
-	data_out_h<=data_h_reg;
+	data_out_h<=data_h;
 	data_out_l<=data_l;
 			
   
