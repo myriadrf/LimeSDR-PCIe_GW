@@ -31,6 +31,8 @@ entity fpgacfg is
 		-- Signals coming from the pins or top level serial interface
 		lreset	: in std_logic; 	-- Logic reset signal, resets logic cells only  (use only one reset)
 		mreset	: in std_logic; 	-- Memory reset signal, resets configuration memory only (use only one reset)
+		HW_VER	: in std_logic_vector(3 downto 0);
+		BOM_VER	: in std_logic_vector(3 downto 0);
 		
 		oen: out std_logic; --nc
 		stateo: out std_logic_vector(5 downto 0);
@@ -65,13 +67,14 @@ entity fpgacfg is
 		LMS1_TXNRX1			: out std_logic;
 		LMS1_TXNRX2			: out std_logic;
 		LMS1_TXEN			: out std_logic;
-		LMS1_RXEN			: out std_logic
+		LMS1_RXEN			: out std_logic;
 --		LMS2_RESET			: out std_logic;
 --		LMS2_CORE_LDO_EN	: out std_logic;
 --		LMS2_TXNRX1			: out std_logic;
 --		LMS2_TXNRX2			: out std_logic;
 --		LMS2_TXEN			: out std_logic;
 --		LMS2_RXEN			: out std_logic
+		GPIO					: out std_logic_vector(6 downto 0)
 
 	);
 end fpgacfg;
@@ -167,6 +170,7 @@ begin
 				case inst_reg(4 downto 0) is	-- mux read-only outputs
 					when "00001" => dout_reg <= x"0001";
 					when "00010" => dout_reg <= (15 downto 8 => '0') & std_logic_vector(to_unsigned(COMPILE_REV, 8));
+					when "00011" => dout_reg <= (15 downto 8 => '0') & BOM_VER & HW_VER;
 					when others  => dout_reg <= mem(to_integer(unsigned(inst_reg(4 downto 0))));
 				end case;
 			end if;			      
@@ -192,7 +196,7 @@ begin
 			mem(0)	<= "0000000000001111"; -- 00 frre, Board ID (LimeSDR-PCIe)
 			mem(1)	<= "0000000000000000"; -- 00 free, GW version
 			mem(2)	<= "0000000000000000"; -- 00 free, GW revision
-			mem(3)	<= "0000000000000000"; -- 16 free, (Reserved)
+			mem(3)	<= "0000000000000000"; -- 9 free, BOM_VER[6:4],HW_VER[3:0]
 			--FPGA direct clocking
 			mem(4)	<= "0000000000000000"; --  0 free, phase_reg_sel
 			mem(5)	<= "0000000000000000"; --  0 free, drct_clk_en, 
@@ -215,7 +219,7 @@ begin
 			mem(20)	<= "0000000000000011"; --  0 free, (Reserved LMS control)
 			mem(21)	<= "0000000000000000"; --  0 free, (Reserved LMS control)
 			mem(22)	<= "0000000000000000"; --  0 free, (Reserved LMS control)
-			mem(23)	<= "0000000000000000"; --  0 free, (Reserved)		
+			mem(23)	<= "0000000001000100"; --  0 free, (Reserved), GPIO[6:0]		
 
 		elsif sclk'event and sclk = '1' then
 				if mem_we = '1' then
@@ -271,6 +275,7 @@ begin
 --		LMS2_TXNRX2			<= mem(19)(12);
 --		LMS2_TXEN			<= mem(19)(13);
 --		LMS2_RXEN			<= mem(19)(14);
+		GPIO					<= mem(23) (6 downto 0);
 
 
 end fpgacfg_arch;
