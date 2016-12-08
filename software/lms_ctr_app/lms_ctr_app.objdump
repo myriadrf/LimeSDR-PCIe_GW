@@ -35,45 +35,45 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   8 .debug_aranges 00000558  00000000  00000000  00005750  2**3
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_info   000066f1  00000000  00000000  00005ca8  2**0
+  9 .debug_info   000066e8  00000000  00000000  00005ca8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_abbrev 00002409  00000000  00000000  0000c399  2**0
+ 10 .debug_abbrev 00002409  00000000  00000000  0000c390  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_line   0000296b  00000000  00000000  0000e7a2  2**0
+ 11 .debug_line   0000296b  00000000  00000000  0000e799  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_frame  00000bb0  00000000  00000000  00011110  2**2
+ 12 .debug_frame  00000bb0  00000000  00000000  00011104  2**2
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    00001f85  00000000  00000000  00011cc0  2**0
+ 13 .debug_str    00001fcc  00000000  00000000  00011cb4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_loc    00000aad  00000000  00000000  00013c45  2**0
+ 14 .debug_loc    00000aad  00000000  00000000  00013c80  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_alt_sim_info 00000040  00000000  00000000  000146f4  2**2
+ 15 .debug_alt_sim_info 00000040  00000000  00000000  00014730  2**2
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_ranges 00000130  00000000  00000000  00014738  2**3
+ 16 .debug_ranges 00000130  00000000  00000000  00014770  2**3
                   CONTENTS, READONLY, DEBUGGING
- 17 .thread_model 00000003  00000000  00000000  000165c8  2**0
+ 17 .thread_model 00000003  00000000  00000000  00016600  2**0
                   CONTENTS, READONLY
- 18 .cpu          00000009  00000000  00000000  000165cb  2**0
+ 18 .cpu          00000009  00000000  00000000  00016603  2**0
                   CONTENTS, READONLY
- 19 .qsys         00000001  00000000  00000000  000165d4  2**0
+ 19 .qsys         00000001  00000000  00000000  0001660c  2**0
                   CONTENTS, READONLY
- 20 .simulation_enabled 00000001  00000000  00000000  000165d5  2**0
+ 20 .simulation_enabled 00000001  00000000  00000000  0001660d  2**0
                   CONTENTS, READONLY
- 21 .sysid_hash   00000004  00000000  00000000  000165d6  2**0
+ 21 .sysid_hash   00000004  00000000  00000000  0001660e  2**0
                   CONTENTS, READONLY
- 22 .sysid_base   00000004  00000000  00000000  000165da  2**0
+ 22 .sysid_base   00000004  00000000  00000000  00016612  2**0
                   CONTENTS, READONLY
- 23 .sysid_time   00000004  00000000  00000000  000165de  2**0
+ 23 .sysid_time   00000004  00000000  00000000  00016616  2**0
                   CONTENTS, READONLY
- 24 .stderr_dev   00000004  00000000  00000000  000165e2  2**0
+ 24 .stderr_dev   00000004  00000000  00000000  0001661a  2**0
                   CONTENTS, READONLY
- 25 .stdin_dev    00000004  00000000  00000000  000165e6  2**0
+ 25 .stdin_dev    00000004  00000000  00000000  0001661e  2**0
                   CONTENTS, READONLY
- 26 .stdout_dev   00000004  00000000  00000000  000165ea  2**0
+ 26 .stdout_dev   00000004  00000000  00000000  00016622  2**0
                   CONTENTS, READONLY
- 27 .sopc_system_name 00000007  00000000  00000000  000165ee  2**0
+ 27 .sopc_system_name 00000007  00000000  00000000  00016626  2**0
                   CONTENTS, READONLY
- 28 .sopcinfo     00072d0a  00000000  00000000  000165f5  2**0
+ 28 .sopcinfo     00072d0a  00000000  00000000  0001662d  2**0
                   CONTENTS, READONLY
 SYMBOL TABLE:
 00008000 l    d  .entry	00000000 .entry
@@ -996,7 +996,7 @@ Disassembly of section .text:
     8ab8:	00c00044 	movi	r3,1
     8abc:	10c00285 	stb	r3,10(r2)
     8ac0:	d0a00017 	ldw	r2,-32768(gp)
-    8ac4:	00c00044 	movi	r3,1
+    8ac4:	00c00084 	movi	r3,2
     8ac8:	10c002c5 	stb	r3,11(r2)
     8acc:	d0a00017 	ldw	r2,-32768(gp)
     8ad0:	10000305 	stb	zero,12(r2)
