@@ -204,8 +204,8 @@ component fpga_outfifo IS
 END component;
   
 
-  type demo_mem is array(0 TO 31) of std_logic_vector(7 DOWNTO 0);
-  signal demoarray : demo_mem;
+--  type demo_mem is array(0 TO 31) of std_logic_vector(7 DOWNTO 0);
+--  signal demoarray : demo_mem;
   
   signal bus_clk :  std_logic;
   signal quiesce : std_logic;
@@ -523,17 +523,17 @@ cnt<=std_logic_vector(rd_cnt);
 -- ---------------------------------------------------------------------------- 
   ram_addr <= conv_integer(user_mem_8_addr);
   
-  process (bus_clk)
-  begin
-    if (bus_clk'event and bus_clk = '1') then
-      if (user_w_mem_8_wren = '1') then 
-        demoarray(ram_addr) <= user_w_mem_8_data;
-      end if;
-      if (user_r_mem_8_rden = '1') then
-        user_r_mem_8_data <= demoarray(ram_addr);
-      end if;
-    end if;
-  end process;
+--  process (bus_clk)
+--  begin
+--    if (bus_clk'event and bus_clk = '1') then
+--      if (user_w_mem_8_wren = '1') then 
+--        demoarray(ram_addr) <= user_w_mem_8_data;
+--      end if;
+--      if (user_r_mem_8_rden = '1') then
+--        user_r_mem_8_data <= demoarray(ram_addr);
+--      end if;
+--    end if;
+--  end process;
 
   user_r_mem_8_empty <= '0';
   user_r_mem_8_eof 	<= '0';
@@ -735,18 +735,18 @@ end process;
  ----------------------------------------------------------------------------
 --user_w_write_32_full formation
 -- ----------------------------------------------------------------------------	
---	process (bus_clk)
---		begin
---			if (bus_clk'event and bus_clk = '1') then
---				if (rx_fifo32_wfull = '0') then
---					user_w_write_32_full <= '0'; -- Deassert any time
---				elsif (user_w_write_32_wren = '1' and rx_fifo32_wfull='1' ) then 
---					user_w_write_32_full <= '1'; -- Assert only with wren	
---				end if;
---			end if;
---		end process;
+	process (bus_clk)
+		begin
+			if (bus_clk'event and bus_clk = '1') then
+				if (rx_fifo32_wfull = '0') then
+					user_w_write_32_full <= '0'; -- Deassert any time
+				elsif (user_w_write_32_wren = '1' and rx_fifo32_wfull='1' ) then 
+					user_w_write_32_full <= '1'; -- Assert only with wren	
+				end if;
+			end if;
+		end process;
 		
-user_w_write_32_full<=rx_fifo32_wfull;
+--user_w_write_32_full<=rx_fifo32_wfull;
 	
 	
 
