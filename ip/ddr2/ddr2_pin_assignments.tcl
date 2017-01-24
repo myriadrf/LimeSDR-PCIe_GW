@@ -21,7 +21,7 @@ set instance_name ""
 
 # This is the prefix for all pin names. Change it if you wish to choose
 # a prefix other than mem_
-if {![info exists pin_prefix]} {set pin_prefix "mem_"}
+if {![info exists pin_prefix]} {set pin_prefix "DDR2_1_"}
 
 
 # In SOPC builder, the pin names will be expanded as follow:
