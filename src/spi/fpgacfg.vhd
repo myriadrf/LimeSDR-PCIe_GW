@@ -178,7 +178,7 @@ begin
 			-- Load operation
 			elsif dout_reg_len = '1' then
 				case inst_reg(4 downto 0) is	-- mux read-only outputs
-					when "00001" => dout_reg <= x"0002";
+					when "00001" => dout_reg <= x"0001";
 					when "00010" => dout_reg <= (15 downto 8 => '0') & std_logic_vector(to_unsigned(COMPILE_REV, 8));
 					when "00011" => dout_reg <= (15 downto 8 => '0') & PWR_SRC & BOM_VER & HW_VER;
 					when others  => dout_reg <= mem(to_integer(unsigned(inst_reg(4 downto 0))));

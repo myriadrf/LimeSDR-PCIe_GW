@@ -960,7 +960,7 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 2736 4432 2931 4448)
+	(rect 2800 4344 2995 4360)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "LMS_DIQ1_D[11..0]" (rect 90 0 230 14)(font "Arial" ))
 	(pt 0 8)
@@ -973,11 +973,11 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 2944 4432 3000 4448))
+	(annotation_block (location)(rect 3008 4344 3064 4360))
 )
 (pin
 	(output)
-	(rect 2736 4448 2922 4464)
+	(rect 2800 4360 2986 4376)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "LMS_DIQ1_IQSEL" (rect 90 0 205 14)(font "Arial" ))
 	(pt 0 8)
@@ -990,7 +990,7 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 2944 4456 3016 4480))
+	(annotation_block (location)(rect 3008 4368 3080 4392))
 )
 (pin
 	(output)
@@ -1181,7 +1181,7 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 1400 4752 1579 4768)
+	(rect 1424 4608 1603 4624)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_odt[0..0]" (rect 90 0 222 14)(font "Arial" ))
 	(pt 0 8)
@@ -1194,11 +1194,11 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1883 4920 1939 4936))
+	(annotation_block (location)(rect 1632 4616 1688 4632))
 )
 (pin
 	(output)
-	(rect 1400 4768 1588 4784)
+	(rect 1424 4624 1612 4640)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_cs_n[0..0]" (rect 90 0 230 14)(font "Arial" ))
 	(pt 0 8)
@@ -1211,11 +1211,11 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1884 4936 1940 4952))
+	(annotation_block (location)(rect 1633 4632 1689 4648))
 )
 (pin
 	(output)
-	(rect 1400 4784 1582 4800)
+	(rect 1424 4640 1606 4656)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_cke[0..0]" (rect 90 0 222 14)(font "Arial" ))
 	(pt 0 8)
@@ -1228,11 +1228,11 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1886 4952 1942 4968))
+	(annotation_block (location)(rect 1635 4648 1691 4664))
 )
 (pin
 	(output)
-	(rect 1400 4800 1591 4816)
+	(rect 1424 4656 1615 4672)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_addr[12..0]" (rect 90 0 238 14)(font "Arial" ))
 	(pt 0 8)
@@ -1245,11 +1245,11 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1887 4968 1943 4984))
+	(annotation_block (location)(rect 1636 4664 1692 4680))
 )
 (pin
 	(output)
-	(rect 1400 4832 1576 4848)
+	(rect 1424 4688 1600 4704)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_ras_n" (rect 90 0 189 14)(font "Arial" ))
 	(pt 0 8)
@@ -1262,11 +1262,11 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1888 5000 1944 5016))
+	(annotation_block (location)(rect 1637 4696 1693 4712))
 )
 (pin
 	(output)
-	(rect 1400 4848 1576 4864)
+	(rect 1424 4704 1600 4720)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_cas_n" (rect 90 0 189 14)(font "Arial" ))
 	(pt 0 8)
@@ -1279,11 +1279,11 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1888 5016 1944 5032))
+	(annotation_block (location)(rect 1637 4712 1693 4728))
 )
 (pin
 	(output)
-	(rect 1400 4864 1576 4880)
+	(rect 1424 4720 1600 4736)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_we_n" (rect 90 0 180 14)(font "Arial" ))
 	(pt 0 8)
@@ -1296,11 +1296,11 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1888 5032 1944 5048))
+	(annotation_block (location)(rect 1637 4728 1693 4744))
 )
 (pin
 	(output)
-	(rect 1400 4880 1579 4896)
+	(rect 1424 4736 1603 4752)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_dm[1..0]" (rect 90 0 213 14)(font "Arial" ))
 	(pt 0 8)
@@ -1313,11 +1313,11 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1888 5048 1944 5064))
+	(annotation_block (location)(rect 1637 4744 1693 4760))
 )
 (pin
 	(output)
-	(rect 1400 4816 1582 4832)
+	(rect 1424 4672 1606 4688)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_ba[2..0]" (rect 90 0 213 14)(font "Arial" ))
 	(pt 0 8)
@@ -1330,7 +1330,7 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1888 4984 1944 5000))
+	(annotation_block (location)(rect 1637 4680 1693 4696))
 )
 (pin
 	(bidir)
@@ -1370,7 +1370,7 @@ agreement for further details.
 )
 (pin
 	(bidir)
-	(rect 1400 4912 1578 4928)
+	(rect 1424 4768 1602 4784)
 	(text "BIDIR" (rect 1 0 42 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_clk[0..0]" (rect 90 0 222 14)(font "Arial" ))
 	(pt 0 8)
@@ -1384,11 +1384,11 @@ agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 28 18)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1888 5064 1944 5080))
+	(annotation_block (location)(rect 1637 4760 1693 4776))
 )
 (pin
 	(bidir)
-	(rect 1400 4928 1590 4944)
+	(rect 1424 4784 1614 4800)
 	(text "BIDIR" (rect 1 0 42 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_clk_n[0..0]" (rect 90 0 238 14)(font "Arial" ))
 	(pt 0 8)
@@ -1402,11 +1402,11 @@ agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 28 18)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1888 5080 1944 5096))
+	(annotation_block (location)(rect 1637 4776 1693 4792))
 )
 (pin
 	(bidir)
-	(rect 1400 4944 1582 4960)
+	(rect 1424 4800 1606 4816)
 	(text "BIDIR" (rect 1 0 42 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_dq[15..0]" (rect 90 0 222 14)(font "Arial" ))
 	(pt 0 8)
@@ -1420,11 +1420,11 @@ agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 28 18)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1888 5096 1952 5112))
+	(annotation_block (location)(rect 1637 4792 1701 4808))
 )
 (pin
 	(bidir)
-	(rect 1400 4960 1582 4976)
+	(rect 1424 4816 1606 4832)
 	(text "BIDIR" (rect 1 0 42 11)(font "Arial" (font_size 6)))
 	(text "DDR2_1_dqs[1..0]" (rect 90 0 222 14)(font "Arial" ))
 	(pt 0 8)
@@ -1438,10 +1438,10 @@ agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 28 18)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1888 5112 1944 5128))
+	(annotation_block (location)(rect 1637 4808 1693 4824))
 )
 (symbol
-	(rect -312 912 -168 992)
+	(rect -304 912 -160 992)
 	(text "debounce" (rect 5 0 71 14)(font "Arial" ))
 	(text "inst2" (rect 8 64 49 78)(font "Arial" ))
 	(port
@@ -1473,7 +1473,7 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 128 64))
 	)
-	(annotation_block (parameter)(rect -168 880 32 912))
+	(annotation_block (parameter)(rect -160 880 40 912))
 )
 (symbol
 	(rect -48 928 0 960)
@@ -1501,7 +1501,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect -384 1248 -256 1328)
+	(rect -304 1176 -176 1256)
 	(text "alive" (rect 5 0 46 14)(font "Arial" ))
 	(text "inst4" (rect 8 64 49 78)(font "Arial" ))
 	(port
@@ -3357,7 +3357,7 @@ agreement for further details.
 	(annotation_block (parameter)(rect 1840 2368 2136 2440))
 )
 (symbol
-	(rect 2344 4408 2592 4520)
+	(rect 2408 4320 2656 4432)
 	(text "lms7002_ddout" (rect 5 0 112 14)(font "Arial" ))
 	(text "inst13" (rect 8 96 57 110)(font "Arial" ))
 	(port
@@ -3415,10 +3415,10 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 232 96))
 	)
-	(annotation_block (parameter)(rect 2600 4360 2811 4402))
+	(annotation_block (parameter)(rect 2664 4272 2875 4314))
 )
 (symbol
-	(rect 1848 4616 1960 4704)
+	(rect 1912 4528 2024 4616)
 	(text "BUSMUX" (rect 28 0 105 18)(font "Arial" (font_size 10)))
 	(text "inst34" (rect 3 77 52 91)(font "Arial" ))
 	(port
@@ -3463,10 +3463,10 @@ agreement for further details.
 		(line (pt 44 16)(pt 68 32))
 		(line (pt 44 80)(pt 68 64))
 	)
-	(annotation_block (parameter)(rect 1968 4608 2096 4636))
+	(annotation_block (parameter)(rect 2032 4520 2160 4548))
 )
 (symbol
-	(rect 1848 4432 1960 4520)
+	(rect 1912 4344 2024 4432)
 	(text "BUSMUX" (rect 28 0 105 18)(font "Arial" (font_size 10)))
 	(text "inst35" (rect 3 77 52 91)(font "Arial" ))
 	(port
@@ -3511,7 +3511,7 @@ agreement for further details.
 		(line (pt 44 16)(pt 68 32))
 		(line (pt 44 80)(pt 68 64))
 	)
-	(annotation_block (parameter)(rect 1960 4400 2088 4428))
+	(annotation_block (parameter)(rect 2024 4312 2152 4340))
 )
 (symbol
 	(rect -616 4536 -336 4808)
@@ -3901,7 +3901,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect -336 5288 -304 5320)
+	(rect -936 4920 -904 4952)
 	(text "GND" (rect 8 16 32 27)(font "Arial" (font_size 6)))
 	(text "inst" (rect 3 21 36 35)(font "Arial" )(invisible))
 	(port
@@ -3918,7 +3918,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect -304 5304 -272 5336)
+	(rect -904 4936 -872 4968)
 	(text "GND" (rect 8 16 32 27)(font "Arial" (font_size 6)))
 	(text "inst37" (rect 3 21 52 35)(font "Arial" )(invisible))
 	(port
@@ -3935,7 +3935,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect -272 5320 -240 5352)
+	(rect -872 4952 -840 4984)
 	(text "GND" (rect 8 16 32 27)(font "Arial" (font_size 6)))
 	(text "inst38" (rect 3 21 52 35)(font "Arial" )(invisible))
 	(port
@@ -3952,7 +3952,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect -240 5336 -208 5368)
+	(rect -840 4968 -808 5000)
 	(text "GND" (rect 8 16 32 27)(font "Arial" (font_size 6)))
 	(text "inst40" (rect 3 21 52 35)(font "Arial" )(invisible))
 	(port
@@ -4278,7 +4278,7 @@ agreement for further details.
 	(annotation_block (parameter)(rect 1928 3648 2340 3732))
 )
 (symbol
-	(rect 800 4648 1168 5080)
+	(rect 824 4504 1192 4936)
 	(text "wfm_player_top" (rect 5 0 120 14)(font "Arial" ))
 	(text "inst28" (rect 8 416 57 430)(font "Arial" ))
 	(port
@@ -4617,7 +4617,7 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 352 416))
 	)
-	(annotation_block (parameter)(rect 808 4304 1250 4577))
+	(annotation_block (parameter)(rect 832 4296 1272 4432))
 )
 (symbol
 	(rect 2304 2008 2608 2344)
@@ -5668,21 +5668,6 @@ agreement for further details.
 	(pt 2304 2088)
 )
 (connector
-	(text "fpga_reset_n" (rect -398 944 -299 958)(font "Arial" ))
-	(pt -424 960)
-	(pt -312 960)
-)
-(connector
-	(text "nrst" (rect -121 928 -88 942)(font "Arial" ))
-	(pt -168 944)
-	(pt -48 944)
-)
-(connector
-	(text "clk_fpga2" (rect -395 928 -321 942)(font "Arial" ))
-	(pt -424 944)
-	(pt -312 944)
-)
-(connector
 	(text "MCLK2RX" (rect 1076 712 1133 726)(font "Arial" ))
 	(pt 1056 728)
 	(pt 1168 728)
@@ -6124,166 +6109,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "ddr2_1_phy_clk" (rect 682 4712 797 4726)(font "Arial" ))
-	(pt 800 4728)
-	(pt 656 4728)
-)
-(connector
-	(text "wfm_data[31..0]" (rect 685 4760 808 4774)(font "Arial" ))
-	(pt 800 4776)
-	(pt 656 4776)
-	(bus)
-)
-(connector
-	(text "wfm_wr" (rect 681 4776 730 4790)(font "Arial" ))
-	(pt 656 4792)
-	(pt 800 4792)
-)
-(connector
-	(text "L" (rect 687 4808 695 4822)(font "Arial" ))
-	(pt 656 4824)
-	(pt 800 4824)
-)
-(connector
-	(text "wfm_smpl_width[1..0]" (rect 673 4792 838 4806)(font "Arial" ))
-	(pt 656 4808)
-	(pt 800 4808)
-	(bus)
-)
-(connector
-	(text "wfm_ch_en[1..0]" (rect 689 4824 812 4838)(font "Arial" ))
-	(pt 656 4840)
-	(pt 800 4840)
-	(bus)
-)
-(connector
-	(text "H" (rect 686 4840 694 4854)(font "Arial" ))
-	(pt 656 4856)
-	(pt 800 4856)
-)
-(connector
-	(text "wfm_play" (rect 692 4744 758 4758)(font "Arial" ))
-	(pt 800 4760)
-	(pt 656 4760)
-)
-(connector
-	(text "wfm_load" (rect 702 4728 768 4742)(font "Arial" ))
-	(pt 800 4744)
-	(pt 656 4744)
-)
-(connector
-	(text "lmlclk" (rect 683 4856 732 4870)(font "Arial" ))
-	(pt 800 4872)
-	(pt 656 4872)
-)
-(connector
-	(text "pcie_bus_clk" (rect 668 4696 767 4710)(font "Arial" ))
-	(pt 656 4712)
-	(pt 800 4712)
-)
-(connector
-	(text "fpga_reset_n" (rect 681 4664 780 4678)(font "Arial" ))
-	(pt 656 4680)
-	(pt 800 4680)
-)
-(connector
-	(text "CLK50_FPGA_1" (rect 651 4680 750 4694)(font "Arial" ))
-	(pt 656 4696)
-	(pt 800 4696)
-)
-(connector
-	(text "wfm_player_rdy" (rect 1205 4664 1320 4678)(font "Arial" ))
-	(pt 1168 4680)
-	(pt 1336 4680)
-)
-(connector
-	(text "ddmux_h[12..0]" (rect 2003 4464 2118 4478)(font "Arial" ))
-	(pt 1960 4480)
-	(pt 2080 4480)
-	(bus)
-)
-(connector
-	(text "lmlclk" (rect 2240 4424 2289 4438)(font "Arial" ))
-	(pt 2192 4440)
-	(pt 2344 4440)
-)
-(connector
-	(text "mclk1tx_locked" (rect 2241 4440 2356 4454)(font "Arial" ))
-	(pt 2192 4456)
-	(pt 2344 4456)
-)
-(connector
-	(text "ddmux_h[12..0]" (rect 2267 4456 2382 4470)(font "Arial" ))
-	(pt 2192 4472)
-	(pt 2344 4472)
-	(bus)
-)
-(connector
-	(text "ddmux_l[12..0]" (rect 2256 4472 2371 4486)(font "Arial" ))
-	(pt 2192 4488)
-	(pt 2344 4488)
-	(bus)
-)
-(connector
-	(text "tx_path_h[12..0]" (rect 1753 4448 1885 4462)(font "Arial" ))
-	(pt 1728 4464)
-	(pt 1848 4464)
-	(bus)
-)
-(connector
-	(text "dd_iq_h[12..0]" (rect 1748 4480 1863 4494)(font "Arial" ))
-	(pt 1728 4496)
-	(pt 1848 4496)
-	(bus)
-)
-(connector
-	(pt 1904 4520)
-	(pt 1904 4536)
-)
-(connector
-	(text "ddmux_l[12..0]" (rect 1992 4648 2107 4662)(font "Arial" ))
-	(pt 1960 4664)
-	(pt 2080 4664)
-	(bus)
-)
-(connector
-	(text "tx_path_l[12..0]" (rect 1756 4632 1888 4646)(font "Arial" ))
-	(pt 1728 4648)
-	(pt 1848 4648)
-	(bus)
-)
-(connector
-	(text "dd_iq_l[12..0]" (rect 1755 4664 1870 4678)(font "Arial" ))
-	(pt 1728 4680)
-	(pt 1848 4680)
-	(bus)
-)
-(connector
-	(pt 1904 4704)
-	(pt 1904 4720)
-)
-(connector
-	(text "wfm_play" (rect 1756 4520 1822 4534)(font "Arial" ))
-	(pt 1904 4536)
-	(pt 1728 4536)
-)
-(connector
-	(text "wfm_play" (rect 1780 4704 1846 4718)(font "Arial" ))
-	(pt 1904 4720)
-	(pt 1728 4720)
-)
-(connector
-	(text "<<__$DEF_ALIAS13380>>" (rect 2648 4440 2821 4454)(font "Arial" )(invisible))
-	(pt 2592 4456)
-	(pt 2736 4456)
-)
-(connector
-	(text "<<__$DEF_ALIAS13382>>" (rect 2640 4424 2813 4438)(font "Arial" )(invisible))
-	(pt 2592 4440)
-	(pt 2736 4440)
-	(bus)
-)
-(connector
 	(text "BOM_VER[3..0]" (rect -702 1840 -595 1854)(font "Arial" ))
 	(pt -720 1856)
 	(pt -608 1856)
@@ -6493,27 +6318,6 @@ agreement for further details.
 	(pt -616 4728)
 )
 (connector
-	(text "ddr2_2_test_complete" (rect -177 5320 -12 5334)(font "Arial" ))
-	(pt -224 5336)
-	(pt -16 5336)
-)
-(connector
-	(text "ddr2_2_test_fail" (rect -180 5304 -48 5318)(font "Arial" ))
-	(pt -256 5320)
-	(pt -16 5320)
-)
-(connector
-	(text "ddr2_2_test_pass" (rect -180 5288 -48 5302)(font "Arial" ))
-	(pt -288 5304)
-	(pt -16 5304)
-)
-(connector
-	(text "ddr2_2_pnf_per_bit_persisit[31..0]" (rect -180 5272 100 5286)(font "Arial" ))
-	(pt -320 5288)
-	(pt -16 5288)
-	(bus)
-)
-(connector
 	(text "mclk1tx_locked" (rect 58 600 173 614)(font "Arial" ))
 	(pt 40 616)
 	(pt 160 616)
@@ -6533,21 +6337,6 @@ agreement for further details.
 	(pt 40 664)
 	(pt 160 664)
 	(bus)
-)
-(connector
-	(text "fpga_alive" (rect -236 1264 -154 1278)(font "Arial" ))
-	(pt -256 1280)
-	(pt -136 1280)
-)
-(connector
-	(text "nrst" (rect -467 1264 -434 1278)(font "Arial" ))
-	(pt -488 1280)
-	(pt -384 1280)
-)
-(connector
-	(text "clk_fpga2" (rect -470 1280 -396 1294)(font "Arial" ))
-	(pt -488 1296)
-	(pt -384 1296)
 )
 (connector
 	(text "fpga_reset_n" (rect 77 768 176 782)(font "Arial" ))
@@ -6655,121 +6444,6 @@ agreement for further details.
 	(pt -880 3232)
 )
 (connector
-	(text "test_en[4]" (rect 738 4872 820 4886)(font "Arial" ))
-	(pt 656 4888)
-	(pt 800 4888)
-)
-(connector
-	(text "test_inject_error[4]" (rect 685 4888 850 4902)(font "Arial" ))
-	(pt 800 4904)
-	(pt 656 4904)
-)
-(connector
-	(pt 1168 4760)
-	(pt 1400 4760)
-	(bus)
-)
-(connector
-	(pt 1168 4776)
-	(pt 1400 4776)
-	(bus)
-)
-(connector
-	(pt 1168 4792)
-	(pt 1400 4792)
-	(bus)
-)
-(connector
-	(pt 1168 4808)
-	(pt 1400 4808)
-	(bus)
-)
-(connector
-	(pt 1168 4824)
-	(pt 1400 4824)
-	(bus)
-)
-(connector
-	(pt 1168 4840)
-	(pt 1400 4840)
-)
-(connector
-	(pt 1168 4856)
-	(pt 1400 4856)
-)
-(connector
-	(pt 1168 4872)
-	(pt 1400 4872)
-)
-(connector
-	(pt 1168 4888)
-	(pt 1400 4888)
-	(bus)
-)
-(connector
-	(text "ddr2_1_phy_clk" (rect 1226 4888 1341 4902)(font "Arial" ))
-	(pt 1168 4904)
-	(pt 1400 4904)
-)
-(connector
-	(pt 1168 4920)
-	(pt 1400 4920)
-	(bus)
-)
-(connector
-	(pt 1168 4936)
-	(pt 1400 4936)
-	(bus)
-)
-(connector
-	(pt 1168 4952)
-	(pt 1400 4952)
-	(bus)
-)
-(connector
-	(pt 1168 4968)
-	(pt 1400 4968)
-	(bus)
-)
-(connector
-	(text "dd_iq_h[15..0]" (rect 1212 4712 1327 4726)(font "Arial" ))
-	(pt 1168 4728)
-	(pt 1336 4728)
-	(bus)
-)
-(connector
-	(text "dd_iq_l[15..0]" (rect 1211 4728 1326 4742)(font "Arial" ))
-	(pt 1168 4744)
-	(pt 1336 4744)
-	(bus)
-)
-(connector
-	(text "ddr2_1_test_complete" (rect 1215 5032 1380 5046)(font "Arial" ))
-	(pt 1168 5048)
-	(pt 1344 5048)
-)
-(connector
-	(text "ddr2_1_test_fail" (rect 1228 5016 1360 5030)(font "Arial" ))
-	(pt 1168 5032)
-	(pt 1344 5032)
-)
-(connector
-	(text "ddr2_1_test_pass" (rect 1204 5000 1336 5014)(font "Arial" ))
-	(pt 1168 5016)
-	(pt 1344 5016)
-)
-(connector
-	(text "ddr2_1_pnf_per_bit_persisit[31..0]" (rect 1188 4984 1468 4998)(font "Arial" ))
-	(pt 1168 5000)
-	(pt 1344 5000)
-	(bus)
-)
-(connector
-	(text "wfm_infifo_wfull" (rect 1201 4696 1333 4710)(font "Arial" ))
-	(pt 1168 4712)
-	(pt 1336 4712)
-)
-(connector
 	(text "wfm_infifo_wfull" (rect 1793 3904 1925 3918)(font "Arial" ))
 	(pt 1776 3920)
 	(pt 1928 3920)
@@ -6778,12 +6452,6 @@ agreement for further details.
 	(text "wfm_player_wrusedw[9..0]" (rect 1812 3888 2010 3902)(font "Arial" ))
 	(pt 1776 3904)
 	(pt 1928 3904)
-	(bus)
-)
-(connector
-	(text "wfm_player_wrusedw[9..0]" (rect 1212 4680 1410 4694)(font "Arial" ))
-	(pt 1168 4696)
-	(pt 1336 4696)
 	(bus)
 )
 (connector
@@ -6803,9 +6471,341 @@ agreement for further details.
 	(pt 2760 2072)
 )
 (connector
-	(text "L" (rect -726 4648 -718 4662)(font "Arial" ))
-	(pt -768 4664)
-	(pt -616 4664)
+	(text "L" (rect -730 4616 -722 4630)(font "Arial" ))
+	(pt -768 4632)
+	(pt -616 4632)
+)
+(connector
+	(text "fpga_alive" (rect -156 1192 -74 1206)(font "Arial" ))
+	(pt -176 1208)
+	(pt -56 1208)
+)
+(connector
+	(text "nrst" (rect -387 1192 -354 1206)(font "Arial" ))
+	(pt -408 1208)
+	(pt -304 1208)
+)
+(connector
+	(text "clk_fpga2" (rect -390 1208 -316 1222)(font "Arial" ))
+	(pt -408 1224)
+	(pt -304 1224)
+)
+(connector
+	(text "nrst" (rect -113 928 -80 942)(font "Arial" ))
+	(pt -48 944)
+	(pt -160 944)
+)
+(connector
+	(text "clk_fpga2" (rect -387 928 -313 942)(font "Arial" ))
+	(pt -416 944)
+	(pt -304 944)
+)
+(connector
+	(text "fpga_reset_n" (rect -390 944 -291 958)(font "Arial" ))
+	(pt -416 960)
+	(pt -304 960)
+)
+(connector
+	(text "ddmux_h[12..0]" (rect 2067 4376 2182 4390)(font "Arial" ))
+	(pt 2024 4392)
+	(pt 2144 4392)
+	(bus)
+)
+(connector
+	(text "lmlclk" (rect 2304 4336 2353 4350)(font "Arial" ))
+	(pt 2256 4352)
+	(pt 2408 4352)
+)
+(connector
+	(text "mclk1tx_locked" (rect 2305 4352 2420 4366)(font "Arial" ))
+	(pt 2256 4368)
+	(pt 2408 4368)
+)
+(connector
+	(text "ddmux_h[12..0]" (rect 2331 4368 2446 4382)(font "Arial" ))
+	(pt 2256 4384)
+	(pt 2408 4384)
+	(bus)
+)
+(connector
+	(text "ddmux_l[12..0]" (rect 2320 4384 2435 4398)(font "Arial" ))
+	(pt 2256 4400)
+	(pt 2408 4400)
+	(bus)
+)
+(connector
+	(text "tx_path_h[12..0]" (rect 1817 4360 1949 4374)(font "Arial" ))
+	(pt 1792 4376)
+	(pt 1912 4376)
+	(bus)
+)
+(connector
+	(text "dd_iq_h[12..0]" (rect 1812 4392 1927 4406)(font "Arial" ))
+	(pt 1792 4408)
+	(pt 1912 4408)
+	(bus)
+)
+(connector
+	(pt 1968 4432)
+	(pt 1968 4448)
+)
+(connector
+	(text "ddmux_l[12..0]" (rect 2056 4560 2171 4574)(font "Arial" ))
+	(pt 2024 4576)
+	(pt 2144 4576)
+	(bus)
+)
+(connector
+	(text "tx_path_l[12..0]" (rect 1820 4544 1952 4558)(font "Arial" ))
+	(pt 1792 4560)
+	(pt 1912 4560)
+	(bus)
+)
+(connector
+	(text "dd_iq_l[12..0]" (rect 1819 4576 1934 4590)(font "Arial" ))
+	(pt 1792 4592)
+	(pt 1912 4592)
+	(bus)
+)
+(connector
+	(pt 1968 4616)
+	(pt 1968 4632)
+)
+(connector
+	(text "wfm_play" (rect 1820 4432 1886 4446)(font "Arial" ))
+	(pt 1968 4448)
+	(pt 1792 4448)
+)
+(connector
+	(text "wfm_play" (rect 1844 4616 1910 4630)(font "Arial" ))
+	(pt 1968 4632)
+	(pt 1792 4632)
+)
+(connector
+	(text "<<__$DEF_ALIAS13380>>" (rect 2712 4352 2885 4366)(font "Arial" )(invisible))
+	(pt 2656 4368)
+	(pt 2800 4368)
+)
+(connector
+	(text "<<__$DEF_ALIAS13382>>" (rect 2704 4336 2877 4350)(font "Arial" )(invisible))
+	(pt 2656 4352)
+	(pt 2800 4352)
+	(bus)
+)
+(connector
+	(text "ddr2_1_phy_clk" (rect 706 4568 821 4582)(font "Arial" ))
+	(pt 824 4584)
+	(pt 680 4584)
+)
+(connector
+	(text "wfm_data[31..0]" (rect 709 4616 832 4630)(font "Arial" ))
+	(pt 824 4632)
+	(pt 680 4632)
+	(bus)
+)
+(connector
+	(text "wfm_wr" (rect 705 4632 754 4646)(font "Arial" ))
+	(pt 680 4648)
+	(pt 824 4648)
+)
+(connector
+	(text "wfm_smpl_width[1..0]" (rect 697 4648 862 4662)(font "Arial" ))
+	(pt 680 4664)
+	(pt 824 4664)
+	(bus)
+)
+(connector
+	(text "wfm_play" (rect 716 4600 782 4614)(font "Arial" ))
+	(pt 824 4616)
+	(pt 680 4616)
+)
+(connector
+	(text "wfm_load" (rect 726 4584 792 4598)(font "Arial" ))
+	(pt 824 4600)
+	(pt 680 4600)
+)
+(connector
+	(text "pcie_bus_clk" (rect 692 4552 791 4566)(font "Arial" ))
+	(pt 680 4568)
+	(pt 824 4568)
+)
+(connector
+	(text "fpga_reset_n" (rect 705 4520 804 4534)(font "Arial" ))
+	(pt 680 4536)
+	(pt 824 4536)
+)
+(connector
+	(text "CLK50_FPGA_1" (rect 675 4536 774 4550)(font "Arial" ))
+	(pt 680 4552)
+	(pt 824 4552)
+)
+(connector
+	(text "wfm_player_rdy" (rect 1229 4520 1344 4534)(font "Arial" ))
+	(pt 1192 4536)
+	(pt 1360 4536)
+)
+(connector
+	(pt 1192 4616)
+	(pt 1424 4616)
+	(bus)
+)
+(connector
+	(pt 1192 4632)
+	(pt 1424 4632)
+	(bus)
+)
+(connector
+	(pt 1192 4648)
+	(pt 1424 4648)
+	(bus)
+)
+(connector
+	(pt 1192 4664)
+	(pt 1424 4664)
+	(bus)
+)
+(connector
+	(pt 1192 4680)
+	(pt 1424 4680)
+	(bus)
+)
+(connector
+	(pt 1192 4696)
+	(pt 1424 4696)
+)
+(connector
+	(pt 1192 4712)
+	(pt 1424 4712)
+)
+(connector
+	(pt 1192 4728)
+	(pt 1424 4728)
+)
+(connector
+	(pt 1192 4744)
+	(pt 1424 4744)
+	(bus)
+)
+(connector
+	(text "dd_iq_h[15..0]" (rect 1236 4568 1351 4582)(font "Arial" ))
+	(pt 1192 4584)
+	(pt 1360 4584)
+	(bus)
+)
+(connector
+	(text "dd_iq_l[15..0]" (rect 1235 4584 1350 4598)(font "Arial" ))
+	(pt 1192 4600)
+	(pt 1360 4600)
+	(bus)
+)
+(connector
+	(text "ddr2_1_test_complete" (rect 1239 4888 1404 4902)(font "Arial" ))
+	(pt 1192 4904)
+	(pt 1368 4904)
+)
+(connector
+	(text "ddr2_1_test_fail" (rect 1252 4872 1384 4886)(font "Arial" ))
+	(pt 1192 4888)
+	(pt 1368 4888)
+)
+(connector
+	(text "ddr2_1_test_pass" (rect 1228 4856 1360 4870)(font "Arial" ))
+	(pt 1192 4872)
+	(pt 1368 4872)
+)
+(connector
+	(text "ddr2_1_pnf_per_bit_persisit[31..0]" (rect 1212 4840 1492 4854)(font "Arial" ))
+	(pt 1192 4856)
+	(pt 1368 4856)
+	(bus)
+)
+(connector
+	(text "wfm_infifo_wfull" (rect 1225 4552 1357 4566)(font "Arial" ))
+	(pt 1192 4568)
+	(pt 1360 4568)
+)
+(connector
+	(text "wfm_player_wrusedw[9..0]" (rect 1236 4536 1434 4550)(font "Arial" ))
+	(pt 1192 4552)
+	(pt 1360 4552)
+	(bus)
+)
+(connector
+	(text "L" (rect 711 4664 719 4678)(font "Arial" ))
+	(pt 680 4680)
+	(pt 824 4680)
+)
+(connector
+	(text "wfm_ch_en[1..0]" (rect 713 4680 836 4694)(font "Arial" ))
+	(pt 680 4696)
+	(pt 824 4696)
+	(bus)
+)
+(connector
+	(text "H" (rect 710 4696 718 4710)(font "Arial" ))
+	(pt 680 4712)
+	(pt 824 4712)
+)
+(connector
+	(text "lmlclk" (rect 707 4712 756 4726)(font "Arial" ))
+	(pt 680 4728)
+	(pt 824 4728)
+)
+(connector
+	(text "test_en[4]" (rect 762 4728 844 4742)(font "Arial" ))
+	(pt 680 4744)
+	(pt 824 4744)
+)
+(connector
+	(text "test_inject_error[4]" (rect 709 4744 874 4758)(font "Arial" ))
+	(pt 680 4760)
+	(pt 824 4760)
+)
+(connector
+	(text "ddr2_1_phy_clk" (rect 1250 4744 1365 4758)(font "Arial" ))
+	(pt 1192 4760)
+	(pt 1424 4760)
+)
+(connector
+	(pt 1192 4776)
+	(pt 1424 4776)
+	(bus)
+)
+(connector
+	(pt 1192 4792)
+	(pt 1424 4792)
+	(bus)
+)
+(connector
+	(pt 1192 4808)
+	(pt 1424 4808)
+	(bus)
+)
+(connector
+	(pt 1192 4824)
+	(pt 1424 4824)
+	(bus)
+)
+(connector
+	(text "ddr2_2_test_complete" (rect -777 4952 -612 4966)(font "Arial" ))
+	(pt -824 4968)
+	(pt -616 4968)
+)
+(connector
+	(text "ddr2_2_test_fail" (rect -780 4936 -648 4950)(font "Arial" ))
+	(pt -856 4952)
+	(pt -616 4952)
+)
+(connector
+	(text "ddr2_2_test_pass" (rect -780 4920 -648 4934)(font "Arial" ))
+	(pt -888 4936)
+	(pt -616 4936)
+)
+(connector
+	(text "ddr2_2_pnf_per_bit_persisit[31..0]" (rect -780 4904 -500 4918)(font "Arial" ))
+	(pt -920 4920)
+	(pt -616 4920)
+	(bus)
 )
 (connector
 	(text "L" (rect -731 4632 -723 4646)(font "Arial" ))
@@ -6813,9 +6813,9 @@ agreement for further details.
 	(pt -616 4648)
 )
 (connector
-	(text "L" (rect -730 4616 -722 4630)(font "Arial" ))
-	(pt -768 4632)
-	(pt -616 4632)
+	(text "L" (rect -726 4648 -718 4662)(font "Arial" ))
+	(pt -768 4664)
+	(pt -616 4664)
 )
 (junction (pt -528 2592))
 (junction (pt -24 2600))
@@ -6844,8 +6844,8 @@ agreement for further details.
 (text "Onboard LEDs" (rect 384 1264 497 1280)(font "Arial" (font_size 8)))
 (text "LimeSDR - PCIE v1r2" (rect 2720 5880 3033 5901)(font "Arial" (font_size 12)))
 (text "2017-01-23" (rect 2720 5912 2885 5933)(font "Arial" (font_size 12)))
-(text "FPGA registers" (rect -1040 4216 -743 4244)(font "Arial" (font_size 16)(bold)))
-(text "ddr2_1_pnf_per_bit_persisit[31..0]" (rect 1188 4984 1468 4998)(font "Arial" ))
+(text "ddr2_1_pnf_per_bit_persisit[31..0]" (rect 1212 4840 1492 4854)(font "Arial" ))
+(text "FPGA Test logic" (rect -1040 4216 -722 4244)(font "Arial" (font_size 16)(bold)))
 (rectangle (rect 664 1736 3104 2928)(color 0 85 0)(line_width 2))
 (rectangle (rect -1072 1736 624 2928)(color 0 85 0)(line_width 2))
 (rectangle (rect -1072 504 624 1696)(color 0 85 0)(line_width 2))
@@ -6867,3 +6867,5 @@ agreement for further details.
 (rectangle (rect -1072 2968 624 3016)(color 0 85 0)(line_width 2))
 (rectangle (rect -1072 4200 624 5024)(color 0 85 0)(line_width 2))
 (rectangle (rect -1072 4200 624 4248)(color 0 85 0)(line_width 2))
+(rectangle (rect 664 4200 3104 5024)(color 0 85 0)(line_width 2))
+(rectangle (rect 664 4200 3104 4248)(color 0 85 0)(line_width 2))

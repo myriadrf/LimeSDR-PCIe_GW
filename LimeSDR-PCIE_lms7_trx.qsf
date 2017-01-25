@@ -229,7 +229,7 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to CLK50_FPGA_1
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_instance_assignment -name CURRENT_STRENGTH_NEW 2MA -to LMS_MCLK2
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LMS_MCLK2
 set_location_assignment PIN_G16 -to I2C_SDA
 set_location_assignment PIN_G17 -to I2C_SCL
 set_location_assignment PIN_J4 -to FPGA_AS_NCSO
@@ -608,11 +608,9 @@ set_global_assignment -name VHDL_FILE src/self_test/clock_test.vhd
 set_global_assignment -name VHDL_FILE src/self_test/clk_with_ref_test.vhd
 set_global_assignment -name VHDL_FILE src/self_test/clk_no_ref_test.vhd
 set_location_assignment PIN_B9 -to LMK_CLK
-set_location_assignment PIN_M7 -to SI_CLK0
 set_location_assignment PIN_J10 -to SI_CLK3
 set_location_assignment PIN_L22 -to SI_CLK6
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to LMK_CLK
-set_instance_assignment -name IO_STANDARD "2.5 V" -to SI_CLK0
 set_instance_assignment -name IO_STANDARD "2.5 V" -to SI_CLK3
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SI_CLK6
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_MCLK2
