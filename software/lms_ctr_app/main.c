@@ -158,6 +158,72 @@ void testFlash(void)
 }
 */
 
+
+/**
+ *	@brief Function to control DAC for TCXO frequency control
+ *	@param oe output enable control: 0 - output disabled, 1 - output enabled
+ *	@param data pointer to DAC value (1 byte)
+ */
+void Control_TCXO_DAC (unsigned char oe, unsigned char *data) //controls DAC (AD5601)
+{
+	volatile int spirez;
+	unsigned char DAC_data[2];
+
+	if (oe == 0) //set DAC out to three-state
+	{
+		DAC_data[0] = 0xC0; //POWER-DOWN MODE = THREE-STATE (MSB bits = 11) + MSB data
+		DAC_data[1] = 0x00; //LSB data
+
+		spirez = alt_avalon_spi_command(SPI_1_BASE, SPI_NR_DAC, 2, DAC_data, 0, NULL, 0);
+	}
+	else //enable DAC output, set new val
+	{
+		DAC_data[0] = (*data) >>2; //POWER-DOWN MODE = NORMAL OPERATION (MSB bits =00) + MSB data
+		DAC_data[1] = (*data) <<6; //LSB data
+
+		spirez = alt_avalon_spi_command(SPI_1_BASE, SPI_NR_DAC, 2, DAC_data, 0, NULL, 0);
+	}
+}
+
+/**
+ *	@brief Function to control ADF for TCXO frequency control
+ *	@param oe output enable control: 0 - output disabled, 1 - output enabled
+ *	@param data pointer to ADF data block (3 bytes)
+ */
+void Control_TCXO_ADF (unsigned char oe, unsigned char *data) //controls ADF4002
+{
+	volatile int spirez;
+	unsigned char ADF_data[12], ADF_block;
+
+	if (oe == 0) //set ADF4002 CP to three-state and MUX_OUT to DGND
+	{
+		ADF_data[0] = 0x1f;
+		ADF_data[1] = 0x81;
+		ADF_data[2] = 0xf3;
+		ADF_data[3] = 0x1f;
+		ADF_data[4] = 0x81;
+		ADF_data[5] = 0xf2;
+		ADF_data[6] = 0x00;
+		ADF_data[7] = 0x01;
+		ADF_data[8] = 0xf4;
+		ADF_data[9] = 0x01;
+		ADF_data[10] = 0x80;
+		ADF_data[11] = 0x01;
+
+		//Reconfigure_SPI_for_LMS();
+
+		//write data to ADF
+		for(ADF_block = 0; ADF_block < 4; ADF_block++)
+		{
+			spirez = alt_avalon_spi_command(SPI_1_ADF4002_BASE, SPI_NR_ADF4002, 3, &ADF_data[ADF_block*3], 0, NULL, 0);
+		}
+	}
+	else //set PLL parameters, 4 blocks must be written
+	{
+		spirez = alt_avalon_spi_command(SPI_1_ADF4002_BASE, SPI_NR_ADF4002, 3, data, 0, NULL, 0);
+	}
+}
+
 /**
  * Main, what else?
  * Gets LEDs pattern from switchers.
@@ -184,9 +250,12 @@ int main()
     //uint8_t spi_rdbuf[2] = {0x01, 0x00};
 
     // Write initial data to the DAC
-	dac_data[0] = (dac_val) >>2; //POWER-DOWN MODE = NORMAL OPERATION (MSB bits =00) + MSB data
-	dac_data[1] = (dac_val) <<6; //LSB data
-	spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_DAC, 2, dac_data, 0, NULL, 0);
+//	dac_data[0] = (dac_val) >>2; //POWER-DOWN MODE = NORMAL OPERATION (MSB bits =00) + MSB data
+//	dac_data[1] = (dac_val) <<6; //LSB data
+//	spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_DAC, 2, dac_data, 0, NULL, 0);
+	Control_TCXO_ADF (0, NULL); //set ADF4002 CP to three-state
+	dac_val = 125; //default DAC value
+	Control_TCXO_DAC (1, &dac_val); //enable DAC output, set new val
 
     //FLASH MEMORY
     spi_wrbuf1[0] = FLASH_CMD_READJEDECID;	//
@@ -432,26 +501,26 @@ int main()
  				case CMD_ADF4002_WR:
  					if(Check_many_blocks (3)) break;
 
- 					for(block = 0; block < LMS_Ctrl_Packet_Rx->Header.Data_blocks; block++)
- 					{
- 						switch(LMS_Ctrl_Packet_Rx->Header.Periph_ID)
- 						{
- 							case 0: //onboard
- 								//CyU3PGpioSetValue (FX3_ADF_SNN, CyFalse); //Enable onboard ADF's SPI
- 								break;
- 							case 1: //fmc
- 								//Modify_BRDSPI16_Reg_bits (0x14, BRD_SPI_ADF_SS, BRD_SPI_ADF_SS, 0); //Enable ADF's SPI
- 								break;
- 							default:
- 								cmd_errors++;
- 								break;
- 						}
+// 					for(block = 0; block < LMS_Ctrl_Packet_Rx->Header.Data_blocks; block++)
+// 					{
+// 						switch(LMS_Ctrl_Packet_Rx->Header.Periph_ID)
+// 						{
+// 							case 0: //onboard
+// 								//CyU3PGpioSetValue (FX3_ADF_SNN, CyFalse); //Enable onboard ADF's SPI
+// 								break;
+// 							case 1: //fmc
+// 								//Modify_BRDSPI16_Reg_bits (0x14, BRD_SPI_ADF_SS, BRD_SPI_ADF_SS, 0); //Enable ADF's SPI
+// 								break;
+// 							default:
+// 								cmd_errors++;
+// 								break;
+// 						}
 
  						//CyU3PSpiTransmitWords (&LMS_Ctrl_Packet_Rx->Data_field[0 + (block*3)], 1);
  						//CyU3PSpiTransmitWords (&LMS_Ctrl_Packet_Rx->Data_field[1 + (block*3)], 1);
  						//CyU3PSpiTransmitWords (&LMS_Ctrl_Packet_Rx->Data_field[2 + (block*3)], 1);
- 						spirez = alt_avalon_spi_command(SPI_1_ADF4002_BASE, SPI_NR_ADF4002, 3, &LMS_Ctrl_Packet_Rx->Data_field[0 + (block*3)], 0, NULL, 0);
-
+ 						//spirez = alt_avalon_spi_command(SPI_1_ADF4002_BASE, SPI_NR_ADF4002, 3, &LMS_Ctrl_Packet_Rx->Data_field[0 + (block*3)], 0, NULL, 0);
+/*
  						switch(LMS_Ctrl_Packet_Rx->Header.Periph_ID)
  						{
  							case 0: //onboard
@@ -464,6 +533,13 @@ int main()
  								cmd_errors++;
  							break;
  						}
+ 					}
+*/
+ 					Control_TCXO_DAC (0, NULL); //set DAC out to three-state
+
+ 					for(block = 0; block < LMS_Ctrl_Packet_Rx->Header.Data_blocks; block++)
+ 					{
+ 						Control_TCXO_ADF (1, &LMS_Ctrl_Packet_Rx->Data_field[0 + (block*3)]); //write data to ADF
  					}
 
  					if(cmd_errors) LMS_Ctrl_Packet_Tx->Header.Status = STATUS_INVALID_PERIPH_ID_CMD;
@@ -557,18 +633,23 @@ int main()
 					{
 						switch (LMS_Ctrl_Packet_Rx->Data_field[0 + (block * 4)]) //do something according to channel
 						{
-							case 0:
+							case 0: //TCXO DAC
 								if (LMS_Ctrl_Packet_Rx->Data_field[1 + (block * 4)] == 0) //RAW units?
 								{
 									if(LMS_Ctrl_Packet_Rx->Data_field[2 + (block * 4)] == 0) //MSB byte empty?
 									{
-										dac_val = LMS_Ctrl_Packet_Rx->Data_field[3 + (block * 4)];
+										Control_TCXO_ADF(0, NULL); //set ADF4002 CP to three-state
 
+										//write data to DAC
+										dac_val = LMS_Ctrl_Packet_Rx->Data_field[3 + (block * 4)];
+										Control_TCXO_DAC(1, &dac_val); //enable DAC output, set new val
+										/**
 										dac_data[0] = (dac_val >> 2) & 0x3F; //POWER-DOWN MODE = NORMAL OPERATION (MSB bits =00) + MSB data
 										dac_data[1] = (dac_val << 6) & 0xC0; //LSB data
 
 										//if( CyU3PI2cTransmitBytes (&preamble, &sc_brdg_data[0], 2, 0) != CY_U3P_SUCCESS)  cmd_errors++;
 										spirez = alt_avalon_spi_command(SPI_1_BASE, SPI_NR_DAC, 2, dac_data, 0, NULL, 0);
+									*/
 									}
 									else cmd_errors++;
 								}
@@ -581,6 +662,7 @@ int main()
 							break;
 						}
 					}
+
 
 
 					if(cmd_errors) LMS_Ctrl_Packet_Tx->Header.Status = STATUS_ERROR_CMD;
