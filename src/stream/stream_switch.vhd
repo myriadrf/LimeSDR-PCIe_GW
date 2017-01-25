@@ -34,7 +34,8 @@ entity stream_switch is
 		  wfm_rdy				: in std_logic;
 		  wfm_fifo_wr			: out std_logic;
 		  wfm_data				: out std_logic_vector(data_width-1 downto 0);
-		  wfm_fifo_wrusedw	: in std_logic_vector(wfm_fifo_wrusedw_size-1 downto 0)
+		  wfm_fifo_wrusedw	: in std_logic_vector(wfm_fifo_wrusedw_size-1 downto 0);
+		  wfm_fifo_wfull		: in std_logic
 		  
         
         );
@@ -103,7 +104,9 @@ tx_fifo_wr 		<= data_in_valid when dest_sel_syncreg(1)='0' else '0';
 tx_fifo_data	<= data_in;
 
 
-wfm_rdy_int		<= '1' when ((wfm_fifo_wrwords - unsigned(wfm_fifo_wrusedw)) > (wfm_limit*8/32)+5 and wfm_rdy='1' )else '0'; 
+--wfm_rdy_int		<= '1' when ((wfm_fifo_wrwords - unsigned(wfm_fifo_wrusedw)) > (wfm_limit*8/32)+5 and wfm_rdy='1' )else '0'; 
+
+wfm_rdy_int		<= '1' when (wfm_fifo_wfull='0' and wfm_rdy='1' )else '0';
 
 data_in_rdy		<= tx_fifo_rdy when dest_sel_syncreg(1)='0' else wfm_rdy_int;
   

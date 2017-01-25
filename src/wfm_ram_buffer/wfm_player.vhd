@@ -34,6 +34,7 @@ entity wfm_player is
 		wfm_data					: in std_logic_vector(data_width-1 downto 0);
 		wfm_wr					: in std_logic;
 		wfm_infifo_wrusedw 	: out std_logic_vector(wfm_infifo_size-1 downto 0);
+		wfm_infifo_wfull		: out std_logic;
 
 		wcmd_clk					: in std_logic;
 		wcmd_reset_n			: in  std_logic;
@@ -168,7 +169,7 @@ port map (
       wrclk         		=> wcmd_clk, 
       wrreq         		=> wfm_wr, 
       data          		=> wfm_data, 
-      wrfull        		=> open, 
+      wrfull        		=> wfm_infifo_wfull, 
 		wrempty		  		=> open, 
       wrusedw       		=> wfm_infifo_wrusedw, 
       rdclk 	     		=> wcmd_clk, 

@@ -45,6 +45,7 @@ entity wfm_player_top is
 		wfm_wr					: in std_logic;
 		wfm_rdy					: out std_logic;
 		wfm_infifo_wrusedw 	: out std_logic_vector(wfm_infifo_size-1 downto 0);
+		wfm_infifo_wfull		: out std_logic;
 		
 		sample_width    		: in std_logic_vector(1 downto 0); -- "00"-16bit, "01"-14bit, "10"-12bit
 		fr_start					: in std_logic;
@@ -165,6 +166,7 @@ component wfm_player is
 		wfm_data					: in std_logic_vector(data_width-1 downto 0);
 		wfm_wr					: in std_logic;
 		wfm_infifo_wrusedw 	: out std_logic_vector(wfm_infifo_size-1 downto 0);
+		wfm_infifo_wfull		: out std_logic;
 
 		wcmd_clk					: in std_logic;
 		wcmd_reset_n			: in  std_logic;
@@ -421,6 +423,7 @@ wfm_player_inst : wfm_player
 		wfm_data					=> wfm_data,
 		wfm_wr					=> wfm_wr,
 		wfm_infifo_wrusedw 	=> wfm_infifo_wrusedw,
+		wfm_infifo_wfull		=> wfm_infifo_wfull,
 
 		wcmd_clk					=> wcmd_clk,
 		wcmd_reset_n			=> wfm_player_wcmd_reset_n,
