@@ -546,7 +546,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/alte
 set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/altera_merlin_arbitrator.sv -library lms_ctr
 set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/altera_avalon_sc_fifo.v -library lms_ctr
 set_global_assignment -name VHDL_FILE lms_ctr/synthesis/lms_ctr.vhd -library lms_ctr
-set_global_assignment -name QIP_FILE ip/fifo_32b/fifo_32b.qip
 set_global_assignment -name QIP_FILE ip/fifo_8b/fifo_8b.qip
 set_global_assignment -name VERILOG_FILE ip/pcie_core/pcie_c4_4x_examples/chaining_dma/pcie_c4_4x_rs_hip.v
 set_global_assignment -name VERILOG_FILE ip/pcie_core/pcie_c4_4x_serdes.v
@@ -560,7 +559,6 @@ set_global_assignment -name VHDL_FILE src/data_manipulation/decompress.vhd
 set_global_assignment -name VHDL_FILE src/tx_packets/tx_pct_data_mimo.vhd
 set_global_assignment -name VHDL_FILE src/tx_packets/sample_nr_cnt_mimo.vhd
 set_global_assignment -name VHDL_FILE src/testing/test_data.vhd
-set_global_assignment -name QIP_FILE ip/fpga_infifo/fpga_infifo.qip
 set_global_assignment -name VHDL_FILE src/tx_packets/sync_fifo_rw.vhd
 set_global_assignment -name VHDL_FILE src/dyn_ps/pll_ps_cntrl.vhd
 set_global_assignment -name VHDL_FILE src/pll_reconfig_ctrl/config_ctrl.vhd
@@ -574,29 +572,14 @@ set_global_assignment -name VHDL_FILE src/general/debounce.vhd
 set_global_assignment -name BDF_FILE lms7_trx_top.bdf
 set_global_assignment -name QIP_FILE ip/fpga_outfifo/fpga_outfifo.qip
 set_global_assignment -name QIP_FILE ip/ddo/ddrox1.qip
-set_global_assignment -name QIP_FILE ip/rxpll/rxpll.qip
 set_global_assignment -name QIP_FILE ip/pll/pll.qip
-set_global_assignment -name QIP_FILE ip/lpm_counter/lpm_cnt.qip
-set_global_assignment -name QIP_FILE ip/lpm_mux/lpm_mux4.qip
 set_global_assignment -name VHDL_FILE src/general/synchronizer.vhd
-set_global_assignment -name QIP_FILE ip/fpga_pll/fpga_pll.qip
-set_global_assignment -name QIP_FILE ip/smplnr_sync_fifo/smplnr_sync_fifo.qip
 set_global_assignment -name VHDL_FILE src/general/capture_signal.vhd
-set_global_assignment -name QIP_FILE ip/ddri/ddri.qip
-set_global_assignment -name QIP_FILE ip/dec_fifo/decomp_fifo.qip
-set_global_assignment -name QIP_FILE ip/rx_fifo_24_to_12/fifo_24_to_12.qip
-set_global_assignment -name QIP_FILE ip/ch_mux/ch_mux.qip
-set_global_assignment -name QIP_FILE ip/tx_outfifo_mimo/tx_outfifo_16_to_32.qip
-set_global_assignment -name QIP_FILE ip/ddo/ddrox13.qip
 set_global_assignment -name VHDL_FILE src/general/bus_synch.vhd
-set_global_assignment -name QIP_FILE ip/pct_trnsf_fifo/pct_trnsf_fifo.qip
 set_global_assignment -name BDF_FILE symbols/delay_chain.bdf
 set_global_assignment -name BDF_FILE symbols/rx_synchronizers.bdf
 set_global_assignment -name BDF_FILE symbols/tx_synchronizers.bdf
-set_global_assignment -name QIP_FILE ip/tx_outfifo_mimo/tx_outfifo_32_to_32.qip
 set_global_assignment -name BDF_FILE symbols/LTE_rx_path.bdf
-set_global_assignment -name QIP_FILE ip/lte_rx_fifo/rx_fifo.qip
-set_global_assignment -name QIP_FILE ip/sim_pll/sim_pll_rx.qip
 set_global_assignment -name BDF_FILE symbols/LTE_tx_path.bdf
 set_global_assignment -name VHDL_FILE src/testing/test_data_dd.vhd
 set_global_assignment -name VHDL_FILE src/general/my_busmux.vhd

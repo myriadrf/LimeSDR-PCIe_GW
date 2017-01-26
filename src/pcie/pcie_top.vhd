@@ -171,20 +171,6 @@ architecture sample_arch of pcie_top is
 	);
 END COMPONENT;
 
-COMPONENT fifo_32b IS
-	PORT
-	(
-		aclr		: IN STD_LOGIC  := '0';
-		data		: IN STD_LOGIC_VECTOR (31 DOWNTO 0);
-		rdclk		: IN STD_LOGIC ;
-		rdreq		: IN STD_LOGIC ;
-		wrclk		: IN STD_LOGIC ;
-		wrreq		: IN STD_LOGIC ;
-		q			: OUT STD_LOGIC_VECTOR (31 DOWNTO 0);
-		rdempty	: OUT STD_LOGIC ;
-		wrfull	: OUT STD_LOGIC 
-	);
-END COMPONENT;
 
 component fpga_outfifo IS
 	PORT

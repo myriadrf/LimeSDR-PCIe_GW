@@ -16,9 +16,9 @@ create_clock -period 20.000 	-name CLK50_FPGA_1 	[get_ports CLK50_FPGA_1]
 create_clock -period 20.000 	-name CLK50_FPGA_2 	[get_ports CLK50_FPGA_2]
 create_clock -period 10.000 	-name CLK100_FPGA		[get_ports CLK100_FPGA]
 #Si5351C clocks
-create_clock -period 37.037 	-name SI_CLK0			[get_ports SI_CLK0]
-create_clock -period 37.037 	-name SI_CLK1			[get_ports SI_CLK1]
-create_clock -period 37.037 	-name SI_CLK2			[get_ports SI_CLK2]
+#create_clock -period 37.037 	-name SI_CLK0			[get_ports SI_CLK0]
+#create_clock -period 37.037 	-name SI_CLK1			[get_ports SI_CLK1]
+#create_clock -period 37.037 	-name SI_CLK2			[get_ports SI_CLK2]
 create_clock -period 37.037 	-name SI_CLK3			[get_ports SI_CLK3]
 create_clock -period 37.037 	-name SI_CLK6			[get_ports SI_CLK6]
 #LMK clk
@@ -120,9 +120,6 @@ set_clock_groups -asynchronous 	-group [get_clocks {CLK50_FPGA_1}] \
 											-group [get_clocks {LMS_MCLK2}] \
 											-group [get_clocks {RX_PLLCLK_C0}] \
 											-group [get_clocks {RX_PLLCLK_C1}] \
-											-group [get_clocks {SI_CLK0}] \
-											-group [get_clocks {SI_CLK1}] \
-											-group [get_clocks {SI_CLK2}] \
 											-group [get_clocks {SI_CLK3}] \
 											-group [get_clocks {SI_CLK6}]
 
