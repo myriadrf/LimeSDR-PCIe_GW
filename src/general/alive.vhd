@@ -36,7 +36,7 @@ begin
 		end if;
 	end process cntp;
 	
-	beat <= cnt(21);
+	beat <= cnt(22);
 
 end alive_arch;
 

@@ -32,7 +32,8 @@ entity fpgacfg is
 		lreset	: in std_logic; 	-- Logic reset signal, resets logic cells only  (use only one reset)
 		mreset	: in std_logic; 	-- Memory reset signal, resets configuration memory only (use only one reset)
 		HW_VER	: in std_logic_vector(3 downto 0);
-		BOM_VER	: in std_logic_vector(3 downto 0);
+		BOM_VER	: in std_logic_vector(2 downto 0);
+		PWR_SRC	: in std_logic;
 		
 		oen: out std_logic; --nc
 		stateo: out std_logic_vector(5 downto 0);
@@ -53,7 +54,10 @@ entity fpgacfg is
 		txpct_loss_clr	: out std_logic;
 		rx_en				: out std_logic;
 		tx_en				: out std_logic;
-		stream_load		: out std_logic;
+		wfm_ch_en		: out std_logic_vector(15 downto 0);
+		wfm_play			: out std_logic;
+		wfm_load			: out std_logic;
+		wfm_smpl_width	: out std_logic_vector(1 downto 0);
 		SPI_SS			: out std_logic_vector(15 downto 0);
 		
 		LMS1_SS			: out std_logic;
@@ -73,8 +77,14 @@ entity fpgacfg is
 --		LMS2_TXNRX1			: out std_logic;
 --		LMS2_TXNRX2			: out std_logic;
 --		LMS2_TXEN			: out std_logic;
---		LMS2_RXEN			: out std_logic
-		GPIO					: out std_logic_vector(6 downto 0)
+--		LMS2_RXEN			: out std_logic;
+		GPIO					: out std_logic_vector(6 downto 0);
+		FPGA_LED1_CTRL		: out std_logic_vector(2 downto 0);
+		FPGA_LED2_CTRL		: out std_logic_vector(2 downto 0);
+		FX3_LED_CTRL		: out std_logic_vector(2 downto 0);
+		FCLK_ENA				: out std_logic_vector(1 downto 0)
+		
+
 
 	);
 end fpgacfg;
@@ -170,7 +180,7 @@ begin
 				case inst_reg(4 downto 0) is	-- mux read-only outputs
 					when "00001" => dout_reg <= x"0001";
 					when "00010" => dout_reg <= (15 downto 8 => '0') & std_logic_vector(to_unsigned(COMPILE_REV, 8));
-					when "00011" => dout_reg <= (15 downto 8 => '0') & BOM_VER & HW_VER;
+					when "00011" => dout_reg <= (15 downto 8 => '0') & PWR_SRC & BOM_VER & HW_VER;
 					when others  => dout_reg <= mem(to_integer(unsigned(inst_reg(4 downto 0))));
 				end case;
 			end if;			      
@@ -193,10 +203,10 @@ begin
 		-- Defaults
 		if mreset = '0' then	
 			--Read only registers
-			mem(0)	<= "0000000000001111"; -- 00 frre, Board ID (LimeSDR-PCIe)
+			mem(0)	<= "0000000000001110"; -- 00 frre, Board ID (LimeSDR-USB)
 			mem(1)	<= "0000000000000000"; -- 00 free, GW version
 			mem(2)	<= "0000000000000000"; -- 00 free, GW revision
-			mem(3)	<= "0000000000000000"; -- 9 free, BOM_VER[6:4],HW_VER[3:0]
+			mem(3)	<= "0000000000000000"; --  9 free, BOM_VER[6:4],HW_VER[3:0]
 			--FPGA direct clocking
 			mem(4)	<= "0000000000000000"; --  0 free, phase_reg_sel
 			mem(5)	<= "0000000000000000"; --  0 free, drct_clk_en, 
@@ -205,22 +215,27 @@ begin
 			mem(7)	<= "0000000000000011"; --  0 free, ch_en[15:0]
 			mem(8)	<= "0000000100000010"; --  6 free, synch_dis, mimo_int_en, reserved[5:0], smpl_width[1:0]
 			mem(9)	<= "0000000000000011"; -- 14 free, txpct_loss_clr, smpl_nr_clr,			
-			mem(10)	<= "0000000000000000"; -- 13 free, stream_load, tx_en, rx_en,
+			mem(10)	<= "0000000000000000"; -- 14 free, tx_en, rx_en,
 			mem(11)	<= "0000000000000000"; -- 16 free, (Reserved)
-			mem(12)	<= "0000000000000000"; -- 16 free, (Reserved)
-			mem(13)	<= "0000000000000000"; -- 16 free, (Reserved)
-			mem(14)	<= "0000000000000000"; -- 16 free, (Reserved)
+			mem(12)	<= "0000000000000011"; --  0 free, wfm_ch_en
+			mem(13)	<= "0000000000000000"; --  0 free, Reserved,wfm_load,wfm_play,Reserved
+			mem(14)	<= "0000000000000010"; -- 14 free, Reserved,wfm_smpl_width
 			mem(15)	<= "0000000000000000"; -- 16 free, (Reserved)
 			--Peripheral config
-			mem(16)	<= "0000000000000000"; -- 16 free, (Reserved)
-			mem(17)	<= "0000000000000000"; -- 16 free, (Reserved)
+			mem(16)	<= "0000000000011000"; -- 16 free, (Reserved)
+			mem(17)	<= "0000000000000010"; -- 16 free, (Reserved)
 			mem(18)  <= "1111111111111111"; --  0 free, SPI_SS[15:0]
-			mem(19)	<= "0110111101101111"; --  0 free, rsrvd,LMS2_RXEN,LMS2_TXEN,LMS2_TXNRX2,LMS2_TXNRX1,LMS2_CORE_LDO_EN,LMS2_RESET,LMS2_SS,rsrvd,LMS1_RXEN,LMS1_TXEN,LMS1_TXNRX2,LMS1_TXNRX1,LMS1_CORE_LDO_EN,LMS1_RESET,LMS1_SS
+			mem(19)	<= "0110111101101011"; --  0 free, rsrvd,LMS2_RXEN,LMS2_TXEN,LMS2_TXNRX2,LMS2_TXNRX1,LMS2_CORE_LDO_EN,LMS2_RESET,LMS2_SS,rsrvd,LMS1_RXEN,LMS1_TXEN,LMS1_TXNRX2,LMS1_TXNRX1,LMS1_CORE_LDO_EN,LMS1_RESET,LMS1_SS
 			mem(20)	<= "0000000000000011"; --  0 free, (Reserved LMS control)
 			mem(21)	<= "0000000000000000"; --  0 free, (Reserved LMS control)
 			mem(22)	<= "0000000000000000"; --  0 free, (Reserved LMS control)
-			mem(23)	<= "0000000001000100"; --  0 free, (Reserved), GPIO[6:0]		
-
+			mem(23)	<= "0000000001000100"; --  0 free, (Reserved), GPIO[6:0]	
+			
+			mem(26)	<= "0000000000000000"; --  0 free, Reserved[15:8],FPGA_LED2_G,FPGA_LED2_R,FPGA_LED2_OVRD,Reserved,FPGA_LED1_G,FPGA_LED1_R,FPGA_LED1_OVRD
+			mem(27)	<= "0000000000000000"; --  0 free, Reserved[15:0]
+			mem(28)	<= "0000000000000000"; --  0 free, Reserved[15:4],FX3_LED_G,FX3_LED_R,FX3_LED_OVRD
+			mem(29)	<= "0000000000000001"; --  0 free, FCLK_ENA[1:0]
+			
 		elsif sclk'event and sclk = '1' then
 				if mem_we = '1' then
 					mem(to_integer(unsigned(inst_reg(4 downto 0)))) <= din_reg(14 downto 0) & sdin;
@@ -253,7 +268,11 @@ begin
 		txpct_loss_clr	<= mem(9) (1);
 		rx_en				<= mem(10) (0);
 		tx_en				<= mem(10) (1);
-		stream_load		<= mem(10) (2);
+		
+		wfm_ch_en		<= mem(12) (15 downto 0);
+		wfm_play			<= mem(13) (1);
+		wfm_load			<= mem(13) (2);
+		wfm_smpl_width	<= mem(13) (1 downto 0);
 
 		for_loop : for i in 0 to 15 generate --to prevent SPI_SS to go low on same time as sen
 			SPI_SS(i)<= mem(18)(i) OR (NOT sen);
@@ -276,6 +295,10 @@ begin
 --		LMS2_TXEN			<= mem(19)(13);
 --		LMS2_RXEN			<= mem(19)(14);
 		GPIO					<= mem(23) (6 downto 0);
+		FPGA_LED1_CTRL		<= mem(26)(2 downto 0);
+		FPGA_LED2_CTRL		<= mem(26)(6 downto 4);
+		FX3_LED_CTRL		<= mem(28)(2 downto 0);
+		FCLK_ENA				<= mem(29)(1 downto 0);
 
 
 end fpgacfg_arch;
