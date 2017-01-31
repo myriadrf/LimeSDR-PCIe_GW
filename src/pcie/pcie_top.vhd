@@ -721,18 +721,18 @@ end process;
  ----------------------------------------------------------------------------
 --user_w_write_32_full formation
 -- ----------------------------------------------------------------------------	
-	process (bus_clk)
-		begin
-			if (bus_clk'event and bus_clk = '1') then
-				if (rx_fifo32_wfull = '0') then
-					user_w_write_32_full <= '0'; -- Deassert any time
-				elsif (user_w_write_32_wren = '1' and rx_fifo32_wfull='1' ) then 
-					user_w_write_32_full <= '1'; -- Assert only with wren	
-				end if;
-			end if;
-		end process;
+--	process (bus_clk)
+--		begin
+--			if (bus_clk'event and bus_clk = '1') then
+--				if (rx_fifo32_wfull = '0') then
+--					user_w_write_32_full <= '0'; -- Deassert any time
+--				elsif (user_w_write_32_wren = '1' and rx_fifo32_wfull='1' ) then 
+--					user_w_write_32_full <= '1'; -- Assert only with wren	
+--				end if;
+--			end if;
+--		end process;
 		
---user_w_write_32_full<=rx_fifo32_wfull;
+user_w_write_32_full<=rx_fifo32_wfull;
 	
 	
 
