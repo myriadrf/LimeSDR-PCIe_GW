@@ -7,7 +7,7 @@ set LMS_MCLK1_period  		6.25
 set LMS_MCLK2_period			6.25
 	#Setup and hold times from datasheet
 set LMS_LMS7_Tsu				1.00
-set LMS_LMS7_Th				0.80
+set LMS_LMS7_Th				1.00
 
 	#Measured Tco_min and Tco_max values
 set LMS_Tco_max				4.05
