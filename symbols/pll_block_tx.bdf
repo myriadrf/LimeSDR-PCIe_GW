@@ -1568,11 +1568,6 @@ agreement for further details.
 	(pt 1608 464)
 )
 (connector
-	(text "c0_ddr" (rect 2409 392 2458 406)(font "Arial" ))
-	(pt 2528 408)
-	(pt 2384 408)
-)
-(connector
 	(text "c0_out" (rect 2123 448 2172 462)(font "Arial" ))
 	(pt 2096 464)
 	(pt 2240 464)
@@ -1601,6 +1596,11 @@ agreement for further details.
 	(text "pll_lock" (rect 2108 528 2174 542)(font "Arial" ))
 	(pt 2096 544)
 	(pt 2240 544)
+)
+(connector
+	(text "c0_out" (rect 2409 392 2458 406)(font "Arial" ))
+	(pt 2528 408)
+	(pt 2384 408)
 )
 (junction (pt 952 472))
 (text "PLL and pll control" (rect 384 280 787 308)(font "Arial" (font_size 16)(bold)))
