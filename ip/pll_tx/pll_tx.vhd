@@ -90,6 +90,7 @@ ARCHITECTURE SYN OF pll_tx IS
 		clk1_duty_cycle		: NATURAL;
 		clk1_multiply_by		: NATURAL;
 		clk1_phase_shift		: STRING;
+		compensate_clock		: STRING;
 		inclk0_input_frequency		: NATURAL;
 		intended_device_family		: STRING;
 		lpm_hint		: STRING;
@@ -186,11 +187,12 @@ BEGIN
 		clk1_duty_cycle => 50,
 		clk1_multiply_by => 1,
 		clk1_phase_shift => "0",
-		inclk0_input_frequency => 5000,
+		compensate_clock => "CLK0",
+		inclk0_input_frequency => 6250,
 		intended_device_family => "Cyclone IV GX",
 		lpm_hint => "CBX_MODULE_PREFIX=pll_tx",
 		lpm_type => "altpll",
-		operation_mode => "NO_COMPENSATION",
+		operation_mode => "ZERO_DELAY_BUFFER",
 		pll_type => "AUTO",
 		port_activeclock => "PORT_UNUSED",
 		port_areset => "PORT_USED",
@@ -273,18 +275,18 @@ END SYN;
 -- Retrieval info: PRIVATE: CLKBAD_SWITCHOVER_CHECK STRING "0"
 -- Retrieval info: PRIVATE: CLKLOSS_CHECK STRING "0"
 -- Retrieval info: PRIVATE: CLKSWITCH_CHECK STRING "0"
--- Retrieval info: PRIVATE: CNX_NO_COMPENSATE_RADIO STRING "1"
+-- Retrieval info: PRIVATE: CNX_NO_COMPENSATE_RADIO STRING "0"
 -- Retrieval info: PRIVATE: CREATE_CLKBAD_CHECK STRING "0"
 -- Retrieval info: PRIVATE: CREATE_INCLK1_CHECK STRING "0"
--- Retrieval info: PRIVATE: CUR_DEDICATED_CLK STRING "c0"
+-- Retrieval info: PRIVATE: CUR_DEDICATED_CLK STRING "c1"
 -- Retrieval info: PRIVATE: CUR_FBIN_CLK STRING "c0"
 -- Retrieval info: PRIVATE: DEVICE_SPEED_GRADE STRING "Any"
 -- Retrieval info: PRIVATE: DIV_FACTOR0 NUMERIC "1"
 -- Retrieval info: PRIVATE: DIV_FACTOR1 NUMERIC "1"
 -- Retrieval info: PRIVATE: DUTY_CYCLE0 STRING "50.00000000"
 -- Retrieval info: PRIVATE: DUTY_CYCLE1 STRING "50.00000000"
--- Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE0 STRING "200.000000"
--- Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE1 STRING "200.000000"
+-- Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE0 STRING "160.000000"
+-- Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE1 STRING "160.000000"
 -- Retrieval info: PRIVATE: EXPLICIT_SWITCHOVER_COUNTER STRING "0"
 -- Retrieval info: PRIVATE: EXT_FEEDBACK_RADIO STRING "0"
 -- Retrieval info: PRIVATE: GLOCKED_COUNTER_EDIT_CHANGED STRING "1"
@@ -292,7 +294,7 @@ END SYN;
 -- Retrieval info: PRIVATE: GLOCKED_MODE_CHECK STRING "0"
 -- Retrieval info: PRIVATE: GLOCK_COUNTER_EDIT NUMERIC "1048575"
 -- Retrieval info: PRIVATE: HAS_MANUAL_SWITCHOVER STRING "1"
--- Retrieval info: PRIVATE: INCLK0_FREQ_EDIT STRING "200.000"
+-- Retrieval info: PRIVATE: INCLK0_FREQ_EDIT STRING "160.000"
 -- Retrieval info: PRIVATE: INCLK0_FREQ_UNIT_COMBO STRING "MHz"
 -- Retrieval info: PRIVATE: INCLK1_FREQ_EDIT STRING "100.000"
 -- Retrieval info: PRIVATE: INCLK1_FREQ_EDIT_CHANGED STRING "1"
@@ -356,7 +358,7 @@ END SYN;
 -- Retrieval info: PRIVATE: USE_CLKENA0 STRING "0"
 -- Retrieval info: PRIVATE: USE_CLKENA1 STRING "0"
 -- Retrieval info: PRIVATE: USE_MIL_SPEED_GRADE NUMERIC "0"
--- Retrieval info: PRIVATE: ZERO_DELAY_RADIO STRING "0"
+-- Retrieval info: PRIVATE: ZERO_DELAY_RADIO STRING "1"
 -- Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
 -- Retrieval info: CONSTANT: BANDWIDTH_TYPE STRING "AUTO"
 -- Retrieval info: CONSTANT: CLK0_DIVIDE_BY NUMERIC "1"
@@ -367,10 +369,11 @@ END SYN;
 -- Retrieval info: CONSTANT: CLK1_DUTY_CYCLE NUMERIC "50"
 -- Retrieval info: CONSTANT: CLK1_MULTIPLY_BY NUMERIC "1"
 -- Retrieval info: CONSTANT: CLK1_PHASE_SHIFT STRING "0"
--- Retrieval info: CONSTANT: INCLK0_INPUT_FREQUENCY NUMERIC "5000"
+-- Retrieval info: CONSTANT: COMPENSATE_CLOCK STRING "CLK0"
+-- Retrieval info: CONSTANT: INCLK0_INPUT_FREQUENCY NUMERIC "6250"
 -- Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone IV GX"
 -- Retrieval info: CONSTANT: LPM_TYPE STRING "altpll"
--- Retrieval info: CONSTANT: OPERATION_MODE STRING "NO_COMPENSATION"
+-- Retrieval info: CONSTANT: OPERATION_MODE STRING "ZERO_DELAY_BUFFER"
 -- Retrieval info: CONSTANT: PLL_TYPE STRING "AUTO"
 -- Retrieval info: CONSTANT: PORT_ACTIVECLOCK STRING "PORT_UNUSED"
 -- Retrieval info: CONSTANT: PORT_ARESET STRING "PORT_USED"

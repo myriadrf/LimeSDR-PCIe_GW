@@ -132,8 +132,8 @@ agreement for further details.
 	)
 	(drawing
 		(text "Cyclone IV GX" (rect 299 233 659 477)(font "Arial" ))
-		(text "inclk0 frequency: 200.000 MHz" (rect 130 140 388 291)(font "Arial" ))
-		(text "Operation Mode: No Compensation" (rect 130 153 404 317)(font "Arial" ))
+		(text "inclk0 frequency: 160.000 MHz" (rect 130 140 388 291)(font "Arial" ))
+		(text "Operation Mode: Zero Delay Buffer" (rect 130 153 407 317)(font "Arial" ))
 		(text "Clk " (rect 131 174 276 359)(font "Arial" ))
 		(text "Ratio" (rect 152 174 324 359)(font "Arial" ))
 		(text "Ph (dg)" (rect 178 174 385 359)(font "Arial" ))
