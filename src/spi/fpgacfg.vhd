@@ -83,6 +83,10 @@ entity fpgacfg is
 		GPIO					: out std_logic_vector(6 downto 0);
 		FPGA_LED1_CTRL		: out std_logic_vector(2 downto 0);
 		FPGA_LED2_CTRL		: out std_logic_vector(2 downto 0);
+		FPGA_LED3_CTRL		: out std_logic_vector(2 downto 0);
+		FPGA_LED4_CTRL		: out std_logic_vector(2 downto 0);
+		FPGA_LED5_CTRL		: out std_logic_vector(2 downto 0);
+		FPGA_LED6_CTRL		: out std_logic_vector(2 downto 0);
 		FX3_LED_CTRL		: out std_logic_vector(2 downto 0);
 		FCLK_ENA				: out std_logic_vector(1 downto 0)
 		
@@ -301,6 +305,10 @@ begin
 		GPIO					<= mem(23) (6 downto 0);
 		FPGA_LED1_CTRL		<= mem(26)(2 downto 0);
 		FPGA_LED2_CTRL		<= mem(26)(6 downto 4);
+		FPGA_LED3_CTRL		<= mem(26)(10 downto 8);
+		FPGA_LED4_CTRL		<= mem(26)(14 downto 12);
+		FPGA_LED5_CTRL		<= mem(27)(2 downto 0);
+		FPGA_LED6_CTRL		<= mem(27)(6 downto 4);
 		FX3_LED_CTRL		<= mem(28)(2 downto 0);
 		FCLK_ENA				<= mem(29)(1 downto 0);
 
