@@ -381,7 +381,7 @@ agreement for further details.
 	(input)
 	(rect -1024 768 -824 784)
 	(text "INPUT" (rect 157 0 198 11)(font "Arial" (font_size 6)))
-	(text "CLK50_FPGA_1" (rect 5 0 105 14)(font "Arial" ))
+	(text "CLK50_FPGA_1" (rect 5 0 104 14)(font "Arial" ))
 	(pt 200 8)
 	(drawing
 		(line (pt 116 12)(pt 141 12))
@@ -396,7 +396,7 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 288 2536 464 2552)
+	(rect 384 2592 560 2608)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "LMS_RESET" (rect 90 0 164 14)(font "Arial" ))
 	(pt 0 8)
@@ -409,7 +409,7 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 480 2536 536 2552))
+	(annotation_block (location)(rect 576 2592 632 2608))
 )
 (pin
 	(output)
@@ -4897,6 +4897,38 @@ agreement for further details.
 		(rectangle (rect 16 16 192 160))
 	)
 )
+(symbol
+	(rect 288 2576 352 2624)
+	(text "AND2" (rect 1 0 34 11)(font "Arial" (font_size 6)))
+	(text "inst34" (rect 3 37 52 51)(font "Arial" ))
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN1" (rect 2 7 19 21)(font "Courier New" (bold))(invisible))
+		(text "IN1" (rect 2 7 19 21)(font "Courier New" (bold))(invisible))
+		(line (pt 0 16)(pt 14 16))
+	)
+	(port
+		(pt 0 32)
+		(input)
+		(text "IN2" (rect 2 23 19 37)(font "Courier New" (bold))(invisible))
+		(text "IN2" (rect 2 23 19 37)(font "Courier New" (bold))(invisible))
+		(line (pt 0 32)(pt 14 32))
+	)
+	(port
+		(pt 64 24)
+		(output)
+		(text "OUT" (rect 48 15 65 29)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 48 15 65 29)(font "Courier New" (bold))(invisible))
+		(line (pt 42 24)(pt 64 24))
+	)
+	(drawing
+		(line (pt 14 12)(pt 30 12))
+		(line (pt 14 37)(pt 31 37))
+		(line (pt 14 12)(pt 14 37))
+		(arc (pt 31 37)(pt 30 12)(rect 18 12 43 37))
+	)
+)
 (connector
 	(text "rst" (rect 40 928 64 942)(font "Arial" ))
 	(pt 0 944)
@@ -5763,11 +5795,6 @@ agreement for further details.
 	(pt 2336 3856)
 	(pt 2480 3856)
 	(bus)
-)
-(connector
-	(text "lms_reset" (rect 228 2528 302 2542)(font "Arial" ))
-	(pt 216 2544)
-	(pt 288 2544)
 )
 (connector
 	(pt -488 1952)
@@ -6849,11 +6876,6 @@ agreement for further details.
 	(pt 104 2320)
 )
 (connector
-	(text "lms_reset" (rect -44 2320 30 2334)(font "Arial" ))
-	(pt -56 2336)
-	(pt 104 2336)
-)
-(connector
 	(text "GPIO[6..0]" (rect -13 2416 69 2430)(font "Arial" ))
 	(pt -56 2432)
 	(pt 104 2432)
@@ -7008,6 +7030,31 @@ agreement for further details.
 	(pt 2256 4400)
 	(pt 2408 4400)
 	(bus)
+)
+(connector
+	(text "lms_ctr_gpio[3..0]" (rect 64 3208 212 3222)(font "Arial" ))
+	(pt 128 3224)
+	(pt 0 3224)
+	(bus)
+)
+(connector
+	(text "lms_ctr_gpio[0]" (rect 200 2592 323 2606)(font "Arial" ))
+	(pt 288 2608)
+	(pt 160 2608)
+)
+(connector
+	(pt 384 2600)
+	(pt 352 2600)
+)
+(connector
+	(text "lms1_reset" (rect -44 2320 38 2334)(font "Arial" ))
+	(pt -56 2336)
+	(pt 104 2336)
+)
+(connector
+	(text "lms1_reset" (rect 188 2576 270 2590)(font "Arial" ))
+	(pt 288 2592)
+	(pt 160 2592)
 )
 (junction (pt -536 2768))
 (junction (pt -32 2776))
