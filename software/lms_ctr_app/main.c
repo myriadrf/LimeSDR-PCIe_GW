@@ -963,7 +963,7 @@ int main()
 							cmd_errors += I2C_start(I2C_OPENCORES_0_BASE, I2C_ADDR_EEPROM, 0);
 	 						cmd_errors += I2C_write(I2C_OPENCORES_0_BASE, LMS_Ctrl_Packet_Rx->Data_field[8], 0);
 	 						cmd_errors += I2C_write(I2C_OPENCORES_0_BASE, LMS_Ctrl_Packet_Rx->Data_field[9], 0);
-	 						cmd_errors += I2C_start(I2C_OPENCORES_0_BASE, SI5351_I2C_ADDR, 1);
+	 						cmd_errors += I2C_start(I2C_OPENCORES_0_BASE, I2C_ADDR_EEPROM, 1);
 	 						for(cnt=0; cnt<data_cnt-1; cnt++)
 	 							LMS_Ctrl_Packet_Tx->Data_field[24+cnt] = I2C_read(I2C_OPENCORES_0_BASE, 0);
 	 						LMS_Ctrl_Packet_Tx->Data_field[24+cnt] = I2C_read(I2C_OPENCORES_0_BASE, 1);
