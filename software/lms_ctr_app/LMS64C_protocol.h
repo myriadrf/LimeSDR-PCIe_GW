@@ -94,6 +94,9 @@ enum eEXP_BOARD {
 
 #define CMD_ANALOG_VAL_WR	0x61 //write analog value
 #define CMD_ANALOG_VAL_RD	0x62 //read analog value
+
+#define CMD_MEMORY_WR		0x8C
+#define CMD_MEMORY_RD		0x8D
 //read reference??? ofset? min? max?
 
 //0x6x free?

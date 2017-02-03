@@ -888,6 +888,99 @@ int main()
  				break;
 
 
+				case CMD_MEMORY_WR:
+					current_portion = (LMS_Ctrl_Packet_Rx->Data_field[1] << 24) | (LMS_Ctrl_Packet_Rx->Data_field[2] << 16) | (LMS_Ctrl_Packet_Rx->Data_field[3] << 8) | (LMS_Ctrl_Packet_Rx->Data_field[4]);
+					data_cnt = LMS_Ctrl_Packet_Rx->Data_field[5];
+
+					if((LMS_Ctrl_Packet_Rx->Data_field[10] == 0) && (LMS_Ctrl_Packet_Rx->Data_field[11] == 3)) //TARGET = 3 (EEPROM)
+					{
+						if(LMS_Ctrl_Packet_Rx->Data_field[0] == 0) //write data to EEPROM #1
+						{
+/*
+							I2C_Addr = I2C_ADDR_EEPROM;
+
+							I2C_Addr &= ~(1 << 0);//write addr
+							preamble.buffer[0] = I2C_Addr;
+
+							preamble.buffer[1] = LMS_Ctrl_Packet_Rx->Data_field[8]; //addr hi
+							preamble.buffer[2] = LMS_Ctrl_Packet_Rx->Data_field[9]; //addr lo
+
+							preamble.length = 3;
+
+							preamble.ctrlMask  = 0x0000;
+
+							if( CyU3PI2cTransmitBytes (&preamble, &LMS_Ctrl_Packet_Rx->Data_field[24], data_cnt, 0) != CY_U3P_SUCCESS)  cmd_errors++;
+
+							CyU3PThreadSleep (5); //wait till EEPROM finish writing
+*/
+							cmd_errors += I2C_start(I2C_OPENCORES_0_BASE, I2C_ADDR_EEPROM, 0);
+	 						cmd_errors += I2C_write(I2C_OPENCORES_0_BASE, LMS_Ctrl_Packet_Rx->Data_field[8], 0);
+	 						cmd_errors += I2C_write(I2C_OPENCORES_0_BASE, LMS_Ctrl_Packet_Rx->Data_field[9], 0);
+	 						for(cnt=0; cnt<data_cnt-1; cnt++)
+	 							cmd_errors += I2C_write(I2C_OPENCORES_0_BASE, LMS_Ctrl_Packet_Rx->Data_field[24+cnt], 0);
+	 						cmd_errors += I2C_write(I2C_OPENCORES_0_BASE, LMS_Ctrl_Packet_Rx->Data_field[24+cnt], 1);
+
+							if(cmd_errors) LMS_Ctrl_Packet_Tx->Header.Status = STATUS_ERROR_CMD;
+							else LMS_Ctrl_Packet_Tx->Header.Status = STATUS_COMPLETED_CMD;
+						}
+						else
+							LMS_Ctrl_Packet_Tx->Header.Status = STATUS_ERROR_CMD;
+					}
+					else
+
+						LMS_Ctrl_Packet_Tx->Header.Status = STATUS_ERROR_CMD;
+
+				break;
+
+
+
+				case CMD_MEMORY_RD:
+					current_portion = (LMS_Ctrl_Packet_Rx->Data_field[1] << 24) | (LMS_Ctrl_Packet_Rx->Data_field[2] << 16) | (LMS_Ctrl_Packet_Rx->Data_field[3] << 8) | (LMS_Ctrl_Packet_Rx->Data_field[4]);
+					data_cnt = LMS_Ctrl_Packet_Rx->Data_field[5];
+
+					if((LMS_Ctrl_Packet_Rx->Data_field[10] == 0) && (LMS_Ctrl_Packet_Rx->Data_field[11] == 3)) ///TARGET = 3 (EEPROM)
+					{
+						if(LMS_Ctrl_Packet_Rx->Data_field[0] == 0) //read data from EEPROM #1
+						{
+/*							I2C_Addr = I2C_ADDR_EEPROM;
+
+							//read byte
+							preamble.length = 4;
+
+							I2C_Addr &= ~(1 << 0);//write addr
+							preamble.buffer[0] = I2C_Addr;
+
+							preamble.buffer[1] = LMS_Ctrl_Packet_Rx->Data_field[8];; //addr hi
+							preamble.buffer[2] = LMS_Ctrl_Packet_Rx->Data_field[9]; //addr lo
+
+							I2C_Addr |= 1 << 0;	//read addr
+
+							preamble.buffer[3] = I2C_Addr;
+							preamble.ctrlMask  = 0x0004;
+
+							if( CyU3PI2cReceiveBytes (&preamble, &LMS_Ctrl_Packet_Tx->Data_field[24], data_cnt, 0)  != CY_U3P_SUCCESS)  cmd_errors++;
+*/
+							cmd_errors += I2C_start(I2C_OPENCORES_0_BASE, I2C_ADDR_EEPROM, 0);
+	 						cmd_errors += I2C_write(I2C_OPENCORES_0_BASE, LMS_Ctrl_Packet_Rx->Data_field[8], 0);
+	 						cmd_errors += I2C_write(I2C_OPENCORES_0_BASE, LMS_Ctrl_Packet_Rx->Data_field[9], 0);
+	 						cmd_errors += I2C_start(I2C_OPENCORES_0_BASE, SI5351_I2C_ADDR, 1);
+	 						for(cnt=0; cnt<data_cnt-1; cnt++)
+	 							LMS_Ctrl_Packet_Tx->Data_field[24+cnt] = I2C_read(I2C_OPENCORES_0_BASE, 0);
+	 						LMS_Ctrl_Packet_Tx->Data_field[24+cnt] = I2C_read(I2C_OPENCORES_0_BASE, 1);
+
+
+							if(cmd_errors) LMS_Ctrl_Packet_Tx->Header.Status = STATUS_ERROR_CMD;
+							else LMS_Ctrl_Packet_Tx->Header.Status = STATUS_COMPLETED_CMD;
+						}
+						else
+							LMS_Ctrl_Packet_Tx->Header.Status = STATUS_ERROR_CMD;
+					}
+					else
+						LMS_Ctrl_Packet_Tx->Header.Status = STATUS_ERROR_CMD;
+
+				break;
+
+
 				case CMD_LMS_MCU_FW_WR:
 
 					current_portion = LMS_Ctrl_Packet_Rx->Data_field[1];
