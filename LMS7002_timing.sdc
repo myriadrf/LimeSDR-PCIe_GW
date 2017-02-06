@@ -42,11 +42,17 @@ create_generated_clock 	-name  TX_PLLCLK_C0 \
 create_generated_clock 	-name   TX_PLLCLK_C1 \
 								-source [get_pins inst20|inst35|altpll_component|auto_generated|pll1|inclk[0]] \
 								-phase 90 [get_pins inst20|inst35|altpll_component|auto_generated|pll1|clk[1]]	
+
+
 								
+##LMS1_FCLK1 clock output pin 
+#create_generated_clock -name LMS_FCLK1_PLL \
+#								-master [get_clocks TX_PLLCLK_C0] \
+#								-source [get_pins {inst20|inst61|ALTDDIO_OUT_component|auto_generated|ddio_outa[0]|dataout}] \
+#								[get_ports LMS_FCLK1]
 #LMS1_FCLK1 clock output pin 
 create_generated_clock -name LMS_FCLK1_PLL \
-								-master [get_clocks TX_PLLCLK_C0] \
-								-source [get_pins {inst20|inst61|ALTDDIO_OUT_component|auto_generated|ddio_outa[0]|dataout}] \
+								-source [get_pins inst20|inst35|altpll_component|auto_generated|pll1|clk[0]] \
 								[get_ports LMS_FCLK1]
 								
 
