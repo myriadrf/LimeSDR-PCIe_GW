@@ -8,7 +8,7 @@ USE altera_mf.all;
 
 entity pcie_top is
   port (
-    clk_50 					: IN std_logic;
+    inclk_50 				: IN std_logic;
     pcie_perstn 			: IN std_logic;
     pcie_refclk 			: IN std_logic;
     pcie_rx 				: IN std_logic_vector(3 DOWNTO 0);
@@ -95,6 +95,10 @@ architecture sample_arch of pcie_top is
       clk0_duty_cycle			: NATURAL;
       clk0_multiply_by			: NATURAL;
       clk0_phase_shift			: STRING;
+		clk1_divide_by				: NATURAL;
+      clk1_duty_cycle			: NATURAL;
+      clk1_multiply_by			: NATURAL;
+      clk1_phase_shift			: STRING;
       inclk0_input_frequency	: NATURAL;
       intended_device_family	: STRING;
       lpm_hint						: STRING;
@@ -238,6 +242,7 @@ END component;
   signal reconfig_clk_locked 		:  std_logic;
   signal out_clocks 					:  std_logic_vector(9 DOWNTO 0);
   signal in_clocks 					:  std_logic_vector(1 DOWNTO 0);
+  signal clk_50 						: std_logic;
   signal clk_125 						: std_logic;
   
   signal clr_rx_fifo					: std_logic;
@@ -375,6 +380,10 @@ cnt<=std_logic_vector(rd_cnt);
 		clk0_duty_cycle 			=> 50,
 		clk0_multiply_by 			=> 5,
 		clk0_phase_shift 			=> "0",
+		clk1_divide_by 			=> 1,
+		clk1_duty_cycle 			=> 50,
+		clk1_multiply_by 			=> 1,
+		clk1_phase_shift 			=> "0",
 		inclk0_input_frequency 	=> 20000,
 		intended_device_family 	=> "Cyclone IV",
 		lpm_hint 					=> "CBX_MODULE_PREFIX=pll_vhdl",
@@ -436,8 +445,9 @@ cnt<=std_logic_vector(rd_cnt);
 
   pll_areset 	<= '0';
   noclock 		<= '0';
-  in_clocks 	<= noclock & clk_50;
+  in_clocks 	<= noclock & inclk_50;
   clk_125 		<= out_clocks(0);
+  clk_50 		<= out_clocks(1);
   
 -- ----------------------------------------------------------------------------
 -- Xillybus inst 
