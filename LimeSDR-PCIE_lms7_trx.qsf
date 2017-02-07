@@ -80,9 +80,9 @@ set_instance_assignment -name IO_STANDARD "1.5-V PCML" -to PCIE_HSO[0]
 set_location_assignment PIN_Y1 -to "PCIE_HSO[0](n)"
 set_location_assignment PIN_H12 -to PCIE_PERSTn
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to PCIE_PERSTn
-set_location_assignment PIN_M11 -to PCIE_REFCLK
+set_location_assignment PIN_M7 -to PCIE_REFCLK
 set_instance_assignment -name IO_STANDARD HCSL -to PCIE_REFCLK
-set_location_assignment PIN_N11 -to "PCIE_REFCLK(n)"
+set_location_assignment PIN_N7 -to "PCIE_REFCLK(n)"
 set_location_assignment PIN_B12 -to FPGA_GPIO0
 set_location_assignment PIN_C16 -to FPGA_GPIO1
 set_location_assignment PIN_B15 -to FPGA_GPIO2
@@ -128,7 +128,6 @@ set_location_assignment PIN_B6 -to LMS_DIQ2_IQSEL2
 set_location_assignment PIN_H9 -to LMS_FCLK1
 set_location_assignment PIN_C5 -to LMS_FCLK2
 set_location_assignment PIN_K10 -to LMS_MCLK1
-set_location_assignment PIN_M8 -to LMS_MCLK2
 set_location_assignment PIN_A1 -to LMS_RESET
 set_location_assignment PIN_J15 -to EXT_GND
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to EXT_GND
@@ -170,8 +169,8 @@ set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_DIQ1_D[9]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_DIQ1_D[10]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_DIQ1_D[11]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_MCLK1
-set_location_assignment PIN_L21 -to CLK50_FPGA_2
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CLK50_FPGA_2
+set_location_assignment PIN_M8 -to CLK50_FPGA_2
+set_instance_assignment -name IO_STANDARD LVDS -to CLK50_FPGA_2
 set_global_assignment -name ENABLE_OCT_DONE OFF
 set_global_assignment -name USE_CONFIGURATION_DEVICE ON
 set_global_assignment -name CYCLONEIII_CONFIGURATION_DEVICE EPCS64
@@ -619,4 +618,7 @@ set_global_assignment -name VHDL_FILE src/self_test/clock_test.vhd
 set_global_assignment -name VHDL_FILE src/self_test/clk_with_ref_test.vhd
 set_global_assignment -name VHDL_FILE src/self_test/clk_no_ref_test.vhd
 set_global_assignment -name VHDL_FILE src/general/onboard_led.vhd
+set_location_assignment PIN_M11 -to LMS_MCLK2
+set_location_assignment PIN_N8 -to "CLK50_FPGA_2(n)"
+set_location_assignment PLL_6 -to inst15|clkpll|auto_generated|pll1
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -1553,11 +1553,6 @@ agreement for further details.
 	(pt 1712 864)
 )
 (connector
-	(text "c1_out" (rect 2411 424 2460 438)(font "Arial" ))
-	(pt 2384 440)
-	(pt 2528 440)
-)
-(connector
 	(text "pll_lock" (rect 2396 464 2462 478)(font "Arial" ))
 	(pt 2384 480)
 	(pt 2528 480)
@@ -1601,6 +1596,11 @@ agreement for further details.
 	(text "c0_out" (rect 2409 392 2458 406)(font "Arial" ))
 	(pt 2528 408)
 	(pt 2384 408)
+)
+(connector
+	(text "inclk0" (rect 2411 424 2460 438)(font "Arial" ))
+	(pt 2384 440)
+	(pt 2528 440)
 )
 (junction (pt 952 472))
 (text "PLL and pll control" (rect 384 280 787 308)(font "Arial" (font_size 16)(bold)))
