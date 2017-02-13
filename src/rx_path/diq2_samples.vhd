@@ -135,27 +135,27 @@ PORT MAP(
 -- ----------------------------------------------------------------------------
 -- DDRIO to sample data from direct clk
 -- ----------------------------------------------------------------------------
---lms7002_ddin_inst2 : diq2_sampling
---GENERIC MAP(dev_family 			=> dev_family,
---				diq_width 			=> diq_width,
---				fifo_size			=> 9,
---				invert_ddio_clk	=> "OFF"
---			)
---PORT MAP(
---		clk_io 		=> clk_iodirect,
---		clk_int		=> clk,
---		reset_n 		=> reset_n,
---		rxiqsel 		=> rxiqsel,
---		rxiq 			=> rxiq,
---		data_out_h 	=> inst2_data_out_h,
---		data_out_l	=> inst2_data_out_l
---		);		
+lms7002_ddin_inst2 : diq2_sampling
+GENERIC MAP(dev_family 			=> dev_family,
+				diq_width 			=> diq_width,
+				fifo_size			=> 9,
+				invert_ddio_clk	=> "OFF"
+			)
+PORT MAP(
+		clk_io 		=> clk_iodirect,
+		clk_int		=> clk,
+		reset_n 		=> reset_n,
+		rxiqsel 		=> rxiqsel,
+		rxiq 			=> rxiq,
+		data_out_h 	=> inst2_data_out_h,
+		data_out_l	=> inst2_data_out_l
+		);		
 
 
---mux_data_h <= inst1_data_out_h when data_src='0' else inst2_data_out_h;
---mux_data_l <= inst1_data_out_l when data_src='0' else inst2_data_out_l;
-mux_data_h <= inst1_data_out_h;
-mux_data_l <= inst1_data_out_l;
+mux_data_h <= inst1_data_out_h when data_src='0' else inst2_data_out_h;
+mux_data_l <= inst1_data_out_l when data_src='0' else inst2_data_out_l;
+--mux_data_h <= inst1_data_out_h;
+--mux_data_l <= inst1_data_out_l;
 
 
 wr_rx_fifo_v3_inst : wr_rx_fifo_v3
