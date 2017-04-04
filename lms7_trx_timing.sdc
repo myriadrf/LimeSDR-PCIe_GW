@@ -13,7 +13,7 @@ read_sdc LMS7002_timing.sdc
 ################################################################################
 #FPGA pll
 create_clock -period 20.000 	-name CLK50_FPGA_1 	[get_ports CLK50_FPGA_1]
-create_clock -period 20.000 	-name CLK50_FPGA_2 	[get_ports CLK50_FPGA_2]
+create_clock -period 20.000 	-name CLK125_FPGA 	[get_ports CLK125_FPGA]
 create_clock -period 10.000 	-name CLK100_FPGA		[get_ports CLK100_FPGA]
 #Si5351C clocks
 #create_clock -period 37.037 	-name SI_CLK0			[get_ports SI_CLK0]
@@ -110,9 +110,9 @@ set_multicycle_path -hold -start -from [get_clocks CLK100_FPGA] -to [get_clocks 
 
 # Set clkA and clkB to be mutually exclusive clocks.
 set_clock_groups -asynchronous 	-group [get_clocks {CLK50_FPGA_1}] \
-											-group [get_clocks {CLK50_FPGA_2}] \
+											-group [get_clocks {CLK125_FPGA}] \
 											-group [get_clocks {CLK100_FPGA}] \
-											-group [get_clocks {LMK_CLK FPGA_SPI0_SCLK_reg FPGA_SPI0_SCLK_out}] \
+											-group [get_clocks {LMK_CLK FPGA_SPI0_SCLK_reg FPGA_SPI0_SCLK_out }] \
 											-group [get_clocks {PCIE_REFCLK}] \
 											-group [get_clocks {LMS_MCLK1}] \
 											-group [get_clocks {TX_PLLCLK_C0}] \
@@ -121,6 +121,8 @@ set_clock_groups -asynchronous 	-group [get_clocks {CLK50_FPGA_1}] \
 											-group [get_clocks {RX_PLLCLK_C0}] \
 											-group [get_clocks {RX_PLLCLK_C1}] \
 											-group [get_clocks {SI_CLK3}] \
+											-group [get_clocks {inst28|DDR2_ctrl_top_inst|ddr2_inst|ddr2_controller_phy_inst|ddr2_phy_inst|ddr2_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[1]}] \
+											-group [get_clocks {inst46|ddr2_inst|ddr2_controller_phy_inst|ddr2_phy_inst|ddr2_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[1]}] \
 											-group [get_clocks {SI_CLK6}]
 
 #set false paths
