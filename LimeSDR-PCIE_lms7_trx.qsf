@@ -468,7 +468,7 @@ set_location_assignment PIN_M22 -to SI_CLK6
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to LMK_CLK
 set_instance_assignment -name IO_STANDARD "2.5 V" -to SI_CLK3
 set_instance_assignment -name IO_STANDARD "1.8 V" -to SI_CLK6
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to LMS_MCLK2
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_MCLK2
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to LMS_FCLK1
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to LMS_DIQ1_IQSEL
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to LMS_DIQ1_D[0]
