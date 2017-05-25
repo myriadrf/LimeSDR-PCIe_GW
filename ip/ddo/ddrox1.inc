@@ -1,4 +1,4 @@
---Copyright (C) 1991-2015 Altera Corporation. All rights reserved.
+--Copyright (C) 1991-2016 Altera Corporation. All rights reserved.
 --Your use of Altera Corporation's design tools, logic functions 
 --and other software and tools, and its AMPP partner logic 
 --functions, and any output files from any of the foregoing 
@@ -16,6 +16,7 @@
 
 FUNCTION ddrox1 
 (
+	aclr,
 	datain_h[0..0],
 	datain_l[0..0],
 	outclock

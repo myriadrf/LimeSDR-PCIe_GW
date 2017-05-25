@@ -109,7 +109,7 @@ module ddr2_phy_alt_mem_phy_seq_wrapper (
   localparam MEM_IF_MEMTYPE                = "DDR2";
   localparam RANK_HAS_ADDR_SWAP            = 0;
   localparam MEM_IF_MR_0                   = 1074;
-  localparam MEM_IF_MR_1                   = 1024;
+  localparam MEM_IF_MR_1                   = 1092;
   localparam MEM_IF_MR_2                   = 0;
   localparam MEM_IF_MR_3                   = 0;
   localparam MEM_IF_OCT_EN                 = 0;
