@@ -105,11 +105,11 @@ module ddr2_alt_mem_ddrx_controller_top(
    localparam CTL_ECC_RMW_ENABLED              = 0;
    localparam CTL_ECC_CSR_ENABLED              = 0;
    localparam CTL_CSR_ENABLED                  = 0;
-   localparam CTL_ODT_ENABLED                  = 0;
+   localparam CTL_ODT_ENABLED                  = 1;
    localparam CSR_ADDR_WIDTH                   = 16;
    localparam CSR_DATA_WIDTH                   = 32;
    localparam CSR_BE_WIDTH                     = 4;
-   localparam CTL_OUTPUT_REGD                  = 0;
+   localparam CTL_OUTPUT_REGD                  = 1;
    localparam MEM_CAS_WR_LAT                   = 5;
    localparam MEM_ADD_LAT                      = 0;
    localparam MEM_TCL                          = 3;
