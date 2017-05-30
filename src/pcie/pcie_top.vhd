@@ -253,11 +253,15 @@ END component;
    signal fpga_outfifo_empty		: std_logic;
    signal fpga_outfifo_empty_gen : std_logic;
 
+   signal stream_rx_en_sync      : std_logic;
 	signal stream_rx_en_reg0		: std_logic;
 	signal stream_rx_en_reg1		: std_logic;
 	signal stream_rx_en_reg2		: std_logic;
   
 begin
+
+sync_reg0 : entity work.sync_reg 
+port map(bus_clk, '1', stream_rx_en, stream_rx_en_sync);
 
 
 -- ----------------------------------------------------------------------------
@@ -270,7 +274,7 @@ begin
 			stream_rx_en_reg1<='0';
 			stream_rx_en_reg2<='0';
 		elsif (bus_clk'event and bus_clk='1') then
-			stream_rx_en_reg0<=stream_rx_en;
+			stream_rx_en_reg0<=stream_rx_en_sync;
 			stream_rx_en_reg1<=stream_rx_en_reg0;
 			stream_rx_en_reg2<=stream_rx_en_reg1;
 		end if;
