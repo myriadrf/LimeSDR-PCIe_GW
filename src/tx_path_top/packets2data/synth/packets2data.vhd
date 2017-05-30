@@ -71,6 +71,7 @@ signal inst0_pct_data         : std_logic_vector(in_pct_data_w-1 downto 0);
 signal inst0_pct_data_wrreq   : std_logic_vector(n_buff-1 downto 0);
 signal inst0_pct_buff_rdy     : std_logic_vector(n_buff-1 downto 0);
 signal inst0_in_pct_wrfull    : std_logic;
+signal inst0_pct_size         : std_logic_vector(pct_size_w-1 downto 0);
 
 
 --for clk domain crosing
@@ -103,6 +104,7 @@ signal instx_q_valid                : std_logic_vector(n_buff-1 downto 0);
 
 signal pct_smpl_mux                 : std_logic_vector(63 downto 0);
 
+signal pct_size_sync_rclk           : std_logic_vector(pct_size_w-1 downto 0);
 signal pct_buff_rdy_int             : std_logic_vector(n_buff-1 downto 0);
 signal pct_size_only_data           : unsigned(pct_size_w-1 downto 0);
 signal half_pct_size_only_data      : unsigned(pct_size_w-1 downto 0);
@@ -118,6 +120,16 @@ begin
 bus_sync_reg0 : entity work.bus_sync_reg
  generic map (64) 
  port map(rclk, '1', inst0_pct_hdr_0, inst0_pct_hdr_0_rclk);
+
+
+bus_sync_reg1 : entity work.bus_sync_reg
+ generic map (pct_size_w) 
+ port map(wclk, '1', pct_size, inst0_pct_size);
+
+
+bus_sync_reg2 : entity work.bus_sync_reg
+ generic map (pct_size_w) 
+ port map(rclk, '1', pct_size, pct_size_sync_rclk);
  
  
  gen_handshake_sync_0  : 
@@ -138,7 +150,7 @@ bus_sync_reg0 : entity work.bus_sync_reg
 -- port map(rclk, '1', (others=>'1'), inst0_pct_hdr_0_valid_rclk);
 
 --inst0_pct_hdr_1 bus is changed once per packet, safe to use sync registers  
- bus_sync_reg2 : entity work.bus_sync_reg
+ bus_sync_reg3 : entity work.bus_sync_reg
  generic map (64) 
  port map(rclk, '1', inst0_pct_hdr_1, inst0_pct_hdr_1_rclk);
  
@@ -169,7 +181,7 @@ begin
    if reset_n = '0' then 
       pct_size_only_data <= (others=>'1');
    elsif (rclk'event AND rclk='1') then 
-      pct_size_only_data <= unsigned(pct_size)-4;
+      pct_size_only_data <= unsigned(pct_size_sync_rclk)-4;
    end if;
 end process;
 
@@ -212,7 +224,7 @@ p2d_wr_fsm_inst0 : entity work.p2d_wr_fsm
    port map(
       clk               => wclk,
       reset_n           => reset_n,
-      pct_size          => pct_size, 
+      pct_size          => inst0_pct_size, 
       in_pct_wrreq      => in_pct_wrreq,
       in_pct_data       => in_pct_data,
       in_pct_wrfull     => inst0_in_pct_wrfull,
@@ -305,7 +317,7 @@ p2d_clr_fsm_inst1 : entity work.p2d_clr_fsm
    port map(
       clk                  => rclk,
       reset_n              => reset_n,
-      pct_size             => pct_size, 
+      pct_size             => pct_size_sync_rclk, 
       
       smpl_nr              => sample_nr,
       
