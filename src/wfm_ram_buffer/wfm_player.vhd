@@ -67,7 +67,9 @@ signal wfm_infifo_rdempty	: std_logic;
 
 signal wfm_load_wcmd0, wfm_load_wcmd1, wfm_load_wcmd2 : std_logic;
 
-signal wcmd_last_addr : std_logic_vector(addr_size-1 downto 0);
+signal wcmd_last_addr            : std_logic_vector(addr_size-1 downto 0);
+signal wcmd_last_addr_sync_rclk  : std_logic_vector(addr_size-1 downto 0);
+
 
 signal wfm_load_wcmd_ext	: std_logic;
 
@@ -151,6 +153,11 @@ end component;
 
   
 begin
+
+
+bus_sync_reg0 : entity work.bus_sync_reg
+ generic map (addr_size) 
+ port map(rcmd_clk, '1', wcmd_last_addr, wcmd_last_addr_sync_rclk);
 
 -- ----------------------------------------------------------------------------
 -- WFM data buffer
@@ -249,7 +256,7 @@ wfm_rcmd_fsm_inst : wfm_rcmd_fsm
 		rcmd_wr					=> rcmd_wr,
 		rcmd_brst_en			=> rcmd_brst_en,
 
-		wcmd_last_addr			=> wcmd_last_addr,
+		wcmd_last_addr			=> wcmd_last_addr_sync_rclk,
  
 		wfm_load					=> wfm_load_wcmd_ext,
 		wfm_play_stop			=> wfm_play_stop
