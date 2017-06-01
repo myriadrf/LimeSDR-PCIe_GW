@@ -69,6 +69,11 @@ signal wfm_load_wcmd0, wfm_load_wcmd1, wfm_load_wcmd2 : std_logic;
 
 signal wcmd_last_addr            : std_logic_vector(addr_size-1 downto 0);
 signal wcmd_last_addr_sync_rclk  : std_logic_vector(addr_size-1 downto 0);
+signal wfm_play_stop_sync_rclk   : std_logic;
+signal wfm_load_wcmd_ext_sync_rclk  : std_logic;
+signal wfm_load_sync_wcmd_clk    : std_logic;
+
+
 
 
 signal wfm_load_wcmd_ext	: std_logic;
@@ -154,6 +159,18 @@ end component;
   
 begin
 
+--Synchronization registers for asynchronous input ports
+sync_reg0 : entity work.sync_reg 
+port map(rcmd_clk, '1', wfm_play_stop, wfm_play_stop_sync_rclk);
+
+sync_reg1 : entity work.sync_reg 
+port map(rcmd_clk, '1', wfm_load_wcmd_ext, wfm_load_wcmd_ext_sync_rclk);
+
+sync_reg2 : entity work.sync_reg 
+port map(wcmd_clk, '1', wfm_load, wfm_load_sync_wcmd_clk);
+
+
+
 
 bus_sync_reg0 : entity work.bus_sync_reg
  generic map (addr_size) 
@@ -219,16 +236,11 @@ wfm_wcmd_fsm_inst : wfm_wcmd_fsm
 
 process(wcmd_clk, wcmd_reset_n)begin
 	if (wcmd_reset_n = '0')then
-		wfm_load_wcmd0<='0';
-		wfm_load_wcmd1<='0';
 		wfm_load_wcmd2<='0';
-	elsif(wcmd_clk'event and wcmd_clk = '1')then 
-		wfm_load_wcmd0<=wfm_load;
-		wfm_load_wcmd1<=wfm_load_wcmd0;
-
-		if wfm_load_wcmd1='1' then 
+	elsif(wcmd_clk'event and wcmd_clk = '1')then
+		if wfm_load_sync_wcmd_clk='1' then 
 			wfm_load_wcmd2<='1';
-		elsif wfm_load_wcmd1='0' and wfm_infifo_rdempty='1' then
+		elsif wfm_load_sync_wcmd_clk='0' and wfm_infifo_rdempty='1' then
 			wfm_load_wcmd2<='0';
 		else
 			wfm_load_wcmd2<=wfm_load_wcmd2; 
@@ -258,8 +270,8 @@ wfm_rcmd_fsm_inst : wfm_rcmd_fsm
 
 		wcmd_last_addr			=> wcmd_last_addr_sync_rclk,
  
-		wfm_load					=> wfm_load_wcmd_ext,
-		wfm_play_stop			=> wfm_play_stop
+		wfm_load					=> wfm_load_wcmd_ext_sync_rclk,
+		wfm_play_stop			=> wfm_play_stop_sync_rclk
         
         );
 
