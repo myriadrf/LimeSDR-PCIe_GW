@@ -139,7 +139,8 @@ signal tst_rdata_valid     : std_logic;
 signal tst_be              : std_logic_vector(3 downto 0);
 signal tst_burstbegin      : std_logic;
 
-signal begin_test_sync_phy_clk   : std_logic;   
+signal begin_test_sync_phy_clk   : std_logic; 
+signal insert_error_sync_phy_clk   : std_logic;  
 
 component fifo_inst is
   generic(dev_family	     : string  := "Cyclone IV E";
@@ -270,6 +271,13 @@ begin
 
 sync_reg0 : entity work.sync_reg 
 port map(ddr2_phy_clk, '1', begin_test, begin_test_sync_phy_clk);
+
+
+sync_reg1 : entity work.sync_reg 
+port map(ddr2_phy_clk, '1', insert_error, insert_error_sync_phy_clk);
+
+
+
 
 
 
@@ -460,7 +468,7 @@ avl_size			<= tst_size 		when begin_test_sync_phy_clk='1' else ddr2arb_local_siz
 local_rdata				<= avl_rdata;
 local_rdata_valid 	<= avl_rdata_valid;
 
-tst_rdata			<= avl_rdata(31 downto 1) & '0' when insert_error='1' else avl_rdata;
+tst_rdata			<= avl_rdata(31 downto 1) & '0' when insert_error_sync_phy_clk='1' else avl_rdata;
 tst_rdata_valid 	<= avl_rdata_valid when begin_test_sync_phy_clk='1' else '0';
 
 
