@@ -6,21 +6,23 @@ set_time_format -unit ns -decimal_places 3
 ################################################################################
 #Read periphery constraints files
 ################################################################################
-read_sdc LMS7002_timing.sdc
 
 ################################################################################
 #Base clocks
 ################################################################################
 #FPGA pll
 create_clock -period 20.000 	-name CLK50_FPGA_1 	[get_ports CLK50_FPGA_1]
-create_clock -period 20.000 	-name CLK125_FPGA 	[get_ports CLK125_FPGA]
 create_clock -period 10.000 	-name CLK100_FPGA		[get_ports CLK100_FPGA]
+create_clock -period  8.000 	-name CLK125_FPGA 	[get_ports CLK125_FPGA]
+
 #Si5351C clocks
-#create_clock -period 37.037 	-name SI_CLK0			[get_ports SI_CLK0]
-#create_clock -period 37.037 	-name SI_CLK1			[get_ports SI_CLK1]
-#create_clock -period 37.037 	-name SI_CLK2			[get_ports SI_CLK2]
+create_clock -period 37.037 	-name SI_CLK0			[get_ports SI_CLK0]
+create_clock -period 37.037 	-name SI_CLK1			[get_ports SI_CLK1]
+create_clock -period 37.037 	-name SI_CLK2			[get_ports SI_CLK2]
 create_clock -period 37.037 	-name SI_CLK3			[get_ports SI_CLK3]
+create_clock -period 37.037 	-name SI_CLK5			[get_ports SI_CLK5]
 create_clock -period 37.037 	-name SI_CLK6			[get_ports SI_CLK6]
+create_clock -period 37.037 	-name SI_CLK7			[get_ports SI_CLK7]
 #LMK clk
 create_clock -period 32.552 	-name LMK_CLK			[get_ports LMK_CLK]
 #PCIE clock
@@ -34,6 +36,23 @@ create_clock -period 10.000	-name CLK100_FPGA_VIRT
 ################################################################################
 #Generated clocks
 ################################################################################
+
+# PLL for PCIe core
+create_generated_clock 	-name  PCIE_PLLCLK_C0 \
+								-master [get_clocks CLK125_FPGA] \
+								-source [get_pins -compatibility_mode *inst15*|clkpll*|inclk[0]*] \
+								-phase 0 \
+                        -divide_by 1 -multiply_by 1 \
+                        [get_pins -compatibility_mode *inst15*|clkpll*|clk[0]*]
+								
+create_generated_clock 	-name  PCIE_PLLCLK_C1 \
+								-master [get_clocks CLK125_FPGA] \
+								-source [get_pins -compatibility_mode *inst15*|clkpll*|inclk[0]*] \
+								-phase 0 \
+                        -divide_by 5 -multiply_by 2 \
+                        [get_pins -compatibility_mode *inst15*|clkpll*|clk[1]*]
+
+
 #NIOS spi
 create_generated_clock 	-name FPGA_SPI0_SCLK_reg \
 								-source [get_ports {CLK100_FPGA}] \
@@ -110,20 +129,28 @@ set_multicycle_path -hold -start -from [get_clocks CLK100_FPGA] -to [get_clocks 
 
 # Set clkA and clkB to be mutually exclusive clocks.
 set_clock_groups -asynchronous 	-group [get_clocks {CLK50_FPGA_1}] \
-											-group [get_clocks {CLK125_FPGA}] \
 											-group [get_clocks {CLK100_FPGA}] \
+											-group [get_clocks {CLK125_FPGA}] \
+                                 -group [get_clocks {PCIE_PLLCLK_C0}] \
+                                 -group [get_clocks {PCIE_PLLCLK_C1}] \
 											-group [get_clocks {LMK_CLK FPGA_SPI0_SCLK_reg FPGA_SPI0_SCLK_out }] \
 											-group [get_clocks {PCIE_REFCLK}] \
 											-group [get_clocks {LMS_MCLK1}] \
+                                 -group [get_clocks {LMS_MCLK1_5MHZ}] \
 											-group [get_clocks {TX_PLLCLK_C0}] \
 											-group [get_clocks {TX_PLLCLK_C1}] \
 											-group [get_clocks {LMS_MCLK2}] \
+                                 -group [get_clocks {LMS_MCLK2_5MHZ}] \
 											-group [get_clocks {RX_PLLCLK_C0}] \
 											-group [get_clocks {RX_PLLCLK_C1}] \
-											-group [get_clocks {SI_CLK3}] \
-											-group [get_clocks {inst28|DDR2_ctrl_top_inst|ddr2_inst|ddr2_controller_phy_inst|ddr2_phy_inst|ddr2_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[1]}] \
-											-group [get_clocks {inst46|ddr2_inst|ddr2_controller_phy_inst|ddr2_phy_inst|ddr2_phy_alt_mem_phy_inst|clk|pll|altpll_component|auto_generated|pll1|clk[1]}] \
-											-group [get_clocks {SI_CLK6}]
+											-group [get_clocks {SI_CLK0}] \
+                                 -group [get_clocks {SI_CLK1}] \
+                                 -group [get_clocks {SI_CLK2}] \
+                                 -group [get_clocks {SI_CLK3}] \
+                                 -group [get_clocks {SI_CLK5}] \
+											-group [get_clocks {SI_CLK6}] \
+											-group [get_clocks {SI_CLK7}]
+
 
 #set false paths
 # For slow speed outputs (Outputs that we dont care about)
@@ -152,9 +179,16 @@ set_false_path -from [get_ports ADF_MUXOUT*]
 set_false_path -from [get_ports I2C_SCL] 	
 set_false_path -from [get_ports I2C_SDA]
 set_false_path -from [get_ports LM75_OS]
-set_false_path -from [get_ports switch_external_connection_export[*]]
+set_false_path -from [get_ports FPGA_SW[*]]
 set_false_path -from [get_ports FPGA_AS_DATA0]
 set_false_path -from [get_ports PCIE_PERSTn]
+
+#For synchronizer chain in design (sync_reg and bus_sync_reg)
+set_false_path -to [get_keepers *sync_reg[0]*]
+set_false_path -to [get_keepers *sync_reg0[*]*]
+
+
+set_false_path -from [get_keepers *singl_clk_with_ref_test*|*cnt_clk0[*]]
 
 
 #set false paths to output clocks 
