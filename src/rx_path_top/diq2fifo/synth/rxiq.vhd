@@ -133,15 +133,22 @@ process (reset_n, clk)
 begin 
    if reset_n='0' then
       fifo_wdata_reg <=(others=>'0');
-      fifo_wrreq_reg <='0';
    elsif (clk'event AND clk = '1') then 
       fifo_wdata_reg <=mux_fifo_wdata;
+   end if;
+end process;
+
+process (fifo_wfull, clk)
+begin 
+   if fifo_wfull='1' then
+      fifo_wrreq_reg <='0';
+   elsif (clk'event AND clk = '1') then 
       fifo_wrreq_reg <=mux_fifo_wrreq;
    end if;
 end process;
 
 fifo_wdata <= fifo_wdata_reg;
-fifo_wrreq <= fifo_wrreq_reg AND NOT fifo_wfull;
+fifo_wrreq <= fifo_wrreq_reg;
 
 
 
