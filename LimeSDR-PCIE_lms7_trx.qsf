@@ -83,14 +83,6 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to PCIE_PERSTn
 set_location_assignment PIN_M7 -to PCIE_REFCLK
 set_instance_assignment -name IO_STANDARD HCSL -to PCIE_REFCLK
 set_location_assignment PIN_N7 -to "PCIE_REFCLK(n)"
-set_location_assignment PIN_B12 -to FPGA_GPIO0
-set_location_assignment PIN_C16 -to FPGA_GPIO1
-set_location_assignment PIN_B15 -to FPGA_GPIO2
-set_location_assignment PIN_B13 -to FPGA_GPIO3
-set_location_assignment PIN_A15 -to FPGA_GPIO4
-set_location_assignment PIN_B16 -to FPGA_GPIO5
-set_location_assignment PIN_A17 -to FPGA_GPIO6
-set_location_assignment PIN_A16 -to FPGA_GPIO7
 set_location_assignment PIN_H21 -to FPGA_LED1_G
 set_location_assignment PIN_E20 -to FPGA_LED1_R
 set_location_assignment PIN_G20 -to FPGA_LED2_G
@@ -131,14 +123,6 @@ set_location_assignment PIN_K10 -to LMS_MCLK1
 set_location_assignment PIN_A1 -to LMS_RESET
 set_location_assignment PIN_J15 -to EXT_GND
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to EXT_GND
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO7
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO6
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO5
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO4
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO3
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO2
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO1
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO0
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_RESET
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_FCLK2
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_FCLK1
@@ -196,10 +180,8 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_SPI1_SCLK
 set_location_assignment PIN_A20 -to FPGA_SPI1_DAC_SS
 set_location_assignment PIN_C19 -to FPGA_SPI1_MOSI
 set_location_assignment PIN_C20 -to FPGA_SPI1_SCLK
-set_location_assignment PIN_G15 -to uart_external_connection_rxd
 set_location_assignment PIN_G14 -to uart_external_connection_txd
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to uart_external_connection_txd
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to uart_external_connection_rxd
 set_location_assignment PIN_K20 -to FPGA_LED3
 set_location_assignment PIN_K19 -to FPGA_LED4
 set_location_assignment PIN_K22 -to FPGA_LED5
@@ -702,6 +684,50 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_SW[0]
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_SW[1]
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_SW[2]
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_SW[3]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[0]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[1]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[2]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[3]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[4]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[6]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[7]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[8]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[9]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[10]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[11]
+set_location_assignment PIN_C13 -to FPGA_GPIO[15]
+set_location_assignment PIN_C12 -to FPGA_GPIO[14]
+set_location_assignment PIN_C15 -to FPGA_GPIO[13]
+set_location_assignment PIN_C14 -to FPGA_GPIO[12]
+set_location_assignment PIN_D15 -to FPGA_GPIO[11]
+set_location_assignment PIN_D14 -to FPGA_GPIO[10]
+set_location_assignment PIN_G14 -to FPGA_GPIO[9]
+set_location_assignment PIN_G15 -to FPGA_GPIO[8]
+set_location_assignment PIN_A16 -to FPGA_GPIO[7]
+set_location_assignment PIN_A17 -to FPGA_GPIO[6]
+set_location_assignment PIN_B16 -to FPGA_GPIO[5]
+set_location_assignment PIN_A15 -to FPGA_GPIO[4]
+set_location_assignment PIN_B13 -to FPGA_GPIO[3]
+set_location_assignment PIN_B15 -to FPGA_GPIO[2]
+set_location_assignment PIN_C16 -to FPGA_GPIO[1]
+set_location_assignment PIN_B12 -to FPGA_GPIO[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[15]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[14]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[13]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[12]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[11]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[10]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[1]
+set_global_assignment -name VHDL_FILE src/spi/periphcfg.vhd
 set_global_assignment -name VERILOG_FILE ip/pcie_core/pcie_c4_4x_core.v
 set_global_assignment -name VERILOG_FILE ip/pcie_core/pcie_c4_4x.v
 set_global_assignment -name VHDL_FILE src/tx_path_top/packets2data/synth/packets2data_top.vhd
@@ -865,21 +891,11 @@ set_global_assignment -name VHDL_FILE src/rx_path_top/diq2fifo/synth/diq2fifo.vh
 set_global_assignment -name VHDL_FILE src/rx_path_top/data2packets/synth/data2packets_top.vhd
 set_global_assignment -name VHDL_FILE src/rx_path_top/data2packets/synth/data2packets_fsm.vhd
 set_global_assignment -name VHDL_FILE src/rx_path_top/data2packets/synth/data2packets.vhd
-set_global_assignment -name SIGNALTAP_FILE debug.stp
 set_global_assignment -name VHDL_FILE src/tx_path_top/fifo2diq/synth/txiq.vhd
 set_global_assignment -name VHDL_FILE src/tx_path_top/fifo2diq/synth/fifo2diq.vhd
 set_global_assignment -name VHDL_FILE src/tx_path_top/handshake_sync/synth/handshake_sync.vhd
 set_global_assignment -name VHDL_FILE src/tx_path_top/tx_path/synth/tx_path_top.vhd
 set_global_assignment -name VHDL_FILE src/tx_path_top/tx_path/synth/sync_fifo_rw.vhd
-set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[0]
-set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[1]
-set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[2]
-set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[3]
-set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[4]
-set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[6]
-set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[7]
-set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[8]
-set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[9]
-set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[10]
-set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[11]
+set_global_assignment -name VHDL_FILE src/general/gpio_ctrl_top.vhd
+set_global_assignment -name VHDL_FILE src/general/gpio_ctrl.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
