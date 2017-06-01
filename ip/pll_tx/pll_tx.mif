@@ -19,7 +19,7 @@
 --    Device Speed Grade: -
 --    PLL Scan Chain: Cyclone III GX GPLL (144 bits)
 --    File Name: H:/working_dir/altera/LimeSDR-PCIE/LimeSDR-PCIE_lms7_trx/ip/pll_tx//pll_tx.mif
---    Generated: Tue Jan 31 15:34:30 2017
+--    Generated: Wed May 31 10:01:30 2017
 
 WIDTH=1;
 DEPTH=144;
