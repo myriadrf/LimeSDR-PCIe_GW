@@ -48,6 +48,9 @@ entity fpgacfg is
 		--Interface Config		
 		ch_en				: out std_logic_vector(15 downto 0);
 		smpl_width		: out std_logic_vector(1 downto 0);
+		mode				: out std_logic;
+		ddr_en			: out std_logic;
+		trxiq_pulse		: out std_logic;
 		mimo_int_en		: out std_logic;
 		synch_dis		: out std_logic;
 		smpl_nr_clr		: out std_logic;
@@ -56,6 +59,7 @@ entity fpgacfg is
 		tx_en				: out std_logic;
 		rx_ptrn_en		: out std_logic;
 		tx_ptrn_en		: out std_logic;
+		tx_cnt_en		: out std_logic;
 		wfm_ch_en		: out std_logic_vector(15 downto 0);
 		wfm_play			: out std_logic;
 		wfm_load			: out std_logic;
@@ -219,7 +223,7 @@ begin
 			mem(6)	<= "0000000000000000"; --  5 free, load_phase_reg, cnt_ind[4:0], clk_ind[4:0]
 			--Interface Config
 			mem(7)	<= "0000000000000011"; --  0 free, ch_en[15:0]
-			mem(8)	<= "0000000100000010"; --  6 free, synch_dis, mimo_int_en, reserved[5:0], smpl_width[1:0]
+			mem(8)	<= "0000000100000010"; --  6 free, synch_dis, mimo_int_en, trxiq_pulse, ddr_en, mode, reserved[2:0], smpl_width[1:0]
 			mem(9)	<= "0000000000000011"; -- 14 free, txpct_loss_clr, smpl_nr_clr,			
 			mem(10)	<= "0000000000000000"; -- 14 free, tx_ptrn_en, rx_ptrn_en, reserved[5:0], tx_en, rx_en,
 			mem(11)	<= "0000000000000000"; -- 16 free, (Reserved)
@@ -268,6 +272,9 @@ begin
 		--Interface Config		
 		ch_en				<= mem(7);
 		smpl_width		<= mem(8) (1 downto 0);
+		mode				<= mem(8) (5);
+		ddr_en			<= mem(8) (6);
+		trxiq_pulse		<= mem(8) (7);
 		mimo_int_en		<= mem(8) (8);
 		synch_dis		<= mem(8) (9);
 		smpl_nr_clr		<= mem(9) (0);
@@ -276,6 +283,7 @@ begin
 		tx_en				<= mem(10) (1);
 		rx_ptrn_en		<= mem(10) (8);
 		tx_ptrn_en		<= mem(10) (9);
+      tx_cnt_en		<= mem(10) (10);
 		
 		wfm_ch_en		<= mem(12) (15 downto 0);
 		wfm_play			<= mem(13) (1);
