@@ -53,7 +53,7 @@
 
 //get info
 #define DEV_TYPE			LMS_DEV_SODERAPCIE
-#define HW_VER				2
+#define HW_VER				3
 #define EXP_BOARD			EXP_BOARD_UNKNOWN
 
 //FPGA Cyclone IV GX (EP4GX30F23C7N) bitstream (RBF) size in bytes
