@@ -1,6 +1,18 @@
-################################################################################
+# ----------------------------------------------------------------------------
+# FILE: 	Clock_groups.vhd
+# DESCRIPTION:	Clock group assigments for TimeQuest
+# DATE:	June 2, 2017
+# AUTHOR(s):	Lime Microsystems
+# REVISIONS:
+# ----------------------------------------------------------------------------
+# NOTES:
+# 
+# ----------------------------------------------------------------------------
+
+
+# ----------------------------------------------------------------------------
 #Timing parameters
-################################################################################
+# ----------------------------------------------------------------------------
 #LMS7002
 	#LMS_MCLK2 period
 set LMS_MCLK1_period  		6.25
@@ -18,9 +30,9 @@ set LMS_Tco_min				2.90
 set LMS7_IN_MAX_DELAY [expr $LMS_Tco_max]
 set LMS7_IN_MIN_DELAY [expr $LMS_Tco_min]
 
-################################################################################
+# ----------------------------------------------------------------------------
 #Base clocks
-################################################################################
+# ----------------------------------------------------------------------------
 
 create_clock -period $LMS_MCLK1_period 			-name LMS_MCLK1			[get_ports LMS_MCLK1] 
 create_clock -period $LMS_MCLK1_period_5MHz 		-name LMS_MCLK1_5MHZ 	[get_ports LMS_MCLK1] -add
@@ -28,15 +40,15 @@ create_clock -period $LMS_MCLK1_period_5MHz 		-name LMS_MCLK1_5MHZ 	[get_ports L
 create_clock -period $LMS_MCLK2_period 			-name LMS_MCLK2 			[get_ports LMS_MCLK2]
 create_clock -period $LMS_MCLK2_period_5MHz 		-name LMS_MCLK2_5MHZ 	[get_ports LMS_MCLK2] -add
 
-################################################################################
+# ----------------------------------------------------------------------------
 #Virtual clocks
-################################################################################
+# ----------------------------------------------------------------------------
 create_clock -name LMS_MCLK2_VIRT			-period $LMS_MCLK2_period
 create_clock -name LMS_MCLK2_VIRT_5MHz		-period $LMS_MCLK2_period_5MHz
 
-################################################################################
+# ----------------------------------------------------------------------------
 #Generated clocks
-################################################################################
+# ----------------------------------------------------------------------------
 
 #LMS TX PLL
 create_generated_clock 	-name  TX_PLLCLK_C0 \
@@ -86,9 +98,9 @@ create_generated_clock 	-name LMS_FCLK2_DRCT \
 								-source [get_pins -compatibility_mode *rx_pll_top*\|*\|*\|dataout*] \
 								[get_ports {LMS_FCLK2}] -add
 								
-################################################################################
+# ----------------------------------------------------------------------------
 #Input constraints
-################################################################################
+# ----------------------------------------------------------------------------
 #LMS1 when MCLK2 is 160MHz
 set_input_delay	-max $LMS7_IN_MAX_DELAY \
 						-clock [get_clocks LMS_MCLK2_VIRT] [get_ports {LMS_DIQ2_D[*] LMS_DIQ2_IQSEL2}]
@@ -118,9 +130,9 @@ set_input_delay	-min $LMS7_IN_MIN_DELAY \
 						-clock [get_clocks LMS_MCLK2_VIRT_5MHz] \
 						-clock_fall [get_ports {LMS_DIQ2_D[*] LMS_DIQ2_IQSEL2}] -add_delay
 						
-################################################################################
+# ----------------------------------------------------------------------------
 #Output constraints
-################################################################################
+# ----------------------------------------------------------------------------
 #LMS1						
 set_output_delay	-max $LMS_LMS7_Tsu \
 						-clock [get_clocks LMS_FCLK1_PLL] [get_ports {LMS_DIQ1_D[*] LMS_DIQ1_IQSEL}]
@@ -150,12 +162,9 @@ set_output_delay	-min -$LMS_LMS7_Th \
 						-clock [get_clocks LMS_FCLK1_DRCT] \
 						-clock_fall [get_ports {LMS_DIQ1_D[*] LMS_DIQ1_IQSEL}] -add_delay
 	
-################################################################################
+# ----------------------------------------------------------------------------
 #Exceptions
-################################################################################	
-################################################################################
-#Exceptions
-################################################################################
+# ----------------------------------------------------------------------------
 #Between Center aligned different edge transfers in DIQ2 interface (when sampling with PLL phase shifted clock >5MHz)
 set_false_path -setup 	-rise_from 	[get_clocks LMS_MCLK2_VIRT] -fall_to \
 												[get_clocks RX_PLLCLK_C1]
