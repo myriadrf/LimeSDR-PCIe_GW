@@ -27,7 +27,8 @@
 //#define FW_VER				2 //FLASH programming added
 //#define FW_VER				3 //Temperature and Si5351C control added
 //#define FW_VER				4 //LM75 configured to control fan; I2C speed increased up to 400kHz; ADF/DAC control implementation.
-#define FW_VER				5 //LMS7 MCU programming feature added
+//#define FW_VER				5 //LMS7 MCU programming feature added
+#define FW_VER				6 // GPIO commands added
 
 #define SPI_NR_LMS7002M 0
 #define SPI_NR_FPGA     1
@@ -1162,12 +1163,71 @@ int main()
 
 				break;
 
+ 	 			case CMD_GPIO_DIR_WR:
+ 	 				//if(Check_many_blocks (2)) break;
+
+ 					//write reg addr
+ 					sc_brdg_data[0] = 0x80;		// Write command & BOARD_GPIO_DIR register address MSB
+ 					sc_brdg_data[1] = 0xC4;		// BOARD_GPIO_DIR register address LSB
+ 					sc_brdg_data[2] = LMS_Ctrl_Packet_Rx->Data_field[1];	// Data fields swapped, while MSB in the data packet is in the
+ 					sc_brdg_data[3] = LMS_Ctrl_Packet_Rx->Data_field[0];	// leftmost byte
+ 					spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_FPGA, 4, sc_brdg_data, 0, NULL, 0);
+
+ 	 				LMS_Ctrl_Packet_Tx->Header.Status = STATUS_COMPLETED_CMD;
+ 	 			break;
+
+
+ 				case CMD_GPIO_DIR_RD:
+ 					//if(Check_many_blocks (2)) break;
+
+					//write reg addr
+ 					sc_brdg_data[0] = 0x00;		// Read command & BOARD_GPIO_DIR register address MSB
+ 					sc_brdg_data[1] = 0xC4;		// BOARD_GPIO_DIR register address LSB
+					spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_FPGA, 2, sc_brdg_data, 2, &sc_brdg_data[2], 0);
+
+					LMS_Ctrl_Packet_Tx->Data_field[0] = sc_brdg_data[3];	// Data fields swapped, while MSB in the data packet is in the
+					LMS_Ctrl_Packet_Tx->Data_field[1] = sc_brdg_data[2];	// leftmost byte
+
+ 					LMS_Ctrl_Packet_Tx->Header.Status = STATUS_COMPLETED_CMD;
+ 				break;
+
+
+ 	 			case CMD_GPIO_WR:
+ 	 				//if(Check_many_blocks (2)) break;
+
+ 	 				//write reg addr
+ 	 				sc_brdg_data[0] = 0x80;		// Write command & BOARD_GPIO_VAL register address MSB
+ 	 				sc_brdg_data[1] = 0xC6;		// BOARD_GPIO_VAL register address LSB
+ 	 				sc_brdg_data[2] = LMS_Ctrl_Packet_Rx->Data_field[1];	// Data fields swapped, while MSB in the data packet is in the
+ 	 				sc_brdg_data[3] = LMS_Ctrl_Packet_Rx->Data_field[0];	// leftmost byte
+ 	 				spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_FPGA, 4, sc_brdg_data, 0, NULL, 0);
+
+ 	 				LMS_Ctrl_Packet_Tx->Header.Status = STATUS_COMPLETED_CMD;
+ 	 			break;
+
+
+ 				case CMD_GPIO_RD:
+ 					//if(Check_many_blocks (2)) break;
+
+					//write reg addr
+ 	 				sc_brdg_data[0] = 0x00;		// Read command & BOARD_GPIO_RD register address MSB
+ 	 				sc_brdg_data[1] = 0xC2;		// BOARD_GPIO_RD register address LSB
+ 					spirez = alt_avalon_spi_command(SPI_LMS_BASE, SPI_NR_FPGA, 2, sc_brdg_data, 2, &sc_brdg_data[2], 0);
+
+ 					LMS_Ctrl_Packet_Tx->Data_field[0] = sc_brdg_data[3];	// Data fields swapped, while MSB in the data packet is in the
+ 					LMS_Ctrl_Packet_Tx->Data_field[1] = sc_brdg_data[2];	// leftmost byte
+
+ 					LMS_Ctrl_Packet_Tx->Header.Status = STATUS_COMPLETED_CMD;
+ 				break;
+
+
 
  				default:
  					/* This is unknown request. */
  					//isHandled = CyFalse;
  					LMS_Ctrl_Packet_Tx->Header.Status = STATUS_UNKNOWN_CMD;
  				break;
+
      		}
 
      		//Send response to the command
