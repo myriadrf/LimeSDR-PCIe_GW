@@ -653,7 +653,7 @@ set_instance_assignment -name GLOBAL_SIGNAL OFF -to SI_CLK3
 set_instance_assignment -name GLOBAL_SIGNAL OFF -to SI_CLK5
 set_instance_assignment -name GLOBAL_SIGNAL OFF -to SI_CLK6
 set_instance_assignment -name GLOBAL_SIGNAL OFF -to SI_CLK7
-set_global_assignment -name SEED 1
+set_global_assignment -name SEED 2
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to LMS_CORE_LDO_EN
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to LMS_RESET
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to LMS_RXEN
