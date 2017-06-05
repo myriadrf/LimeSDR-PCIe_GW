@@ -67,7 +67,7 @@ inst0_lms7002_ddin : entity work.lms7002_ddin
 	)
 	port map (
       clk       	=> clk,
-      reset_n   	=> reset_n, 
+      reset_n   	=> '1', 
 		rxiq		 	=> DIQ, 
 		rxiqsel	 	=> fsync, 
 		data_out_h	=> inst0_diq_out_h, 
