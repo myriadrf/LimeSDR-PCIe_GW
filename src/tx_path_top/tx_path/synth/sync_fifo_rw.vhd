@@ -36,10 +36,12 @@ end sync_fifo_rw;
 -- ----------------------------------------------------------------------------
 architecture arch of sync_fifo_rw is
 --declare signals,  components here
-signal rdreq    : std_logic;
-signal wrreq    : std_logic;
-signal rdempty  : std_logic;
-signal wrfull   : std_logic;
+signal rdreq      : std_logic;
+signal wrreq      : std_logic;
+signal rdempty    : std_logic;
+signal wrfull     : std_logic;
+signal sync_q_reg : std_logic_vector(data_w-1 downto 0);
+signal fifo_q     : std_logic_vector(data_w-1 downto 0);
 
 
 
@@ -116,14 +118,24 @@ fifo :  fifo_inst
       wrusedw       => open,
       rdclk 	     => rclk,
       rdreq         => rdreq,
-      q             => sync_q,
+      q             => fifo_q,
       rdempty       => rdempty,
       rdusedw       => open     		
         );
 
+-- ----------------------------------------------------------------------------
+-- output reg
+-- ----------------------------------------------------------------------------
+process(rclk) 
+begin 
+   if (rclk'event AND rclk = '1' ) then 
+      sync_q_reg <= fifo_q;
+   end if;
+end process;
 
-	
-    
+
+sync_q <= sync_q_reg;
+
   
 end arch;   
 
