@@ -23,8 +23,8 @@ set LMS_MCLK2_period_5MHz	200.0
 set LMS_LMS7_Tsu				1.50
 set LMS_LMS7_Th				2.40
 	#Measured Tco_min and Tco_max values
-set LMS_Tco_max				4.05
-set LMS_Tco_min				2.90
+set LMS_Tco_max				4.25
+set LMS_Tco_min				2.00
 
 	#Tco based
 set LMS7_IN_MAX_DELAY [expr $LMS_Tco_max]
@@ -84,7 +84,6 @@ create_generated_clock -name RX_PLLCLK_C0 \
 create_generated_clock -name RX_PLLCLK_C1 \
 								-master [get_clocks LMS_MCLK2] \
 								-source [get_pins -compatibility_mode *rx_pll_top*\|*\|*\|pll1|inclk[0]] \
-                        -invert \
 								-phase 0 [get_pins -compatibility_mode *rx_pll_top*\|*\|*\|pll1|clk[1]]
 #								
 #LMS_FCLK2 clock 							
@@ -166,13 +165,13 @@ set_output_delay	-min -$LMS_LMS7_Th \
 #Exceptions
 # ----------------------------------------------------------------------------
 #Between Center aligned different edge transfers in DIQ2 interface (when sampling with PLL phase shifted clock >5MHz)
-set_false_path -setup 	-rise_from 	[get_clocks LMS_MCLK2_VIRT] -fall_to \
+set_false_path -setup 	-rise_from 	[get_clocks LMS_MCLK2_VIRT] -rise_to \
 												[get_clocks RX_PLLCLK_C1]
-set_false_path -setup 	-fall_from 	[get_clocks LMS_MCLK2_VIRT] -rise_to \
+set_false_path -setup 	-fall_from 	[get_clocks LMS_MCLK2_VIRT] -fall_to \
 												[get_clocks RX_PLLCLK_C1]
-set_false_path -hold 	-rise_from 	[get_clocks LMS_MCLK2_VIRT] -fall_to \
+set_false_path -hold 	-rise_from 	[get_clocks LMS_MCLK2_VIRT] -rise_to \
 												[get_clocks RX_PLLCLK_C1]
-set_false_path -hold 	-fall_from 	[get_clocks LMS_MCLK2_VIRT] -rise_to \
+set_false_path -hold 	-fall_from 	[get_clocks LMS_MCLK2_VIRT] -fall_to \
 												[get_clocks RX_PLLCLK_C1]	
 												
 #Between Edge aligned same edge transfers in DIQ2 interface (When sampling with direct LMS_MCLK2 clock <5MHz)

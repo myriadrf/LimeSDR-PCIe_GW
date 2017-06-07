@@ -316,14 +316,14 @@ END SYN;
 -- Retrieval info:      <PRIVATE name = "pipeline_commands" value="true"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "use_generated_memory_model" value="true"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "export_debug_port" value="false"  type="STRING"  enable="1" />
--- Retrieval info:      <PRIVATE name = "local_if_clk_mhz_label" value="150.0"  type="STRING"  enable="1" />
+-- Retrieval info:      <PRIVATE name = "local_if_clk_mhz_label" value="125.0"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "pll_ref_clk_ps_label" value="(20000 ps)"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "pll_ref_clk_mhz" value="50.0"  type="STRING"  enable="1" />
--- Retrieval info:      <PRIVATE name = "mem_if_clk_mhz" value="150.0"  type="STRING"  enable="1" />
+-- Retrieval info:      <PRIVATE name = "mem_if_clk_mhz" value="125.0"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "local_if_drate" value="Full"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "project_family" value="Cyclone IV GX"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "enable_v72_rsu" value="false"  type="STRING"  enable="1" />
--- Retrieval info:      <PRIVATE name = "mem_if_clk_ps_label" value="(6667 ps)"  type="STRING"  enable="1" />
+-- Retrieval info:      <PRIVATE name = "mem_if_clk_ps_label" value="(8000 ps)"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "mem_if_memtype" value="DDR2 SDRAM"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "new_variant" value="false"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "family" value="Cyclone IV GX"  type="STRING"  enable="1" />
@@ -345,7 +345,7 @@ END SYN;
 -- Retrieval info:      <PRIVATE name = "mem_if_bankaddr_width" value="3"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "mem_if_dq_per_dqs" value="8"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "vendor" value="Other"  type="STRING"  enable="1" />
--- Retrieval info:      <PRIVATE name = "mem_if_preset" value="alliance_AS4C64M16D2"  type="STRING"  enable="1" />
+-- Retrieval info:      <PRIVATE name = "mem_if_preset" value="alliance_AS4C64M16D2_125MHz_v1"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "fast_simulation_en" value="FAST"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "mem_if_cs_width" value="1"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "mem_if_cs_per_dimm" value="1"  type="STRING"  enable="1" />
@@ -395,7 +395,7 @@ END SYN;
 -- Retrieval info:      <PRIVATE name = "mem_if_tmrd_ns" value="14.0"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "mem_tdsa_ps" value="50"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "mem_if_twtr_ck" value="2"  type="STRING"  enable="1" />
--- Retrieval info:      <PRIVATE name = "mem_trtp_ns" value="7.5"  type="STRING"  enable="1" />
+-- Retrieval info:      <PRIVATE name = "mem_trtp_ns" value="9.0"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "mem_if_trcd_ns" value="12.5"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "mem_drv_str" value="Normal"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "mem_tcl_50_fmax" value="400.0"  type="STRING"  enable="1" />

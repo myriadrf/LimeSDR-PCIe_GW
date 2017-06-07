@@ -399,26 +399,26 @@ DDR2_arb_inst :  DDR2_arb
 --    end process;
 
 
-traffic_gen_inst : ddr2_traffic_gen
-	port map (
-		avl_ready				=> ddr2_local_ready,
-		avl_addr					=> tst_addr,
-		avl_size					=> tst_size,
-		avl_wdata				=> tst_wdata,
-		avl_rdata				=> tst_rdata,
-		avl_write_req			=> tst_write_req,
-		avl_read_req			=> tst_read_req,
-		avl_rdata_valid		=> tst_rdata_valid,
-		avl_be					=> tst_be,
-		avl_burstbegin			=> tst_burstbegin,
-		clk						=> ddr2_phy_clk,
-		reset_n					=> begin_test_sync_phy_clk, --ddr2_local_init_done,
-		pnf_per_bit				=> pnf_per_bit,
-		pnf_per_bit_persist	=> pnf_per_bit_persist,
-		pass						=> pass,
-		fail						=> fail,
-		test_complete			=> test_complete 
-	);	
+--traffic_gen_inst : ddr2_traffic_gen
+--	port map (
+--		avl_ready				=> ddr2_local_ready,
+--		avl_addr					=> tst_addr,
+--		avl_size					=> tst_size,
+--		avl_wdata				=> tst_wdata,
+--		avl_rdata				=> tst_rdata,
+--		avl_write_req			=> tst_write_req,
+--		avl_read_req			=> tst_read_req,
+--		avl_rdata_valid		=> tst_rdata_valid,
+--		avl_be					=> tst_be,
+--		avl_burstbegin			=> tst_burstbegin,
+--		clk						=> ddr2_phy_clk,
+--		reset_n					=> begin_test_sync_phy_clk, --ddr2_local_init_done,
+--		pnf_per_bit				=> pnf_per_bit,
+--		pnf_per_bit_persist	=> pnf_per_bit_persist,
+--		pass						=> pass,
+--		fail						=> fail,
+--		test_complete			=> test_complete 
+--	);	
 
 ddr2_inst : ddr2
 	PORT map (

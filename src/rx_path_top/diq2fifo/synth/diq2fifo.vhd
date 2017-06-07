@@ -32,6 +32,8 @@ entity diq2fifo is
       --Rx interface data 
       DIQ		 	: in std_logic_vector(iq_width-1 downto 0);
 		fsync	 	   : in std_logic;
+      diq_h       : out std_logic_vector(iq_width downto 0);
+      diq_l       : out std_logic_vector(iq_width downto 0);
       --fifo ports 
       fifo_wfull  : in std_logic;
       fifo_wrreq  : out std_logic;
@@ -67,13 +69,15 @@ inst0_lms7002_ddin : entity work.lms7002_ddin
 	)
 	port map (
       clk       	=> clk,
-      reset_n   	=> reset_n, 
+      reset_n   	=> '1', 
 		rxiq		 	=> DIQ, 
 		rxiqsel	 	=> fsync, 
 		data_out_h	=> inst0_diq_out_h, 
 		data_out_l	=> inst0_diq_out_l 
         );
-        
+
+diq_h <= inst0_diq_out_h;
+diq_l <= inst0_diq_out_l;       
         
 inst1_rxiq : entity work.rxiq
 	generic map( 

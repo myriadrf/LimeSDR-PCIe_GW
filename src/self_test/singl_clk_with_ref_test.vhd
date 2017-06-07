@@ -32,13 +32,13 @@ end singl_clk_with_ref_test;
 -- ----------------------------------------------------------------------------
 architecture arch of singl_clk_with_ref_test is
 --declare signals,  components here
-signal cnt_ref_clk 			: unsigned (23 downto 0);
-signal cnt_ref_clk_en		: std_logic; 
-signal cnt_clk0				: unsigned (23 downto 0);
-signal cnt_clk_en				: std_logic; 
-signal test_en_reg			: std_logic_vector(1 downto 0);
+signal cnt_ref_clk 			   : unsigned (23 downto 0);
+signal cnt_ref_clk_en		   : std_logic; 
+signal cnt_clk0				   : unsigned (23 downto 0);
+signal cnt_clk_en				   : std_logic; 
+signal test_en_reg			   : std_logic_vector(1 downto 0);
 
-signal cnt_clk0_en_reg0, cnt_clk0_en_reg1 : std_logic;
+signal cnt_clk_en_cync_clk0   : std_logic;
 
 
 type state_type is (idle, count, count_end);
@@ -145,6 +145,11 @@ process(current_state) begin
 	end if;
 end process;
 
+
+
+sync_reg0 : entity work.sync_reg 
+port map(clk0, '1', cnt_clk_en, cnt_clk_en_cync_clk0);
+
 -- ----------------------------------------------------------------------------
 -- clock cycle counter in clk0 domain
 -- ----------------------------------------------------------------------------
@@ -152,12 +157,8 @@ end process;
     begin
       if test_en='0' then
 			cnt_clk0<=(others=>'0');
-			cnt_clk0_en_reg0<='0';
-			cnt_clk0_en_reg1<='0';
  	    elsif (clk0'event and clk0 = '1') then
-			cnt_clk0_en_reg0<=cnt_clk_en;
-			cnt_clk0_en_reg1<=cnt_clk0_en_reg0;
- 	      if cnt_clk0_en_reg1='1' then 
+ 	      if cnt_clk_en_cync_clk0='1' then 
 				cnt_clk0<=cnt_clk0+1;
 			else 
 				cnt_clk0<=cnt_clk0;
