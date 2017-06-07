@@ -23,8 +23,8 @@ set LMS_MCLK2_period_5MHz	200.0
 set LMS_LMS7_Tsu				1.50
 set LMS_LMS7_Th				2.40
 	#Measured Tco_min and Tco_max values
-set LMS_Tco_max				4.05
-set LMS_Tco_min				2.90
+set LMS_Tco_max				4.25
+set LMS_Tco_min				2.00
 
 	#Tco based
 set LMS7_IN_MAX_DELAY [expr $LMS_Tco_max]
