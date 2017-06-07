@@ -40,10 +40,16 @@ architecture arch of pct_payload_extrct is
 --declare signals,  components here
 signal wr_cnt : unsigned (15 downto 0);
 
-signal hdr_payload_reg	: std_logic_vector(data_w-1 downto 0);
+signal hdr_payload_reg	      : std_logic_vector(data_w-1 downto 0);
  
-signal payload_dest_reg	: std_logic_vector(1 downto 0);
-signal payload_size_reg	: std_logic_vector(15 downto 0);
+signal payload_dest_reg	      : std_logic_vector(1 downto 0);
+signal payload_size_reg	      : std_logic_vector(15 downto 0);
+
+
+signal pct_payload_data_reg	: std_logic_vector(data_w-1 downto 0);
+signal pct_payload_valid_reg  : std_logic;
+signal pct_payload_dest_reg	: std_logic_vector(1 downto 0);
+signal pct_payload_valid_comb : std_logic;
 
   
 begin
@@ -94,14 +100,33 @@ payload_size_reg<=hdr_payload_reg(23 downto 8);
 process (wr_cnt,payload_size_reg, pct_wr)
 begin 
 		if wr_cnt>3 and wr_cnt<=(to_integer(unsigned(payload_size_reg))+header_size)*8/data_w - 1 then 
-			pct_payload_valid<= pct_wr;
+			pct_payload_valid_comb<= pct_wr;
 		else 
-			pct_payload_valid<= '0';
+			pct_payload_valid_comb<= '0';
 		end if;		 
 end process;
 
-pct_payload_data<=pct_data;
-pct_payload_dest<=payload_dest_reg;
+
+-- ----------------------------------------------------------------------------
+-- output_registers
+-- ----------------------------------------------------------------------------
+  process(reset_n, clk)
+    begin
+		if reset_n='0' then
+         pct_payload_data_reg    <= (others=>'0');	
+         pct_payload_valid_reg   <= '0'; 
+         pct_payload_dest_reg    <= (others=>'0');	
+		elsif (clk'event and clk = '1') then
+         pct_payload_data_reg    <= pct_data;	
+         pct_payload_valid_reg   <= pct_payload_valid_comb; 
+         pct_payload_dest_reg    <= payload_dest_reg;	
+		end if;
+    end process;
+
+
+pct_payload_data     <= pct_payload_data_reg;
+pct_payload_dest     <= pct_payload_dest_reg;
+pct_payload_valid    <= pct_payload_valid_reg;
 
 end arch;   
 
