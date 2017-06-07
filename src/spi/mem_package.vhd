@@ -27,6 +27,8 @@ package mem_package is
  	type    marray8x16  is array ( 7 downto 0) of mword16; -- 8x16b memory array
 	type    marray4x12  is array ( 3 downto 0) of mword12; -- 4x12b memory array
 	type    marray16x16 is array (15 downto 0) of mword16; -- 16x16b memory array
+   type    marray24x16 is array (23 downto 0) of mword16; -- 16x16b memory array
+   type    marray29x16 is array (28 downto 0) of mword16; -- 16x16b memory array
  	type    marray8x25  is array ( 7 downto 0) of mword25; -- 8x25b memory array
 end mem_package;
 
