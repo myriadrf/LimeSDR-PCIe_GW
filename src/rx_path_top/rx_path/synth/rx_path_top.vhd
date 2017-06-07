@@ -35,6 +35,8 @@ entity rx_path_top is
       --Rx interface data 
       DIQ		 	         : in std_logic_vector(iq_width-1 downto 0);
 		fsync	 	            : in std_logic;
+      diq_h                : out std_logic_vector(iq_width downto 0);
+      diq_l                : out std_logic_vector(iq_width downto 0);
       --samples
       smpl_fifo_wrreq_out  : out std_logic;
       --Packet fifo ports 
@@ -80,6 +82,8 @@ signal smpl_nr_in_sync        : std_logic_vector(63 downto 0);
 --inst0 
 signal inst0_fifo_wrreq       : std_logic;
 signal inst0_fifo_wdata       : std_logic_vector(iq_width*4-1 downto 0);
+signal inst0_diq_h            : std_logic_vector(iq_width downto 0);
+signal inst0_diq_l            : std_logic_vector(iq_width downto 0);
 --inst1
 signal inst1_wrfull           : std_logic;
 signal inst1_q                : std_logic_vector(iq_width*4-1 downto 0);
@@ -178,12 +182,17 @@ diq2fifo_inst0 : entity work.diq2fifo
       --Rx interface data 
       DIQ		 	=> DIQ,
 		fsync	 	   => fsync,
+      diq_h       => inst0_diq_h,
+      diq_l       => inst0_diq_l,
       --fifo ports 
       fifo_wfull  => inst1_wrfull,
       fifo_wrreq  => inst0_fifo_wrreq,
       fifo_wdata  => inst0_fifo_wdata 
         );
-        
+
+
+diq_h <= inst0_diq_h;
+diq_l <= inst0_diq_l;      
         
 smpl_fifo_wrreq_out <= inst0_fifo_wrreq; 
         
