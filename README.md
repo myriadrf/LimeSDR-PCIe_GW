@@ -9,10 +9,13 @@ The gateware can be built with the free version of the Altera Quartus tools.
 This repository contains the following hardware-specific branches:
 
 * master:
-  * Gateware for Hardware Revision 1v2
+  * Gateware for Hardware Revision 1v3
   
 * HW_v1.0:
   * Gateware for Hardware Revision 1v0
+  
+* HW_v1.2:
+  * Gateware for Hardware Revision 1v2
 
 ## Licensing
 
