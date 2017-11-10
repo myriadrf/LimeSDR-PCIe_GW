@@ -56,6 +56,8 @@ end clock_test;
 architecture arch of clock_test is
 --declare signals,  components here
 
+signal test_en_sync : std_logic_vector(3 downto 0);
+
 component clk_no_ref_test is
   port (
         --input ports 
@@ -127,11 +129,16 @@ end component;
 
 begin
 
+
+bus_sync_reg0 : entity work.bus_sync_reg
+ generic map (4) 
+ port map(FX3_clk, '1', test_en, test_en_sync);
+
 FX3_clk_test : clk_no_ref_test
   port map(
         clk       		=> FX3_clk,
         reset_n   		=> reset_n,
-		  test_en			=> test_en(0),
+		  test_en			=> test_en_sync(0),
 		  test_cnt			=> FX3_clk_cnt,
 		  test_complete	=> test_cmplt(0),
 		  test_pass_fail	=> test_rez(0)   
@@ -150,7 +157,7 @@ Si5351C_test : clk_with_ref_test
 		  clk4				=> Si5351C_clk_5,
 		  clk5				=> Si5351C_clk_6,
 		  clk6				=> Si5351C_clk_7,		  
-		  test_en			=> test_en(1),
+		  test_en			=> test_en_sync(1),
 		  test_cnt0			=> Si5351C_clk_0_cnt,
 		  test_cnt1			=> Si5351C_clk_1_cnt,
 		  test_cnt2			=> Si5351C_clk_2_cnt,
@@ -170,7 +177,7 @@ LML_CLK_test : singl_clk_with_ref_test
         refclk       	=> FX3_clk,
         reset_n   		=> reset_n,
 		  clk0				=> LMK_CLK,		  
-		  test_en			=> test_en(2),
+		  test_en			=> test_en_sync(2),
 		  test_cnt0			=> LMK_CLK_cnt,
 		  test_complete	=> test_cmplt(2),
 		  test_pass_fail	=> test_rez(2)   
@@ -183,7 +190,7 @@ ADF_muxout_test : transition_count
 			reset_n   		=> reset_n,
 			trans_wire		=> ADF_MUXOUT,
 		  
-			test_en			=> test_en(3),
+			test_en			=> test_en_sync(3),
 			test_cnt			=> ADF_MUXOUT_cnt,
 			test_complete	=> test_cmplt(3),
 			test_pass_fail	=> open

@@ -48,7 +48,7 @@ architecture arch of stream_switch is
 --declare signals,  components here
 signal wfm_fifo_wrwords 					: unsigned (wfm_fifo_wrusedw_size-1 downto 0);
 signal wfm_rdy_int							: std_logic;
-signal dest_sel_syncreg						: std_logic_vector(2 downto 0);
+signal dest_sel_sync						   : std_logic;
 
 
 component pct_payload_extrct is
@@ -71,14 +71,9 @@ end component;
   
 begin
 
-process(reset_n, clk)
-begin
-	if reset_n = '0' then 
-		dest_sel_syncreg<=(others=>'0');
-	elsif	(clk'event and clk='0') then 
-		dest_sel_syncreg<=dest_sel_syncreg(1 downto 0) & dest_sel;
-	end if;
-end process;
+
+sync_reg0 : entity work.sync_reg 
+port map(clk, '1', dest_sel, dest_sel_sync);
 
 
 inst0 :  pct_payload_extrct
@@ -89,7 +84,7 @@ inst0 :  pct_payload_extrct
   port map (
       --input ports 
 		clk					=> clk,
-		reset_n				=> dest_sel_syncreg(1),
+		reset_n				=> dest_sel_sync,
 		pct_data				=> data_in,
 		pct_wr				=> data_in_valid,
 		pct_payload_data	=> wfm_data,
@@ -100,7 +95,7 @@ inst0 :  pct_payload_extrct
 
 wfm_fifo_wrwords <= ((wfm_fifo_wrusedw_size-1) =>'1', others=>'0');
 	  
-tx_fifo_wr 		<= data_in_valid when dest_sel_syncreg(1)='0' else '0';
+tx_fifo_wr 		<= data_in_valid when dest_sel_sync='0' else '0';
 tx_fifo_data	<= data_in;
 
 
@@ -108,7 +103,7 @@ tx_fifo_data	<= data_in;
 
 wfm_rdy_int		<= '1' when (wfm_fifo_wfull='0' and wfm_rdy='1' )else '0';
 
-data_in_rdy		<= tx_fifo_rdy when dest_sel_syncreg(1)='0' else wfm_rdy_int;
+data_in_rdy		<= tx_fifo_rdy when dest_sel_sync='0' else wfm_rdy_int;
   
 end arch;
 

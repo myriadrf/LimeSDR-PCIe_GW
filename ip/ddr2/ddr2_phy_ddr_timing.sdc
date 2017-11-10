@@ -22,8 +22,8 @@
 # speed_grade : 7
 # local_if_drate : Full
 # pll_ref_clk_mhz : 50.0
-# mem_if_clk_mhz : 150.0
-# mem_if_preset : alliance_AS4C64M16D2
+# mem_if_clk_mhz : 125.0
+# mem_if_preset : alliance_AS4C64M16D2_125MHz_v1
 # chip_or_dimm : Discrete Device
 # mem_if_dq_per_dqs : 8
 # ac_phase : 90

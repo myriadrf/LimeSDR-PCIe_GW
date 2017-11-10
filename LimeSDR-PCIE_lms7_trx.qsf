@@ -83,14 +83,6 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to PCIE_PERSTn
 set_location_assignment PIN_M11 -to PCIE_REFCLK
 set_instance_assignment -name IO_STANDARD HCSL -to PCIE_REFCLK
 set_location_assignment PIN_N11 -to "PCIE_REFCLK(n)"
-set_location_assignment PIN_B12 -to FPGA_GPIO0
-set_location_assignment PIN_C16 -to FPGA_GPIO1
-set_location_assignment PIN_B15 -to FPGA_GPIO2
-set_location_assignment PIN_B13 -to FPGA_GPIO3
-set_location_assignment PIN_A15 -to FPGA_GPIO4
-set_location_assignment PIN_B16 -to FPGA_GPIO5
-set_location_assignment PIN_A17 -to FPGA_GPIO6
-set_location_assignment PIN_A16 -to FPGA_GPIO7
 set_location_assignment PIN_H21 -to FPGA_LED1_G
 set_location_assignment PIN_E20 -to FPGA_LED1_R
 set_location_assignment PIN_G20 -to FPGA_LED2_G
@@ -128,18 +120,9 @@ set_location_assignment PIN_B6 -to LMS_DIQ2_IQSEL2
 set_location_assignment PIN_H9 -to LMS_FCLK1
 set_location_assignment PIN_C5 -to LMS_FCLK2
 set_location_assignment PIN_K10 -to LMS_MCLK1
-set_location_assignment PIN_M8 -to LMS_MCLK2
 set_location_assignment PIN_A1 -to LMS_RESET
 set_location_assignment PIN_J15 -to EXT_GND
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to EXT_GND
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO7
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO6
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO5
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO4
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO3
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO2
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO1
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO0
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_RESET
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_FCLK2
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_FCLK1
@@ -170,8 +153,6 @@ set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_DIQ1_D[9]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_DIQ1_D[10]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_DIQ1_D[11]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_MCLK1
-set_location_assignment PIN_L21 -to CLK50_FPGA_2
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CLK50_FPGA_2
 set_global_assignment -name ENABLE_OCT_DONE OFF
 set_global_assignment -name USE_CONFIGURATION_DEVICE ON
 set_global_assignment -name CYCLONEIII_CONFIGURATION_DEVICE EPCS64
@@ -199,21 +180,8 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_SPI1_SCLK
 set_location_assignment PIN_A20 -to FPGA_SPI1_DAC_SS
 set_location_assignment PIN_C19 -to FPGA_SPI1_MOSI
 set_location_assignment PIN_C20 -to FPGA_SPI1_SCLK
-set_location_assignment PIN_G15 -to uart_external_connection_rxd
 set_location_assignment PIN_G14 -to uart_external_connection_txd
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to uart_external_connection_txd
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to uart_external_connection_rxd
-set_location_assignment PIN_D22 -to switch_external_connection_export[0]
-set_location_assignment PIN_E21 -to switch_external_connection_export[1]
-set_location_assignment PIN_E22 -to switch_external_connection_export[2]
-set_location_assignment PIN_G22 -to switch_external_connection_export[3]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to switch_external_connection_export[0]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to switch_external_connection_export[1]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to switch_external_connection_export[2]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to switch_external_connection_export[3]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to lms_ctr_gpio_external_connection_export[0]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to lms_ctr_gpio_external_connection_export[1]
-set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to lms_ctr_gpio_external_connection_export[2]
 set_location_assignment PIN_K20 -to FPGA_LED3
 set_location_assignment PIN_K19 -to FPGA_LED4
 set_location_assignment PIN_K22 -to FPGA_LED5
@@ -224,12 +192,11 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_LED5
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_LED6
 set_global_assignment -name OPTIMIZATION_MODE "AGGRESSIVE PERFORMANCE"
 set_global_assignment -name ENABLE_SIGNALTAP OFF
-set_global_assignment -name USE_SIGNALTAP_FILE stp1.stp
+set_global_assignment -name USE_SIGNALTAP_FILE debug.stp
 set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to CLK50_FPGA_1
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LMS_MCLK2
 set_location_assignment PIN_G16 -to I2C_SDA
 set_location_assignment PIN_G17 -to I2C_SCL
 set_location_assignment PIN_J4 -to FPGA_AS_NCSO
@@ -486,6 +453,294 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to LMS_DIQ
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to LMS_DIQ1_D[9]
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to LMS_DIQ1_D[10]
 set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to LMS_DIQ1_D[11]
+set_location_assignment PIN_M8 -to LMS_MCLK2
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_odt[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_odt[0]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_clk[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_clk[0]
+set_instance_assignment -name PAD_TO_CORE_DELAY 0 -to DDR2_2_clk[0]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_clk_n[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_clk_n[0]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_cs_n[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_cs_n[0]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_cke[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_cke[0]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[0]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[1]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[2]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[3]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[4]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[5]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[6]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[6]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[7]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[7]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[8]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[8]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[9]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[9]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[10]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[10]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[11]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[11]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_addr[12]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_addr[12]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_ba[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_ba[0]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_ba[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_ba[1]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_ba[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_ba[2]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_ras_n
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_ras_n
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_cas_n
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_cas_n
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_we_n
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to DDR2_2_we_n
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[0]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[1]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[2]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[3]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[4]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[5]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[6]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[6]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[7]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[7]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[8]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[8]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[9]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[9]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[10]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[10]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[11]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[11]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[12]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[12]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[13]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[13]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[14]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[14]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dq[15]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dq[15]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dqs[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dqs[0]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dqs[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dqs[1]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dm[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dm[0]
+set_instance_assignment -name IO_STANDARD "SSTL-18 CLASS I" -to DDR2_2_dm[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 12MA -to DDR2_2_dm[1]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[0]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[1]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[2]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[3]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[4]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[5]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[6]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[7]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[8]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[9]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[10]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[11]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[12]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[13]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[14]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dq[15]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[0]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[1]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[2]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[3]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[4]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[5]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[6]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[7]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[8]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[9]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[10]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[11]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[12]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[13]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[14]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dq[15]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dqs[0]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dqs[1]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dqs[0]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dqs[1]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dm[0]
+set_instance_assignment -name MEM_INTERFACE_DELAY_CHAIN_CONFIG FLEXIBLE_TIMING -to DDR2_2_dm[1]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dm[0]
+set_instance_assignment -name OUTPUT_ENABLE_GROUP 3078784 -to DDR2_2_dm[1]
+set_instance_assignment -name CKN_CK_PAIR ON -from DDR2_2_clk_n[0] -to DDR2_2_clk[0]
+set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
+set_global_assignment -name ENABLE_BOOT_SEL_PIN OFF
+set_global_assignment -name DEVICE_MIGRATION_LIST "EP4CGX30CF23C7,EP4CGX50CF23C7"
+set_location_assignment PIN_N17 -to DDR2_2_addr[12]
+set_location_assignment PIN_N14 -to DDR2_2_addr[11]
+set_location_assignment PIN_R15 -to DDR2_2_addr[10]
+set_location_assignment PIN_P15 -to DDR2_2_addr[9]
+set_location_assignment PIN_P13 -to DDR2_2_addr[8]
+set_location_assignment PIN_M16 -to DDR2_2_addr[7]
+set_location_assignment PIN_M15 -to DDR2_2_addr[6]
+set_location_assignment PIN_N15 -to DDR2_2_addr[5]
+set_location_assignment PIN_N13 -to DDR2_2_addr[4]
+set_location_assignment PIN_T11 -to DDR2_2_addr[3]
+set_location_assignment PIN_M14 -to DDR2_2_addr[2]
+set_location_assignment PIN_P14 -to DDR2_2_addr[1]
+set_location_assignment PIN_M13 -to DDR2_2_addr[0]
+set_location_assignment PIN_AA4 -to DDR2_2_ba[2]
+set_location_assignment PIN_AA13 -to DDR2_2_ba[1]
+set_location_assignment PIN_AB13 -to DDR2_2_ba[0]
+set_location_assignment PIN_R19 -to DDR2_2_cas_n
+set_location_assignment PIN_T14 -to DDR2_2_cke[0]
+set_location_assignment PIN_W4 -to DDR2_2_clk[0]
+set_location_assignment PIN_Y4 -to DDR2_2_clk_n[0]
+set_location_assignment PIN_AB11 -to DDR2_2_cs_n[0]
+set_location_assignment PIN_W12 -to DDR2_2_dm[1]
+set_location_assignment PIN_W7 -to DDR2_2_dm[0]
+set_location_assignment PIN_AA10 -to DDR2_2_dq[15]
+set_location_assignment PIN_Y11 -to DDR2_2_dq[14]
+set_location_assignment PIN_W11 -to DDR2_2_dq[13]
+set_location_assignment PIN_AB8 -to DDR2_2_dq[12]
+set_location_assignment PIN_AA9 -to DDR2_2_dq[11]
+set_location_assignment PIN_Y9 -to DDR2_2_dq[10]
+set_location_assignment PIN_W9 -to DDR2_2_dq[9]
+set_location_assignment PIN_AB6 -to DDR2_2_dq[8]
+set_location_assignment PIN_W6 -to DDR2_2_dq[7]
+set_location_assignment PIN_W5 -to DDR2_2_dq[6]
+set_location_assignment PIN_Y7 -to DDR2_2_dq[5]
+set_location_assignment PIN_Y6 -to DDR2_2_dq[4]
+set_location_assignment PIN_Y5 -to DDR2_2_dq[3]
+set_location_assignment PIN_AA6 -to DDR2_2_dq[2]
+set_location_assignment PIN_AB5 -to DDR2_2_dq[1]
+set_location_assignment PIN_AB4 -to DDR2_2_dq[0]
+set_location_assignment PIN_Y10 -to DDR2_2_dqs[1]
+set_location_assignment PIN_Y8 -to DDR2_2_dqs[0]
+set_location_assignment PIN_W18 -to DDR2_2_odt[0]
+set_location_assignment PIN_U14 -to DDR2_2_ras_n
+set_location_assignment PIN_T15 -to DDR2_2_we_n
+set_location_assignment PIN_M7 -to SI_CLK0
+set_instance_assignment -name IO_STANDARD "2.5 V" -to SI_CLK0
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SI_CLK1
+set_instance_assignment -name IO_STANDARD "2.5 V" -to SI_CLK2
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SI_CLK5
+set_instance_assignment -name IO_STANDARD "1.8 V" -to SI_CLK7
+set_instance_assignment -name GLOBAL_SIGNAL OFF -to EXT_GND
+set_instance_assignment -name GLOBAL_SIGNAL OFF -to SI_CLK0
+set_instance_assignment -name GLOBAL_SIGNAL OFF -to SI_CLK1
+set_instance_assignment -name GLOBAL_SIGNAL OFF -to SI_CLK2
+set_instance_assignment -name GLOBAL_SIGNAL OFF -to SI_CLK3
+set_instance_assignment -name GLOBAL_SIGNAL OFF -to SI_CLK5
+set_instance_assignment -name GLOBAL_SIGNAL OFF -to SI_CLK6
+set_instance_assignment -name GLOBAL_SIGNAL OFF -to SI_CLK7
+set_global_assignment -name SEED 2
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to LMS_CORE_LDO_EN
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to LMS_RESET
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to LMS_RXEN
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to LMS_TXEN
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to LMS_TXNRX1
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MINIMUM CURRENT" -to LMS_TXNRX2
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to LMS_FCLK2
+set_instance_assignment -name SLEW_RATE 2 -to LMS_FCLK2
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[11]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[10]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[9]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[8]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[7]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[6]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[5]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[4]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[3]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[2]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[1]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_D[0]
+set_instance_assignment -name SLEW_RATE 2 -to LMS_DIQ1_IQSEL
+set_instance_assignment -name SLEW_RATE 2 -to LMS_FCLK1
+set_location_assignment PIN_D22 -to FPGA_SW[0]
+set_location_assignment PIN_E21 -to FPGA_SW[1]
+set_location_assignment PIN_E22 -to FPGA_SW[2]
+set_location_assignment PIN_G22 -to FPGA_SW[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_SW[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_SW[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_SW[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_SW[3]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[0]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[1]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[2]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[3]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[4]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[6]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[7]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[8]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[9]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 1 -to LMS_DIQ1_D[10]
+set_instance_assignment -name CLOCK_TO_OUTPUT_DELAY 0 -to LMS_DIQ1_D[11]
+set_location_assignment PIN_C13 -to FPGA_GPIO[15]
+set_location_assignment PIN_C12 -to FPGA_GPIO[14]
+set_location_assignment PIN_C15 -to FPGA_GPIO[13]
+set_location_assignment PIN_C14 -to FPGA_GPIO[12]
+set_location_assignment PIN_D15 -to FPGA_GPIO[11]
+set_location_assignment PIN_D14 -to FPGA_GPIO[10]
+set_location_assignment PIN_G14 -to FPGA_GPIO[9]
+set_location_assignment PIN_G15 -to FPGA_GPIO[8]
+set_location_assignment PIN_A16 -to FPGA_GPIO[7]
+set_location_assignment PIN_A17 -to FPGA_GPIO[6]
+set_location_assignment PIN_B16 -to FPGA_GPIO[5]
+set_location_assignment PIN_A15 -to FPGA_GPIO[4]
+set_location_assignment PIN_B13 -to FPGA_GPIO[3]
+set_location_assignment PIN_B15 -to FPGA_GPIO[2]
+set_location_assignment PIN_C16 -to FPGA_GPIO[1]
+set_location_assignment PIN_B12 -to FPGA_GPIO[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[15]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[14]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[13]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[12]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[11]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[10]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_GPIO[1]
+set_global_assignment -name VHDL_FILE src/spi/periphcfg.vhd
+set_global_assignment -name VERILOG_FILE ip/pcie_core/pcie_c4_4x_core.v
+set_global_assignment -name VERILOG_FILE ip/pcie_core/pcie_c4_4x.v
+set_global_assignment -name VHDL_FILE src/tx_path_top/packets2data/synth/packets2data_top.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/packets2data/synth/packets2data.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/packets2data/synth/p2d_wr_fsm.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/packets2data/synth/p2d_sync_fsm.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/packets2data/synth/p2d_rd_fsm.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/packets2data/synth/p2d_clr_fsm.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/bit_unpack/synth/unpack_64_to_64.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/bit_unpack/synth/unpack_64_to_56.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/bit_unpack/synth/unpack_64_to_48.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/bit_unpack/synth/bit_unpack_64.vhd
+set_global_assignment -name VHDL_FILE src/tx_pll_top/synth/tx_pll_top.vhd
+set_global_assignment -name SDC_FILE LMS7002_timing.sdc
+set_global_assignment -name VHDL_FILE src/altera_inst/lpm_cnt_inst.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/rx_path/synth/rx_path_top.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/bit_pack/synth/pack_56_to_64.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/bit_pack/synth/pack_48_to_64.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/bit_pack/synth/bit_pack.vhd
+set_global_assignment -name VHDL_FILE src/rx_pll_top/synth/rx_pll_top.vhd
+set_global_assignment -name QIP_FILE ip/clkctrl/clkctrl/synthesis/clkctrl.qip
 set_global_assignment -name VHDL_FILE src/txiqmux/synth/txiqmux.vhd
 set_global_assignment -name VHDL_FILE src/txiqmux/synth/txiq_tst_ptrn.vhd
 set_global_assignment -name VHDL_FILE src/general/sync_reg.vhd
@@ -514,7 +769,6 @@ set_global_assignment -name VHDL_FILE src/revision/revision.vhd
 set_global_assignment -name VHDL_FILE src/rx_path/wr_rx_fifo_v3.vhd
 set_global_assignment -name VHDL_FILE src/rx_path/rx_pct_data_v2.vhd
 set_global_assignment -name VHDL_FILE src/rx_path/rx_path.vhd
-set_global_assignment -name VHDL_FILE src/rx_path/lms7002_ddin.vhd
 set_global_assignment -name VHDL_FILE src/rx_path/diq2_sampling.vhd
 set_global_assignment -name VHDL_FILE src/rx_path/diq2_samples.vhd
 set_global_assignment -name VHDL_FILE src/rx_path/compress_v2.vhd
@@ -578,8 +832,6 @@ set_global_assignment -name VHDL_FILE lms_ctr/synthesis/lms_ctr.vhd -library lms
 set_global_assignment -name QIP_FILE ip/fifo_8b/fifo_8b.qip
 set_global_assignment -name VERILOG_FILE ip/pcie_core/pcie_c4_4x_examples/chaining_dma/pcie_c4_4x_rs_hip.v
 set_global_assignment -name VERILOG_FILE ip/pcie_core/pcie_c4_4x_serdes.v
-set_global_assignment -name VERILOG_FILE ip/pcie_core/pcie_c4_4x_core.v
-set_global_assignment -name VERILOG_FILE ip/pcie_core/pcie_c4_4x.v
 set_global_assignment -name VERILOG_FILE "ip/pcie_core/ip_compiler_for_pci_express-library/altpcie_rs_serdes.v"
 set_global_assignment -name VERILOG_FILE "ip/pcie_core/ip_compiler_for_pci_express-library/altpcie_reconfig_3cgx.v"
 set_global_assignment -name VERILOG_FILE "ip/pcie_core/ip_compiler_for_pci_express-library/altpcie_hip_pipen1b.v"
@@ -588,7 +840,6 @@ set_global_assignment -name VHDL_FILE src/data_manipulation/decompress.vhd
 set_global_assignment -name VHDL_FILE src/tx_packets/tx_pct_data_mimo.vhd
 set_global_assignment -name VHDL_FILE src/tx_packets/sample_nr_cnt_mimo.vhd
 set_global_assignment -name VHDL_FILE src/testing/test_data.vhd
-set_global_assignment -name VHDL_FILE src/tx_packets/sync_fifo_rw.vhd
 set_global_assignment -name VHDL_FILE src/dyn_ps/pll_ps_cntrl.vhd
 set_global_assignment -name VHDL_FILE src/pll_reconfig_ctrl/config_ctrl.vhd
 set_global_assignment -name VHDL_FILE src/spi/miso_mux.vhd
@@ -605,11 +856,9 @@ set_global_assignment -name VHDL_FILE src/general/synchronizer.vhd
 set_global_assignment -name VHDL_FILE src/general/capture_signal.vhd
 set_global_assignment -name VHDL_FILE src/general/bus_synch.vhd
 set_global_assignment -name BDF_FILE symbols/delay_chain.bdf
-set_global_assignment -name BDF_FILE symbols/rx_synchronizers.bdf
 set_global_assignment -name BDF_FILE symbols/tx_synchronizers.bdf
 set_global_assignment -name BDF_FILE symbols/LTE_rx_path.bdf
 set_global_assignment -name BDF_FILE symbols/LTE_tx_path.bdf
-set_global_assignment -name VHDL_FILE src/testing/test_data_dd.vhd
 set_global_assignment -name VHDL_FILE src/general/my_busmux.vhd
 set_global_assignment -name VHDL_FILE src/pcie/pcie_top.vhd
 set_global_assignment -name VHDL_FILE src/self_test/transition_count.vhd
@@ -619,4 +868,37 @@ set_global_assignment -name VHDL_FILE src/self_test/clock_test.vhd
 set_global_assignment -name VHDL_FILE src/self_test/clk_with_ref_test.vhd
 set_global_assignment -name VHDL_FILE src/self_test/clk_no_ref_test.vhd
 set_global_assignment -name VHDL_FILE src/general/onboard_led.vhd
+set_global_assignment -name TCL_SCRIPT_FILE DDR2_2_pin_assigments.tcl
+set_global_assignment -name VHDL_FILE src/rx_path_top/smpl_cnt/synth/smpl_cnt.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/diq2fifo/synth/test_data_dd.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/diq2fifo/synth/rxiq_siso_sdr.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/diq2fifo/synth/rxiq_siso_ddr.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/diq2fifo/synth/rxiq_siso.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/diq2fifo/synth/rxiq_pulse_ddr.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/diq2fifo/synth/rxiq_mimo_ddr.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/diq2fifo/synth/rxiq_mimo.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/diq2fifo/synth/rxiq.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/diq2fifo/synth/lms7002_ddin.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/diq2fifo/synth/diq2fifo.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/data2packets/synth/data2packets_top.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/data2packets/synth/data2packets_fsm.vhd
+set_global_assignment -name VHDL_FILE src/rx_path_top/data2packets/synth/data2packets.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/fifo2diq/synth/txiq.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/fifo2diq/synth/fifo2diq.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/handshake_sync/synth/handshake_sync.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/tx_path/synth/tx_path_top.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/tx_path/synth/sync_fifo_rw.vhd
+set_global_assignment -name VHDL_FILE src/general/gpio_ctrl_top.vhd
+set_global_assignment -name VHDL_FILE src/general/gpio_ctrl.vhd
+set_global_assignment -name SDC_FILE Clock_groups.sdc
+set_global_assignment -name VHDL_FILE src/testing/rxiq_check.vhd
+set_global_assignment -name VHDL_FILE src/testing/deinterleave_ch.vhd
+set_instance_assignment -name PAD_TO_CORE_DELAY 4 -to LMS_DIQ2_D[11]
+set_instance_assignment -name PAD_TO_CORE_DELAY 4 -to LMS_DIQ2_IQSEL2
+set_instance_assignment -name PAD_TO_CORE_DELAY 2 -to LMS_DIQ2_D[5]
+set_instance_assignment -name PAD_TO_CORE_DELAY 2 -to LMS_DIQ2_D[9]
+set_instance_assignment -name PAD_TO_CORE_DELAY 2 -to LMS_DIQ2_D[10]
+set_instance_assignment -name PAD_TO_CORE_DELAY 2 -to LMS_DIQ2_D[1]
+set_location_assignment PIN_L21 -to CLK50_FPGA_2
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CLK50_FPGA_2
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
