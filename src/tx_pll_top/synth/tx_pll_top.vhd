@@ -247,9 +247,9 @@ pll_areset_n   <= not pll_areset;
  generic map (10) 
  port map(inst1_pll_scanclk, '1', dynps_phase, dynps_phase_sync);
 
- bus_sync_reg3 : entity work.bus_sync_reg
- generic map (2) 
- port map(pll_inclk_global, '1', drct_clk_en, drct_clk_en_sync);
+-- bus_sync_reg3 : entity work.bus_sync_reg
+-- generic map (2) 
+-- port map(pll_inclk_global, '1', drct_clk_en, drct_clk_en_sync);
 
 
 
@@ -424,65 +424,65 @@ pll_reconfig_status_inst4 : entity work.pll_reconfig_status
 -- ----------------------------------------------------------------------------
 -- c0 direct output lcell delay chain 
 -- ----------------------------------------------------------------------------   
-c0_dly_instx_gen : 
-for i in 0 to drct_c0_ndly-1 generate
-   --first lcell instance
-   first : if i = 0 generate 
-   lcell0 : lcell 
-      port map (
-         a_in  => pll_inclk_global,
-         a_out => drct_c0_dly_chain(i)
-         );
-   end generate first;
-   --rest of the lcell instance
-   rest : if i > 0 generate
-   lcellx : lcell 
-      port map (
-         a_in  => drct_c0_dly_chain(i-1),
-         a_out => drct_c0_dly_chain(i)
-         );
-   end generate rest;
-end generate c0_dly_instx_gen;
+--c0_dly_instx_gen : 
+--for i in 0 to drct_c0_ndly-1 generate
+--   --first lcell instance
+--   first : if i = 0 generate 
+--   lcell0 : lcell 
+--      port map (
+--         a_in  => pll_inclk_global,
+--         a_out => drct_c0_dly_chain(i)
+--         );
+--   end generate first;
+--   --rest of the lcell instance
+--   rest : if i > 0 generate
+--   lcellx : lcell 
+--      port map (
+--         a_in  => drct_c0_dly_chain(i-1),
+--         a_out => drct_c0_dly_chain(i)
+--         );
+--   end generate rest;
+--end generate c0_dly_instx_gen;
 
 
 -- ----------------------------------------------------------------------------
 -- c1 direct output lcell delay chain 
 -- ----------------------------------------------------------------------------   
-c1_dly_instx_gen : 
-for i in 0 to drct_c1_ndly-1 generate
-   --first lcell instance
-   first : if i = 0 generate 
-   lcell0 : lcell 
-      port map (
-         a_in  => pll_inclk_global,
-         a_out => drct_c1_dly_chain(i)
-         );
-   end generate first;
-   --rest of the lcell instance
-   rest : if i > 0 generate
-   lcellx : lcell 
-      port map (
-         a_in  => drct_c1_dly_chain(i-1),
-         a_out => drct_c1_dly_chain(i)
-         );
-   end generate rest;
-end generate c1_dly_instx_gen;
+--c1_dly_instx_gen : 
+--for i in 0 to drct_c1_ndly-1 generate
+--   --first lcell instance
+--   first : if i = 0 generate 
+--   lcell0 : lcell 
+--      port map (
+--         a_in  => pll_inclk_global,
+--         a_out => drct_c1_dly_chain(i)
+--         );
+--   end generate first;
+--   --rest of the lcell instance
+--   rest : if i > 0 generate
+--   lcellx : lcell 
+--      port map (
+--         a_in  => drct_c1_dly_chain(i-1),
+--         a_out => drct_c1_dly_chain(i)
+--         );
+--   end generate rest;
+--end generate c1_dly_instx_gen;
 
 -- ----------------------------------------------------------------------------
 -- c0 clk MUX
 -- ----------------------------------------------------------------------------
-c0_mux <=   inst3_clk(0) when drct_clk_en_sync(0)='0' else 
-            drct_c0_dly_chain(drct_c0_ndly-1);
+--c0_mux <=   inst3_clk(0) when drct_clk_en_sync(0)='0' else 
+--            drct_c0_dly_chain(drct_c0_ndly-1);
 
 -- ----------------------------------------------------------------------------
 -- c1 clk MUX
 -- ----------------------------------------------------------------------------
-c1_mux <=   inst3_clk(1) when drct_clk_en_sync(1)='0' else 
-            drct_c1_dly_chain(drct_c1_ndly-1);
+--c1_mux <=   inst3_clk(1) when drct_clk_en_sync(1)='0' else 
+--            drct_c1_dly_chain(drct_c1_ndly-1);
 
 
-locked_mux <=  pll_areset_n when (drct_clk_en_sync(0)='1' OR drct_clk_en_sync(1)='1') else
-               inst3_locked;
+--locked_mux <=  pll_areset_n when (drct_clk_en_sync(0)='1' OR drct_clk_en_sync(1)='1') else
+--               inst3_locked;
 
 
 
@@ -515,33 +515,47 @@ PORT MAP (
 -- ----------------------------------------------------------------------------
 -- Clock control buffers 
 -- ----------------------------------------------------------------------------
-clkctrl_inst6 : clkctrl 
-port map(
-   inclk    => pll_inclk,
-   ena      => '1',
-   outclk   => pll_inclk_global
-);
+--clkctrl_inst6 : clkctrl 
+--port map(
+--   inclk    => pll_inclk,
+--   ena      => '1',
+--   outclk   => pll_inclk_global
+--);
+
+--clkctrl_inst7 : clkctrl 
+--port map(
+--   inclk    => c0_mux,
+--   ena      => clk_ena(0),
+--   outclk   => c0_global
+--);
 
 clkctrl_inst7 : clkctrl 
 port map(
-   inclk    => c0_mux,
+   inclk    => inst3_clk(0),
    ena      => clk_ena(0),
    outclk   => c0_global
 );
 
+--clkctrl_inst8 : clkctrl 
+--port map(
+--   inclk    => c1_mux,
+--   ena      => clk_ena(1),
+--   outclk   => c1_global
+--);
+
 clkctrl_inst8 : clkctrl 
 port map(
-   inclk    => c1_mux,
+   inclk    => inst3_clk(1),
    ena      => clk_ena(1),
    outclk   => c1_global
 );
-
 -- ----------------------------------------------------------------------------
 -- To output ports
 -- ----------------------------------------------------------------------------
 c0             <= inst5_dataout(0);
 c1             <= c1_global;
-pll_locked     <= locked_mux;
+--pll_locked     <= locked_mux;
+pll_locked     <= inst3_locked;
 rcnfig_status  <= inst4_rcfig_complete;
 busy           <= inst1_busy OR inst2_ps_status;
   

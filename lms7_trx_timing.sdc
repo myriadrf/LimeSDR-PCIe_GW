@@ -22,16 +22,14 @@ set_time_format -unit ns -decimal_places 3
 #FPGA pll
 create_clock -period 20.000 	-name CLK50_FPGA_1 	[get_ports CLK50_FPGA_1]
 create_clock -period 10.000 	-name CLK100_FPGA		[get_ports CLK100_FPGA]
-create_clock -period  8.000 	-name CLK125_FPGA 	[get_ports CLK125_FPGA]
+create_clock -period 20.000 	-name CLK50_FPGA_2 	[get_ports CLK50_FPGA_2]
 
 #Si5351C clocks
 create_clock -period 37.037 	-name SI_CLK0			[get_ports SI_CLK0]
 create_clock -period 37.037 	-name SI_CLK1			[get_ports SI_CLK1]
-create_clock -period 37.037 	-name SI_CLK2			[get_ports SI_CLK2]
 create_clock -period 37.037 	-name SI_CLK3			[get_ports SI_CLK3]
 create_clock -period 37.037 	-name SI_CLK5			[get_ports SI_CLK5]
 create_clock -period 37.037 	-name SI_CLK6			[get_ports SI_CLK6]
-create_clock -period 37.037 	-name SI_CLK7			[get_ports SI_CLK7]
 #LMK clk
 create_clock -period 32.552 	-name LMK_CLK			[get_ports LMK_CLK]
 #PCIE clock

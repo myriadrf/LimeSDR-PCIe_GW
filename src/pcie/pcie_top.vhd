@@ -8,7 +8,7 @@ USE altera_mf.all;
 
 entity pcie_top is
    port (
-   inclk_125            : IN std_logic;
+   inclk                : IN std_logic; --PLL input clock, PLL parameters has to set by this clk freq
    pcie_perstn          : IN std_logic;
    pcie_refclk          : IN std_logic;
    pcie_rx              : IN std_logic_vector(3 DOWNTO 0);
@@ -291,15 +291,15 @@ port map(bus_clk, '1', stream_rx_en, stream_rx_en_sync);
   	clkpll : altpll
 	GENERIC MAP (
 		bandwidth_type 			=> "AUTO",
-		clk0_divide_by 			=> 1,
+		clk0_divide_by 			=> 2,
 		clk0_duty_cycle 			=> 50,
-		clk0_multiply_by 			=> 1,
+		clk0_multiply_by 			=> 5,
 		clk0_phase_shift 			=> "0",
-		clk1_divide_by 			=> 5,
+		clk1_divide_by 			=> 1,
 		clk1_duty_cycle 			=> 50,
-		clk1_multiply_by 			=> 2,
+		clk1_multiply_by 			=> 1,
 		clk1_phase_shift 			=> "0",
-		inclk0_input_frequency 	=> 8000,
+		inclk0_input_frequency 	=> 20000,
 		intended_device_family 	=> "Cyclone IV",
 		lpm_hint 					=> "CBX_MODULE_PREFIX=pll_vhdl",
 		lpm_type 					=> "altpll",
@@ -360,7 +360,7 @@ port map(bus_clk, '1', stream_rx_en, stream_rx_en_sync);
 
   pll_areset 	<= '0';
   noclock 		<= '0';
-  in_clocks 	<= noclock & inclk_125;
+  in_clocks 	<= noclock & inclk;
   clk_125 		<= out_clocks(0);
   clk_50 		<= out_clocks(1);
   
