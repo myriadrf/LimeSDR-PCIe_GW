@@ -137,7 +137,10 @@ signal tst_write_req       : std_logic;
 signal tst_read_req        : std_logic;
 signal tst_rdata_valid     : std_logic;
 signal tst_be              : std_logic_vector(3 downto 0);
-signal tst_burstbegin      : std_logic;   
+signal tst_burstbegin      : std_logic;
+
+signal begin_test_sync_phy_clk   : std_logic; 
+signal insert_error_sync_phy_clk   : std_logic;  
 
 component fifo_inst is
   generic(dev_family	     : string  := "Cyclone IV E";
@@ -266,6 +269,19 @@ end component;
   
 begin
 
+sync_reg0 : entity work.sync_reg 
+port map(ddr2_phy_clk, '1', begin_test, begin_test_sync_phy_clk);
+
+
+sync_reg1 : entity work.sync_reg 
+port map(ddr2_phy_clk, '1', insert_error, insert_error_sync_phy_clk);
+
+
+
+
+
+
+
 
 wcmdfifo_data<=(wcmd_brst_en & wcmd_addr & wcmd_data);
 -- ---------------------------------------------------------------------------
@@ -383,26 +399,26 @@ DDR2_arb_inst :  DDR2_arb
 --    end process;
 
 
-traffic_gen_inst : ddr2_traffic_gen
-	port map (
-		avl_ready				=> ddr2_local_ready,
-		avl_addr					=> tst_addr,
-		avl_size					=> tst_size,
-		avl_wdata				=> tst_wdata,
-		avl_rdata				=> tst_rdata,
-		avl_write_req			=> tst_write_req,
-		avl_read_req			=> tst_read_req,
-		avl_rdata_valid		=> tst_rdata_valid,
-		avl_be					=> tst_be,
-		avl_burstbegin			=> tst_burstbegin,
-		clk						=> ddr2_phy_clk,
-		reset_n					=> begin_test, --ddr2_local_init_done,
-		pnf_per_bit				=> pnf_per_bit,
-		pnf_per_bit_persist	=> pnf_per_bit_persist,
-		pass						=> pass,
-		fail						=> fail,
-		test_complete			=> test_complete 
-	);	
+--traffic_gen_inst : ddr2_traffic_gen
+--	port map (
+--		avl_ready				=> ddr2_local_ready,
+--		avl_addr					=> tst_addr,
+--		avl_size					=> tst_size,
+--		avl_wdata				=> tst_wdata,
+--		avl_rdata				=> tst_rdata,
+--		avl_write_req			=> tst_write_req,
+--		avl_read_req			=> tst_read_req,
+--		avl_rdata_valid		=> tst_rdata_valid,
+--		avl_be					=> tst_be,
+--		avl_burstbegin			=> tst_burstbegin,
+--		clk						=> ddr2_phy_clk,
+--		reset_n					=> begin_test_sync_phy_clk, --ddr2_local_init_done,
+--		pnf_per_bit				=> pnf_per_bit,
+--		pnf_per_bit_persist	=> pnf_per_bit_persist,
+--		pass						=> pass,
+--		fail						=> fail,
+--		test_complete			=> test_complete 
+--	);	
 
 ddr2_inst : ddr2
 	PORT map (
@@ -441,19 +457,19 @@ ddr2_inst : ddr2
 		mem_dqs				=> mem_dqs 
 	);
 
-avl_addr 		<= tst_addr 		when begin_test='1' else ddr2arb_local_addr;
-avl_write_req	<=	tst_write_req 	when begin_test='1' else ddr2arb_local_write_req;
-avl_read_req	<=	tst_read_req 	when begin_test='1' else ddr2arb_local_read_req;
-avl_burstbegin <= tst_burstbegin when begin_test='1' else ddr2arb_local_burstbegin;
-avl_wdata		<= tst_wdata 		when begin_test='1' else ddr2arb_local_wdata;
-avl_be			<= tst_be 			when begin_test='1' else ddr2arb_local_be;
-avl_size			<= tst_size 		when begin_test='1' else ddr2arb_local_size;
+avl_addr 		<= tst_addr 		when begin_test_sync_phy_clk='1' else ddr2arb_local_addr;
+avl_write_req	<=	tst_write_req 	when begin_test_sync_phy_clk='1' else ddr2arb_local_write_req;
+avl_read_req	<=	tst_read_req 	when begin_test_sync_phy_clk='1' else ddr2arb_local_read_req;
+avl_burstbegin <= tst_burstbegin when begin_test_sync_phy_clk='1' else ddr2arb_local_burstbegin;
+avl_wdata		<= tst_wdata 		when begin_test_sync_phy_clk='1' else ddr2arb_local_wdata;
+avl_be			<= tst_be 			when begin_test_sync_phy_clk='1' else ddr2arb_local_be;
+avl_size			<= tst_size 		when begin_test_sync_phy_clk='1' else ddr2arb_local_size;
 
 local_rdata				<= avl_rdata;
 local_rdata_valid 	<= avl_rdata_valid;
 
-tst_rdata			<= avl_rdata(31 downto 1) & '0' when insert_error='1' else avl_rdata;
-tst_rdata_valid 	<= avl_rdata_valid when begin_test='1' else '0';
+tst_rdata			<= avl_rdata(31 downto 1) & '0' when insert_error_sync_phy_clk='1' else avl_rdata;
+tst_rdata_valid 	<= avl_rdata_valid when begin_test_sync_phy_clk='1' else '0';
 
 
 phy_clk<=ddr2_phy_clk;

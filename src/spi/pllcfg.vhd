@@ -134,7 +134,7 @@ architecture pllcfg_arch of pllcfg is
 	signal dout_regB_sen, dout_regB_len: std_logic;
 
 
-	signal mem: marray32x16;					-- Config memory
+	signal mem: marray24x16;					-- Config memory
 	signal mem_weA: std_logic;
 	signal mem_weB: std_logic;
 	

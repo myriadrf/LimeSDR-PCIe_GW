@@ -4,7 +4,7 @@
 // Megafunction Name(s):
 // ============================================================
 
-//Legal Notice: (C)2016 Altera Corporation. All rights reserved.  Your
+//Legal Notice: (C)2017 Altera Corporation. All rights reserved.  Your
 //use of Altera Corporation's design tools, logic functions and other
 //software and tools, and its AMPP partner logic functions, and any
 //output files any of the foregoing (including device programming or
@@ -916,7 +916,7 @@ endmodule
 // Warning: If you modify this section, IP Compiler for PCI Express Wizard may not be able to reproduce your chosen configuration.
 // 
 // Retrieval info: <?xml version="1.0"?>
-// Retrieval info: <MEGACORE title="IP Compiler for PCI Express"  version="15.1"  build="185"  iptb_version="1.3.0 Build 185"  format_version="120" >
+// Retrieval info: <MEGACORE title="IP Compiler for PCI Express"  version="15.1"  build="193"  iptb_version="1.3.0 Build 193"  format_version="120" >
 // Retrieval info:  <NETLIST_SECTION class="altera.ipbu.flowbase.netlist.model.MVCModel"  active_core="altpcie_hip_pipen1b" >
 // Retrieval info:   <STATIC_SECTION>
 // Retrieval info:    <PRIVATES>

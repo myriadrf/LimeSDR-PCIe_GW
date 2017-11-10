@@ -1,0 +1,135 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dH:/working_dir/altera/LimeSDR-USB/lms7_trx/src/smpl_cnt
+Elpm_cnt_inst
+Z1 w1490694556
+Z2 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z5 8../altera_inst/lpm_cnt_inst.vhd
+Z6 F../altera_inst/lpm_cnt_inst.vhd
+l0
+L18
+Vi`GGdmaRdSn:j2=7hb:^^0
+!s100 mn]EB_f^lc=b6ngT7IZhg2
+Z7 OV;C;10.4d;61
+31
+Z8 !s110 1490694560
+!i10b 1
+Z9 !s108 1490694560.000000
+Z10 !s90 -reportprogress|300|-quiet|-93|../altera_inst/lpm_cnt_inst.vhd|
+Z11 !s107 ../altera_inst/lpm_cnt_inst.vhd|
+!i113 1
+Z12 o-quiet -93
+Z13 tShow_source 1 Explicit 1 NoCoverage 1
+Aarch
+R2
+R3
+R4
+Z14 DEx4 work 12 lpm_cnt_inst 0 22 i`GGdmaRdSn:j2=7hb:^^0
+l68
+L41
+VmCU[l=zQSUI=S5c2UkR@40
+!s100 NEeM<Z5i67KXd8J>R;1zj3
+R7
+31
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Esmpl_cnt
+Z15 w1490694486
+R2
+R3
+R4
+R0
+Z16 8synth/smpl_cnt.vhd
+Z17 Fsynth/smpl_cnt.vhd
+l0
+L15
+VIBZagZC98NT2DNm55VHO<1
+!s100 i84`iIGg]>>]mmdI87@zf0
+R7
+31
+R8
+!i10b 1
+R9
+Z18 !s90 -reportprogress|300|-quiet|-93|synth/smpl_cnt.vhd|
+Z19 !s107 synth/smpl_cnt.vhd|
+!i113 1
+R12
+R13
+Aarch
+R14
+R2
+R3
+R4
+Z20 DEx4 work 8 smpl_cnt 0 22 IBZagZC98NT2DNm55VHO<1
+l54
+L42
+VABUN[63TffeEX?6G:=J1=2
+!s100 i6VeGY^I[Sa:^:5[LR:ZA1
+R7
+31
+R8
+!i10b 1
+R9
+R18
+R19
+!i113 1
+R12
+R13
+Esmpl_cnt_tb
+Z21 w1490694502
+R2
+R3
+R4
+R0
+Z22 8sim/smpl_cnt_tb.vhd
+Z23 Fsim/smpl_cnt_tb.vhd
+l0
+L15
+VE0?Wk<WR_36Jlikb6`_je0
+!s100 KBAZm_X7]mbE^i^gQUiho0
+R7
+31
+R8
+!i10b 1
+R9
+Z24 !s90 -reportprogress|300|-quiet|-93|sim/smpl_cnt_tb.vhd|
+Z25 !s107 sim/smpl_cnt_tb.vhd|
+!i113 1
+R12
+R13
+Atb_behave
+R20
+R2
+R3
+R4
+Z26 DEx4 work 11 smpl_cnt_tb 0 22 E0?Wk<WR_36Jlikb6`_je0
+l34
+L22
+Vo<WIgF`of<Jc?Z76f9^f13
+!s100 l85P9;2o<kSI1h>L4=ChS3
+R7
+31
+R8
+!i10b 1
+R9
+R24
+R25
+!i113 1
+R12
+R13

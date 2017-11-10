@@ -120,10 +120,8 @@ signal DDR2_ctrl_local_ready			: std_logic;
 signal DDR2_ctrl_local_rdata			: std_logic_vector(cntrl_bus_size*2*cntrl_rate-1 downto 0);
 signal DDR2_ctrl_local_rdata_valid	: std_logic;
 signal DDR2_ctrl_local_init_done		: std_logic;
-signal DDR2_ctrl_init_done_wcmd0 	: std_logic;
-signal DDR2_ctrl_init_done_wcmd1 	: std_logic;
-signal DDR2_ctrl_init_done_rcmd0 	: std_logic;
-signal DDR2_ctrl_init_done_rcmd1 	: std_logic;
+signal DDR2_ctrl_init_done_wcmd 	   : std_logic;
+signal DDR2_ctrl_init_done_rcmd 	   : std_logic;
 
 --wfm outfifo signals
 signal wfm_out_fifo_rdreq				: std_logic;
@@ -132,9 +130,12 @@ signal wfm_out_fifo_rdempty			: std_logic;
 
 signal dcmpr_rdempty						: std_logic;
 signal dcmpr_q								: std_logic_vector(data_width-1 downto 0);
-signal dcmpr_wusedw						: std_logic_vector(dcmpr_fifo_size-1 downto 0); 
+signal dcmpr_wusedw						: std_logic_vector(dcmpr_fifo_size-1 downto 0);
+signal dcmpr_reset_n                : std_logic;
+ 
 
 signal rdfifo_read						: std_logic;
+signal rdfifo_reset_n               : std_logic;
 
 signal wfm_load_i							: std_logic;
 
@@ -142,6 +143,8 @@ signal dd_iq_l_int						: std_logic_vector(15 downto 0);
 signal dd_iq_h_int						: std_logic_vector(15 downto 0);
 
 signal wfm_load_reg_pll_refclk		: std_logic_vector(2 downto 0);
+signal wfm_load_sync_iq_clk         : std_logic;
+signal sample_width_phy_clk    		: std_logic_vector(1 downto 0);
 
 
 component wfm_player is
@@ -329,21 +332,29 @@ begin
 wfm_load_i<=not wfm_load;
 
 
+sync_reg0 : entity work.sync_reg 
+port map(rcmd_clk, '1', wfm_load, wfm_load_sync_iq_clk);
+
+bus_sync_reg0 : entity work.bus_sync_reg
+ generic map (2) 
+ port map(DDR2_ctrl_phy_clk, '1', sample_width, sample_width_phy_clk);
+
+
+
 
 -- ----------------------------------------------------------------------------
 -- To synchronize DDR2_ctrl_local_init_done signal to wcmd_clk
 -- ----------------------------------------------------------------------------
+sync_reg1 : entity work.sync_reg 
+port map(wcmd_clk, '1', DDR2_ctrl_local_init_done, DDR2_ctrl_init_done_wcmd);
+
+
 process (reset_n, wcmd_clk) is 
 begin 
 	if reset_n='0' then 
-		DDR2_ctrl_init_done_wcmd0<='0';
-		DDR2_ctrl_init_done_wcmd1<='0';
 		wfm_player_wcmd_reset_n<='0';
-	elsif (wcmd_clk'event and wcmd_clk='1') then 
-		DDR2_ctrl_init_done_wcmd0<=DDR2_ctrl_local_init_done;
-		DDR2_ctrl_init_done_wcmd1<=DDR2_ctrl_init_done_wcmd0;
-		
-		if DDR2_ctrl_init_done_wcmd1='1' then 
+	elsif (wcmd_clk'event and wcmd_clk='1') then 		
+		if DDR2_ctrl_init_done_wcmd='1' then 
 			wfm_player_wcmd_reset_n<='1';
 		else 
 			wfm_player_wcmd_reset_n<='0';
@@ -354,17 +365,16 @@ end process;
 -- ----------------------------------------------------------------------------
 -- To synchronize DDR2_ctrl_local_init_done signal to rcmd_clk
 -- ----------------------------------------------------------------------------
+
+sync_reg2 : entity work.sync_reg 
+port map(rcmd_clk, '1', DDR2_ctrl_local_init_done, DDR2_ctrl_init_done_rcmd);
+
 process (reset_n, rcmd_clk) is 
 begin 
 	if reset_n='0' then 
-		DDR2_ctrl_init_done_rcmd0<='0';
-		DDR2_ctrl_init_done_rcmd1<='0';
 		wfm_player_rcmd_reset_n<='0';
-	elsif (rcmd_clk'event and rcmd_clk='1') then 
-		DDR2_ctrl_init_done_rcmd0<=DDR2_ctrl_local_init_done;
-		DDR2_ctrl_init_done_rcmd1<=DDR2_ctrl_init_done_rcmd0;
-		
-		if DDR2_ctrl_init_done_rcmd1='1' then 
+	elsif (rcmd_clk'event and rcmd_clk='1') then 		
+		if DDR2_ctrl_init_done_rcmd='1' then 
 			wfm_player_rcmd_reset_n<='1';
 		else 
 			wfm_player_rcmd_reset_n<='0';
@@ -508,7 +518,9 @@ port map(
 	 
 -- ----------------------------------------------------------------------------
 -- Payload decompress module
--- ----------------------------------------------------------------------------	 
+-- ----------------------------------------------------------------------------	
+dcmpr_reset_n <= not wfm_load_sync_iq_clk;
+ 
 dcmpr :  decompress 
   generic map  (
 					dev_family => dev_family,
@@ -520,10 +532,10 @@ dcmpr :  decompress
         --input ports 
         wclk          => DDR2_ctrl_phy_clk,  
         rclk          => iq_clk, 
-        reset_n       => wfm_load_i, 
+        reset_n       => dcmpr_reset_n, 
         data_in       => DDR2_ctrl_local_rdata, 
         data_in_valid => DDR2_ctrl_local_rdata_valid, 
-        sample_width  => sample_width,
+        sample_width  => sample_width_phy_clk,
         rdreq         => rdfifo_read,
         rdempty       => dcmpr_rdempty,
         rdusedw       => open, 
@@ -535,12 +547,14 @@ dcmpr :  decompress
 		 
 -- ----------------------------------------------------------------------------
 -- Read and form samples from decompress fifo
--- ----------------------------------------------------------------------------			
+-- ----------------------------------------------------------------------------
+rdfifo_reset_n <= not wfm_load_sync_iq_clk;
+			
 rd_fifo : rd_tx_fifo 
   generic map (sampl_width =>12)
   port map (
       clk			=> iq_clk,
-      reset_n		=> wfm_load_i, 
+      reset_n		=> rdfifo_reset_n, 
       fr_start  	=> fr_start, 
       ch_en			=> ch_en,
       mimo_en		=> mimo_en,
@@ -555,8 +569,15 @@ rd_fifo : rd_tx_fifo
 
 phy_clk<=DDR2_ctrl_phy_clk;
 
-dd_iq_h<=dd_iq_l_int;
-dd_iq_l<=dd_iq_h_int;	
+
+--output register
+process(iq_clk)
+begin 
+   if (iq_clk'event AND iq_clk='1') then 
+      dd_iq_h<=dd_iq_l_int;
+      dd_iq_l<=dd_iq_h_int;
+   end if;
+end process;
 
 
 --dd_iq_h_uns<="000" & dd_iq_l_int(12) & std_logic_vector(signed(dd_iq_l_int(11 downto 0))+2048);
