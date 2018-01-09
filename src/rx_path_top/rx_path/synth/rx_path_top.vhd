@@ -100,11 +100,6 @@ signal inst3_q                : std_logic_vector(63 downto 0);
 type my_array is array (0 to 5) of std_logic_vector(63 downto 0);
 signal delay_chain   : my_array;
 
-signal tx_pct_loss_detect     : std_logic;
-
-
-
-
 
 begin
 
@@ -230,31 +225,14 @@ smpl_fifo_inst1 : entity work.fifo_inst
 inst2_smpl_buff_rddata <=  inst1_q(47 downto 36) & "0000" & 
                            inst1_q(35 downto 24) & "0000" & 
                            inst1_q(23 downto 12) & "0000" & 
-                           inst1_q(11 downto 0) & "0000";
--------------------------------------------------------------------------------
--- detect cleared packets in tx path
--------------------------------------------------------------------------------   
-process(reset_n, clk)
-    begin
-      if reset_n='0' then
-          tx_pct_loss_detect<='0';
- 	    elsif (clk'event and clk = '1') then
- 	        if tx_pct_loss_sync='1' then 
- 	          tx_pct_loss_detect<='1';
- 	        elsif  tx_pct_loss_clr_sync='1' then 
- 	          tx_pct_loss_detect<='0';
- 	        else 
- 	          tx_pct_loss_detect<=tx_pct_loss_detect;
- 	        end if;
- 	    end if;
-    end process; 
+                           inst1_q(11 downto 0) & "0000"; 
     
     
 --packet reserved bits  
-  inst2_pct_hdr_0(63 downto 48)<="000000000000" & tx_pct_loss_detect & pct_fifo_wusedw(pct_buff_wrusedw_w-1 downto pct_buff_wrusedw_w-3);
-  inst2_pct_hdr_0(47 downto 32)<=x"0201";
-  inst2_pct_hdr_0(31 downto 16)<=x"0403";
-  inst2_pct_hdr_0(15 downto 0)<=x"0605";
+   inst2_pct_hdr_0(15 downto 0)   <="000000000000" & tx_pct_loss_sync & pct_fifo_wusedw(pct_buff_wrusedw_w-1 downto pct_buff_wrusedw_w-3);
+   inst2_pct_hdr_0(31 downto 16)  <=x"0201";
+   inst2_pct_hdr_0(47 downto 32)  <=x"0403";
+   inst2_pct_hdr_0(63 downto 48)  <=x"0605";
         
         
 -- ----------------------------------------------------------------------------
