@@ -56,9 +56,9 @@
 -- MEM_COL_BITS                       : 10
 -- LOCAL_DATA_BITS                    : 32
 -- NUM_CLOCK_PAIRS                    : 1
--- CLOCK_TICK_IN_PS                   : 8000
+-- CLOCK_TICK_IN_PS                   : 6666
 -- REGISTERED_DIMM                    : false
--- TINIT_CLOCKS                       : 25000
+-- TINIT_CLOCKS                       : 30004
 -- Data_Width_Ratio                   : 2
 
 -- << END MEGAWIZARD INSERT PARAMETER_LIST
@@ -93,12 +93,12 @@ entity ddr2_example_top_tb is
         gLOCAL_IF_DWIDTH_AFTER_ECC : in integer := 32;
         gNUM_CLOCK_PAIRS       : in integer := 1;
         RTL_ROUNDTRIP_CLOCKS   : in real    := 0.0;
-        CLOCK_TICK_IN_PS       : in integer := 8000;
+        CLOCK_TICK_IN_PS       : in integer := 6666;
         REGISTERED_DIMM        : in boolean := false;
         BOARD_DQS_DELAY        : in integer := 0;
         BOARD_CLK_DELAY        : in integer := 0;
 
-        TINIT_CLOCKS           : in integer := 25000;
+        TINIT_CLOCKS           : in integer := 30004;
         REF_CLOCK_TICK_IN_PS   : in integer := 20000;
         -- Below 2 lines for SPR272543: 
         -- Testbench workaround for tests with "dedicated memory clock phase shift" failing, 

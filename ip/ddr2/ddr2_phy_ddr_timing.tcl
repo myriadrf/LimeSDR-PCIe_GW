@@ -1,7 +1,7 @@
 package require ::quartus::ddr_timing_model
 
 # The clock period of your memory interface. Don't modify this
-set ::t(period) 8.000
+set ::t(period) 6.666
 
 # The worst case skew between any pair of traces which are nominally matched
 set ::t(board_skew) 0.020
@@ -33,7 +33,7 @@ set ::t(QHS) 0.300
 
 # DQS to CK timing on reads
 set ::t(DQSCK) 0.350
-set ::t(HP) 3.600
+set ::t(HP) 3.000
 
 # The maximum allowed length of the mimic path depends on the device family
 set ::t(mimic_shift) 2.500
