@@ -1110,7 +1110,7 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 1368 744 1544 760)
+	(rect 1384 744 1560 760)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "LMS_FCLK2" (rect 90 0 164 14)(font "Arial" ))
 	(pt 0 8)
@@ -1123,7 +1123,7 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1440 624 1488 640))
+	(annotation_block (location)(rect 1456 624 1504 640))
 )
 (pin
 	(output)
@@ -1212,7 +1212,7 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 1424 1376 1600 1392)
+	(rect 1440 1328 1616 1344)
 	(text "OUTPUT" (rect 1 0 50 11)(font "Arial" (font_size 6)))
 	(text "LMS_FCLK1" (rect 90 0 164 14)(font "Arial" ))
 	(pt 0 8)
@@ -1225,7 +1225,7 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 1600 1392 1656 1408))
+	(annotation_block (location)(rect 1616 1344 1672 1360))
 )
 (pin
 	(bidir)
@@ -1733,174 +1733,6 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 248 320))
 	)
-)
-(symbol
-	(rect 2272 744 2544 984)
-	(text "pllcfg_top" (rect 5 0 87 14)(font "Arial" ))
-	(text "inst19" (rect 8 224 57 238)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "sdinA" (rect 0 0 41 14)(font "Arial" ))
-		(text "sdinA" (rect 21 27 62 41)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "sclkA" (rect 0 0 41 14)(font "Arial" ))
-		(text "sclkA" (rect 21 43 62 57)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "senA" (rect 0 0 33 14)(font "Arial" ))
-		(text "senA" (rect 21 59 54 73)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "sdinB" (rect 0 0 41 14)(font "Arial" ))
-		(text "sdinB" (rect 21 75 62 89)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "sclkB" (rect 0 0 41 14)(font "Arial" ))
-		(text "sclkB" (rect 21 91 62 105)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96))
-	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "senB" (rect 0 0 33 14)(font "Arial" ))
-		(text "senB" (rect 21 107 54 121)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112))
-	)
-	(port
-		(pt 0 128)
-		(input)
-		(text "lreset" (rect 0 0 49 14)(font "Arial" ))
-		(text "lreset" (rect 21 123 70 137)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128))
-	)
-	(port
-		(pt 0 144)
-		(input)
-		(text "mreset" (rect 0 0 49 14)(font "Arial" ))
-		(text "mreset" (rect 21 139 70 153)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144))
-	)
-	(port
-		(pt 0 160)
-		(input)
-		(text "pllcfg_busy[n_pll-1..0]" (rect 0 0 189 14)(font "Arial" ))
-		(text "pllcfg_busy[n_pll-1..0]" (rect 21 155 210 169)(font "Arial" ))
-		(line (pt 0 160)(pt 16 160)(line_width 3))
-	)
-	(port
-		(pt 0 176)
-		(input)
-		(text "pllcfg_done[n_pll-1..0]" (rect 0 0 189 14)(font "Arial" ))
-		(text "pllcfg_done[n_pll-1..0]" (rect 21 171 210 185)(font "Arial" ))
-		(line (pt 0 176)(pt 16 176)(line_width 3))
-	)
-	(port
-		(pt 0 192)
-		(input)
-		(text "pll_lock[n_pll-1..0]" (rect 0 0 165 14)(font "Arial" ))
-		(text "pll_lock[n_pll-1..0]" (rect 21 187 186 201)(font "Arial" ))
-		(line (pt 0 192)(pt 16 192)(line_width 3))
-	)
-	(port
-		(pt 272 32)
-		(output)
-		(text "sdoutA" (rect 0 0 49 14)(font "Arial" ))
-		(text "sdoutA" (rect 210 27 259 41)(font "Arial" ))
-		(line (pt 272 32)(pt 256 32))
-	)
-	(port
-		(pt 272 48)
-		(output)
-		(text "oenA" (rect 0 0 33 14)(font "Arial" ))
-		(text "oenA" (rect 224 43 257 57)(font "Arial" ))
-		(line (pt 272 48)(pt 256 48))
-	)
-	(port
-		(pt 272 64)
-		(output)
-		(text "sdoutB" (rect 0 0 49 14)(font "Arial" ))
-		(text "sdoutB" (rect 210 59 259 73)(font "Arial" ))
-		(line (pt 272 64)(pt 256 64))
-	)
-	(port
-		(pt 272 80)
-		(output)
-		(text "oenB" (rect 0 0 33 14)(font "Arial" ))
-		(text "oenB" (rect 224 75 257 89)(font "Arial" ))
-		(line (pt 272 80)(pt 256 80))
-	)
-	(port
-		(pt 272 96)
-		(output)
-		(text "phcfg_start[n_pll-1..0]" (rect 0 0 189 14)(font "Arial" ))
-		(text "phcfg_start[n_pll-1..0]" (rect 91 91 280 105)(font "Arial" ))
-		(line (pt 272 96)(pt 256 96)(line_width 3))
-	)
-	(port
-		(pt 272 112)
-		(output)
-		(text "pllcfg_start[n_pll-1..0]" (rect 0 0 198 14)(font "Arial" ))
-		(text "pllcfg_start[n_pll-1..0]" (rect 84 107 282 121)(font "Arial" ))
-		(line (pt 272 112)(pt 256 112)(line_width 3))
-	)
-	(port
-		(pt 272 128)
-		(output)
-		(text "pllrst_start[n_pll-1..0]" (rect 0 0 198 14)(font "Arial" ))
-		(text "pllrst_start[n_pll-1..0]" (rect 84 123 282 137)(font "Arial" ))
-		(line (pt 272 128)(pt 256 128)(line_width 3))
-	)
-	(port
-		(pt 272 144)
-		(output)
-		(text "phcfg_updn" (rect 0 0 82 14)(font "Arial" ))
-		(text "phcfg_updn" (rect 182 139 264 153)(font "Arial" ))
-		(line (pt 272 144)(pt 256 144))
-	)
-	(port
-		(pt 272 160)
-		(output)
-		(text "cnt_ind[4..0]" (rect 0 0 107 14)(font "Arial" ))
-		(text "cnt_ind[4..0]" (rect 161 155 268 169)(font "Arial" ))
-		(line (pt 272 160)(pt 256 160)(line_width 3))
-	)
-	(port
-		(pt 272 176)
-		(output)
-		(text "cnt_phase[15..0]" (rect 0 0 132 14)(font "Arial" ))
-		(text "cnt_phase[15..0]" (rect 140 171 272 185)(font "Arial" ))
-		(line (pt 272 176)(pt 256 176)(line_width 3))
-	)
-	(port
-		(pt 272 192)
-		(output)
-		(text "pllcfg_data[143..0]" (rect 0 0 156 14)(font "Arial" ))
-		(text "pllcfg_data[143..0]" (rect 119 187 275 201)(font "Arial" ))
-		(line (pt 272 192)(pt 256 192)(line_width 3))
-	)
-	(parameter
-		"n_pll"
-		"2"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 256 224))
-	)
-	(annotation_block (parameter)(rect 2272 656 2568 704))
 )
 (symbol
 	(rect 2408 1056 2472 1104)
@@ -2824,221 +2656,6 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 1016 720 1248 992)
-	(text "rx_pll_top" (rect 5 0 87 14)(font "Arial" ))
-	(text "inst2" (rect 8 256 49 270)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "pll_inclk" (rect 0 0 74 14)(font "Arial" ))
-		(text "pll_inclk" (rect 21 27 95 41)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "pll_areset" (rect 0 0 82 14)(font "Arial" ))
-		(text "pll_areset" (rect 21 43 103 57)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "inv_c0" (rect 0 0 49 14)(font "Arial" ))
-		(text "inv_c0" (rect 21 59 70 73)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "clk_ena[1..0]" (rect 0 0 107 14)(font "Arial" ))
-		(text "clk_ena[1..0]" (rect 21 75 128 89)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "drct_clk_en[1..0]" (rect 0 0 140 14)(font "Arial" ))
-		(text "drct_clk_en[1..0]" (rect 21 91 161 105)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96)(line_width 3))
-	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "rcnfg_clk" (rect 0 0 74 14)(font "Arial" ))
-		(text "rcnfg_clk" (rect 21 107 95 121)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112))
-	)
-	(port
-		(pt 0 128)
-		(input)
-		(text "rcnfig_areset" (rect 0 0 107 14)(font "Arial" ))
-		(text "rcnfig_areset" (rect 21 123 128 137)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128))
-	)
-	(port
-		(pt 0 144)
-		(input)
-		(text "rcnfig_en" (rect 0 0 74 14)(font "Arial" ))
-		(text "rcnfig_en" (rect 21 139 95 153)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144))
-	)
-	(port
-		(pt 0 160)
-		(input)
-		(text "rcnfig_data[143..0]" (rect 0 0 156 14)(font "Arial" ))
-		(text "rcnfig_data[143..0]" (rect 21 155 177 169)(font "Arial" ))
-		(line (pt 0 160)(pt 16 160)(line_width 3))
-	)
-	(port
-		(pt 0 176)
-		(input)
-		(text "dynps_en" (rect 0 0 66 14)(font "Arial" ))
-		(text "dynps_en" (rect 21 171 87 185)(font "Arial" ))
-		(line (pt 0 176)(pt 16 176))
-	)
-	(port
-		(pt 0 192)
-		(input)
-		(text "dynps_dir" (rect 0 0 74 14)(font "Arial" ))
-		(text "dynps_dir" (rect 21 187 95 201)(font "Arial" ))
-		(line (pt 0 192)(pt 16 192))
-	)
-	(port
-		(pt 0 208)
-		(input)
-		(text "dynps_cnt_sel[2..0]" (rect 0 0 156 14)(font "Arial" ))
-		(text "dynps_cnt_sel[2..0]" (rect 21 203 177 217)(font "Arial" ))
-		(line (pt 0 208)(pt 16 208)(line_width 3))
-	)
-	(port
-		(pt 0 224)
-		(input)
-		(text "dynps_phase[9..0]" (rect 0 0 140 14)(font "Arial" ))
-		(text "dynps_phase[9..0]" (rect 21 219 161 233)(font "Arial" ))
-		(line (pt 0 224)(pt 16 224)(line_width 3))
-	)
-	(port
-		(pt 232 32)
-		(output)
-		(text "c0" (rect 0 0 16 14)(font "Arial" ))
-		(text "c0" (rect 198 27 214 41)(font "Arial" ))
-		(line (pt 232 32)(pt 216 32))
-	)
-	(port
-		(pt 232 48)
-		(output)
-		(text "c1" (rect 0 0 16 14)(font "Arial" ))
-		(text "c1" (rect 198 43 214 57)(font "Arial" ))
-		(line (pt 232 48)(pt 216 48))
-	)
-	(port
-		(pt 232 64)
-		(output)
-		(text "pll_locked" (rect 0 0 82 14)(font "Arial" ))
-		(text "pll_locked" (rect 142 59 224 73)(font "Arial" ))
-		(line (pt 232 64)(pt 216 64))
-	)
-	(port
-		(pt 232 80)
-		(output)
-		(text "rcnfig_status" (rect 0 0 107 14)(font "Arial" ))
-		(text "rcnfig_status" (rect 121 75 228 89)(font "Arial" ))
-		(line (pt 232 80)(pt 216 80))
-	)
-	(port
-		(pt 232 96)
-		(output)
-		(text "busy" (rect 0 0 33 14)(font "Arial" ))
-		(text "busy" (rect 184 91 217 105)(font "Arial" ))
-		(line (pt 232 96)(pt 216 96))
-	)
-	(parameter
-		"bandwidth_type"
-		"AUTO"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"clk0_divide_by"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk0_duty_cycle"
-		"50"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk0_multiply_by"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk0_phase_shift"
-		"0"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"clk1_divide_by"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk1_duty_cycle"
-		"50"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk1_multiply_by"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk1_phase_shift"
-		"0"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"compensate_clock"
-		"CLK1"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"inclk0_input_frequency"
-		"6250"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"intended_device_family"
-		"Cyclone IV GX"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"operation_mode"
-		"SOURCE_SYNCHRONOUS"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"scan_chain_mif_file"
-		"ip/pll_rx/pll_rx.mif"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"drct_c0_ndly"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"drct_c1_ndly"
-		"2"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 216 256))
-	)
-	(annotation_block (parameter)(rect 1248 360 1820 717))
-)
-(symbol
 	(rect 2024 2280 2056 2312)
 	(text "GND" (rect 8 16 32 27)(font "Arial" (font_size 6)))
 	(text "inst9" (rect 3 21 44 35)(font "Arial" )(invisible))
@@ -3733,221 +3350,6 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 1048 1352 1280 1624)
-	(text "tx_pll_top" (rect 5 0 87 14)(font "Arial" ))
-	(text "inst14" (rect 8 256 57 270)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "pll_inclk" (rect 0 0 74 14)(font "Arial" ))
-		(text "pll_inclk" (rect 21 27 95 41)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "pll_areset" (rect 0 0 82 14)(font "Arial" ))
-		(text "pll_areset" (rect 21 43 103 57)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "inv_c0" (rect 0 0 49 14)(font "Arial" ))
-		(text "inv_c0" (rect 21 59 70 73)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "clk_ena[1..0]" (rect 0 0 107 14)(font "Arial" ))
-		(text "clk_ena[1..0]" (rect 21 75 128 89)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "drct_clk_en[1..0]" (rect 0 0 140 14)(font "Arial" ))
-		(text "drct_clk_en[1..0]" (rect 21 91 161 105)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96)(line_width 3))
-	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "rcnfg_clk" (rect 0 0 74 14)(font "Arial" ))
-		(text "rcnfg_clk" (rect 21 107 95 121)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112))
-	)
-	(port
-		(pt 0 128)
-		(input)
-		(text "rcnfig_areset" (rect 0 0 107 14)(font "Arial" ))
-		(text "rcnfig_areset" (rect 21 123 128 137)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128))
-	)
-	(port
-		(pt 0 144)
-		(input)
-		(text "rcnfig_en" (rect 0 0 74 14)(font "Arial" ))
-		(text "rcnfig_en" (rect 21 139 95 153)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144))
-	)
-	(port
-		(pt 0 160)
-		(input)
-		(text "rcnfig_data[143..0]" (rect 0 0 156 14)(font "Arial" ))
-		(text "rcnfig_data[143..0]" (rect 21 155 177 169)(font "Arial" ))
-		(line (pt 0 160)(pt 16 160)(line_width 3))
-	)
-	(port
-		(pt 0 176)
-		(input)
-		(text "dynps_en" (rect 0 0 66 14)(font "Arial" ))
-		(text "dynps_en" (rect 21 171 87 185)(font "Arial" ))
-		(line (pt 0 176)(pt 16 176))
-	)
-	(port
-		(pt 0 192)
-		(input)
-		(text "dynps_dir" (rect 0 0 74 14)(font "Arial" ))
-		(text "dynps_dir" (rect 21 187 95 201)(font "Arial" ))
-		(line (pt 0 192)(pt 16 192))
-	)
-	(port
-		(pt 0 208)
-		(input)
-		(text "dynps_cnt_sel[2..0]" (rect 0 0 156 14)(font "Arial" ))
-		(text "dynps_cnt_sel[2..0]" (rect 21 203 177 217)(font "Arial" ))
-		(line (pt 0 208)(pt 16 208)(line_width 3))
-	)
-	(port
-		(pt 0 224)
-		(input)
-		(text "dynps_phase[9..0]" (rect 0 0 140 14)(font "Arial" ))
-		(text "dynps_phase[9..0]" (rect 21 219 161 233)(font "Arial" ))
-		(line (pt 0 224)(pt 16 224)(line_width 3))
-	)
-	(port
-		(pt 232 32)
-		(output)
-		(text "c0" (rect 0 0 16 14)(font "Arial" ))
-		(text "c0" (rect 198 27 214 41)(font "Arial" ))
-		(line (pt 232 32)(pt 216 32))
-	)
-	(port
-		(pt 232 48)
-		(output)
-		(text "c1" (rect 0 0 16 14)(font "Arial" ))
-		(text "c1" (rect 198 43 214 57)(font "Arial" ))
-		(line (pt 232 48)(pt 216 48))
-	)
-	(port
-		(pt 232 64)
-		(output)
-		(text "pll_locked" (rect 0 0 82 14)(font "Arial" ))
-		(text "pll_locked" (rect 142 59 224 73)(font "Arial" ))
-		(line (pt 232 64)(pt 216 64))
-	)
-	(port
-		(pt 232 80)
-		(output)
-		(text "rcnfig_status" (rect 0 0 107 14)(font "Arial" ))
-		(text "rcnfig_status" (rect 121 75 228 89)(font "Arial" ))
-		(line (pt 232 80)(pt 216 80))
-	)
-	(port
-		(pt 232 96)
-		(output)
-		(text "busy" (rect 0 0 33 14)(font "Arial" ))
-		(text "busy" (rect 184 91 217 105)(font "Arial" ))
-		(line (pt 232 96)(pt 216 96))
-	)
-	(parameter
-		"bandwidth_type"
-		"AUTO"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"clk0_divide_by"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk0_duty_cycle"
-		"50"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk0_multiply_by"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk0_phase_shift"
-		"0"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"clk1_divide_by"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk1_duty_cycle"
-		"50"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk1_multiply_by"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"clk1_phase_shift"
-		"0"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"compensate_clock"
-		"CLK1"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"inclk0_input_frequency"
-		"6250"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"intended_device_family"
-		"Cyclone IV GX"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"operation_mode"
-		"SOURCE_SYNCHRONOUS"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"scan_chain_mif_file"
-		"ip/pll_tx/pll_tx.mif"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"drct_c0_ndly"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"drct_c1_ndly"
-		"2"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 216 256))
-	)
-	(annotation_block (parameter)(rect 1280 992 1852 1349))
-)
-(symbol
 	(rect -64 1504 224 1648)
 	(text "gpio_ctrl_top" (rect 5 0 112 14)(font "Arial" ))
 	(text "inst26" (rect 8 128 57 142)(font "Arial" ))
@@ -4444,208 +3846,6 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 264 256))
 	)
-)
-(symbol
-	(rect 2200 2008 2560 2344)
-	(text "rx_path_top" (rect 5 0 95 14)(font "Arial" ))
-	(text "inst7" (rect 8 320 49 334)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 24 14)(font "Arial" ))
-		(text "clk" (rect 21 27 45 41)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "reset_n" (rect 0 0 57 14)(font "Arial" ))
-		(text "reset_n" (rect 21 43 78 57)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "test_ptrn_en" (rect 0 0 99 14)(font "Arial" ))
-		(text "test_ptrn_en" (rect 21 59 120 73)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "sample_width[1..0]" (rect 0 0 148 14)(font "Arial" ))
-		(text "sample_width[1..0]" (rect 21 75 169 89)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "mode" (rect 0 0 33 14)(font "Arial" ))
-		(text "mode" (rect 21 91 54 105)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96))
-	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "trxiqpulse" (rect 0 0 82 14)(font "Arial" ))
-		(text "trxiqpulse" (rect 21 107 103 121)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112))
-	)
-	(port
-		(pt 0 128)
-		(input)
-		(text "ddr_en" (rect 0 0 49 14)(font "Arial" ))
-		(text "ddr_en" (rect 21 123 70 137)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128))
-	)
-	(port
-		(pt 0 144)
-		(input)
-		(text "mimo_en" (rect 0 0 57 14)(font "Arial" ))
-		(text "mimo_en" (rect 21 139 78 153)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144))
-	)
-	(port
-		(pt 0 160)
-		(input)
-		(text "ch_en[1..0]" (rect 0 0 90 14)(font "Arial" ))
-		(text "ch_en[1..0]" (rect 21 155 111 169)(font "Arial" ))
-		(line (pt 0 160)(pt 16 160)(line_width 3))
-	)
-	(port
-		(pt 0 176)
-		(input)
-		(text "fidm" (rect 0 0 33 14)(font "Arial" ))
-		(text "fidm" (rect 21 171 54 185)(font "Arial" ))
-		(line (pt 0 176)(pt 16 176))
-	)
-	(port
-		(pt 0 192)
-		(input)
-		(text "DIQ[iq_width-1..0]" (rect 0 0 148 14)(font "Arial" ))
-		(text "DIQ[iq_width-1..0]" (rect 21 187 169 201)(font "Arial" ))
-		(line (pt 0 192)(pt 16 192)(line_width 3))
-	)
-	(port
-		(pt 0 208)
-		(input)
-		(text "fsync" (rect 0 0 41 14)(font "Arial" ))
-		(text "fsync" (rect 21 203 62 217)(font "Arial" ))
-		(line (pt 0 208)(pt 16 208))
-	)
-	(port
-		(pt 0 224)
-		(input)
-		(text "pct_fifo_wusedw[pct_buff_wrusedw_w-1..0]" (rect 0 0 330 14)(font "Arial" ))
-		(text "pct_fifo_wusedw[pct_buff_wrusedw_w-1..0]" (rect 21 219 351 233)(font "Arial" ))
-		(line (pt 0 224)(pt 16 224)(line_width 3))
-	)
-	(port
-		(pt 0 240)
-		(input)
-		(text "clr_smpl_nr" (rect 0 0 90 14)(font "Arial" ))
-		(text "clr_smpl_nr" (rect 21 235 111 249)(font "Arial" ))
-		(line (pt 0 240)(pt 16 240))
-	)
-	(port
-		(pt 0 256)
-		(input)
-		(text "ld_smpl_nr" (rect 0 0 82 14)(font "Arial" ))
-		(text "ld_smpl_nr" (rect 21 251 103 265)(font "Arial" ))
-		(line (pt 0 256)(pt 16 256))
-	)
-	(port
-		(pt 0 272)
-		(input)
-		(text "smpl_nr_in[63..0]" (rect 0 0 140 14)(font "Arial" ))
-		(text "smpl_nr_in[63..0]" (rect 21 267 161 281)(font "Arial" ))
-		(line (pt 0 272)(pt 16 272)(line_width 3))
-	)
-	(port
-		(pt 0 288)
-		(input)
-		(text "tx_pct_loss" (rect 0 0 90 14)(font "Arial" ))
-		(text "tx_pct_loss" (rect 21 283 111 297)(font "Arial" ))
-		(line (pt 0 288)(pt 16 288))
-	)
-	(port
-		(pt 0 304)
-		(input)
-		(text "tx_pct_loss_clr" (rect 0 0 123 14)(font "Arial" ))
-		(text "tx_pct_loss_clr" (rect 21 299 144 313)(font "Arial" ))
-		(line (pt 0 304)(pt 16 304))
-	)
-	(port
-		(pt 360 32)
-		(output)
-		(text "diq_h[iq_width..0]" (rect 0 0 148 14)(font "Arial" ))
-		(text "diq_h[iq_width..0]" (rect 214 27 362 41)(font "Arial" ))
-		(line (pt 360 32)(pt 344 32)(line_width 3))
-	)
-	(port
-		(pt 360 48)
-		(output)
-		(text "diq_l[iq_width..0]" (rect 0 0 148 14)(font "Arial" ))
-		(text "diq_l[iq_width..0]" (rect 214 43 362 57)(font "Arial" ))
-		(line (pt 360 48)(pt 344 48)(line_width 3))
-	)
-	(port
-		(pt 360 64)
-		(output)
-		(text "smpl_fifo_wrreq_out" (rect 0 0 156 14)(font "Arial" ))
-		(text "smpl_fifo_wrreq_out" (rect 207 59 363 73)(font "Arial" ))
-		(line (pt 360 64)(pt 344 64))
-	)
-	(port
-		(pt 360 80)
-		(output)
-		(text "pct_fifo_wrreq" (rect 0 0 115 14)(font "Arial" ))
-		(text "pct_fifo_wrreq" (rect 242 75 357 89)(font "Arial" ))
-		(line (pt 360 80)(pt 344 80))
-	)
-	(port
-		(pt 360 96)
-		(output)
-		(text "pct_fifo_wdata[63..0]" (rect 0 0 173 14)(font "Arial" ))
-		(text "pct_fifo_wdata[63..0]" (rect 193 91 366 105)(font "Arial" ))
-		(line (pt 360 96)(pt 344 96)(line_width 3))
-	)
-	(port
-		(pt 360 112)
-		(output)
-		(text "smpl_nr_cnt[63..0]" (rect 0 0 148 14)(font "Arial" ))
-		(text "smpl_nr_cnt[63..0]" (rect 214 107 362 121)(font "Arial" ))
-		(line (pt 360 112)(pt 344 112)(line_width 3))
-	)
-	(parameter
-		"dev_family"
-		"Cyclone IV GX"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"iq_width"
-		"12"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"invert_input_clocks"
-		"ON"
-		""
-		(type "PARAMETER_STRING")	)
-	(parameter
-		"smpl_buff_rdusedw_w"
-		"11"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"pct_buff_wrusedw_w"
-		"12"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 344 320))
-	)
-	(annotation_block (parameter)(rect 2208 1848 2680 1974))
 )
 (symbol
 	(rect 824 4504 1192 4936)
@@ -5158,39 +4358,1132 @@ agreement for further details.
 		(pt 320 32)
 		(output)
 		(text "sdout" (rect 0 0 41 14)(font "Arial" ))
-		(text "sdout" (rect 265 27 299 41)(font "Arial" ))
+		(text "sdout" (rect 265 27 306 41)(font "Arial" ))
 		(line (pt 320 32)(pt 304 32))
 	)
 	(port
 		(pt 320 48)
 		(output)
 		(text "oen" (rect 0 0 24 14)(font "Arial" ))
-		(text "oen" (rect 279 43 299 57)(font "Arial" ))
+		(text "oen" (rect 279 43 303 57)(font "Arial" ))
 		(line (pt 320 48)(pt 304 48))
 	)
 	(port
 		(pt 320 64)
 		(output)
 		(text "stateo[5..0]" (rect 0 0 99 14)(font "Arial" ))
-		(text "stateo[5..0]" (rect 216 59 299 73)(font "Arial" ))
+		(text "stateo[5..0]" (rect 216 59 315 73)(font "Arial" ))
 		(line (pt 320 64)(pt 304 64)(line_width 3))
 	)
 	(port
 		(pt 320 80)
 		(output)
 		(text "TEST_EN[5..0]" (rect 0 0 107 14)(font "Arial" ))
-		(text "TEST_EN[5..0]" (rect 209 75 299 89)(font "Arial" ))
+		(text "TEST_EN[5..0]" (rect 209 75 316 89)(font "Arial" ))
 		(line (pt 320 80)(pt 304 80)(line_width 3))
 	)
 	(port
 		(pt 320 96)
 		(output)
 		(text "TEST_FRC_ERR[5..0]" (rect 0 0 148 14)(font "Arial" ))
-		(text "TEST_FRC_ERR[5..0]" (rect 174 91 299 105)(font "Arial" ))
+		(text "TEST_FRC_ERR[5..0]" (rect 174 91 322 105)(font "Arial" ))
 		(line (pt 320 96)(pt 304 96)(line_width 3))
 	)
 	(drawing
 		(rectangle (rect 16 16 304 416))
+	)
+)
+(symbol
+	(rect 1016 720 1264 1088)
+	(text "rx_pll_top" (rect 5 0 87 14)(font "Arial" ))
+	(text "inst2" (rect 8 352 49 366)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "pll_inclk" (rect 0 0 74 14)(font "Arial" ))
+		(text "pll_inclk" (rect 21 27 95 41)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "pll_areset" (rect 0 0 82 14)(font "Arial" ))
+		(text "pll_areset" (rect 21 43 103 57)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "pll_logic_reset_n" (rect 0 0 140 14)(font "Arial" ))
+		(text "pll_logic_reset_n" (rect 21 59 161 73)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "inv_c0" (rect 0 0 49 14)(font "Arial" ))
+		(text "inv_c0" (rect 21 75 70 89)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "clk_ena[1..0]" (rect 0 0 107 14)(font "Arial" ))
+		(text "clk_ena[1..0]" (rect 21 91 128 105)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "drct_clk_en[1..0]" (rect 0 0 140 14)(font "Arial" ))
+		(text "drct_clk_en[1..0]" (rect 21 107 161 121)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "rcnfg_clk" (rect 0 0 74 14)(font "Arial" ))
+		(text "rcnfg_clk" (rect 21 123 95 137)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "rcnfig_areset" (rect 0 0 107 14)(font "Arial" ))
+		(text "rcnfig_areset" (rect 21 139 128 153)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "rcnfig_en" (rect 0 0 74 14)(font "Arial" ))
+		(text "rcnfig_en" (rect 21 155 95 169)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "rcnfig_data[143..0]" (rect 0 0 156 14)(font "Arial" ))
+		(text "rcnfig_data[143..0]" (rect 21 171 177 185)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 3))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "dynps_mode" (rect 0 0 82 14)(font "Arial" ))
+		(text "dynps_mode" (rect 21 187 103 201)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "dynps_areset_n" (rect 0 0 115 14)(font "Arial" ))
+		(text "dynps_areset_n" (rect 21 203 136 217)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "dynps_en" (rect 0 0 66 14)(font "Arial" ))
+		(text "dynps_en" (rect 21 219 87 233)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224))
+	)
+	(port
+		(pt 0 240)
+		(input)
+		(text "dynps_tst" (rect 0 0 74 14)(font "Arial" ))
+		(text "dynps_tst" (rect 21 235 95 249)(font "Arial" ))
+		(line (pt 0 240)(pt 16 240))
+	)
+	(port
+		(pt 0 256)
+		(input)
+		(text "dynps_dir" (rect 0 0 74 14)(font "Arial" ))
+		(text "dynps_dir" (rect 21 251 95 265)(font "Arial" ))
+		(line (pt 0 256)(pt 16 256))
+	)
+	(port
+		(pt 0 272)
+		(input)
+		(text "dynps_cnt_sel[2..0]" (rect 0 0 156 14)(font "Arial" ))
+		(text "dynps_cnt_sel[2..0]" (rect 21 267 177 281)(font "Arial" ))
+		(line (pt 0 272)(pt 16 272)(line_width 3))
+	)
+	(port
+		(pt 0 288)
+		(input)
+		(text "dynps_phase[9..0]" (rect 0 0 140 14)(font "Arial" ))
+		(text "dynps_phase[9..0]" (rect 21 283 161 297)(font "Arial" ))
+		(line (pt 0 288)(pt 16 288)(line_width 3))
+	)
+	(port
+		(pt 0 304)
+		(input)
+		(text "dynps_step_size[9..0]" (rect 0 0 173 14)(font "Arial" ))
+		(text "dynps_step_size[9..0]" (rect 21 299 194 313)(font "Arial" ))
+		(line (pt 0 304)(pt 16 304)(line_width 3))
+	)
+	(port
+		(pt 0 320)
+		(input)
+		(text "smpl_cmp_done" (rect 0 0 107 14)(font "Arial" ))
+		(text "smpl_cmp_done" (rect 21 315 128 329)(font "Arial" ))
+		(line (pt 0 320)(pt 16 320))
+	)
+	(port
+		(pt 0 336)
+		(input)
+		(text "smpl_cmp_error" (rect 0 0 115 14)(font "Arial" ))
+		(text "smpl_cmp_error" (rect 21 331 136 345)(font "Arial" ))
+		(line (pt 0 336)(pt 16 336))
+	)
+	(port
+		(pt 248 32)
+		(output)
+		(text "c0" (rect 0 0 16 14)(font "Arial" ))
+		(text "c0" (rect 214 27 227 41)(font "Arial" ))
+		(line (pt 248 32)(pt 232 32))
+	)
+	(port
+		(pt 248 48)
+		(output)
+		(text "c1" (rect 0 0 16 14)(font "Arial" ))
+		(text "c1" (rect 214 43 227 57)(font "Arial" ))
+		(line (pt 248 48)(pt 232 48))
+	)
+	(port
+		(pt 248 64)
+		(output)
+		(text "pll_locked" (rect 0 0 82 14)(font "Arial" ))
+		(text "pll_locked" (rect 158 59 227 73)(font "Arial" ))
+		(line (pt 248 64)(pt 232 64))
+	)
+	(port
+		(pt 248 80)
+		(output)
+		(text "rcnfig_status" (rect 0 0 107 14)(font "Arial" ))
+		(text "rcnfig_status" (rect 137 75 227 89)(font "Arial" ))
+		(line (pt 248 80)(pt 232 80))
+	)
+	(port
+		(pt 248 96)
+		(output)
+		(text "dynps_busy" (rect 0 0 82 14)(font "Arial" ))
+		(text "dynps_busy" (rect 158 91 227 105)(font "Arial" ))
+		(line (pt 248 96)(pt 232 96))
+	)
+	(port
+		(pt 248 112)
+		(output)
+		(text "dynps_done" (rect 0 0 82 14)(font "Arial" ))
+		(text "dynps_done" (rect 158 107 227 121)(font "Arial" ))
+		(line (pt 248 112)(pt 232 112))
+	)
+	(port
+		(pt 248 128)
+		(output)
+		(text "dynps_status" (rect 0 0 99 14)(font "Arial" ))
+		(text "dynps_status" (rect 144 123 227 137)(font "Arial" ))
+		(line (pt 248 128)(pt 232 128))
+	)
+	(port
+		(pt 248 144)
+		(output)
+		(text "smpl_cmp_en" (rect 0 0 90 14)(font "Arial" ))
+		(text "smpl_cmp_en" (rect 151 139 227 153)(font "Arial" ))
+		(line (pt 248 144)(pt 232 144))
+	)
+	(port
+		(pt 248 160)
+		(output)
+		(text "busy" (rect 0 0 33 14)(font "Arial" ))
+		(text "busy" (rect 200 155 227 169)(font "Arial" ))
+		(line (pt 248 160)(pt 232 160))
+	)
+	(parameter
+		"bandwidth_type"
+		"AUTO"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"clk0_divide_by"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk0_duty_cycle"
+		"50"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk0_multiply_by"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk0_phase_shift"
+		"0"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"clk1_divide_by"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk1_duty_cycle"
+		"50"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk1_multiply_by"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk1_phase_shift"
+		"0"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"compensate_clock"
+		"CLK1"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"inclk0_input_frequency"
+		"6250"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"intended_device_family"
+		"Cyclone IV GX"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"operation_mode"
+		"SOURCE_SYNCHRONOUS"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"scan_chain_mif_file"
+		"ip/pll_rx/pll_rx.mif"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"drct_c0_ndly"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"drct_c1_ndly"
+		"2"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 232 352))
+	)
+	(annotation_block (parameter)(rect 1248 360 1820 717))
+)
+(symbol
+	(rect 856 912 904 944)
+	(text "NOT" (rect 1 0 25 11)(font "Arial" (font_size 6)))
+	(text "inst64" (rect 3 21 52 35)(font "Arial" ))
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN" (rect 2 7 13 21)(font "Courier New" (bold))(invisible))
+		(text "IN" (rect 2 7 13 21)(font "Courier New" (bold))(invisible))
+		(line (pt 0 16)(pt 13 16))
+	)
+	(port
+		(pt 48 16)
+		(output)
+		(text "OUT" (rect 32 7 49 21)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 32 7 49 21)(font "Courier New" (bold))(invisible))
+		(line (pt 39 16)(pt 48 16))
+	)
+	(drawing
+		(line (pt 13 25)(pt 13 7))
+		(line (pt 13 7)(pt 31 16))
+		(line (pt 13 25)(pt 31 16))
+		(circle (rect 31 12 39 20))
+	)
+)
+(symbol
+	(rect 1048 1304 1296 1672)
+	(text "tx_pll_top" (rect 5 0 87 14)(font "Arial" ))
+	(text "inst14" (rect 8 352 57 366)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "pll_inclk" (rect 0 0 74 14)(font "Arial" ))
+		(text "pll_inclk" (rect 21 27 95 41)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "pll_areset" (rect 0 0 82 14)(font "Arial" ))
+		(text "pll_areset" (rect 21 43 103 57)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "pll_logic_reset_n" (rect 0 0 140 14)(font "Arial" ))
+		(text "pll_logic_reset_n" (rect 21 59 161 73)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "inv_c0" (rect 0 0 49 14)(font "Arial" ))
+		(text "inv_c0" (rect 21 75 70 89)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "clk_ena[1..0]" (rect 0 0 107 14)(font "Arial" ))
+		(text "clk_ena[1..0]" (rect 21 91 128 105)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "drct_clk_en[1..0]" (rect 0 0 140 14)(font "Arial" ))
+		(text "drct_clk_en[1..0]" (rect 21 107 161 121)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "rcnfg_clk" (rect 0 0 74 14)(font "Arial" ))
+		(text "rcnfg_clk" (rect 21 123 95 137)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "rcnfig_areset" (rect 0 0 107 14)(font "Arial" ))
+		(text "rcnfig_areset" (rect 21 139 128 153)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "rcnfig_en" (rect 0 0 74 14)(font "Arial" ))
+		(text "rcnfig_en" (rect 21 155 95 169)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "rcnfig_data[143..0]" (rect 0 0 156 14)(font "Arial" ))
+		(text "rcnfig_data[143..0]" (rect 21 171 177 185)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 3))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "dynps_areset_n" (rect 0 0 115 14)(font "Arial" ))
+		(text "dynps_areset_n" (rect 21 187 136 201)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "dynps_mode" (rect 0 0 82 14)(font "Arial" ))
+		(text "dynps_mode" (rect 21 203 103 217)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "dynps_en" (rect 0 0 66 14)(font "Arial" ))
+		(text "dynps_en" (rect 21 219 87 233)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224))
+	)
+	(port
+		(pt 0 240)
+		(input)
+		(text "dynps_tst" (rect 0 0 74 14)(font "Arial" ))
+		(text "dynps_tst" (rect 21 235 95 249)(font "Arial" ))
+		(line (pt 0 240)(pt 16 240))
+	)
+	(port
+		(pt 0 256)
+		(input)
+		(text "dynps_dir" (rect 0 0 74 14)(font "Arial" ))
+		(text "dynps_dir" (rect 21 251 95 265)(font "Arial" ))
+		(line (pt 0 256)(pt 16 256))
+	)
+	(port
+		(pt 0 272)
+		(input)
+		(text "dynps_cnt_sel[2..0]" (rect 0 0 156 14)(font "Arial" ))
+		(text "dynps_cnt_sel[2..0]" (rect 21 267 177 281)(font "Arial" ))
+		(line (pt 0 272)(pt 16 272)(line_width 3))
+	)
+	(port
+		(pt 0 288)
+		(input)
+		(text "dynps_phase[9..0]" (rect 0 0 140 14)(font "Arial" ))
+		(text "dynps_phase[9..0]" (rect 21 283 161 297)(font "Arial" ))
+		(line (pt 0 288)(pt 16 288)(line_width 3))
+	)
+	(port
+		(pt 0 304)
+		(input)
+		(text "dynps_step_size[9..0]" (rect 0 0 173 14)(font "Arial" ))
+		(text "dynps_step_size[9..0]" (rect 21 299 194 313)(font "Arial" ))
+		(line (pt 0 304)(pt 16 304)(line_width 3))
+	)
+	(port
+		(pt 0 320)
+		(input)
+		(text "smpl_cmp_done" (rect 0 0 107 14)(font "Arial" ))
+		(text "smpl_cmp_done" (rect 21 315 128 329)(font "Arial" ))
+		(line (pt 0 320)(pt 16 320))
+	)
+	(port
+		(pt 0 336)
+		(input)
+		(text "smpl_cmp_error" (rect 0 0 115 14)(font "Arial" ))
+		(text "smpl_cmp_error" (rect 21 331 136 345)(font "Arial" ))
+		(line (pt 0 336)(pt 16 336))
+	)
+	(port
+		(pt 248 32)
+		(output)
+		(text "c0" (rect 0 0 16 14)(font "Arial" ))
+		(text "c0" (rect 214 27 227 41)(font "Arial" ))
+		(line (pt 248 32)(pt 232 32))
+	)
+	(port
+		(pt 248 48)
+		(output)
+		(text "c1" (rect 0 0 16 14)(font "Arial" ))
+		(text "c1" (rect 214 43 227 57)(font "Arial" ))
+		(line (pt 248 48)(pt 232 48))
+	)
+	(port
+		(pt 248 64)
+		(output)
+		(text "pll_locked" (rect 0 0 82 14)(font "Arial" ))
+		(text "pll_locked" (rect 158 59 227 73)(font "Arial" ))
+		(line (pt 248 64)(pt 232 64))
+	)
+	(port
+		(pt 248 80)
+		(output)
+		(text "rcnfig_status" (rect 0 0 107 14)(font "Arial" ))
+		(text "rcnfig_status" (rect 137 75 227 89)(font "Arial" ))
+		(line (pt 248 80)(pt 232 80))
+	)
+	(port
+		(pt 248 96)
+		(output)
+		(text "dynps_busy" (rect 0 0 82 14)(font "Arial" ))
+		(text "dynps_busy" (rect 158 91 227 105)(font "Arial" ))
+		(line (pt 248 96)(pt 232 96))
+	)
+	(port
+		(pt 248 112)
+		(output)
+		(text "dynps_done" (rect 0 0 82 14)(font "Arial" ))
+		(text "dynps_done" (rect 158 107 227 121)(font "Arial" ))
+		(line (pt 248 112)(pt 232 112))
+	)
+	(port
+		(pt 248 128)
+		(output)
+		(text "dynps_status" (rect 0 0 99 14)(font "Arial" ))
+		(text "dynps_status" (rect 144 123 227 137)(font "Arial" ))
+		(line (pt 248 128)(pt 232 128))
+	)
+	(port
+		(pt 248 144)
+		(output)
+		(text "smpl_cmp_en" (rect 0 0 90 14)(font "Arial" ))
+		(text "smpl_cmp_en" (rect 151 139 227 153)(font "Arial" ))
+		(line (pt 248 144)(pt 232 144))
+	)
+	(port
+		(pt 248 160)
+		(output)
+		(text "busy" (rect 0 0 33 14)(font "Arial" ))
+		(text "busy" (rect 200 155 227 169)(font "Arial" ))
+		(line (pt 248 160)(pt 232 160))
+	)
+	(parameter
+		"bandwidth_type"
+		"AUTO"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"clk0_divide_by"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk0_duty_cycle"
+		"50"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk0_multiply_by"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk0_phase_shift"
+		"0"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"clk1_divide_by"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk1_duty_cycle"
+		"50"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk1_multiply_by"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"clk1_phase_shift"
+		"0"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"compensate_clock"
+		"CLK1"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"inclk0_input_frequency"
+		"6250"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"intended_device_family"
+		"Cyclone IV GX"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"operation_mode"
+		"SOURCE_SYNCHRONOUS"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"scan_chain_mif_file"
+		"ip/pll_tx/pll_tx.mif"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"drct_c0_ndly"
+		"1"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"drct_c1_ndly"
+		"2"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 232 352))
+	)
+	(annotation_block (parameter)(rect 1280 944 1852 1301))
+)
+(symbol
+	(rect 888 1480 936 1512)
+	(text "NOT" (rect 1 0 25 11)(font "Arial" (font_size 6)))
+	(text "inst66" (rect 3 21 52 35)(font "Arial" ))
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN" (rect 2 7 13 21)(font "Courier New" (bold))(invisible))
+		(text "IN" (rect 2 7 13 21)(font "Courier New" (bold))(invisible))
+		(line (pt 0 16)(pt 13 16))
+	)
+	(port
+		(pt 48 16)
+		(output)
+		(text "OUT" (rect 32 7 49 21)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 32 7 49 21)(font "Courier New" (bold))(invisible))
+		(line (pt 39 16)(pt 48 16))
+	)
+	(drawing
+		(line (pt 13 25)(pt 13 7))
+		(line (pt 13 7)(pt 31 16))
+		(line (pt 13 25)(pt 31 16))
+		(circle (rect 31 12 39 20))
+	)
+)
+(symbol
+	(rect 2272 744 2576 1048)
+	(text "pllcfg_top" (rect 5 0 87 14)(font "Arial" ))
+	(text "inst19" (rect 8 288 57 302)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "sdinA" (rect 0 0 41 14)(font "Arial" ))
+		(text "sdinA" (rect 21 27 62 41)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "sclkA" (rect 0 0 41 14)(font "Arial" ))
+		(text "sclkA" (rect 21 43 62 57)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "senA" (rect 0 0 33 14)(font "Arial" ))
+		(text "senA" (rect 21 59 54 73)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "sdinB" (rect 0 0 41 14)(font "Arial" ))
+		(text "sdinB" (rect 21 75 62 89)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "sclkB" (rect 0 0 41 14)(font "Arial" ))
+		(text "sclkB" (rect 21 91 62 105)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "senB" (rect 0 0 33 14)(font "Arial" ))
+		(text "senB" (rect 21 107 54 121)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "lreset" (rect 0 0 49 14)(font "Arial" ))
+		(text "lreset" (rect 21 123 70 137)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "mreset" (rect 0 0 49 14)(font "Arial" ))
+		(text "mreset" (rect 21 139 70 153)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "pllcfg_busy[n_pll-1..0]" (rect 0 0 189 14)(font "Arial" ))
+		(text "pllcfg_busy[n_pll-1..0]" (rect 21 155 210 169)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160)(line_width 3))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "pllcfg_done[n_pll-1..0]" (rect 0 0 189 14)(font "Arial" ))
+		(text "pllcfg_done[n_pll-1..0]" (rect 21 171 210 185)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 3))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "pll_lock[n_pll-1..0]" (rect 0 0 165 14)(font "Arial" ))
+		(text "pll_lock[n_pll-1..0]" (rect 21 187 186 201)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192)(line_width 3))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "auto_phcfg_done[n_pll-1..0]" (rect 0 0 223 14)(font "Arial" ))
+		(text "auto_phcfg_done[n_pll-1..0]" (rect 21 203 244 217)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208)(line_width 3))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "auto_phcfg_err[n_pll-1..0]" (rect 0 0 214 14)(font "Arial" ))
+		(text "auto_phcfg_err[n_pll-1..0]" (rect 21 219 235 233)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224)(line_width 3))
+	)
+	(port
+		(pt 304 32)
+		(output)
+		(text "sdoutA" (rect 0 0 49 14)(font "Arial" ))
+		(text "sdoutA" (rect 242 27 283 41)(font "Arial" ))
+		(line (pt 304 32)(pt 288 32))
+	)
+	(port
+		(pt 304 48)
+		(output)
+		(text "oenA" (rect 0 0 33 14)(font "Arial" ))
+		(text "oenA" (rect 256 43 283 57)(font "Arial" ))
+		(line (pt 304 48)(pt 288 48))
+	)
+	(port
+		(pt 304 64)
+		(output)
+		(text "sdoutB" (rect 0 0 49 14)(font "Arial" ))
+		(text "sdoutB" (rect 242 59 283 73)(font "Arial" ))
+		(line (pt 304 64)(pt 288 64))
+	)
+	(port
+		(pt 304 80)
+		(output)
+		(text "oenB" (rect 0 0 33 14)(font "Arial" ))
+		(text "oenB" (rect 256 75 283 89)(font "Arial" ))
+		(line (pt 304 80)(pt 288 80))
+	)
+	(port
+		(pt 304 96)
+		(output)
+		(text "phcfg_mode" (rect 0 0 82 14)(font "Arial" ))
+		(text "phcfg_mode" (rect 214 91 283 105)(font "Arial" ))
+		(line (pt 304 96)(pt 288 96))
+	)
+	(port
+		(pt 304 112)
+		(output)
+		(text "phcfg_tst" (rect 0 0 74 14)(font "Arial" ))
+		(text "phcfg_tst" (rect 221 107 283 121)(font "Arial" ))
+		(line (pt 304 112)(pt 288 112))
+	)
+	(port
+		(pt 304 128)
+		(output)
+		(text "phcfg_start[n_pll-1..0]" (rect 0 0 189 14)(font "Arial" ))
+		(text "phcfg_start[n_pll-1..0]" (rect 123 123 283 137)(font "Arial" ))
+		(line (pt 304 128)(pt 288 128)(line_width 3))
+	)
+	(port
+		(pt 304 144)
+		(output)
+		(text "pllcfg_start[n_pll-1..0]" (rect 0 0 198 14)(font "Arial" ))
+		(text "pllcfg_start[n_pll-1..0]" (rect 116 139 283 153)(font "Arial" ))
+		(line (pt 304 144)(pt 288 144)(line_width 3))
+	)
+	(port
+		(pt 304 160)
+		(output)
+		(text "pllrst_start[n_pll-1..0]" (rect 0 0 198 14)(font "Arial" ))
+		(text "pllrst_start[n_pll-1..0]" (rect 116 155 283 169)(font "Arial" ))
+		(line (pt 304 160)(pt 288 160)(line_width 3))
+	)
+	(port
+		(pt 304 176)
+		(output)
+		(text "phcfg_updn" (rect 0 0 82 14)(font "Arial" ))
+		(text "phcfg_updn" (rect 214 171 283 185)(font "Arial" ))
+		(line (pt 304 176)(pt 288 176))
+	)
+	(port
+		(pt 304 192)
+		(output)
+		(text "cnt_ind[4..0]" (rect 0 0 107 14)(font "Arial" ))
+		(text "cnt_ind[4..0]" (rect 193 187 283 201)(font "Arial" ))
+		(line (pt 304 192)(pt 288 192)(line_width 3))
+	)
+	(port
+		(pt 304 208)
+		(output)
+		(text "cnt_phase[15..0]" (rect 0 0 132 14)(font "Arial" ))
+		(text "cnt_phase[15..0]" (rect 172 203 283 217)(font "Arial" ))
+		(line (pt 304 208)(pt 288 208)(line_width 3))
+	)
+	(port
+		(pt 304 224)
+		(output)
+		(text "pllcfg_data[143..0]" (rect 0 0 156 14)(font "Arial" ))
+		(text "pllcfg_data[143..0]" (rect 151 219 283 233)(font "Arial" ))
+		(line (pt 304 224)(pt 288 224)(line_width 3))
+	)
+	(port
+		(pt 304 240)
+		(output)
+		(text "auto_phcfg_smpls[15..0]" (rect 0 0 189 14)(font "Arial" ))
+		(text "auto_phcfg_smpls[15..0]" (rect 123 235 283 249)(font "Arial" ))
+		(line (pt 304 240)(pt 288 240)(line_width 3))
+	)
+	(port
+		(pt 304 256)
+		(output)
+		(text "auto_phcfg_step[15..0]" (rect 0 0 181 14)(font "Arial" ))
+		(text "auto_phcfg_step[15..0]" (rect 130 251 283 265)(font "Arial" ))
+		(line (pt 304 256)(pt 288 256)(line_width 3))
+	)
+	(parameter
+		"n_pll"
+		"2"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 288 288))
+	)
+	(annotation_block (parameter)(rect 2272 656 2568 704))
+)
+(symbol
+	(rect 2200 2008 2560 2376)
+	(text "rx_path_top" (rect 5 0 95 14)(font "Arial" ))
+	(text "inst7" (rect 8 352 49 366)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 24 14)(font "Arial" ))
+		(text "clk" (rect 21 27 45 41)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "reset_n" (rect 0 0 57 14)(font "Arial" ))
+		(text "reset_n" (rect 21 43 78 57)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "test_ptrn_en" (rect 0 0 99 14)(font "Arial" ))
+		(text "test_ptrn_en" (rect 21 59 120 73)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "sample_width[1..0]" (rect 0 0 148 14)(font "Arial" ))
+		(text "sample_width[1..0]" (rect 21 75 169 89)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "mode" (rect 0 0 33 14)(font "Arial" ))
+		(text "mode" (rect 21 91 54 105)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "trxiqpulse" (rect 0 0 82 14)(font "Arial" ))
+		(text "trxiqpulse" (rect 21 107 103 121)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "ddr_en" (rect 0 0 49 14)(font "Arial" ))
+		(text "ddr_en" (rect 21 123 70 137)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "mimo_en" (rect 0 0 57 14)(font "Arial" ))
+		(text "mimo_en" (rect 21 139 78 153)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "ch_en[1..0]" (rect 0 0 90 14)(font "Arial" ))
+		(text "ch_en[1..0]" (rect 21 155 111 169)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160)(line_width 3))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "fidm" (rect 0 0 33 14)(font "Arial" ))
+		(text "fidm" (rect 21 171 54 185)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "DIQ[iq_width-1..0]" (rect 0 0 148 14)(font "Arial" ))
+		(text "DIQ[iq_width-1..0]" (rect 21 187 169 201)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192)(line_width 3))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "fsync" (rect 0 0 41 14)(font "Arial" ))
+		(text "fsync" (rect 21 203 62 217)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "pct_fifo_wusedw[pct_buff_wrusedw_w-1..0]" (rect 0 0 330 14)(font "Arial" ))
+		(text "pct_fifo_wusedw[pct_buff_wrusedw_w-1..0]" (rect 21 219 351 233)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224)(line_width 3))
+	)
+	(port
+		(pt 0 240)
+		(input)
+		(text "clr_smpl_nr" (rect 0 0 90 14)(font "Arial" ))
+		(text "clr_smpl_nr" (rect 21 235 111 249)(font "Arial" ))
+		(line (pt 0 240)(pt 16 240))
+	)
+	(port
+		(pt 0 256)
+		(input)
+		(text "ld_smpl_nr" (rect 0 0 82 14)(font "Arial" ))
+		(text "ld_smpl_nr" (rect 21 251 103 265)(font "Arial" ))
+		(line (pt 0 256)(pt 16 256))
+	)
+	(port
+		(pt 0 272)
+		(input)
+		(text "smpl_nr_in[63..0]" (rect 0 0 140 14)(font "Arial" ))
+		(text "smpl_nr_in[63..0]" (rect 21 267 161 281)(font "Arial" ))
+		(line (pt 0 272)(pt 16 272)(line_width 3))
+	)
+	(port
+		(pt 0 288)
+		(input)
+		(text "tx_pct_loss" (rect 0 0 90 14)(font "Arial" ))
+		(text "tx_pct_loss" (rect 21 283 111 297)(font "Arial" ))
+		(line (pt 0 288)(pt 16 288))
+	)
+	(port
+		(pt 0 304)
+		(input)
+		(text "tx_pct_loss_clr" (rect 0 0 123 14)(font "Arial" ))
+		(text "tx_pct_loss_clr" (rect 21 299 144 313)(font "Arial" ))
+		(line (pt 0 304)(pt 16 304))
+	)
+	(port
+		(pt 0 320)
+		(input)
+		(text "smpl_cmp_start" (rect 0 0 115 14)(font "Arial" ))
+		(text "smpl_cmp_start" (rect 21 315 136 329)(font "Arial" ))
+		(line (pt 0 320)(pt 16 320))
+	)
+	(port
+		(pt 0 336)
+		(input)
+		(text "smpl_cmp_length[15..0]" (rect 0 0 181 14)(font "Arial" ))
+		(text "smpl_cmp_length[15..0]" (rect 21 331 202 345)(font "Arial" ))
+		(line (pt 0 336)(pt 16 336)(line_width 3))
+	)
+	(port
+		(pt 360 32)
+		(output)
+		(text "smpl_fifo_wrreq_out" (rect 0 0 156 14)(font "Arial" ))
+		(text "smpl_fifo_wrreq_out" (rect 207 27 339 41)(font "Arial" ))
+		(line (pt 360 32)(pt 344 32))
+	)
+	(port
+		(pt 360 48)
+		(output)
+		(text "pct_fifo_wrreq" (rect 0 0 115 14)(font "Arial" ))
+		(text "pct_fifo_wrreq" (rect 242 43 339 57)(font "Arial" ))
+		(line (pt 360 48)(pt 344 48))
+	)
+	(port
+		(pt 360 64)
+		(output)
+		(text "pct_fifo_wdata[63..0]" (rect 0 0 173 14)(font "Arial" ))
+		(text "pct_fifo_wdata[63..0]" (rect 193 59 339 73)(font "Arial" ))
+		(line (pt 360 64)(pt 344 64)(line_width 3))
+	)
+	(port
+		(pt 360 80)
+		(output)
+		(text "smpl_nr_cnt[63..0]" (rect 0 0 148 14)(font "Arial" ))
+		(text "smpl_nr_cnt[63..0]" (rect 214 75 339 89)(font "Arial" ))
+		(line (pt 360 80)(pt 344 80)(line_width 3))
+	)
+	(port
+		(pt 360 96)
+		(output)
+		(text "smpl_cmp_done" (rect 0 0 107 14)(font "Arial" ))
+		(text "smpl_cmp_done" (rect 249 91 339 105)(font "Arial" ))
+		(line (pt 360 96)(pt 344 96))
+	)
+	(port
+		(pt 360 112)
+		(output)
+		(text "smpl_cmp_err" (rect 0 0 99 14)(font "Arial" ))
+		(text "smpl_cmp_err" (rect 256 107 339 121)(font "Arial" ))
+		(line (pt 360 112)(pt 344 112))
+	)
+	(parameter
+		"dev_family"
+		"Cyclone IV GX"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"iq_width"
+		"12"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"invert_input_clocks"
+		"ON"
+		""
+		(type "PARAMETER_STRING")	)
+	(parameter
+		"smpl_buff_rdusedw_w"
+		"11"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"pct_buff_wrusedw_w"
+		"12"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 344 352))
+	)
+	(annotation_block (parameter)(rect 2208 1848 2680 1974))
+)
+(symbol
+	(rect 1888 2304 1952 2352)
+	(text "OR2" (rect 1 0 25 11)(font "Arial" (font_size 6)))
+	(text "inst49" (rect 3 37 52 51)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "IN2" (rect 2 23 19 37)(font "Courier New" (bold))(invisible))
+		(text "IN2" (rect 2 23 19 37)(font "Courier New" (bold))(invisible))
+		(line (pt 0 32)(pt 15 32))
+	)
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN1" (rect 2 7 19 21)(font "Courier New" (bold))(invisible))
+		(text "IN1" (rect 2 7 19 21)(font "Courier New" (bold))(invisible))
+		(line (pt 0 16)(pt 15 16))
+	)
+	(port
+		(pt 64 24)
+		(output)
+		(text "OUT" (rect 48 15 65 29)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 48 15 65 29)(font "Courier New" (bold))(invisible))
+		(line (pt 48 24)(pt 64 24))
+	)
+	(drawing
+		(line (pt 14 36)(pt 25 36))
+		(line (pt 14 13)(pt 25 13))
+		(arc (pt 7 29)(pt 7 19)(rect -14 8 19 41))
+		(arc (pt 49 24)(pt 25 13)(rect -6 13 57 76))
+		(arc (pt 25 35)(pt 49 24)(rect -6 -27 57 36))
 	)
 )
 (connector
@@ -5397,47 +5690,6 @@ agreement for further details.
 	(pt 1456 3312)
 )
 (connector
-	(text "phcfg_start[1..0]" (rect 2564 824 2704 838)(font "Arial" ))
-	(pt 2544 840)
-	(pt 2664 840)
-	(bus)
-)
-(connector
-	(text "pllcfg_start[1..0]" (rect 2561 840 2709 854)(font "Arial" ))
-	(pt 2544 856)
-	(pt 2664 856)
-	(bus)
-)
-(connector
-	(text "pllrst_start[1..0]" (rect 2560 856 2708 870)(font "Arial" ))
-	(pt 2544 872)
-	(pt 2664 872)
-	(bus)
-)
-(connector
-	(text "phcfg_updn" (rect 2558 872 2640 886)(font "Arial" ))
-	(pt 2544 888)
-	(pt 2664 888)
-)
-(connector
-	(text "cnt_ind[4..0]" (rect 2558 888 2665 902)(font "Arial" ))
-	(pt 2544 904)
-	(pt 2664 904)
-	(bus)
-)
-(connector
-	(text "cnt_phase[15..0]" (rect 2558 904 2690 918)(font "Arial" ))
-	(pt 2544 920)
-	(pt 2664 920)
-	(bus)
-)
-(connector
-	(text "pllcfg_data[143..0]" (rect 2559 920 2715 934)(font "Arial" ))
-	(pt 2544 936)
-	(pt 2664 936)
-	(bus)
-)
-(connector
 	(text "rxpllcfg_busy" (rect 2307 1056 2414 1070)(font "Arial" ))
 	(pt 2408 1072)
 	(pt 2264 1072)
@@ -5474,11 +5726,6 @@ agreement for further details.
 	(pt 2096 904)
 	(pt 2272 904)
 	(bus)
-)
-(connector
-	(text "pllcfg_sdoutA" (rect 2563 760 2670 774)(font "Arial" ))
-	(pt 2544 776)
-	(pt 2664 776)
 )
 (connector
 	(text "spi_enables[1]" (rect 2160 792 2275 806)(font "Arial" ))
@@ -6323,94 +6570,9 @@ agreement for further details.
 	(pt 1016 752)
 )
 (connector
-	(text "MCLK2RX_pll" (rect 1264 736 1354 750)(font "Arial" ))
-	(pt 1248 752)
-	(pt 1368 752)
-)
-(connector
-	(text "MCLK2RX_pll_d" (rect 1260 752 1367 766)(font "Arial" ))
-	(pt 1368 768)
-	(pt 1248 768)
-)
-(connector
-	(text "rx_reconfig_status" (rect 1266 784 1414 798)(font "Arial" ))
-	(pt 1248 800)
-	(pt 1368 800)
-)
-(connector
-	(text "rxpllcfg_busy" (rect 1283 800 1390 814)(font "Arial" ))
-	(pt 1248 816)
-	(pt 1368 816)
-)
-(connector
-	(text "rxpll_locked" (rect 1264 768 1363 782)(font "Arial" ))
-	(pt 1368 784)
-	(pt 1248 784)
-)
-(connector
 	(text "pllrst_start[1]" (rect 917 752 1040 766)(font "Arial" ))
 	(pt 904 768)
 	(pt 1016 768)
-)
-(connector
-	(text "L" (rect 939 768 947 782)(font "Arial" ))
-	(pt 1016 784)
-	(pt 904 784)
-)
-(connector
-	(text "H,FCLK_ENA[1]" (rect 916 784 1023 798)(font "Arial" ))
-	(pt 1016 800)
-	(pt 904 800)
-	(bus)
-)
-(connector
-	(text "drc_clk_en[1],drc_clk_en[1]" (rect 902 800 1125 814)(font "Arial" ))
-	(pt 1016 816)
-	(pt 904 816)
-	(bus)
-)
-(connector
-	(text "clk_fpga2" (rect 922 816 996 830)(font "Arial" ))
-	(pt 904 832)
-	(pt 1016 832)
-)
-(connector
-	(text "pllrst_start[1]" (rect 917 832 1040 846)(font "Arial" ))
-	(pt 904 848)
-	(pt 1016 848)
-)
-(connector
-	(text "pllcfg_start[1]" (rect 904 848 1027 862)(font "Arial" ))
-	(pt 904 864)
-	(pt 1016 864)
-)
-(connector
-	(text "pllcfg_data[143..0]" (rect 912 864 1068 878)(font "Arial" ))
-	(pt 904 880)
-	(pt 1016 880)
-	(bus)
-)
-(connector
-	(text "phcfg_start[1]" (rect 915 880 1030 894)(font "Arial" ))
-	(pt 904 896)
-	(pt 1016 896)
-)
-(connector
-	(text "phcfg_updn" (rect 913 896 995 910)(font "Arial" ))
-	(pt 904 912)
-	(pt 1016 912)
-)
-(connector
-	(text "cnt_ind[2..0]" (rect 915 912 1022 926)(font "Arial" ))
-	(pt 904 928)
-	(pt 1016 928)
-	(bus)
-)
-(connector
-	(text "cnt_phase[9..0]" (rect 914 928 1037 942)(font "Arial" ))
-	(pt 904 944)
-	(pt 1016 944)
-	(bus)
 )
 (connector
 	(text "MCLK2RX_pll_d" (rect 2081 2024 2188 2038)(font "Arial" ))
@@ -6499,79 +6661,6 @@ agreement for further details.
 	(text "rx_ptrn_en" (rect 2068 2056 2150 2070)(font "Arial" ))
 	(pt 2064 2072)
 	(pt 2200 2072)
-)
-(connector
-	(text "lmlclk" (rect 1296 1384 1345 1398)(font "Arial" ))
-	(pt 1280 1400)
-	(pt 1424 1400)
-)
-(connector
-	(text "mclk1tx_locked" (rect 1292 1400 1407 1414)(font "Arial" ))
-	(pt 1424 1416)
-	(pt 1280 1416)
-)
-(connector
-	(text "tx_reconfig_status" (rect 1297 1416 1445 1430)(font "Arial" ))
-	(pt 1424 1432)
-	(pt 1280 1432)
-)
-(connector
-	(text "txpllcfg_busy" (rect 1323 1432 1430 1446)(font "Arial" ))
-	(pt 1424 1448)
-	(pt 1280 1448)
-)
-(connector
-	(text "clk_fpga2" (rect 946 1448 1020 1462)(font "Arial" ))
-	(pt 936 1464)
-	(pt 1048 1464)
-)
-(connector
-	(text "pllrst_start[0]" (rect 949 1464 1072 1478)(font "Arial" ))
-	(pt 936 1480)
-	(pt 1048 1480)
-)
-(connector
-	(text "pllcfg_data[143..0]" (rect 944 1496 1100 1510)(font "Arial" ))
-	(pt 936 1512)
-	(pt 1048 1512)
-	(bus)
-)
-(connector
-	(text "phcfg_updn" (rect 945 1528 1027 1542)(font "Arial" ))
-	(pt 936 1544)
-	(pt 1048 1544)
-)
-(connector
-	(text "cnt_ind[2..0]" (rect 945 1544 1052 1558)(font "Arial" ))
-	(pt 936 1560)
-	(pt 1048 1560)
-	(bus)
-)
-(connector
-	(text "cnt_phase[9..0]" (rect 946 1560 1069 1574)(font "Arial" ))
-	(pt 936 1576)
-	(pt 1048 1576)
-	(bus)
-)
-(connector
-	(text "drc_clk_en[0],drc_clk_en[0]" (rect 928 1432 1151 1446)(font "Arial" ))
-	(pt 936 1448)
-	(pt 1048 1448)
-	(bus)
-)
-(connector
-	(text "MCLK1TX" (rect 951 1368 1008 1382)(font "Arial" ))
-	(pt 936 1384)
-	(pt 1048 1384)
-)
-(connector
-	(pt 1280 1384)
-	(pt 1424 1384)
-)
-(connector
-	(text "pllrst_start[0]" (rect 949 1384 1072 1398)(font "Arial" ))
-	(pt 936 1400)
-	(pt 1048 1400)
 )
 (connector
 	(text "lte_ch_en[1..0]" (rect 2078 2152 2201 2166)(font "Arial" ))
@@ -6712,12 +6801,6 @@ agreement for further details.
 	(pt 2272 872)
 )
 (connector
-	(text "H,FCLK_ENA[0]" (rect 958 1416 1065 1430)(font "Arial" ))
-	(pt 936 1432)
-	(pt 1048 1432)
-	(bus)
-)
-(connector
 	(text "pcie_read_32_open" (rect 1753 3456 1893 3470)(font "Arial" ))
 	(pt 1736 3472)
 	(pt 1888 3472)
@@ -6726,21 +6809,6 @@ agreement for further details.
 	(text "pcie_read_32_open" (rect -70 1312 70 1326)(font "Arial" ))
 	(pt -144 1328)
 	(pt 16 1328)
-)
-(connector
-	(text "phcfg_start[0]" (rect 947 1512 1062 1526)(font "Arial" ))
-	(pt 936 1528)
-	(pt 1048 1528)
-)
-(connector
-	(text "pllcfg_start[0]" (rect 936 1480 1059 1494)(font "Arial" ))
-	(pt 936 1496)
-	(pt 1048 1496)
-)
-(connector
-	(text "L" (rect 966 1400 974 1414)(font "Arial" ))
-	(pt 936 1416)
-	(pt 1048 1416)
 )
 (connector
 	(text "L,L,L,L,FPGA_SW[3..0]" (rect -381 3240 -208 3254)(font "Arial" ))
@@ -7287,40 +7355,6 @@ agreement for further details.
 	(pt 1456 3504)
 )
 (connector
-	(text "rxpct_outfifowr" (rect 2608 2072 2731 2086)(font "Arial" ))
-	(pt 2560 2088)
-	(pt 2712 2088)
-)
-(connector
-	(text "rx_pct_data[63..0]" (rect 2611 2088 2759 2102)(font "Arial" ))
-	(pt 2560 2104)
-	(pt 2712 2104)
-	(bus)
-)
-(connector
-	(text "wrrxfifo_wr" (rect 2606 2056 2696 2070)(font "Arial" ))
-	(pt 2560 2072)
-	(pt 2712 2072)
-)
-(connector
-	(text "rx_path_smpl_nr_cnt[63..0]" (rect 2586 2104 2800 2118)(font "Arial" ))
-	(pt 2560 2120)
-	(pt 2712 2120)
-	(bus)
-)
-(connector
-	(text "rxpath_diq_h[12..0]" (rect 2577 2024 2733 2038)(font "Arial" ))
-	(pt 2560 2040)
-	(pt 2712 2040)
-	(bus)
-)
-(connector
-	(text "rxpath_diq_l[12..0]" (rect 2577 2040 2733 2054)(font "Arial" ))
-	(pt 2560 2056)
-	(pt 2712 2056)
-	(bus)
-)
-(connector
 	(text "ddr2_1_pnf_per_bit_persisit[31..0]" (rect 1212 4840 1492 4854)(font "Arial" ))
 	(pt 1192 4856)
 	(pt 1368 4856)
@@ -7353,6 +7387,422 @@ agreement for further details.
 	(text "wfm_player_rdy" (rect 1229 4520 1344 4534)(font "Arial" ))
 	(pt 1192 4536)
 	(pt 1360 4536)
+)
+(connector
+	(text "MCLK2RX_pll_d" (rect 1276 752 1383 766)(font "Arial" ))
+	(pt 1264 768)
+	(pt 1384 768)
+)
+(connector
+	(text "rxpll_locked" (rect 1280 768 1379 782)(font "Arial" ))
+	(pt 1264 784)
+	(pt 1384 784)
+)
+(connector
+	(text "rx_reconfig_status" (rect 1282 784 1430 798)(font "Arial" ))
+	(pt 1264 800)
+	(pt 1384 800)
+)
+(connector
+	(text "MCLK2RX_pll" (rect 1280 736 1370 750)(font "Arial" ))
+	(pt 1264 752)
+	(pt 1384 752)
+)
+(connector
+	(text "rxpllcfg_busy" (rect 1299 864 1406 878)(font "Arial" ))
+	(pt 1264 880)
+	(pt 1384 880)
+)
+(connector
+	(text "rxpll_dynps_done" (rect 1289 816 1421 830)(font "Arial" ))
+	(pt 1264 832)
+	(pt 1384 832)
+)
+(connector
+	(text "rxpll_dynps_status" (rect 1289 832 1437 846)(font "Arial" ))
+	(pt 1264 848)
+	(pt 1384 848)
+)
+(connector
+	(text "rxpll_smpcmp_en" (rect 1285 848 1408 862)(font "Arial" ))
+	(pt 1264 864)
+	(pt 1384 864)
+)
+(connector
+	(text "L" (rect 933 784 941 798)(font "Arial" ))
+	(pt 904 800)
+	(pt 1016 800)
+)
+(connector
+	(text "H,FCLK_ENA[1]" (rect 910 800 1017 814)(font "Arial" ))
+	(pt 904 816)
+	(pt 1016 816)
+	(bus)
+)
+(connector
+	(text "drc_clk_en[1],drc_clk_en[1]" (rect 896 816 1119 830)(font "Arial" ))
+	(pt 904 832)
+	(pt 1016 832)
+	(bus)
+)
+(connector
+	(text "clk_fpga2" (rect 916 832 990 846)(font "Arial" ))
+	(pt 904 848)
+	(pt 1016 848)
+)
+(connector
+	(text "pllrst_start[1]" (rect 911 848 1034 862)(font "Arial" ))
+	(pt 904 864)
+	(pt 1016 864)
+)
+(connector
+	(text "pllcfg_start[1]" (rect 898 864 1021 878)(font "Arial" ))
+	(pt 904 880)
+	(pt 1016 880)
+)
+(connector
+	(text "pllcfg_data[143..0]" (rect 906 880 1062 894)(font "Arial" ))
+	(pt 904 896)
+	(pt 1016 896)
+	(bus)
+)
+(connector
+	(text "phcfg_start[1]" (rect 909 928 1024 942)(font "Arial" ))
+	(pt 904 944)
+	(pt 1016 944)
+)
+(connector
+	(text "cnt_ind[2..0]" (rect 909 976 1016 990)(font "Arial" ))
+	(pt 904 992)
+	(pt 1016 992)
+	(bus)
+)
+(connector
+	(text "cnt_phase[9..0]" (rect 908 992 1031 1006)(font "Arial" ))
+	(pt 904 1008)
+	(pt 1016 1008)
+	(bus)
+)
+(connector
+	(text "phcfg_updn" (rect 907 960 989 974)(font "Arial" ))
+	(pt 904 976)
+	(pt 1016 976)
+)
+(connector
+	(text "pllcfg_phcfg_mode" (rect 923 896 1063 910)(font "Arial" ))
+	(pt 1016 912)
+	(pt 904 912)
+)
+(connector
+	(text "pllrst_start[1]" (rect 750 912 873 926)(font "Arial" ))
+	(pt 744 928)
+	(pt 856 928)
+)
+(connector
+	(pt 904 928)
+	(pt 1016 928)
+)
+(connector
+	(text "pllcfg_phcfg_tst" (rect 911 944 1043 958)(font "Arial" ))
+	(pt 904 960)
+	(pt 1016 960)
+)
+(connector
+	(text "pllcfg_auto_phcfg_step[9..0]" (rect 880 1008 1111 1022)(font "Arial" ))
+	(pt 904 1024)
+	(pt 1016 1024)
+	(bus)
+)
+(connector
+	(text "rx_path_smpl_cmp_done" (rect 919 1024 1092 1038)(font "Arial" ))
+	(pt 904 1040)
+	(pt 1016 1040)
+)
+(connector
+	(text "rx_path_smpl_cmp_err" (rect 903 1040 1068 1054)(font "Arial" ))
+	(pt 904 1056)
+	(pt 1016 1056)
+)
+(connector
+	(text "fpga_reset_n" (rect 930 768 1029 782)(font "Arial" ))
+	(pt 904 784)
+	(pt 1016 784)
+)
+(connector
+	(text "MCLK1TX" (rect 951 1320 1008 1334)(font "Arial" ))
+	(pt 936 1336)
+	(pt 1048 1336)
+)
+(connector
+	(text "lmlclk" (rect 1312 1336 1361 1350)(font "Arial" ))
+	(pt 1296 1352)
+	(pt 1440 1352)
+)
+(connector
+	(text "mclk1tx_locked" (rect 1308 1352 1423 1366)(font "Arial" ))
+	(pt 1296 1368)
+	(pt 1440 1368)
+)
+(connector
+	(text "tx_reconfig_status" (rect 1313 1368 1461 1382)(font "Arial" ))
+	(pt 1296 1384)
+	(pt 1440 1384)
+)
+(connector
+	(pt 1296 1336)
+	(pt 1440 1336)
+)
+(connector
+	(text "txpllcfg_busy" (rect 1339 1448 1446 1462)(font "Arial" ))
+	(pt 1296 1464)
+	(pt 1440 1464)
+)
+(connector
+	(text "pllrst_start[0]" (rect 949 1336 1072 1350)(font "Arial" ))
+	(pt 936 1352)
+	(pt 1048 1352)
+)
+(connector
+	(text "clk_fpga2" (rect 946 1416 1020 1430)(font "Arial" ))
+	(pt 936 1432)
+	(pt 1048 1432)
+)
+(connector
+	(text "pllrst_start[0]" (rect 949 1432 1072 1446)(font "Arial" ))
+	(pt 936 1448)
+	(pt 1048 1448)
+)
+(connector
+	(text "pllcfg_data[143..0]" (rect 944 1464 1100 1478)(font "Arial" ))
+	(pt 936 1480)
+	(pt 1048 1480)
+	(bus)
+)
+(connector
+	(text "drc_clk_en[0],drc_clk_en[0]" (rect 928 1400 1151 1414)(font "Arial" ))
+	(pt 936 1416)
+	(pt 1048 1416)
+	(bus)
+)
+(connector
+	(text "H,FCLK_ENA[0]" (rect 958 1384 1065 1398)(font "Arial" ))
+	(pt 936 1400)
+	(pt 1048 1400)
+	(bus)
+)
+(connector
+	(text "pllcfg_start[0]" (rect 936 1448 1059 1462)(font "Arial" ))
+	(pt 936 1464)
+	(pt 1048 1464)
+)
+(connector
+	(text "L" (rect 966 1368 974 1382)(font "Arial" ))
+	(pt 936 1384)
+	(pt 1048 1384)
+)
+(connector
+	(text "phcfg_start[0]" (rect 947 1512 1062 1526)(font "Arial" ))
+	(pt 936 1528)
+	(pt 1048 1528)
+)
+(connector
+	(text "cnt_ind[2..0]" (rect 945 1560 1052 1574)(font "Arial" ))
+	(pt 936 1576)
+	(pt 1048 1576)
+	(bus)
+)
+(connector
+	(text "cnt_phase[9..0]" (rect 946 1576 1069 1590)(font "Arial" ))
+	(pt 936 1592)
+	(pt 1048 1592)
+	(bus)
+)
+(connector
+	(text "phcfg_updn" (rect 945 1544 1027 1558)(font "Arial" ))
+	(pt 936 1560)
+	(pt 1048 1560)
+)
+(connector
+	(text "fpga_reset_n" (rect 962 1352 1061 1366)(font "Arial" ))
+	(pt 936 1368)
+	(pt 1048 1368)
+)
+(connector
+	(text "pllcfg_phcfg_mode" (rect 947 1496 1087 1510)(font "Arial" ))
+	(pt 936 1512)
+	(pt 1048 1512)
+)
+(connector
+	(pt 936 1496)
+	(pt 1048 1496)
+)
+(connector
+	(text "pllrst_start[0]" (rect 782 1480 905 1494)(font "Arial" ))
+	(pt 776 1496)
+	(pt 888 1496)
+)
+(connector
+	(text "pllcfg_phcfg_tst" (rect 943 1528 1075 1542)(font "Arial" ))
+	(pt 936 1544)
+	(pt 1048 1544)
+)
+(connector
+	(text "rx_path_smpl_cmp_done" (rect 938 1608 1111 1622)(font "Arial" ))
+	(pt 936 1624)
+	(pt 1048 1624)
+)
+(connector
+	(text "rx_path_smpl_cmp_err" (rect 938 1624 1103 1638)(font "Arial" ))
+	(pt 936 1640)
+	(pt 1048 1640)
+)
+(connector
+	(text "pllcfg_auto_phcfg_step[9..0]" (rect 931 1592 1162 1606)(font "Arial" ))
+	(pt 1048 1608)
+	(pt 936 1608)
+	(bus)
+)
+(connector
+	(text "txpll_dynps_done" (rect 1321 1400 1453 1414)(font "Arial" ))
+	(pt 1440 1416)
+	(pt 1296 1416)
+)
+(connector
+	(text "txpll_dynps_status" (rect 1321 1416 1469 1430)(font "Arial" ))
+	(pt 1440 1432)
+	(pt 1296 1432)
+)
+(connector
+	(text "txpll_smpcmp_en" (rect 1317 1432 1440 1446)(font "Arial" ))
+	(pt 1440 1448)
+	(pt 1296 1448)
+)
+(connector
+	(text "pllcfg_sdoutA" (rect 2595 760 2702 774)(font "Arial" ))
+	(pt 2576 776)
+	(pt 2696 776)
+)
+(connector
+	(text "rxpll_dynps_done,txpll_dynps_done" (rect 2120 936 2392 950)(font "Arial" ))
+	(pt 2272 952)
+	(pt 2096 952)
+	(bus)
+)
+(connector
+	(text "rxpll_dynps_status,txpll_dynps_status" (rect 2116 952 2421 966)(font "Arial" ))
+	(pt 2272 968)
+	(pt 2096 968)
+	(bus)
+)
+(connector
+	(text "phcfg_start[1..0]" (rect 2596 856 2736 870)(font "Arial" ))
+	(pt 2576 872)
+	(pt 2696 872)
+	(bus)
+)
+(connector
+	(text "pllcfg_start[1..0]" (rect 2593 872 2741 886)(font "Arial" ))
+	(pt 2576 888)
+	(pt 2696 888)
+	(bus)
+)
+(connector
+	(text "pllrst_start[1..0]" (rect 2592 888 2740 902)(font "Arial" ))
+	(pt 2576 904)
+	(pt 2696 904)
+	(bus)
+)
+(connector
+	(text "phcfg_updn" (rect 2590 904 2672 918)(font "Arial" ))
+	(pt 2576 920)
+	(pt 2696 920)
+)
+(connector
+	(text "cnt_ind[4..0]" (rect 2590 920 2697 934)(font "Arial" ))
+	(pt 2576 936)
+	(pt 2696 936)
+	(bus)
+)
+(connector
+	(text "cnt_phase[15..0]" (rect 2590 936 2722 950)(font "Arial" ))
+	(pt 2576 952)
+	(pt 2696 952)
+	(bus)
+)
+(connector
+	(text "pllcfg_data[143..0]" (rect 2591 952 2747 966)(font "Arial" ))
+	(pt 2576 968)
+	(pt 2696 968)
+	(bus)
+)
+(connector
+	(text "pllcfg_auto_phcfg_smpls[15..0]" (rect 2598 968 2845 982)(font "Arial" ))
+	(pt 2576 984)
+	(pt 2696 984)
+	(bus)
+)
+(connector
+	(text "pllcfg_auto_phcfg_step[15..0]" (rect 2603 984 2842 998)(font "Arial" ))
+	(pt 2696 1000)
+	(pt 2576 1000)
+	(bus)
+)
+(connector
+	(text "pllcfg_phcfg_mode" (rect 2595 824 2735 838)(font "Arial" ))
+	(pt 2576 840)
+	(pt 2696 840)
+)
+(connector
+	(text "pllcfg_phcfg_tst" (rect 2591 840 2723 854)(font "Arial" ))
+	(pt 2576 856)
+	(pt 2696 856)
+)
+(connector
+	(text "rxpct_outfifowr" (rect 2608 2040 2731 2054)(font "Arial" ))
+	(pt 2560 2056)
+	(pt 2712 2056)
+)
+(connector
+	(text "rx_pct_data[63..0]" (rect 2611 2056 2759 2070)(font "Arial" ))
+	(pt 2560 2072)
+	(pt 2712 2072)
+	(bus)
+)
+(connector
+	(text "rx_path_smpl_nr_cnt[63..0]" (rect 2586 2072 2800 2086)(font "Arial" ))
+	(pt 2560 2088)
+	(pt 2712 2088)
+	(bus)
+)
+(connector
+	(text "rx_path_smpl_cmp_done" (rect 2578 2088 2751 2102)(font "Arial" ))
+	(pt 2560 2104)
+	(pt 2712 2104)
+)
+(connector
+	(text "rx_path_smpl_cmp_err" (rect 2578 2104 2743 2118)(font "Arial" ))
+	(pt 2560 2120)
+	(pt 2712 2120)
+)
+(connector
+	(text "pllcfg_auto_phcfg_smpls[15..0]" (rect 2062 2328 2309 2342)(font "Arial" ))
+	(pt 2056 2344)
+	(pt 2200 2344)
+	(bus)
+)
+(connector
+	(pt 1952 2328)
+	(pt 2200 2328)
+)
+(connector
+	(text "rxpll_smpcmp_en" (rect 1757 2304 1880 2318)(font "Arial" ))
+	(pt 1752 2320)
+	(pt 1888 2320)
+)
+(connector
+	(text "txpll_smpcmp_en" (rect 1757 2320 1880 2334)(font "Arial" ))
+	(pt 1888 2336)
+	(pt 1752 2336)
 )
 (junction (pt 1048 2584))
 (junction (pt -1000 2752))
