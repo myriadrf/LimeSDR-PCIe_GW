@@ -56,9 +56,15 @@ alt_sld_fab_wrapper_hw.tcl
 *.xml
 
 #--------------
+# Modelsim files
+#--------------
+*.wlf
+
+#--------------
 # generated folders
 #--------------
 simulation/
 incremental_db/
+source_library/
 db/
 workspace/
