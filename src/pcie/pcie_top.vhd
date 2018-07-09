@@ -22,23 +22,23 @@ USE altera_mf.all;
 -- ----------------------------------------------------------------------------
 entity pcie_top is
    generic(
-      dev_family           : string := "Cyclone IV GX";
-      stream_data_width    : integer := 32;
-      controll_data_width  : integer := 8;
-      -- Stream (PC->FPGA) 
-      EP01_0_rdusedw_width : integer := 11;
-      EP01_0_rwidth        : integer := 32;
-      EP01_1_rdusedw_width : integer := 11;
-      EP01_1_rwidth        : integer := 32;
-      -- Stream (FPGA->PC)
-      EP81_wrusedw_width   : integer := 10;
-      EP81_wwidth          : integer := 64;
-      -- Control (PC->FPGA)
-      EP0F_rdusedw_width   : integer := 11;
-      EP0F_rwidth          : integer := 8;
-      -- Control (FPGA->PC)
-      EP8F_wrusedw_width   : integer := 11;
-      EP8F_wwidth          : integer := 8
+      g_DEV_FAMILY               : string := "Cyclone IV GX";
+      g_S0_DATA_WIDTH            : integer := 32;
+      g_C0_DATA_WIDTH            : integer := 8;
+      -- Stream (Host->FPGA) 
+      g_H2F_S0_0_RDUSEDW_WIDTH   : integer := 11;
+      g_H2F_S0_0_RWIDTH          : integer := 32;
+      g_H2F_S0_1_RDUSEDW_WIDTH   : integer := 11;
+      g_H2F_S0_1_RWIDTH          : integer := 32;
+      -- Stream (FPGA->Host)
+      g_F2H_S0_WRUSEDW_WIDTH     : integer := 10;
+      g_F2H_S0_WWIDTH            : integer := 64;
+      -- Control (Host->FPGA)
+      g_H2F_C0_RDUSEDW_WIDTH     : integer := 11;
+      g_H2F_C0_RWIDTH            : integer := 8;
+      -- Control (FPGA->Host)
+      g_F2H_C0_WRUSEDW_WIDTH     : integer := 11;
+      g_F2H_C0_WWIDTH            : integer := 8
    );
    port (
       inclk_125            : in std_logic;   -- Input clock for PLL
@@ -50,40 +50,40 @@ entity pcie_top is
       pcie_tx              : out std_logic_vector(3 downto 0);
       pcie_bus_clk         : out std_logic;  -- PCIe data clock output
       -- FIFO buffers
-      EP01_sel             : in std_logic;      -- 0 - EP01_0,
-     --Stream endpoint FIFO 0 (PC->FPGA) 
-      EP01_0_rdclk         : in std_logic;
-      EP01_0_aclrn         : in std_logic;
-      EP01_0_rd            : in std_logic;
-      EP01_0_rdata         : out std_logic_vector(EP01_0_rwidth-1 downto 0);
-      EP01_0_rempty        : out std_logic;
-      EP01_0_rdusedw       : out std_logic_vector(EP01_0_rdusedw_width-1 downto 0);
-      --Stream endpoint FIFO 1 (PC->FPGA) 
-      EP01_1_rdclk         : in std_logic;
-      EP01_1_aclrn         : in std_logic;
-      EP01_1_rd            : in std_logic;
-      EP01_1_rdata         : out std_logic_vector(EP01_1_rwidth-1 downto 0);
-      EP01_1_rempty        : out std_logic;
-      EP01_1_rdusedw       : out std_logic_vector(EP01_1_rdusedw_width-1 downto 0);
-      --Stream endpoint FIFO (FPGA->PC)
-      EP81_wclk            : in std_logic;
-      EP81_aclrn           : in std_logic;
-      EP81_wr              : in std_logic;
-      EP81_wdata           : in std_logic_vector(EP81_wwidth-1 downto 0);
-      EP81_wfull           : out std_logic;
-      EP81_wrusedw         : out std_logic_vector(EP81_wrusedw_width-1 downto 0);
-      --Control endpoint FIFO (PC->FPGA)
-      EP0F_rdclk           : in std_logic;
-      EP0F_aclrn           : in std_logic;
-      EP0F_rd              : in std_logic;
-      EP0F_rdata           : out std_logic_vector(EP0F_rwidth-1 downto 0);
-      EP0F_rempty          : out std_logic;
-      --Control endpoint FIFO (FPGA->PC)
-      EP8F_wclk            : in std_logic;
-      EP8F_aclrn           : in std_logic;
-      EP8F_wr              : in std_logic;
-      EP8F_wdata           : in std_logic_vector(EP8F_wwidth-1 downto 0);
-      EP8F_wfull           : out std_logic;
+      H2F_S0_0_sel         : in std_logic;   -- 0 - S0_0,
+     --Stream endpoint FIFO 0 (Host->FPGA) 
+      H2F_S0_0_rdclk       : in std_logic;
+      H2F_S0_0_aclrn       : in std_logic;
+      H2F_S0_0_rd          : in std_logic;
+      H2F_S0_0_rdata       : out std_logic_vector(g_H2F_S0_0_RWIDTH-1 downto 0);
+      H2F_S0_0_rempty      : out std_logic;
+      H2F_S0_0_rdusedw     : out std_logic_vector(g_H2F_S0_0_RDUSEDW_WIDTH-1 downto 0);
+      --Stream endpoint FIFO 1 (Host->FPGA) 
+      H2F_S0_1_rdclk       : in std_logic;
+      H2F_S0_1_aclrn       : in std_logic;
+      H2F_S0_1_rd          : in std_logic;
+      H2F_S0_1_rdata       : out std_logic_vector(g_H2F_S0_1_RWIDTH-1 downto 0);
+      H2F_S0_1_rempty      : out std_logic;
+      H2F_S0_1_rdusedw     : out std_logic_vector(g_H2F_S0_1_RDUSEDW_WIDTH-1 downto 0);
+      --Stream endpoint FIFO (FPGA->Host)
+      F2H_S0_wclk          : in std_logic;
+      F2H_S0_aclrn         : in std_logic;
+      F2H_S0_wr            : in std_logic;
+      F2H_S0_wdata         : in std_logic_vector(g_F2H_S0_WWIDTH-1 downto 0);
+      F2H_S0_wfull         : out std_logic;
+      F2H_S0_wrusedw       : out std_logic_vector(g_F2H_S0_WRUSEDW_WIDTH-1 downto 0);
+      --Control endpoint FIFO (Host->FPGA)
+      H2F_C0_rdclk         : in std_logic;
+      H2F_C0_aclrn         : in std_logic;
+      H2F_C0_rd            : in std_logic;
+      H2F_C0_rdata         : out std_logic_vector(g_H2F_C0_RWIDTH-1 downto 0);
+      H2F_C0_rempty        : out std_logic;
+      --Control endpoint FIFO (FPGA->Host)
+      F2H_C0_wclk          : in std_logic;
+      F2H_C0_aclrn         : in std_logic;
+      F2H_C0_wr            : in std_logic;
+      F2H_C0_wdata         : in std_logic_vector(g_F2H_C0_WWIDTH-1 downto 0);
+      F2H_C0_wfull         : out std_logic;
 
       stream_rx_en         : in std_logic;
       user_read_32_open    : out std_logic
@@ -92,34 +92,34 @@ end pcie_top;
   
 architecture sample_arch of pcie_top is
    -- Module constants
-   constant C_EP01_0_WRUSEDW_WIDTH  : integer := FIFOWR_SIZE (stream_data_width, EP01_0_rwidth, EP01_0_rdusedw_width);
-   constant C_EP01_0_RDUSEDW_WIDTH  : integer := EP01_0_rdusedw_width; 
-   constant C_EP01_1_WRUSEDW_WIDTH  : integer := FIFOWR_SIZE (stream_data_width, EP01_1_rwidth, EP01_1_rdusedw_width);
-   constant C_EP01_1_RDUSEDW_WIDTH  : integer := EP01_1_rdusedw_width; 
+   constant c_H2F_S0_0_WRUSEDW_WIDTH   : integer := FIFOWR_SIZE (g_S0_DATA_WIDTH, g_H2F_S0_0_RWIDTH, g_H2F_S0_0_RDUSEDW_WIDTH);
+   constant c_H2F_S0_0_RDUSEDW_WIDTH   : integer := g_H2F_S0_0_RDUSEDW_WIDTH; 
+   constant c_H2F_S0_1_WRUSEDW_WIDTH   : integer := FIFOWR_SIZE (g_S0_DATA_WIDTH, g_H2F_S0_1_RWIDTH, g_H2F_S0_1_RDUSEDW_WIDTH);
+   constant c_H2F_S0_1_RDUSEDW_WIDTH   : integer := g_H2F_S0_1_RDUSEDW_WIDTH; 
 
-   constant C_EP0F_WRUSEDW_WIDTH    : integer := FIFOWR_SIZE (controll_data_width, EP0F_rwidth, EP0F_rdusedw_width);
-   constant C_EP0F_RDUSEDW_WIDTH    : integer := EP0F_rdusedw_width; 
+   constant c_H2F_C0_WRUSEDW_WIDTH     : integer := FIFOWR_SIZE (g_C0_DATA_WIDTH, g_H2F_C0_RWIDTH, g_H2F_C0_RDUSEDW_WIDTH);
+   constant c_H2F_C0_RDUSEDW_WIDTH     : integer := g_H2F_C0_RDUSEDW_WIDTH; 
    
-   constant C_EP81_WRUSEDW_WIDTH    : integer := EP81_wrusedw_width;
-   constant C_EP81_RDUSEDW_WIDTH    : integer := FIFORD_SIZE (EP81_wwidth, stream_data_width, EP81_wrusedw_width);
+   constant c_F2H_S0_WRUSEDW_WIDTH     : integer := g_F2H_S0_WRUSEDW_WIDTH;
+   constant c_F2H_S0_RDUSEDW_WIDTH     : integer := FIFORD_SIZE (g_F2H_S0_WWIDTH, g_S0_DATA_WIDTH, g_F2H_S0_WRUSEDW_WIDTH);
    
-   constant C_EP8F_WRUSEDW_WIDTH    : integer := EP8F_wrusedw_width;
-   constant C_EP8F_RDUSEDW_WIDTH    : integer := FIFORD_SIZE (EP8F_wwidth, controll_data_width, EP8F_wrusedw_width);
+   constant c_F2H_C0_WRUSEDW_WIDTH     : integer := g_F2H_C0_WRUSEDW_WIDTH;
+   constant c_F2H_C0_RDUSEDW_WIDTH     : integer := FIFORD_SIZE (g_F2H_C0_WWIDTH, g_C0_DATA_WIDTH, g_F2H_C0_WRUSEDW_WIDTH);
   
-   signal EP01_sel_sync             : std_logic;
-   signal EP01_0_sclrn              : std_logic;
-   signal EP01_1_sclrn              : std_logic;
-   signal EP01_0_sclrn_reg          : std_logic;
-   signal EP01_1_sclrn_reg          : std_logic;
+   signal H2F_S0_0_sel_sync            : std_logic;
+   signal H2F_S0_0_sclrn               : std_logic;
+   signal H2F_S0_1_sclrn               : std_logic;
+   signal H2F_S0_0_sclrn_reg           : std_logic;
+   signal H2F_S0_1_sclrn_reg           : std_logic;
    
 
-   signal bus_clk                   : std_logic;
-   signal quiesce                   : std_logic;
+   signal bus_clk                      : std_logic;
+   signal quiesce                      : std_logic;
+      
+   signal reset_8                      : std_logic;
+   signal reset_32                     : std_logic;
    
-   signal reset_8                   : std_logic;
-   signal reset_32                  : std_logic;
-
-   signal ram_addr                  : integer range 0 to 31;
+   signal ram_addr                     : integer range 0 to 31;
    
    signal inst1_user_r_mem_8_rden      : std_logic;
    signal inst1_user_r_mem_8_empty     : std_logic;
@@ -166,7 +166,7 @@ architecture sample_arch of pcie_top is
    --inst3
    signal inst3_reset_n          : std_logic;
    signal inst3_pct_wr           : std_logic;
-   signal inst3_pct_payload_data : std_logic_vector(stream_data_width-1 downto 0);
+   signal inst3_pct_payload_data : std_logic_vector(g_S0_DATA_WIDTH-1 downto 0);
    signal inst3_pct_payload_valid: std_logic;
    
    --inst4
@@ -181,12 +181,12 @@ architecture sample_arch of pcie_top is
    --inst6
    signal inst6_reset_n          : std_logic;
    signal inst6_rdempty          : std_logic;
-   signal inst6_q                : std_logic_vector(stream_data_width-1 downto 0);
+   signal inst6_q                : std_logic_vector(g_S0_DATA_WIDTH-1 downto 0);
    
    --inst6
    signal inst7_reset_n          : std_logic;
    signal inst7_rdempty          : std_logic;
-   signal inst7_q                : std_logic_vector(controll_data_width-1 downto 0);
+   signal inst7_q                : std_logic_vector(g_C0_DATA_WIDTH-1 downto 0);
    
    signal reconfig_clk_locked    : std_logic;
    signal clk_50                 : std_logic;
@@ -334,28 +334,28 @@ begin
 -- ----------------------------------------------------------------------------  
    -- Reset signal with synchronous removal to clk clock domain, 
    sync_reg0 : entity work.sync_reg 
-   port map(bus_clk, EP01_0_aclrn, '1', EP01_0_sclrn);
+   port map(bus_clk, H2F_S0_0_aclrn, '1', H2F_S0_0_sclrn);
    
    sync_reg1 : entity work.sync_reg 
-   port map(bus_clk, EP01_1_aclrn, '1', EP01_1_sclrn); 
+   port map(bus_clk, H2F_S0_1_aclrn, '1', H2F_S0_1_sclrn); 
    
    
-   inst2_reset_n <= EP01_0_sclrn;
-   --For 01 Stream endpoint, Host->FPGA
-   inst3_reset_n <= inst1_user_w_write_32_open OR EP01_1_sclrn;   
+   inst2_reset_n <= H2F_S0_0_sclrn;
+   --For Stream endpoint, Host->FPGA
+   inst3_reset_n <= inst1_user_w_write_32_open OR H2F_S0_1_sclrn;   
    inst4_reset_n <= inst3_reset_n;
-   --For 0F Control endpoint, Host->FPGA
+   --For Control endpoint, Host->FPGA
    inst5_reset_n <= inst1_user_w_write_8_open;
-   --For 81 stream endpoint, FPGA->Host
+   --For stream endpoint, FPGA->Host
    inst6_reset_n <= inst1_user_r_read_32_open;  
-   --For 8F control endpoint, FPGA->Host
+   --For control endpoint, FPGA->Host
    inst7_reset_n <= inst1_user_r_read_8_open;
 
 -- ----------------------------------------------------------------------------
 -- Sync registers
 -- ----------------------------------------------------------------------------   
    sync_reg3 : entity work.sync_reg 
-   port map(bus_clk, reset_n, EP01_sel, EP01_sel_sync); 
+   port map(bus_clk, reset_n, H2F_S0_0_sel, H2F_S0_0_sel_sync); 
    
    sync_reg4 : entity work.sync_reg 
    port map(bus_clk, '1', stream_rx_en, stream_rx_en_sync);
@@ -523,7 +523,7 @@ begin
       user_led                => open
       );
    
-      inst1_user_w_write_32_full <= inst2_wrfull when EP01_sel_sync = '0' else 
+      inst1_user_w_write_32_full <= inst2_wrfull when H2F_S0_0_sel_sync = '0' else 
                                     inst4_wrfull;
 
                                     
@@ -549,19 +549,19 @@ begin
   inst1_user_w_mem_8_full  <= '0';
 
 -- ----------------------------------------------------------------------------
--- For 01 Stream endpoint, Host->FPGA
--- There are two FIFO buffers for this endpoint. Buffer is selected with EP01_sel
+-- For Stream S0 endpoint, Host->FPGA
+-- There are two FIFO buffers for this endpoint. Buffer is selected with H2F_S0_0_sel
 -- ----------------------------------------------------------------------------
-   inst2_wrreq    <= inst1_user_w_write_32_wren when EP01_sel_sync = '0' else '0';
+   inst2_wrreq    <= inst1_user_w_write_32_wren when H2F_S0_0_sel_sync = '0' else '0';
  
    -- First fifo, dedicated for TX stream
-   inst2_EP01_0_FIFO : entity work.two_fifo_inst 
+   inst2_H2F_S0_0_FIFO : entity work.two_fifo_inst 
    generic map(
-      dev_family     => dev_family,
-      wrwidth        => stream_data_width,
+      dev_family     => g_DEV_FAMILY,
+      wrwidth        => g_S0_DATA_WIDTH,
       wrusedw_witdth => 10,  
-      rdwidth        => EP01_0_rwidth,
-      rdusedw_width  => C_EP01_0_RDUSEDW_WIDTH,
+      rdwidth        => g_H2F_S0_0_RWIDTH,
+      rdusedw_width  => c_H2F_S0_0_RDUSEDW_WIDTH,
       show_ahead     => "OFF",
       TRNSF_SIZE     => 512, 
       TRNSF_N        => 8
@@ -576,39 +576,39 @@ begin
       wrfull      => inst2_wrfull,
       wrempty     => open,
       wrusedw     => open,
-      rdclk       => EP01_0_rdclk,
-      rdreq       => EP01_0_rd,
-      q           => EP01_0_rdata,
-      rdempty     => EP01_0_rempty,
-      rdusedw     => EP01_0_rdusedw   
+      rdclk       => H2F_S0_0_rdclk,
+      rdreq       => H2F_S0_0_rd,
+      q           => H2F_S0_0_rdata,
+      rdempty     => H2F_S0_0_rempty,
+      rdusedw     => H2F_S0_0_rdusedw   
    );
    
-   inst3_pct_wr    <= inst1_user_w_write_32_wren when EP01_sel_sync = '1' else '0'; 
+   inst3_pct_wr    <= inst1_user_w_write_32_wren when H2F_S0_0_sel_sync = '1' else '0'; 
    -- This module takes only IQ data from packet, and discards packet header
    pct_payload_extrct_inst3 : entity work.pct_payload_extrct
    generic map(
-      data_w			=> stream_data_width,
-      header_size		=> 16, 
-      pct_size			=> 4096
+      data_w         => g_S0_DATA_WIDTH,
+      header_size    => 16, 
+      pct_size       => 4096
    ) 
    port map(
-      clk					=> bus_clk,
-      reset_n				=> inst3_reset_n,
-      pct_data				=> inst1_user_w_write_32_data, 
-      pct_wr				=> inst3_pct_wr,
-      pct_payload_data	=> inst3_pct_payload_data,
-      pct_payload_valid	=> inst3_pct_payload_valid,
-      pct_payload_dest	=> open
+      clk               => bus_clk,
+      reset_n           => inst3_reset_n,
+      pct_data          => inst1_user_w_write_32_data, 
+      pct_wr            => inst3_pct_wr,
+      pct_payload_data  => inst3_pct_payload_data,
+      pct_payload_valid => inst3_pct_payload_valid,
+      pct_payload_dest  => open
    );
    
    -- Second FIFO, dedicated for WFM player
-   inst4_EP01_1_FIFO : entity work.fifo_inst 
+   inst4_H2F_S0_1_FIFO : entity work.fifo_inst 
    generic map(
-      dev_family     => dev_family,
-      wrwidth        => stream_data_width,
-      wrusedw_witdth => C_EP01_1_WRUSEDW_WIDTH,  
-      rdwidth        => EP01_1_rwidth,
-      rdusedw_width  => C_EP01_1_RDUSEDW_WIDTH,
+      dev_family     => g_DEV_FAMILY,
+      wrwidth        => g_S0_DATA_WIDTH,
+      wrusedw_witdth => c_H2F_S0_1_WRUSEDW_WIDTH,  
+      rdwidth        => g_H2F_S0_1_RWIDTH,
+      rdusedw_width  => c_H2F_S0_1_RDUSEDW_WIDTH,
       show_ahead     => "ON"
    )
    port map(
@@ -620,23 +620,23 @@ begin
       wrfull   => inst4_wrfull,
       wrempty  => open,
       wrusedw  => open,
-      rdclk    => EP01_1_rdclk,
-      rdreq    => EP01_1_rd,
-      q        => EP01_1_rdata,
-      rdempty  => EP01_1_rempty,
-      rdusedw  => EP01_1_rdusedw   
+      rdclk    => H2F_S0_1_rdclk,
+      rdreq    => H2F_S0_1_rd,
+      q        => H2F_S0_1_rdata,
+      rdempty  => H2F_S0_1_rempty,
+      rdusedw  => H2F_S0_1_rdusedw   
    );
    
 -- ----------------------------------------------------------------------------
--- For 0F Control endpoint, Host->FPGA
+-- For C0 Control endpoint, Host->FPGA
 -- ---------------------------------------------------------------------------- 
-   inst5_EP0F_FIFO : entity work.fifo_inst 
+   inst5_H2F_C0_FIFO : entity work.fifo_inst 
    generic map(
-      dev_family     => dev_family,
-      wrwidth        => controll_data_width,
-      wrusedw_witdth => C_EP0F_WRUSEDW_WIDTH,  
-      rdwidth        => EP0F_rwidth,
-      rdusedw_width  => C_EP0F_RDUSEDW_WIDTH,
+      dev_family     => g_DEV_FAMILY,
+      wrwidth        => g_C0_DATA_WIDTH,
+      wrusedw_witdth => c_H2F_C0_WRUSEDW_WIDTH,  
+      rdwidth        => g_H2F_C0_RWIDTH,
+      rdusedw_width  => c_H2F_C0_RDUSEDW_WIDTH,
       show_ahead     => "OFF"
    )
    port map(
@@ -648,33 +648,33 @@ begin
       wrfull   => inst5_wrfull,
       wrempty  => open,
       wrusedw  => open,
-      rdclk    => EP0F_rdclk,
-      rdreq    => EP0F_rd,
-      q        => EP0F_rdata,
-      rdempty  => EP0F_rempty,
+      rdclk    => H2F_C0_rdclk,
+      rdreq    => H2F_C0_rd,
+      q        => H2F_C0_rdata,
+      rdempty  => H2F_C0_rempty,
       rdusedw  => open     
    );  
 -- ----------------------------------------------------------------------------
--- For 81 stream endpoint, FPGA->Host
+-- For S0 stream endpoint, FPGA->Host
 -- ---------------------------------------------------------------------------- 
-   inst6_EP81_FIFO : entity work.fifo_inst 
+   inst6_F2H_S0_FIFO : entity work.fifo_inst 
    generic map(
-      dev_family     => dev_family,
-      wrwidth        => EP81_wwidth,
-      wrusedw_witdth => C_EP81_WRUSEDW_WIDTH,  
-      rdwidth        => stream_data_width,
-      rdusedw_width  => C_EP81_RDUSEDW_WIDTH,
+      dev_family     => g_DEV_FAMILY,
+      wrwidth        => g_F2H_S0_WWIDTH,
+      wrusedw_witdth => c_F2H_S0_WRUSEDW_WIDTH,  
+      rdwidth        => g_S0_DATA_WIDTH,
+      rdusedw_width  => c_F2H_S0_RDUSEDW_WIDTH,
       show_ahead     => "OFF"
    ) 
    port map(
       --input ports 
       reset_n  => inst6_reset_n,
-      wrclk    => EP81_wclk,
-      wrreq    => EP81_wr,
-      data     => EP81_wdata,
-      wrfull   => EP81_wfull,
+      wrclk    => F2H_S0_wclk,
+      wrreq    => F2H_S0_wr,
+      data     => F2H_S0_wdata,
+      wrfull   => F2H_S0_wfull,
       wrempty  => open,
-      wrusedw  => EP81_wrusedw,
+      wrusedw  => F2H_S0_wrusedw,
       rdclk    => bus_clk,
       rdreq    => inst1_user_r_read_32_rden,
       q        => inst6_q,
@@ -682,24 +682,24 @@ begin
       rdusedw  => open    
    );   
 -- ----------------------------------------------------------------------------
--- For 8F control endpoint, FPGA->Host
+-- For C0 control endpoint, FPGA->Host
 -- ---------------------------------------------------------------------------- 
-   inst7_EP8F_FIFO : entity work.fifo_inst 
+   inst7_F2H_C0_FIFO : entity work.fifo_inst 
    generic map(
-      dev_family     => dev_family,
-      wrwidth        => EP8F_wwidth,
-      wrusedw_witdth => C_EP8F_WRUSEDW_WIDTH,  
-      rdwidth        => controll_data_width,
-      rdusedw_width  => C_EP8F_RDUSEDW_WIDTH,
+      dev_family     => g_DEV_FAMILY,
+      wrwidth        => g_F2H_C0_WWIDTH,
+      wrusedw_witdth => c_F2H_C0_WRUSEDW_WIDTH,  
+      rdwidth        => g_C0_DATA_WIDTH,
+      rdusedw_width  => c_F2H_C0_RDUSEDW_WIDTH,
       show_ahead     => "OFF"
    ) 
    port map(
       --input ports 
       reset_n  => inst7_reset_n,
-      wrclk    => EP8F_wclk,
-      wrreq    => EP8F_wr,
-      data     => EP8F_wdata,
-      wrfull   => EP8F_wfull,
+      wrclk    => F2H_C0_wclk,
+      wrreq    => F2H_C0_wr,
+      data     => F2H_C0_wdata,
+      wrfull   => F2H_C0_wfull,
       wrempty  => open,
       wrusedw  => open,
       rdclk    => bus_clk,

@@ -243,19 +243,17 @@ constant c_H2F_S0_1_RDUSEDW_WIDTH: integer := FIFO_WORDS_TO_Nbits(g_HOST2FPGA_S0
 constant c_F2H_S0_WRUSEDW_WIDTH  : integer := FIFO_WORDS_TO_Nbits(g_FPGA2HOST_S0_0_SIZE/(c_F2H_S0_WWIDTH/8),true);
 constant c_H2F_C0_RDUSEDW_WIDTH  : integer := FIFO_WORDS_TO_Nbits(g_HOST2FPGA_C0_0_SIZE/(c_H2F_C0_RWIDTH/8),true);
 constant c_F2H_C0_WRUSEDW_WIDTH  : integer := FIFO_WORDS_TO_Nbits(g_FPGA2HOST_C0_0_SIZE/(c_F2H_C0_WWIDTH/8),true);
-signal inst2_EP81_wfull          : std_logic;
-signal inst2_EP81_wrusedw        : std_logic_vector(c_F2H_S0_WRUSEDW_WIDTH-1 downto 0);
-signal inst2_EP0F_rdata          : std_logic_vector(c_H2F_C0_RWIDTH-1 downto 0);
-signal inst2_EP0F_rempty         : std_logic;
-signal inst2_EP8F_wfull          : std_logic;
-signal inst2_GPIF_busy           : std_logic;
-signal inst2_faddr               : std_logic_vector(4 downto 0);
-signal inst2_EP01_0_rdata        : std_logic_vector(c_H2F_S0_0_RWIDTH-1 downto 0);
-signal inst2_EP01_0_rempty       : std_logic;
-signal inst2_EP01_0_rdusedw      : std_logic_vector(c_H2F_S0_0_RDUSEDW_WIDTH-1 downto 0);
-signal inst2_EP01_1_rdata        : std_logic_vector(c_H2F_S0_1_RWIDTH-1 downto 0);
-signal inst2_EP01_1_rempty       : std_logic;
-signal inst2_EP01_1_rdusedw      : std_logic_vector(c_H2F_S0_1_RDUSEDW_WIDTH-1 downto 0);
+signal inst2_F2H_S0_wfull        : std_logic;
+signal inst2_F2H_S0_wrusedw      : std_logic_vector(c_F2H_S0_WRUSEDW_WIDTH-1 downto 0);
+signal inst2_H2F_C0_rdata        : std_logic_vector(c_H2F_C0_RWIDTH-1 downto 0);
+signal inst2_H2F_C0_rempty       : std_logic;
+signal inst2_F2H_C0_wfull        : std_logic;
+signal inst2_H2F_S0_0_rdata      : std_logic_vector(c_H2F_S0_0_RWIDTH-1 downto 0);
+signal inst2_H2F_S0_0_rempty     : std_logic;
+signal inst2_H2F_S0_0_rdusedw    : std_logic_vector(c_H2F_S0_0_RDUSEDW_WIDTH-1 downto 0);
+signal inst2_H2F_S0_1_rdata      : std_logic_vector(c_H2F_S0_1_RWIDTH-1 downto 0);
+signal inst2_H2F_S0_1_rempty     : std_logic;
+signal inst2_H2F_S0_1_rdusedw    : std_logic_vector(c_H2F_S0_1_RDUSEDW_WIDTH-1 downto 0);
 signal inst2_user_read_32_open   : std_logic;
 
 
@@ -263,7 +261,7 @@ signal inst2_user_read_32_open   : std_logic;
 signal inst5_busy : std_logic;
 
 --inst6
-constant C_WFM_INFIFO_SIZE          : integer := FIFO_WORDS_TO_Nbits(g_WFM_INFIFO_SIZE/(c_S0_DATA_WIDTH/8),true);
+constant c_WFM_INFIFO_SIZE          : integer := FIFO_WORDS_TO_Nbits(g_WFM_INFIFO_SIZE/(c_S0_DATA_WIDTH/8),true);
 signal inst6_tx_pct_loss_flg        : std_logic;
 signal inst6_tx_txant_en            : std_logic;
 signal inst6_tx_in_pct_full         : std_logic;
@@ -317,12 +315,12 @@ begin
       clk                        => CLK100_FPGA,
       reset_n                    => reset_n_clk100_fpga,
       -- Control data FIFO
-      exfifo_if_d                => inst2_EP0F_rdata,
+      exfifo_if_d                => inst2_H2F_C0_rdata,
       exfifo_if_rd               => inst0_exfifo_if_rd, 
-      exfifo_if_rdempty          => inst2_EP0F_rempty,
+      exfifo_if_rdempty          => inst2_H2F_C0_rempty,
       exfifo_of_d                => inst0_exfifo_of_d, 
       exfifo_of_wr               => inst0_exfifo_of_wr, 
-      exfifo_of_wrfull           => inst2_EP8F_wfull,
+      exfifo_of_wrfull           => inst2_F2H_C0_wfull,
       exfifo_of_rst              => inst0_exfifo_of_rst, 
       -- SPI 0 
       spi_0_MISO                 => FPGA_SPI0_MISO,
@@ -444,23 +442,23 @@ begin
 -- ----------------------------------------------------------------------------
    inst2_pcie_top : entity work.pcie_top
    generic map(
-      dev_family           => g_DEV_FAMILY,
-      stream_data_width    => c_S0_DATA_WIDTH,
-      controll_data_width  => c_C0_DATA_WIDTH,
-      -- Stream, socket 0, (PC->FPGA) 
-      EP01_0_rdusedw_width => c_H2F_S0_0_RDUSEDW_WIDTH,
-      EP01_0_rwidth        => c_H2F_S0_0_RWIDTH,
-      EP01_1_rdusedw_width => c_H2F_S0_1_RDUSEDW_WIDTH,
-      EP01_1_rwidth        => c_H2F_S0_1_RWIDTH,
-      -- Stream, socket 2, (FPGA->PC)
-      EP81_wrusedw_width   => c_F2H_S0_WRUSEDW_WIDTH,
-      EP81_wwidth          => c_F2H_S0_WWIDTH,
-      -- Control, socket 1, (PC->FPGA)
-      EP0F_rdusedw_width   => c_H2F_C0_RDUSEDW_WIDTH,
-      EP0F_rwidth          => c_H2F_C0_RWIDTH,
-      -- Control, socket 3, (FPGA->PC)
-      EP8F_wrusedw_width   => c_F2H_C0_WRUSEDW_WIDTH,
-      EP8F_wwidth          => c_F2H_C0_WWIDTH 
+      g_DEV_FAMILY               => g_DEV_FAMILY,
+      g_S0_DATA_WIDTH            => c_S0_DATA_WIDTH,
+      g_C0_DATA_WIDTH            => c_C0_DATA_WIDTH,
+      -- Stream (Host->FPGA) 
+      g_H2F_S0_0_RDUSEDW_WIDTH   => c_H2F_S0_0_RDUSEDW_WIDTH,
+      g_H2F_S0_0_RWIDTH          => c_H2F_S0_0_RWIDTH,
+      g_H2F_S0_1_RDUSEDW_WIDTH   => c_H2F_S0_1_RDUSEDW_WIDTH,
+      g_H2F_S0_1_RWIDTH          => c_H2F_S0_1_RWIDTH,
+      -- Stream (FPGA->Host)
+      g_F2H_S0_WRUSEDW_WIDTH     => c_F2H_S0_WRUSEDW_WIDTH,
+      g_F2H_S0_WWIDTH            => c_F2H_S0_WWIDTH,
+      -- Control (Host->FPGA)
+      g_H2F_C0_RDUSEDW_WIDTH     => c_H2F_C0_RDUSEDW_WIDTH,
+      g_H2F_C0_RWIDTH            => c_H2F_C0_RWIDTH,
+      -- Control (FPGA->Host)
+      g_F2H_C0_WRUSEDW_WIDTH     => c_F2H_C0_WRUSEDW_WIDTH,
+      g_F2H_C0_WWIDTH            => c_F2H_C0_WWIDTH 
    )
    port map(
       inclk_125            => CLK125_FPGA,    -- Input clock for PLL
@@ -472,41 +470,40 @@ begin
       pcie_tx              => PCIE_HSI_IC,
       pcie_bus_clk         => open,  -- PCIe data clock output
       
-      EP01_sel             => inst0_from_fpgacfg.wfm_load,
-      --stream endpoint fifo (PC->FPGA) 
-      EP01_0_rdclk         => inst1_txpll_c1,
-      EP01_0_aclrn         => inst6_tx_in_pct_reset_n_req,
-      EP01_0_rd            => inst6_tx_in_pct_rdreq,
-      EP01_0_rdata         => inst2_EP01_0_rdata,
-      EP01_0_rempty        => inst2_EP01_0_rempty,
-      EP01_0_rdusedw       => inst2_EP01_0_rdusedw,
+      H2F_S0_0_sel         => inst0_from_fpgacfg.wfm_load,
+      --Stream endpoint FIFO (Host->FPGA) 
+      H2F_S0_0_rdclk       => inst1_txpll_c1,
+      H2F_S0_0_aclrn       => inst6_tx_in_pct_reset_n_req,
+      H2F_S0_0_rd          => inst6_tx_in_pct_rdreq,
+      H2F_S0_0_rdata       => inst2_H2F_S0_0_rdata,
+      H2F_S0_0_rempty      => inst2_H2F_S0_0_rempty,
+      H2F_S0_0_rdusedw     => inst2_H2F_S0_0_rdusedw,
      
-      EP01_1_rdclk         => inst1_txpll_c1,
-      EP01_1_aclrn         => inst0_from_fpgacfg.wfm_load,
-      EP01_1_rd            => inst6_wfm_in_pct_rdreq,
-      EP01_1_rdata         => inst2_EP01_1_rdata,
-      EP01_1_rempty        => inst2_EP01_1_rempty,
-      EP01_1_rdusedw       => inst2_EP01_1_rdusedw, 
-      
-      --stream endpoint fifo (FPGA->PC)
-      EP81_wclk            => inst1_rxpll_c1,
-      EP81_aclrn           => inst6_rx_pct_fifo_aclrn_req,
-      EP81_wr              => inst6_rx_pct_fifo_wrreq,
-      EP81_wdata           => inst6_rx_pct_fifo_wdata,
-      EP81_wfull           => inst2_EP81_wfull,
-      EP81_wrusedw         => inst2_EP81_wrusedw,
-      --controll endpoint fifo (PC->FPGA)
-      EP0F_rdclk           => CLK100_FPGA,
-      EP0F_aclrn           => reset_n,
-      EP0F_rd              => inst0_exfifo_if_rd,
-      EP0F_rdata           => inst2_EP0F_rdata,
-      EP0F_rempty          => inst2_EP0F_rempty,
-      --controll endpoint fifo (FPGA->PC)
-      EP8F_wclk            => CLK100_FPGA,
-      EP8F_aclrn           => not inst0_exfifo_of_rst,
-      EP8F_wr              => inst0_exfifo_of_wr,
-      EP8F_wdata           => inst0_exfifo_of_d,
-      EP8F_wfull           => inst2_EP8F_wfull,
+      H2F_S0_1_rdclk       => inst1_txpll_c1,
+      H2F_S0_1_aclrn       => inst0_from_fpgacfg.wfm_load,
+      H2F_S0_1_rd          => inst6_wfm_in_pct_rdreq,
+      H2F_S0_1_rdata       => inst2_H2F_S0_1_rdata,
+      H2F_S0_1_rempty      => inst2_H2F_S0_1_rempty,
+      H2F_S0_1_rdusedw     => inst2_H2F_S0_1_rdusedw,      
+      --Stream endpoint FIFO (FPGA->Host)
+      F2H_S0_wclk          => inst1_rxpll_c1,
+      F2H_S0_aclrn         => inst6_rx_pct_fifo_aclrn_req,
+      F2H_S0_wr            => inst6_rx_pct_fifo_wrreq,
+      F2H_S0_wdata         => inst6_rx_pct_fifo_wdata,
+      F2H_S0_wfull         => inst2_F2H_S0_wfull,
+      F2H_S0_wrusedw       => inst2_F2H_S0_wrusedw,
+      --Control endpoint FIFO (Host->FPGA)
+      H2F_C0_rdclk         => CLK100_FPGA,
+      H2F_C0_aclrn         => reset_n,
+      H2F_C0_rd            => inst0_exfifo_if_rd,
+      H2F_C0_rdata         => inst2_H2F_C0_rdata,
+      H2F_C0_rempty        => inst2_H2F_C0_rempty,
+      --Control endpoint FIFO (FPGA->Host)
+      F2H_C0_wclk          => CLK100_FPGA,
+      F2H_C0_aclrn         => not inst0_exfifo_of_rst,
+      F2H_C0_wr            => inst0_exfifo_of_wr,
+      F2H_C0_wdata         => inst0_exfifo_of_d,
+      F2H_C0_wfull         => inst2_F2H_C0_wfull,
       stream_rx_en         => inst0_from_fpgacfg.rx_en,
       user_read_32_open    => inst2_user_read_32_open
       );
@@ -611,7 +608,7 @@ begin
       --input ports 
       clk      => CLK100_FPGA,
       reset_n  => reset_n_clk100_fpga,
-      busy_in  => inst0_gpo(0) OR inst2_GPIF_busy,
+      busy_in  => inst0_gpo(0),
       busy_out => inst5_busy
    );
     
@@ -650,7 +647,7 @@ begin
       WFM_LCL_BUS_SIZE        => 64,
       WFM_LCL_BURST_LENGTH    => 2,
       --WFM player parameters
-      WFM_WFM_INFIFO_SIZE     => C_WFM_INFIFO_SIZE,
+      WFM_WFM_INFIFO_SIZE     => c_WFM_INFIFO_SIZE,
       WFM_DATA_WIDTH          => c_S0_DATA_WIDTH,
       WFM_IQ_WIDTH            => g_LMS_DIQ_WIDTH
    )
@@ -670,9 +667,9 @@ begin
       --fifo ports
       tx_in_pct_reset_n_req   => inst6_tx_in_pct_reset_n_req,
       tx_in_pct_rdreq         => inst6_tx_in_pct_rdreq,
-      tx_in_pct_data          => inst2_EP01_0_rdata,
-      tx_in_pct_rdempty       => inst2_EP01_0_rempty,
-      tx_in_pct_rdusedw       => inst2_EP01_0_rdusedw,
+      tx_in_pct_data          => inst2_H2F_S0_0_rdata,
+      tx_in_pct_rdempty       => inst2_H2F_S0_0_rempty,
+      tx_in_pct_rdusedw       => inst2_H2F_S0_0_rdusedw,
       
       -- WFM Player
       wfm_pll_ref_clk         => CLK50_FPGA,
@@ -681,9 +678,9 @@ begin
          -- WFM FIFO read ports
       wfm_in_pct_reset_n_req  => inst6_wfm_in_pct_reset_n_req,
       wfm_in_pct_rdreq        => inst6_wfm_in_pct_rdreq, 
-      wfm_in_pct_data         => inst2_EP01_1_rdata,
-      wfm_in_pct_rdempty      => inst2_EP01_1_rempty,
-      wfm_in_pct_rdusedw      => inst2_EP01_1_rdusedw,
+      wfm_in_pct_data         => inst2_H2F_S0_1_rdata,
+      wfm_in_pct_rdempty      => inst2_H2F_S0_1_rempty,
+      wfm_in_pct_rdusedw      => inst2_H2F_S0_1_rdusedw,
 
       --DDR2 external memory signals
       wfm_mem_odt             => DDR2_1_ODT,
@@ -708,7 +705,7 @@ begin
       rx_fsync                => LMS_DIQ2_IQSEL2,
       --Packet fifo ports
       rx_pct_fifo_aclrn_req   => inst6_rx_pct_fifo_aclrn_req,
-      rx_pct_fifo_wusedw      => inst2_EP81_wrusedw,
+      rx_pct_fifo_wusedw      => inst2_F2H_S0_wrusedw,
       rx_pct_fifo_wrreq       => inst6_rx_pct_fifo_wrreq,
       rx_pct_fifo_wdata       => inst6_rx_pct_fifo_wdata,
       --sample compare
