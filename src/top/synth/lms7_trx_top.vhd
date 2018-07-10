@@ -195,6 +195,7 @@ constant c_H2F_C0_RWIDTH         : integer := 8;      -- Host->FPGA control, rd 
 constant c_F2H_C0_WWIDTH         : integer := 8;      -- FPGA->Host control, wr width 
 
 signal reset_n                   : std_logic;
+signal reset_n_lmk_clk           : std_logic;
 signal reset_n_clk50_fpga        : std_logic; 
 signal reset_n_clk100_fpga       : std_logic;
 signal reset_n_si_clk0           : std_logic;
@@ -299,6 +300,11 @@ begin
       -- Reset signal with synchronous removal to SI_CLK0 clock domain, 
    sync_reg2 : entity work.sync_reg 
    port map(CLK50_FPGA, reset_n, '1', reset_n_clk50_fpga);
+   
+      -- Reset signal with synchronous removal to LMK_CLK clock domain, 
+   sync_reg3 : entity work.sync_reg 
+   port map(LMK_CLK, reset_n, '1', reset_n_lmk_clk); 
+   
      
 -- ----------------------------------------------------------------------------
 -- NIOS CPU instance.
@@ -557,8 +563,8 @@ begin
    )
    port map(
       -- General ports
-      clk                  => CLK50_FPGA,
-      reset_n              => reset_n_clk50_fpga,
+      clk                  => LMK_CLK,
+      reset_n              => reset_n_lmk_clk,
       -- configuration memory
       from_fpgacfg         => inst0_from_fpgacfg,
       to_periphcfg         => inst0_to_periphcfg,
