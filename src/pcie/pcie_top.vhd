@@ -86,7 +86,8 @@ entity pcie_top is
       F2H_C0_wfull         : out std_logic;
 
       stream_rx_en         : in std_logic;
-      user_read_32_open    : out std_logic
+      user_read_32_open    : out std_logic;
+      user_write_32_open   : out std_logic
    );
 end pcie_top;
   
@@ -717,5 +718,6 @@ begin
    inst1_user_r_read_8_eof    <= '0';
 
    user_read_32_open          <= inst1_user_r_read_32_open;
+   user_write_32_open         <= inst1_user_w_write_32_open;
   
 end sample_arch;

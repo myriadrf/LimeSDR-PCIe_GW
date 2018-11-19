@@ -256,6 +256,7 @@ signal inst2_H2F_S0_1_rdata      : std_logic_vector(c_H2F_S0_1_RWIDTH-1 downto 0
 signal inst2_H2F_S0_1_rempty     : std_logic;
 signal inst2_H2F_S0_1_rdusedw    : std_logic_vector(c_H2F_S0_1_RDUSEDW_WIDTH-1 downto 0);
 signal inst2_user_read_32_open   : std_logic;
+signal inst2_user_write_32_open  : std_logic;
 
 
 --inst5
@@ -511,7 +512,8 @@ begin
       F2H_C0_wdata         => inst0_exfifo_of_d,
       F2H_C0_wfull         => inst2_F2H_C0_wfull,
       stream_rx_en         => inst0_from_fpgacfg.rx_en,
-      user_read_32_open    => inst2_user_read_32_open
+      user_read_32_open    => inst2_user_read_32_open,
+      user_write_32_open   => inst2_user_write_32_open
       );
       
 -- ----------------------------------------------------------------------------
@@ -587,7 +589,7 @@ begin
       --LED3 - LED6
       led3_in              => inst1_rxpll_locked,
       led4_in              => inst1_txpll_locked,
-      led5_in              => inst2_user_read_32_open,
+      led5_in              => inst2_user_read_32_open OR inst2_user_write_32_open,
       led6_in              => '0',
       led3_out             => FPGA_LED3,
       led4_out             => FPGA_LED4,
@@ -626,7 +628,8 @@ begin
    process(inst0_from_fpgacfg, inst2_user_read_32_open)
    begin 
       inst0_from_fpgacfg_mod        <= inst0_from_fpgacfg;
-      inst0_from_fpgacfg_mod.rx_en  <= inst0_from_fpgacfg.rx_en AND inst2_user_read_32_open;
+      inst0_from_fpgacfg_mod.rx_en  <= inst0_from_fpgacfg.rx_en AND 
+                                       (inst2_user_read_32_open OR inst2_user_write_32_open);
    end process;
    
    inst6_rxtx_top : entity work.rxtx_top
