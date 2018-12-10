@@ -40,16 +40,18 @@ architecture arch of pct_payload_extrct is
 --declare signals,  components here
 signal wr_cnt : unsigned (15 downto 0);
 
-signal hdr_payload_reg	      : std_logic_vector(data_w-1 downto 0);
+signal hdr_payload_reg	: std_logic_vector(data_w-1 downto 0);
  
 signal payload_dest_reg	      : std_logic_vector(1 downto 0);
 signal payload_size_reg	      : std_logic_vector(15 downto 0);
-
-
-signal pct_payload_data_reg	: std_logic_vector(data_w-1 downto 0);
-signal pct_payload_valid_reg  : std_logic;
-signal pct_payload_dest_reg	: std_logic_vector(1 downto 0);
 signal pct_payload_valid_comb : std_logic;
+
+signal wr_cnt_all       : unsigned(31 downto 0);
+signal valid_cnt_all    : unsigned(31 downto 0);
+
+attribute noprune : boolean;
+attribute noprune of wr_cnt_all     : signal is true;
+attribute noprune of valid_cnt_all  : signal is true;
 
   
 begin
@@ -106,27 +108,29 @@ begin
 		end if;		 
 end process;
 
-
--- ----------------------------------------------------------------------------
--- output_registers
--- ----------------------------------------------------------------------------
   process(reset_n, clk)
-    begin
-		if reset_n='0' then
-         pct_payload_data_reg    <= (others=>'0');	
-         pct_payload_valid_reg   <= '0'; 
-         pct_payload_dest_reg    <= (others=>'0');	
-		elsif (clk'event and clk = '1') then
-         pct_payload_data_reg    <= pct_data;	
-         pct_payload_valid_reg   <= pct_payload_valid_comb; 
-         pct_payload_dest_reg    <= payload_dest_reg;	
-		end if;
-    end process;
+   begin
+      if reset_n='0' then
+         wr_cnt_all     <= (others=>'0');
+         valid_cnt_all  <= (others=>'0');
+      elsif (clk'event and clk = '1') then
+         if pct_wr='1' then 
+            wr_cnt_all <= wr_cnt_all + 1;
+         else 
+            wr_cnt_all <= wr_cnt_all;
+         end if;
+         
+         if pct_payload_valid_comb='1' then 
+            valid_cnt_all <= valid_cnt_all + 1;
+         else 
+            valid_cnt_all <= valid_cnt_all;
+         end if;
+      end if;
+   end process;
 
-
-pct_payload_data     <= pct_payload_data_reg;
-pct_payload_dest     <= pct_payload_dest_reg;
-pct_payload_valid    <= pct_payload_valid_reg;
+pct_payload_data  <= pct_data;
+pct_payload_dest  <= payload_dest_reg;
+pct_payload_valid <= pct_payload_valid_comb;
 
 end arch;   
 

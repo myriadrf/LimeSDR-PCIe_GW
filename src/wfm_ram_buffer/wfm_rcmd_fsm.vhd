@@ -41,9 +41,11 @@ end wfm_rcmd_fsm;
 -- ----------------------------------------------------------------------------
 architecture arch of wfm_rcmd_fsm is
 --declare signals,  components here
-signal wfm_load_reg           : std_logic_vector(1 downto 0);
-signal wcmd_last_addr_latch   : std_logic_vector(addr_size-1 downto 0);
-signal wcmd_last_addr_even    : std_logic_vector(addr_size-1 downto 0);  
+signal wfm_load_reg : std_logic_vector(2 downto 0);
+signal wfm_play_stop_reg	: std_logic_vector(2 downto 0);
+signal wfm_load_int	: std_logic;
+signal wcmd_last_addr_latch,	wcmd_last_addr_reg0, wcmd_last_addr_reg1	: std_logic_vector(addr_size-1 downto 0);
+signal wcmd_last_addr_even : std_logic_vector(addr_size-1 downto 0);  
 
 type state_type is (idle, check_rdy, burst_rd, last_burst,rd, rd_stop);
 
@@ -66,10 +68,16 @@ process(rcmd_reset_n, rcmd_clk) is
 	begin 
 		if rcmd_reset_n='0' then 
 			wfm_load_reg<=(others=>'0');
+			wfm_play_stop_reg<=(others=>'0');
+			wcmd_last_addr_reg0<=(others=>'0');
+			wcmd_last_addr_reg1<=(others=>'0');
 		elsif (rcmd_clk'event and rcmd_clk='1') then
-			wfm_load_reg<=wfm_load_reg(0) & wfm_load;
-			if wfm_load_reg(1 downto 0)="10" then --latch on falling edge
-				wcmd_last_addr_latch<=wcmd_last_addr;
+			wfm_load_reg<=wfm_load_reg(1 downto 0) & wfm_load;
+			wfm_play_stop_reg<=wfm_play_stop_reg(1 downto 0) & wfm_play_stop;
+			wcmd_last_addr_reg0<=wcmd_last_addr;
+			wcmd_last_addr_reg1<=wcmd_last_addr_reg0;
+			if wfm_load_reg(2 downto 1)="10" then --latch on falling edge
+				wcmd_last_addr_latch<=wcmd_last_addr_reg1;
 			else 
 				 wcmd_last_addr_latch<=wcmd_last_addr_latch;
 			end if;
@@ -151,20 +159,20 @@ end process;
 -- ----------------------------------------------------------------------------
 --state machine combo
 -- ----------------------------------------------------------------------------
-fsm : process(current_state, wfm_load_reg, rcmd_rdy, wfm_play_stop, rd_addr, wcmd_last_addr_even,
+fsm : process(current_state, wfm_load_reg(2 downto 1), rcmd_rdy, wfm_play_stop_reg(2), rd_addr, wcmd_last_addr_even,
 				wcmd_last_addr_latch(0)) begin
 	next_state <= current_state;
 	case current_state is
 	  
 		when idle => --idle state 
-			if wfm_load_reg="10" then 
+			if wfm_load_reg(2 downto 1)="10" then 
 				next_state<=check_rdy;
 			else 
 				next_state<=idle;
 			end if;
 
 		when check_rdy => --check that RD command fifo is ready to accept commands
-			if rcmd_rdy='1' and wfm_play_stop='1' then 
+			if rcmd_rdy='1' and wfm_play_stop_reg(2)='1' then 
 				next_state<=burst_rd;
 			else 
 				next_state<=check_rdy;
@@ -179,7 +187,7 @@ fsm : process(current_state, wfm_load_reg, rcmd_rdy, wfm_play_stop, rd_addr, wcm
 							next_state<=last_burst;
 						end if;
 					else 
-						if wfm_play_stop='0' then
+						if wfm_play_stop_reg(2)='0' then
 							next_state<=rd_stop;
 						else 
 							next_state<=burst_rd;
@@ -190,7 +198,7 @@ fsm : process(current_state, wfm_load_reg, rcmd_rdy, wfm_play_stop, rd_addr, wcm
 			end if;
 
 --			if rcmd_rdy='1' then 
---				if wfm_play_stop='1' then
+--				if wfm_play_stop_reg(2)='1' then
 --					if rd_addr>=unsigned(wcmd_last_addr_even)-2 then 
 --						if wcmd_last_addr_latch(0)='1' then
 --							next_state<=rd; 
@@ -209,7 +217,7 @@ fsm : process(current_state, wfm_load_reg, rcmd_rdy, wfm_play_stop, rd_addr, wcm
 
 		when last_burst =>	--last burst command to reset address
 			if rcmd_rdy='1' then 
-				if  wfm_play_stop='1' then 
+				if  wfm_play_stop_reg(2)='1' then 
 					next_state<=burst_rd;
 				else 
 					next_state<=check_rdy;
@@ -220,7 +228,7 @@ fsm : process(current_state, wfm_load_reg, rcmd_rdy, wfm_play_stop, rd_addr, wcm
 
 		when rd => 			-- non burst read command
 			if rcmd_rdy='1' then 
-				if  wfm_play_stop='1' then 
+				if  wfm_play_stop_reg(2)='1' then 
 					next_state<=burst_rd;
 				else 
 					next_state<=check_rdy;
@@ -230,9 +238,9 @@ fsm : process(current_state, wfm_load_reg, rcmd_rdy, wfm_play_stop, rd_addr, wcm
 			end if;
 		
 		when rd_stop =>	--stop reading 
-			if wfm_load_reg="01" then 
+			if wfm_load_reg(2 downto 1)="01" then 
 				next_state<=idle;
-			elsif wfm_play_stop='1' then 
+			elsif wfm_play_stop_reg(2)='1' then 
 				next_state<=burst_rd;
 			else 
 				next_state<=rd_stop;

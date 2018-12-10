@@ -98,7 +98,6 @@ signal dynps_cnt_sel_sync        : std_logic_vector(2 downto 0);
 signal dynps_phase_sync          : std_logic_vector(9 downto 0);
 signal dynps_step_size_sync      : std_logic_vector(9 downto 0);
 signal rcnfig_en_sync_scanclk    : std_logic;
-signal drct_clk_en_sync          : std_logic_vector(1 downto 0);
 signal dynps_mode_sync           : std_logic;
 signal dynps_tst_sync            : std_logic;
 
@@ -298,10 +297,6 @@ pll_areset_n   <= not pll_areset;
  port map(inst1_pll_scanclk, pll_logic_reset_n, dynps_phase, dynps_phase_sync);
  
  bus_sync_reg3 : entity work.bus_sync_reg
- generic map (2) 
- port map(pll_inclk_global, pll_logic_reset_n, drct_clk_en, drct_clk_en_sync);
- 
- bus_sync_reg4 : entity work.bus_sync_reg
  generic map (10) 
  port map(inst1_pll_scanclk, pll_logic_reset_n, dynps_step_size, dynps_step_size_sync);
   
@@ -424,7 +419,7 @@ GENERIC MAP (
       compensate_clock           => compensate_clock,
       inclk0_input_frequency     => inclk0_input_frequency,
       intended_device_family     => intended_device_family,
-      lpm_hint                   => "CBX_MODULE_PREFIX=pll_rx",
+      lpm_hint                   => "CBX_MODULE_PREFIX=pll",
       lpm_type                   => "altpll",
       operation_mode             => operation_mode,
       pll_type                   => "AUTO",
@@ -556,17 +551,17 @@ end generate c1_dly_instx_gen;
 -- ----------------------------------------------------------------------------
 -- c0 clk MUX
 -- ----------------------------------------------------------------------------
-c0_mux <=   inst3_clk(0) when drct_clk_en_sync(0)='0' else 
+c0_mux <=   inst3_clk(0) when drct_clk_en(0)='0' else 
             drct_c0_dly_chain(drct_c0_ndly-1);
 
 -- ----------------------------------------------------------------------------
 -- c1 clk MUX
 -- ----------------------------------------------------------------------------
-c1_mux <=   inst3_clk(1) when drct_clk_en_sync(1)='0' else 
+c1_mux <=   inst3_clk(1) when drct_clk_en(1)='0' else 
             drct_c1_dly_chain(drct_c1_ndly-1);
 
 
-locked_mux <=  pll_areset_n when (drct_clk_en_sync(0)='1' OR drct_clk_en_sync(1)='1') else
+locked_mux <=  pll_areset_n when (drct_clk_en(0)='1' OR drct_clk_en(1)='1') else
                inst3_locked;
 
 

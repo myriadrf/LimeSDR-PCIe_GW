@@ -31,55 +31,56 @@ entity wfm_player_top is
 );
   port (
       --input ports
-		reset_n					: in std_logic;
-		ddr2_pll_ref_clk		: in std_logic;
-	 
-		wcmd_clk					: in std_logic;
-		
-		rcmd_clk					: in std_logic;
-		
-		wfm_load					: in std_logic;
-		wfm_play_stop			: in std_logic; -- 1- play, 0- stop
+		reset_n					   : in std_logic;
+		ddr2_pll_ref_clk		   : in std_logic;
+      
+		wcmd_clk					   : in std_logic;
+         
+		rcmd_clk					   : in std_logic;
+         
+		wfm_load					   : in std_logic;
+		wfm_play_stop			   : in std_logic; -- 1- play, 0- stop
 
-		wfm_data					: in std_logic_vector(data_width-1 downto 0);
-		wfm_wr					: in std_logic;
-		wfm_rdy					: out std_logic;
-		wfm_infifo_wrusedw 	: out std_logic_vector(wfm_infifo_size-1 downto 0);
-		wfm_infifo_wfull		: out std_logic;
+      wfm_infifo_reset_n_req  : out std_logic;
+		wfm_infifo_data		   : in std_logic_vector(data_width-1 downto 0);
+		wfm_infifo_rdreq  	   : out std_logic;
+      wfm_infifo_rdempty      : in std_logic;
+      wfm_infifo_rdusedw      : in std_logic_vector(wfm_infifo_size-1 downto 0);
+		wfm_rdy					   : out std_logic;
 		
-		sample_width    		: in std_logic_vector(1 downto 0); -- "00"-16bit, "01"-14bit, "10"-12bit
-		fr_start					: in std_logic;
-		ch_en						: in std_logic_vector(1 downto 0);
-      mimo_en					: in std_logic;
+		sample_width    		   : in std_logic_vector(1 downto 0); -- "00"-16bit, "01"-14bit, "10"-12bit
+		fr_start					   : in std_logic;
+		ch_en						   : in std_logic_vector(1 downto 0);
+      mimo_en					   : in std_logic;
 
-		iq_clk					: in std_logic;
-		dd_iq_h					: out std_logic_vector(15 downto 0);
-		dd_iq_l					: out std_logic_vector(15 downto 0);
---		dd_iq_h_uns				: out std_logic_vector(15 downto 0);
---		dd_iq_l_uns				: out std_logic_vector(15 downto 0);
+		iq_clk					   : in std_logic;
+		dd_iq_h					   : out std_logic_vector(15 downto 0);
+		dd_iq_l					   : out std_logic_vector(15 downto 0);
+--		dd_iq_h_uns				   : out std_logic_vector(15 downto 0);
+--		dd_iq_l_uns				   : out std_logic_vector(15 downto 0);
 
 		--DDR2 external memory signals	
-		mem_odt					: out std_logic_vector (0 DOWNTO 0);
-		mem_cs_n					: out std_logic_vector (0 DOWNTO 0);
-		mem_cke					: out std_logic_vector (0 DOWNTO 0);
-		mem_addr					: out std_logic_vector (12 DOWNTO 0);
-		mem_ba					: out std_logic_vector (2 DOWNTO 0);
-		mem_ras_n				: out std_logic;
-		mem_cas_n				: out std_logic;
-		mem_we_n					: out std_logic;
-		mem_dm					: out std_logic_vector (1 DOWNTO 0);
-		phy_clk					: out std_logic;
-		mem_clk					: inout std_logic_vector (0 DOWNTO 0);
-		mem_clk_n				: inout std_logic_vector (0 DOWNTO 0);
-		mem_dq					: inout std_logic_vector (15 DOWNTO 0);
-		mem_dqs					: inout std_logic_vector (1 DOWNTO 0);
-		begin_test				: in std_logic;
-		insert_error			: in std_logic;
-		pnf_per_bit			 	: out std_logic_vector(31 downto 0);
-		pnf_per_bit_persist 	: out std_logic_vector(31 downto 0);
-		pass                	: out std_logic;
-		fail                	: out std_logic; 
-		test_complete       	: out std_logic
+		mem_odt					   : out std_logic_vector (0 DOWNTO 0);
+		mem_cs_n					   : out std_logic_vector (0 DOWNTO 0);
+		mem_cke					   : out std_logic_vector (0 DOWNTO 0);
+		mem_addr					   : out std_logic_vector (12 DOWNTO 0);
+		mem_ba					   : out std_logic_vector (2 DOWNTO 0);
+		mem_ras_n				   : out std_logic;
+		mem_cas_n				   : out std_logic;
+		mem_we_n					   : out std_logic;
+		mem_dm					   : out std_logic_vector (1 DOWNTO 0);
+		phy_clk					   : out std_logic;
+		mem_clk					   : inout std_logic_vector (0 DOWNTO 0);
+		mem_clk_n				   : inout std_logic_vector (0 DOWNTO 0);
+		mem_dq					   : inout std_logic_vector (15 DOWNTO 0);
+		mem_dqs					   : inout std_logic_vector (1 DOWNTO 0);
+		begin_test				   : in std_logic;
+		insert_error			   : in std_logic;
+		pnf_per_bit			 	   : out std_logic_vector(31 downto 0);
+		pnf_per_bit_persist 	   : out std_logic_vector(31 downto 0);
+		pass                	   : out std_logic;
+		fail                	   : out std_logic; 
+		test_complete       	   : out std_logic
 		
         
         );
@@ -120,8 +121,10 @@ signal DDR2_ctrl_local_ready			: std_logic;
 signal DDR2_ctrl_local_rdata			: std_logic_vector(cntrl_bus_size*2*cntrl_rate-1 downto 0);
 signal DDR2_ctrl_local_rdata_valid	: std_logic;
 signal DDR2_ctrl_local_init_done		: std_logic;
-signal DDR2_ctrl_init_done_wcmd 	   : std_logic;
-signal DDR2_ctrl_init_done_rcmd 	   : std_logic;
+signal DDR2_ctrl_init_done_wcmd0 	: std_logic;
+signal DDR2_ctrl_init_done_wcmd1 	: std_logic;
+signal DDR2_ctrl_init_done_rcmd0 	: std_logic;
+signal DDR2_ctrl_init_done_rcmd1 	: std_logic;
 
 --wfm outfifo signals
 signal wfm_out_fifo_rdreq				: std_logic;
@@ -130,12 +133,9 @@ signal wfm_out_fifo_rdempty			: std_logic;
 
 signal dcmpr_rdempty						: std_logic;
 signal dcmpr_q								: std_logic_vector(data_width-1 downto 0);
-signal dcmpr_wusedw						: std_logic_vector(dcmpr_fifo_size-1 downto 0);
-signal dcmpr_reset_n                : std_logic;
- 
+signal dcmpr_wusedw						: std_logic_vector(dcmpr_fifo_size-1 downto 0); 
 
 signal rdfifo_read						: std_logic;
-signal rdfifo_reset_n               : std_logic;
 
 signal wfm_load_i							: std_logic;
 
@@ -143,50 +143,6 @@ signal dd_iq_l_int						: std_logic_vector(15 downto 0);
 signal dd_iq_h_int						: std_logic_vector(15 downto 0);
 
 signal wfm_load_reg_pll_refclk		: std_logic_vector(2 downto 0);
-signal wfm_load_sync_iq_clk         : std_logic;
-signal sample_width_phy_clk    		: std_logic_vector(1 downto 0);
-
-
-component wfm_player is
-	generic(
-			dev_family			: string  := "Cyclone IV E"; 
-			wfm_infifo_size	: integer := 11;
-			wfm_outfifo_size	: integer := 11;
-			data_width			: integer := 32;
-			iq_width				: integer := 12;
-			addr_size			: integer := 24;
-			cntrl_bus_size		: integer := 16;
-			lcl_burst_length	: integer := 2;
-			cntrl_rate			: integer := 1 --1 - full rate, 2 - half rate
-);
-  port (
-		ddr2_phy_clk			: in std_logic;
-		ddr2_phy_reset_n		: in std_logic;
-
-		wfm_load					: in std_logic;
-		wfm_play_stop			: in std_logic; -- 1- play, 0- stop
-
-		wfm_data					: in std_logic_vector(data_width-1 downto 0);
-		wfm_wr					: in std_logic;
-		wfm_infifo_wrusedw 	: out std_logic_vector(wfm_infifo_size-1 downto 0);
-		wfm_infifo_wfull		: out std_logic;
-
-		wcmd_clk					: in std_logic;
-		wcmd_reset_n			: in  std_logic;
-		wcmd_rdy					: in std_logic;
-		wcmd_addr				: out std_logic_vector(addr_size-1 downto 0);
-		wcmd_wr					: out std_logic;
-		wcmd_brst_en			: out std_logic; --1- writes in burst, 0- single write
-		wcmd_data				: out std_logic_vector(cntrl_bus_size*2*cntrl_rate-1 downto 0);
-		rcmd_clk					: in std_logic;
-		rcmd_reset_n			: in std_logic;
-		rcmd_rdy					: in std_logic;
-		rcmd_addr				: out std_logic_vector(addr_size-1 downto 0);
-		rcmd_wr					: out std_logic;
-		rcmd_brst_en			: out std_logic --1- reads in burst, 0- single read
-		
-        );
-end component;
 
 
 component DDR2_ctrl_top is
@@ -332,29 +288,21 @@ begin
 wfm_load_i<=not wfm_load;
 
 
-sync_reg0 : entity work.sync_reg 
-port map(rcmd_clk, '1', wfm_load, wfm_load_sync_iq_clk);
-
-bus_sync_reg0 : entity work.bus_sync_reg
- generic map (2) 
- port map(DDR2_ctrl_phy_clk, '1', sample_width, sample_width_phy_clk);
-
-
-
 
 -- ----------------------------------------------------------------------------
 -- To synchronize DDR2_ctrl_local_init_done signal to wcmd_clk
 -- ----------------------------------------------------------------------------
-sync_reg1 : entity work.sync_reg 
-port map(wcmd_clk, '1', DDR2_ctrl_local_init_done, DDR2_ctrl_init_done_wcmd);
-
-
 process (reset_n, wcmd_clk) is 
 begin 
 	if reset_n='0' then 
+		DDR2_ctrl_init_done_wcmd0<='0';
+		DDR2_ctrl_init_done_wcmd1<='0';
 		wfm_player_wcmd_reset_n<='0';
-	elsif (wcmd_clk'event and wcmd_clk='1') then 		
-		if DDR2_ctrl_init_done_wcmd='1' then 
+	elsif (wcmd_clk'event and wcmd_clk='1') then 
+		DDR2_ctrl_init_done_wcmd0<=DDR2_ctrl_local_init_done;
+		DDR2_ctrl_init_done_wcmd1<=DDR2_ctrl_init_done_wcmd0;
+		
+		if DDR2_ctrl_init_done_wcmd1='1' then 
 			wfm_player_wcmd_reset_n<='1';
 		else 
 			wfm_player_wcmd_reset_n<='0';
@@ -365,16 +313,17 @@ end process;
 -- ----------------------------------------------------------------------------
 -- To synchronize DDR2_ctrl_local_init_done signal to rcmd_clk
 -- ----------------------------------------------------------------------------
-
-sync_reg2 : entity work.sync_reg 
-port map(rcmd_clk, '1', DDR2_ctrl_local_init_done, DDR2_ctrl_init_done_rcmd);
-
 process (reset_n, rcmd_clk) is 
 begin 
 	if reset_n='0' then 
+		DDR2_ctrl_init_done_rcmd0<='0';
+		DDR2_ctrl_init_done_rcmd1<='0';
 		wfm_player_rcmd_reset_n<='0';
-	elsif (rcmd_clk'event and rcmd_clk='1') then 		
-		if DDR2_ctrl_init_done_rcmd='1' then 
+	elsif (rcmd_clk'event and rcmd_clk='1') then 
+		DDR2_ctrl_init_done_rcmd0<=DDR2_ctrl_local_init_done;
+		DDR2_ctrl_init_done_rcmd1<=DDR2_ctrl_init_done_rcmd0;
+		
+		if DDR2_ctrl_init_done_rcmd1='1' then 
 			wfm_player_rcmd_reset_n<='1';
 		else 
 			wfm_player_rcmd_reset_n<='0';
@@ -409,7 +358,7 @@ end process;
 -- ----------------------------------------------------------------------------
 -- WFM player inst
 -- ----------------------------------------------------------------------------
-wfm_player_inst : wfm_player
+wfm_player_inst : entity work.wfm_player
 	generic map (
 			dev_family			=> dev_family, 
 			wfm_infifo_size	=> wfm_infifo_size,
@@ -424,30 +373,31 @@ wfm_player_inst : wfm_player
   port map(
 
 
-		ddr2_phy_clk			=> DDR2_ctrl_phy_clk,
-		ddr2_phy_reset_n		=> DDR2_ctrl_local_init_done,
+		ddr2_phy_clk			   => DDR2_ctrl_phy_clk,
+		ddr2_phy_reset_n		   => DDR2_ctrl_local_init_done,
+   
+		wfm_load					   => wfm_load,
+		wfm_play_stop			   => wfm_play_stop,
 
-		wfm_load					=> wfm_load,
-		wfm_play_stop			=> wfm_play_stop,
+      wfm_infifo_reset_n_req  => wfm_infifo_reset_n_req,
+		wfm_infifo_data		   => wfm_infifo_data,
+      wfm_infifo_rdempty      => wfm_infifo_rdempty,
+		wfm_infifo_rdreq		   => wfm_infifo_rdreq,
+		wfm_infifo_rdusedw 	   => wfm_infifo_rdusedw,
 
-		wfm_data					=> wfm_data,
-		wfm_wr					=> wfm_wr,
-		wfm_infifo_wrusedw 	=> wfm_infifo_wrusedw,
-		wfm_infifo_wfull		=> wfm_infifo_wfull,
-
-		wcmd_clk					=> wcmd_clk,
-		wcmd_reset_n			=> wfm_player_wcmd_reset_n,
-		wcmd_rdy					=> DDR2_ctrl_wcmd_rdy,
-		wcmd_addr				=> wfm_player_wcmd_addr,
-		wcmd_wr					=> wfm_player_wcmd_wr,
-		wcmd_brst_en			=> wfm_player_wcmd_brst_en,
-		wcmd_data				=> wfm_player_wcmd_data,
-		rcmd_clk					=> rcmd_clk,
-		rcmd_reset_n			=> wfm_player_rcmd_reset_n,
-		rcmd_rdy					=> DDR2_ctrl_rcmd_rdy,
-		rcmd_addr				=> wfm_player_rcmd_addr,
-		rcmd_wr					=> wfm_player_rcmd_wr,
-		rcmd_brst_en			=> wfm_player_rcmd_brst_en
+		wcmd_clk					   => wcmd_clk,
+		wcmd_reset_n			   => wfm_player_wcmd_reset_n,
+		wcmd_rdy					   => DDR2_ctrl_wcmd_rdy,
+		wcmd_addr				   => wfm_player_wcmd_addr,
+		wcmd_wr					   => wfm_player_wcmd_wr,
+		wcmd_brst_en			   => wfm_player_wcmd_brst_en,
+		wcmd_data				   => wfm_player_wcmd_data,
+		rcmd_clk					   => rcmd_clk,
+		rcmd_reset_n			   => wfm_player_rcmd_reset_n,
+		rcmd_rdy					   => DDR2_ctrl_rcmd_rdy,
+		rcmd_addr				   => wfm_player_rcmd_addr,
+		rcmd_wr					   => wfm_player_rcmd_wr,
+		rcmd_brst_en			   => wfm_player_rcmd_brst_en
 
         );
 
@@ -518,9 +468,7 @@ port map(
 	 
 -- ----------------------------------------------------------------------------
 -- Payload decompress module
--- ----------------------------------------------------------------------------	
-dcmpr_reset_n <= not wfm_load_sync_iq_clk;
- 
+-- ----------------------------------------------------------------------------	 
 dcmpr :  decompress 
   generic map  (
 					dev_family => dev_family,
@@ -532,10 +480,10 @@ dcmpr :  decompress
         --input ports 
         wclk          => DDR2_ctrl_phy_clk,  
         rclk          => iq_clk, 
-        reset_n       => dcmpr_reset_n, 
+        reset_n       => wfm_load_i, 
         data_in       => DDR2_ctrl_local_rdata, 
         data_in_valid => DDR2_ctrl_local_rdata_valid, 
-        sample_width  => sample_width_phy_clk,
+        sample_width  => sample_width,
         rdreq         => rdfifo_read,
         rdempty       => dcmpr_rdempty,
         rdusedw       => open, 
@@ -547,14 +495,12 @@ dcmpr :  decompress
 		 
 -- ----------------------------------------------------------------------------
 -- Read and form samples from decompress fifo
--- ----------------------------------------------------------------------------
-rdfifo_reset_n <= not wfm_load_sync_iq_clk;
-			
+-- ----------------------------------------------------------------------------			
 rd_fifo : rd_tx_fifo 
   generic map (sampl_width =>12)
   port map (
       clk			=> iq_clk,
-      reset_n		=> rdfifo_reset_n, 
+      reset_n		=> wfm_load_i, 
       fr_start  	=> fr_start, 
       ch_en			=> ch_en,
       mimo_en		=> mimo_en,
@@ -569,15 +515,8 @@ rd_fifo : rd_tx_fifo
 
 phy_clk<=DDR2_ctrl_phy_clk;
 
-
---output register
-process(iq_clk)
-begin 
-   if (iq_clk'event AND iq_clk='1') then 
-      dd_iq_h<=dd_iq_l_int;
-      dd_iq_l<=dd_iq_h_int;
-   end if;
-end process;
+dd_iq_h<=dd_iq_l_int;
+dd_iq_l<=dd_iq_h_int;	
 
 
 --dd_iq_h_uns<="000" & dd_iq_l_int(12) & std_logic_vector(signed(dd_iq_l_int(11 downto 0))+2048);

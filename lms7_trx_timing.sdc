@@ -20,7 +20,7 @@ set_time_format -unit ns -decimal_places 3
 #Base clocks
 # ----------------------------------------------------------------------------
 #FPGA pll
-create_clock -period 20.000 	-name CLK50_FPGA_1 	[get_ports CLK50_FPGA_1]
+create_clock -period 20.000 	-name CLK50_FPGA 	   [get_ports CLK50_FPGA]
 create_clock -period 10.000 	-name CLK100_FPGA		[get_ports CLK100_FPGA]
 create_clock -period  8.000 	-name CLK125_FPGA 	[get_ports CLK125_FPGA]
 
@@ -50,10 +50,10 @@ create_clock -period 10.000	-name CLK100_FPGA_VIRT
 create_generated_clock 	-name FPGA_SPI0_SCLK_reg \
 								-source [get_ports {CLK100_FPGA}] \
 								-divide_by 6 \
-								[get_registers {nios_cpu:inst16|lms_ctr:u0|lms_ctr_spi_lms:spi_lms|SCLK_reg}]
+								[get_registers {*|lms_ctr_spi_lms:spi_lms|SCLK_reg}]
 								
 create_generated_clock 	-name FPGA_SPI0_SCLK_out \
-								-source [get_registers {nios_cpu:inst16|lms_ctr:u0|lms_ctr_spi_lms:spi_lms|SCLK_reg}] \
+								-source [get_registers {*|lms_ctr_spi_lms:spi_lms|SCLK_reg}] \
 								[get_ports FPGA_SPI0_SCLK]
 								
 set_false_path				-to [get_ports FPGA_SPI0_SCLK]
@@ -61,7 +61,7 @@ set_false_path				-to [get_ports FPGA_SPI0_SCLK]
 create_generated_clock -name FPGA_SPI1_SCLK \
 								-source [get_ports CLK100_FPGA] \
 								-divide_by 6 \
-								[get_registers nios_cpu:inst16|lms_ctr:u0|lms_ctr_spi_1:spi_1|SCLK_reg]	
+								[get_registers *|lms_ctr_spi_1:spi_1|SCLK_reg]	
 								
 							
 					
@@ -132,8 +132,8 @@ set_false_path -to [get_ports LMS_TXNRX2]
 set_false_path -to [get_ports LMS_RESET]
 set_false_path -to [get_ports TX2_2_LB*]
 set_false_path -to [get_ports TX1_2_LB*]
-set_false_path -to [get_ports I2C_SCL] 	
-set_false_path -to [get_ports I2C_SDA]
+set_false_path -to [get_ports FPGA_I2C_SCL] 	
+set_false_path -to [get_ports FPGA_I2C_SDA]
 set_false_path -to [get_ports FPGA_AS_*]
 set_false_path -to [get_ports FPGA_SPI1_*]
 set_false_path -to [get_ports FPGA_SPI0_LMS_SS]
@@ -144,8 +144,8 @@ set_false_path -from [get_ports EXT_GND*]
 set_false_path -from [get_ports HW_VER*]
 set_false_path -from [get_ports BOM_VER*] 		
 set_false_path -from [get_ports ADF_MUXOUT*] 					
-set_false_path -from [get_ports I2C_SCL] 	
-set_false_path -from [get_ports I2C_SDA]
+set_false_path -from [get_ports FPGA_I2C_SCL] 	
+set_false_path -from [get_ports FPGA_I2C_SDA]
 set_false_path -from [get_ports LM75_OS]
 set_false_path -from [get_ports FPGA_SW[*]]
 set_false_path -from [get_ports FPGA_AS_DATA0]
