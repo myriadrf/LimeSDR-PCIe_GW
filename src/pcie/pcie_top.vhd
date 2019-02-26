@@ -556,21 +556,18 @@ begin
    inst2_wrreq    <= inst1_user_w_write_32_wren when H2F_S0_0_sel_sync = '0' else '0';
  
    -- First fifo, dedicated for TX stream
-   inst2_H2F_S0_0_FIFO : entity work.two_fifo_inst 
+   inst2_H2F_S0_0_FIFO : entity work.fifo_inst 
    generic map(
       dev_family     => g_DEV_FAMILY,
       wrwidth        => g_S0_DATA_WIDTH,
       wrusedw_witdth => 10,  
       rdwidth        => g_H2F_S0_0_RWIDTH,
       rdusedw_width  => c_H2F_S0_0_RDUSEDW_WIDTH,
-      show_ahead     => "OFF",
-      TRNSF_SIZE     => 512, 
-      TRNSF_N        => 8
+      show_ahead     => "OFF"
    )
    port map(
       --input ports 
-      reset_0_n   => inst1_user_w_write_32_open,
-      reset_1_n   => inst2_reset_n,
+      reset_n     => inst1_user_w_write_32_open,
       wrclk       => bus_clk,
       wrreq       => inst2_wrreq,
       data        => inst1_user_w_write_32_data,

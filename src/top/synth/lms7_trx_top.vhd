@@ -674,7 +674,6 @@ begin
       tx_DIQ                  => LMS_DIQ1_D,
       tx_fsync                => LMS_DIQ1_IQSEL,
       --fifo ports
-      tx_in_pct_reset_n_req   => inst6_tx_in_pct_reset_n_req,
       tx_in_pct_rdreq         => inst6_tx_in_pct_rdreq,
       tx_in_pct_data          => inst2_H2F_S0_0_rdata,
       tx_in_pct_rdempty       => inst2_H2F_S0_0_rempty,
