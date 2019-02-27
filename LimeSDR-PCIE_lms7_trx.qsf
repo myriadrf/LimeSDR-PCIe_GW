@@ -730,6 +730,8 @@ set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_RO
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name AUTO_SHIFT_REGISTER_RECOGNITION AUTO
 set_location_assignment PLL_6 -to "pcie_top:inst2_pcie_top|altpll:altpll_inst0|pll_vhdl_altpll:auto_generated|wire_pll1_clk[1]"
+set_global_assignment -name VHDL_FILE src/tx_path_top/pct_separate/synth/pct_separate_fsm.vhd
+set_global_assignment -name VHDL_FILE src/tx_path_top/pct_separate/synth/one_pct_fifo.vhd
 set_global_assignment -name VHDL_FILE src/rx_path_top/smpl_cnt/synth/iq_smpl_cnt.vhd
 set_global_assignment -name VHDL_FILE src/pcie/two_fifo_inst.vhd
 set_global_assignment -name VHDL_FILE src/tx_path_top/fifo2diq/synth/txiq_ctrl.vhd
