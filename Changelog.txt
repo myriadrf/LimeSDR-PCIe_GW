@@ -1,0 +1,4 @@
+Release 2.11 (2019-05-07)
+==========================
+TX path changes:
+- Modified txiq module to output zero samples if FIFO is empty after enable
