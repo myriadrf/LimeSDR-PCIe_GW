@@ -468,7 +468,7 @@ begin
       g_F2H_C0_WWIDTH            => c_F2H_C0_WWIDTH 
    )
    port map(
-      inclk_125            => CLK125_FPGA,    -- Input clock for PLL
+      clk            => CLK125_FPGA,    -- Input clock for PLL
       reset_n              => reset_n,
       -- PCIe interface
       pcie_perstn          => PCIE_PERSTN, 
@@ -477,7 +477,7 @@ begin
       pcie_tx              => PCIE_HSI_IC,
       pcie_bus_clk         => open,  -- PCIe data clock output
       
-      H2F_S0_0_sel         => inst0_from_fpgacfg.wfm_load,
+      H2F_S0_sel         => inst0_from_fpgacfg.wfm_load,
       --Stream endpoint FIFO (Host->FPGA) 
       H2F_S0_0_rdclk       => inst1_txpll_c1,
       H2F_S0_0_aclrn       => inst6_tx_in_pct_reset_n_req,
@@ -511,9 +511,8 @@ begin
       F2H_C0_wr            => inst0_exfifo_of_wr,
       F2H_C0_wdata         => inst0_exfifo_of_d,
       F2H_C0_wfull         => inst2_F2H_C0_wfull,
-      stream_rx_en         => inst0_from_fpgacfg.rx_en,
-      user_read_32_open    => inst2_user_read_32_open,
-      user_write_32_open   => inst2_user_write_32_open
+      
+      F2H_S0_open          => inst2_user_read_32_open
       );
       
 -- ----------------------------------------------------------------------------
@@ -628,8 +627,7 @@ begin
    process(inst0_from_fpgacfg, inst2_user_read_32_open)
    begin 
       inst0_from_fpgacfg_mod        <= inst0_from_fpgacfg;
-      inst0_from_fpgacfg_mod.rx_en  <= inst0_from_fpgacfg.rx_en AND 
-                                       (inst2_user_read_32_open OR inst2_user_write_32_open);
+      inst0_from_fpgacfg_mod.rx_en  <= inst0_from_fpgacfg.rx_en AND inst2_user_read_32_open;
    end process;
    
    inst6_rxtx_top : entity work.rxtx_top
