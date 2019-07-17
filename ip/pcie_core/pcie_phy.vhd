@@ -1226,10 +1226,10 @@ end europa;
 -- Retrieval info:      <PRIVATE name = "p_pci_master" value="true"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pci_master_bursts" value="true"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pci_master_concurrent_reads" value="false"  type="STRING"  enable="1" />
--- Retrieval info:      <PRIVATE name = "p_pci_master_data_width" value="32"  type="STRING"  enable="1" />
+-- Retrieval info:      <PRIVATE name = "p_pci_master_data_width" value="64"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pci_maximum_burst_size" value="128"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pci_maximum_burst_size_a2p" value="128"  type="STRING"  enable="1" />
--- Retrieval info:      <PRIVATE name = "p_pci_maximum_pending_read_transactions_a2p" value="2"  type="STRING"  enable="1" />
+-- Retrieval info:      <PRIVATE name = "p_pci_maximum_pending_read_transactions_a2p" value="8"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pci_non_pref_av_master_port" value="true"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pci_not_target_only_port" value="true"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pci_pref_av_master_port" value="true"  type="STRING"  enable="1" />
@@ -1285,7 +1285,7 @@ end europa;
 -- Retrieval info:      <PRIVATE name = "p_pcie_completion_timeout" value="NONE"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pcie_custom_phy_x8" value="0"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pcie_custom_rx_buffer_xml" value="0"  type="STRING"  enable="1" />
--- Retrieval info:      <PRIVATE name = "p_pcie_device_id" value="0x0004"  type="STRING"  enable="1" />
+-- Retrieval info:      <PRIVATE name = "p_pcie_device_id" value="0xE001"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pcie_disable_L0s" value="false"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pcie_dll_active_report_support" value="0"  type="BOOLEAN"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pcie_eie_b4_nfts_count" value="4"  type="INTEGER"  enable="1" />
@@ -1367,8 +1367,8 @@ end europa;
 -- Retrieval info:      <PRIVATE name = "p_pcie_slot_capabilities" value="0x00000000"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pcie_special_phy_gl" value="0"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pcie_special_phy_px" value="1"  type="STRING"  enable="1" />
--- Retrieval info:      <PRIVATE name = "p_pcie_subsystem_device_id" value="0x0004"  type="STRING"  enable="1" />
--- Retrieval info:      <PRIVATE name = "p_pcie_subsystem_vendor_id" value="0x1172"  type="STRING"  enable="1" />
+-- Retrieval info:      <PRIVATE name = "p_pcie_subsystem_device_id" value="0x1170"  type="STRING"  enable="1" />
+-- Retrieval info:      <PRIVATE name = "p_pcie_subsystem_vendor_id" value="0x00AB"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pcie_surprise_down_error_support" value="0"  type="BOOLEAN"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pcie_target_performance_preset" value="High"  type="STRING"  enable="1" />
 -- Retrieval info:      <PRIVATE name = "p_pcie_test_out_width" value="9 bits"  type="STRING"  enable="1" />

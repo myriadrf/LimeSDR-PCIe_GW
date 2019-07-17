@@ -69,6 +69,7 @@ create_generated_clock -name FPGA_SPI1_SCLK \
 #Other clock constraints
 # ----------------------------------------------------------------------------							
 derive_clock_uncertainty
+derive_pll_clocks
 
 # ----------------------------------------------------------------------------
 #Input constraints

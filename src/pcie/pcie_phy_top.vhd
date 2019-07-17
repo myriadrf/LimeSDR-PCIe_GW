@@ -15,40 +15,45 @@ library ieee;
 use ieee.std_logic_1164.all;
 entity pcie_phy_top is
    port (
-   RX_IN0                    : IN  STD_LOGIC;
-   RX_IN1                    : IN  STD_LOGIC;
-   RX_IN2                    : IN  STD_LOGIC;
-   RX_IN3                    : IN  STD_LOGIC;
-   APP_INT_STS               : IN  STD_LOGIC;
-   APP_MSI_NUM               : IN  STD_LOGIC_VECTOR(4 DOWNTO 0);
-   APP_MSI_REQ               : IN  STD_LOGIC;
-   APP_MSI_TC                : IN  STD_LOGIC_VECTOR(2 DOWNTO 0);
-   NPOR                      : IN  STD_LOGIC;
-   PLD_CLK                   : IN  STD_LOGIC;
-   PME_TO_CR                 : IN  STD_LOGIC;
-   WORD_CONVERSION_CLK       : IN  STD_LOGIC;
-   WORD_CONVERSION_RESET_N   : IN  STD_LOGIC;
-   REFCLK                    : IN  STD_LOGIC;
-   RX_ST_READY0              : IN  STD_LOGIC;
-   TX_ST_DATA0               : IN  STD_LOGIC_VECTOR(63 DOWNTO 0);
-   TX_ST_EOP0                : IN  STD_LOGIC;
-   TX_ST_SOP0                : IN  STD_LOGIC;
-   TX_ST_VALID0              : IN  STD_LOGIC;
-   
-   TL_CFG_ADD                : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-   TL_CFG_CTL                : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-   CORE_CLK_OUT              : OUT STD_LOGIC;
-   TX_OUT0                   : OUT STD_LOGIC;
-   TX_OUT1                   : OUT STD_LOGIC;
-   TX_OUT2                   : OUT STD_LOGIC;
-   TX_OUT3                   : OUT STD_LOGIC;
-   APP_MSI_ACK               : OUT STD_LOGIC;
-   PME_TO_SR                 : OUT STD_LOGIC;
-   RX_ST_DATA0               : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
-   RX_ST_EOP0                : OUT STD_LOGIC;
-   RX_ST_SOP0                : OUT STD_LOGIC;
-   RX_ST_VALID0              : OUT STD_LOGIC;
-   TX_ST_READY0              : OUT STD_LOGIC
+         -- Free running clocks
+         clk_50                    : in  std_logic;
+         clk_125                   : in  std_logic;
+         reset_n                   : in  std_logic;
+         -- PCIe
+         pcie_refclk               : in  std_logic;
+         pcie_reset_n              : in  std_logic;
+         pcie_rx                   : in  std_logic_vector(3 downto 0);
+         pcie_tx                   : out std_logic_vector(3 downto 0);
+
+         APP_INT_STS               : IN  STD_LOGIC;
+         APP_MSI_NUM               : IN  STD_LOGIC_VECTOR(4 DOWNTO 0);
+         APP_MSI_REQ               : IN  STD_LOGIC;
+         APP_MSI_TC                : IN  STD_LOGIC_VECTOR(2 DOWNTO 0);
+         NPOR                      : IN  STD_LOGIC;
+         PLD_CLK                   : IN  STD_LOGIC;
+         PME_TO_CR                 : IN  STD_LOGIC;
+         WORD_CONVERSION_CLK       : IN  STD_LOGIC;
+         WORD_CONVERSION_RESET_N   : IN  STD_LOGIC;
+         RX_ST_READY0              : IN  STD_LOGIC;
+         TX_ST_DATA0               : IN  STD_LOGIC_VECTOR(63 DOWNTO 0);
+         TX_ST_EOP0                : IN  STD_LOGIC;
+         TX_ST_SOP0                : IN  STD_LOGIC;
+         TX_ST_VALID0              : IN  STD_LOGIC;
+         
+         TL_CFG_ADD                : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+         TL_CFG_CTL                : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+         CORE_CLK_OUT              : OUT STD_LOGIC;
+         TX_OUT0                   : OUT STD_LOGIC;
+         TX_OUT1                   : OUT STD_LOGIC;
+         TX_OUT2                   : OUT STD_LOGIC;
+         TX_OUT3                   : OUT STD_LOGIC;
+         APP_MSI_ACK               : OUT STD_LOGIC;
+         PME_TO_SR                 : OUT STD_LOGIC;
+         RX_ST_DATA0               : OUT STD_LOGIC_VECTOR(63 DOWNTO 0);
+         RX_ST_EOP0                : OUT STD_LOGIC;
+         RX_ST_SOP0                : OUT STD_LOGIC;
+         RX_ST_VALID0              : OUT STD_LOGIC;
+         TX_ST_READY0              : OUT STD_LOGIC
    );
 end entity pcie_phy_top;
 
@@ -68,6 +73,47 @@ signal tx_qw_av_st_eop   : STD_LOGIC;
 signal tx_qw_av_st_sop   : STD_LOGIC;
 signal tx_qw_av_st_rdy   : STD_LOGIC;
 signal tx_qw_av_st_vld   : STD_LOGIC;
+
+signal busy_altgxb_reconfig   : std_logic;
+signal reconfig_fromgxb       : std_logic_vector(4 downto 0);
+signal reconfig_togxb         : std_logic_vector(3 downto 0);
+
+signal rc_pll_locked          : std_logic;
+signal crst                   : std_logic;
+signal dlup_exit              : std_logic;
+signal hotrst_exit            : std_logic;
+signal l2_exit                : std_logic;
+signal ltssm                  : std_logic_vector(4 downto 0);
+signal npor_serdes_pll_locked : std_logic;
+signal srst                   : std_logic;
+
+signal rx_st_data_reverse		: std_logic_vector(63 downto 0);
+
+
+   component altpcie_reconfig_3cgx is 
+   port (
+      busy                       : out std_logic;  
+      offset_cancellation_reset  : in  std_logic;
+      reconfig_clk               : in  std_logic;
+      reconfig_fromgxb           : in  std_logic_vector(4 downto 0);
+      reconfig_togxb             : out std_logic_vector(3 downto 0)
+      );
+   end component altpcie_reconfig_3cgx;
+
+   component pcie_phy_rs_hip is 
+   port (
+      app_rstn    : out std_logic;
+      crst        : out std_logic;
+      dlup_exit   : in  std_logic;
+      hotrst_exit : in  std_logic;
+      l2_exit     : in  std_logic;
+      ltssm       : in  std_logic_vector(4 downto 0);
+      npor        : in  std_logic;
+      pld_clk     : in  std_logic;
+      srst        : out std_logic;
+      test_sim    : in  std_logic
+      );
+   end component pcie_phy_rs_hip;
 
 
 component pcie_phy is 
@@ -264,144 +310,172 @@ end component sync_reg;
 
 begin
 
+   npor_serdes_pll_locked <= pcie_reset_n AND rc_pll_locked;
+
+
    comp_pcie_phy : pcie_phy
       port map (
-                app_int_sts          => APP_INT_STS,
-                app_msi_num          => APP_MSI_NUM,
-                app_msi_req          => APP_MSI_REQ,
-                app_msi_tc           => APP_MSI_TC,
-                busy_altgxb_reconfig => '0',
-                cal_blk_clk          => PLD_CLK,--'0',
-                cpl_err              => (others => '0'),
-                cpl_pending          => '0',
-                crst                 => NPOR,
-                fixedclk_serdes      => '0',
-                gxb_powerdown        => not NPOR,
-                hpg_ctrler           => (others => '0'),
-                lmi_addr             => (others => '0'),
-                lmi_din              => (others => '0'),
-                lmi_rden             => '0',
-                lmi_wren             => '0',
-                npor                 => NPOR,
-                pclk_in              => '0',
-                pex_msi_num          => (others => '0'),
-                phystatus_ext        => '0',
-                pipe_mode            => '0',
-                pld_clk              => PLD_CLK,
-                pll_powerdown        => not NPOR,
-                pm_auxpwr            => '0',
-                pm_data              => (others => '0'),
-                pm_event             => '0',
-                pme_to_cr            => PME_TO_CR,
-                reconfig_clk         => '0',
-                reconfig_togxb       => (others => '0'),
-                refclk               => REFCLK,
-                rx_in0               => RX_IN0,
-                rx_in1               => RX_IN1,
-                rx_in2               => RX_IN2,
-                rx_in3               => RX_IN3,
-                rx_st_mask0          => '0',
-                rx_st_ready0         => rx_qw_av_st_rdy,
-                rxdata0_ext          => (others => '0'),
-                rxdata1_ext          => (others => '0'),
-                rxdata2_ext          => (others => '0'),
-                rxdata3_ext          => (others => '0'),
-                rxdatak0_ext         => '0',
-                rxdatak1_ext         => '0',
-                rxdatak2_ext         => '0',
-                rxdatak3_ext         => '0',
-                rxelecidle0_ext      => '0',
-                rxelecidle1_ext      => '0',
-                rxelecidle2_ext      => '0',
-                rxelecidle3_ext      => '0',
-                rxstatus0_ext        => (others => '0'),
-                rxstatus1_ext        => (others => '0'),
-                rxstatus2_ext        => (others => '0'),
-                rxstatus3_ext        => (others => '0'),
-                rxvalid0_ext         => '0',
-                rxvalid1_ext         => '0',
-                rxvalid2_ext         => '0',
-                rxvalid3_ext         => '0',
-                srst                 => NPOR,
-                test_in              => (others => '0'),
-                tx_st_data0          => tx_qw_av_st_data,
-                tx_st_eop0           => tx_qw_av_st_eop,
-                tx_st_err0           => '0',
-                tx_st_sop0           => tx_qw_av_st_sop,
-                tx_st_valid0         => tx_qw_av_st_vld,
+                app_int_sts          => APP_INT_STS,           --gut
+                app_msi_num          => APP_MSI_NUM,           --gut?
+                app_msi_req          => APP_MSI_REQ,           --gut?
+                app_msi_tc           => APP_MSI_TC,            --gut?
+                busy_altgxb_reconfig => busy_altgxb_reconfig,  --gut
+                cal_blk_clk          => CLK_50,                --gut
+                cpl_err              => (others => '0'),       --gut
+                cpl_pending          => '0',                   --?
+                crst                 => crst,                  --gut
+                fixedclk_serdes      => CLK_125,               --gut
+                gxb_powerdown        => not NPOR,              --gut
+                hpg_ctrler           => (others => '0'),       --gut
+                lmi_addr             => (others => '0'),       --gut
+                lmi_din              => (others => '0'),       --gut
+                lmi_rden             => '0',                   --gut
+                lmi_wren             => '0',                   --gut
+                npor                 => NPOR,                  --gut
+                pclk_in              => '0',                   --gut
+                pex_msi_num          => (others => '0'),       --?
+                phystatus_ext        => '0',                   --gut
+                pipe_mode            => '0',                   --gut
+                pld_clk              => PLD_CLK,               --gut
+                pll_powerdown        => not NPOR,              --gut
+                pm_auxpwr            => '0',                   --gut
+                pm_data              => (others => '0'),       --gut
+                pm_event             => '0',                   --gut
+                pme_to_cr            => PME_TO_CR,             --gut
+                reconfig_clk         => CLK_50,                --gut
+                reconfig_togxb       => reconfig_togxb,        --gut
+                refclk               => pcie_refclk,           --gut         
+                rx_in0               => pcie_rx(0),            --gut
+                rx_in1               => pcie_rx(1),            --gut
+                rx_in2               => pcie_rx(2),            --gut
+                rx_in3               => pcie_rx(3),            --gut
+                rx_st_mask0          => '0',                   --gut
+                rx_st_ready0         => rx_qw_av_st_rdy,       --gut
+                rxdata0_ext          => (others => '0'),       --gut
+                rxdata1_ext          => (others => '0'),       --gut
+                rxdata2_ext          => (others => '0'),       --gut
+                rxdata3_ext          => (others => '0'),       --gut
+                rxdatak0_ext         => '0',                   --gut
+                rxdatak1_ext         => '0',                   --gut
+                rxdatak2_ext         => '0',                   --gut
+                rxdatak3_ext         => '0',                   --gut
+                rxelecidle0_ext      => '0',                   --gut
+                rxelecidle1_ext      => '0',                   --gut
+                rxelecidle2_ext      => '0',                   --gut
+                rxelecidle3_ext      => '0',                   --gut
+                rxstatus0_ext        => (others => '0'),       --gut
+                rxstatus1_ext        => (others => '0'),       --gut
+                rxstatus2_ext        => (others => '0'),       --gut
+                rxstatus3_ext        => (others => '0'),       --gut
+                rxvalid0_ext         => '0',                   --gut
+                rxvalid1_ext         => '0',                   --gut
+                rxvalid2_ext         => '0',                   --gut
+                rxvalid3_ext         => '0',                   --gut
+                srst                 => srst,                  --gut
+                test_in              => (others => '0'),       --gut
+                tx_st_data0          => tx_qw_av_st_data,      --gut
+                tx_st_eop0           => tx_qw_av_st_eop,       --gut
+                tx_st_err0           => '0',                   --gut
+                tx_st_sop0           => tx_qw_av_st_sop,       --gut
+                tx_st_valid0         => tx_qw_av_st_vld,       --gut
                 
-                app_int_ack          => open,
-                app_msi_ack          => APP_MSI_ACK,
-                clk250_out           => open,
-                clk500_out           => open,
-                core_clk_out         => CORE_CLK_OUT,
-                derr_cor_ext_rcv0    => open,
-                derr_cor_ext_rpl     => open,
-                derr_rpl             => open,
-                dlup_exit            => open,
-                hotrst_exit          => open,
-                ko_cpl_spc_vc0       => open,
-                l2_exit              => open,
-                lane_act             => open,
-                lmi_ack              => open,
-                lmi_dout             => open,
-                ltssm                => open,
-                pme_to_sr            => PME_TO_SR,
-                powerdown_ext        => open,
-                r2c_err0             => open,
-                rate_ext             => open,
-                rc_pll_locked        => open,
-                rc_rx_digitalreset   => open,
-                reconfig_fromgxb     => open,
-                reset_status         => open,
-                rx_fifo_empty0       => open,
-                rx_fifo_full0        => open,
-                rx_st_bardec0        => open,
-                rx_st_be0            => open,
-                rx_st_data0          => rx_qw_av_st_data,
-                rx_st_eop0           => rx_qw_av_st_eop,
-                rx_st_err0           => open,
-                rx_st_sop0           => rx_qw_av_st_sop,
-                rx_st_valid0         => rx_qw_av_st_vld,
-                rxpolarity0_ext      => open,
-                rxpolarity1_ext      => open,
-                rxpolarity2_ext      => open,
-                rxpolarity3_ext      => open,
-                suc_spd_neg          => open,
-                test_out             => open,
-                tl_cfg_add           => TL_CFG_ADD,
-                tl_cfg_ctl           => TL_CFG_CTL,
-                tl_cfg_ctl_wr        => open,
-                tl_cfg_sts           => open,
-                tl_cfg_sts_wr        => open,
-                tx_cred0             => open,
-                tx_fifo_empty0       => open,
-                tx_fifo_full0        => open,
-                tx_fifo_rdptr0       => open,
-                tx_fifo_wrptr0       => open,
-                tx_out0              => TX_OUT0,
-                tx_out1              => TX_OUT1,
-                tx_out2              => TX_OUT2,
-                tx_out3              => TX_OUT3,
-                tx_st_ready0         => tx_qw_av_st_rdy,
-                txcompl0_ext         => open,
-                txcompl1_ext         => open,
-                txcompl2_ext         => open,
-                txcompl3_ext         => open,
-                txdata0_ext          => open,
-                txdata1_ext          => open,
-                txdata2_ext          => open,
-                txdata3_ext          => open,
-                txdatak0_ext         => open,
-                txdatak1_ext         => open,
-                txdatak2_ext         => open,
-                txdatak3_ext         => open,
-                txdetectrx_ext       => open,
-                txelecidle0_ext      => open,
-                txelecidle1_ext      => open,
-                txelecidle2_ext      => open,
-                txelecidle3_ext      => open
+                app_int_ack          => open,                  --gut
+                app_msi_ack          => APP_MSI_ACK,           --gut
+                clk250_out           => open,                  --gut
+                clk500_out           => open,                  --gut
+                core_clk_out         => CORE_CLK_OUT,          --gut
+                derr_cor_ext_rcv0    => open,                  --?
+                derr_cor_ext_rpl     => open,                  --?
+                derr_rpl             => open,                  --?
+                dlup_exit            => dlup_exit,             --gut
+                hotrst_exit          => hotrst_exit,           --gut
+                ko_cpl_spc_vc0       => open,                  --?
+                l2_exit              => l2_exit,               --gut
+                lane_act             => open,                  --?
+                lmi_ack              => open,                  --?
+                lmi_dout             => open,                  --?
+                ltssm                => ltssm,                 --gut
+                pme_to_sr            => PME_TO_SR,             --gut      
+                powerdown_ext        => open,                  --gut
+                r2c_err0             => open,                  --?  --interesting
+                rate_ext             => open,                  --gut
+                rc_pll_locked        => rc_pll_locked,         --gut?
+                rc_rx_digitalreset   => open,                  --gut?
+                reconfig_fromgxb     => reconfig_fromgxb,      --gut
+                reset_status         => open,                  --?
+                rx_fifo_empty0       => open,                  --?  --interesting
+                rx_fifo_full0        => open,                  --?  --interesting
+                rx_st_bardec0        => open,                  --gut
+                rx_st_be0            => open,                  --gut
+                rx_st_data0          => rx_qw_av_st_data,      --gut
+                rx_st_eop0           => rx_qw_av_st_eop,       --gut
+                rx_st_err0           => open,                  --?
+                rx_st_sop0           => rx_qw_av_st_sop,       --gut
+                rx_st_valid0         => rx_qw_av_st_vld,       --gut
+                rxpolarity0_ext      => open,                  --gut
+                rxpolarity1_ext      => open,                  --gut
+                rxpolarity2_ext      => open,                  --gut
+                rxpolarity3_ext      => open,                  --gut
+                suc_spd_neg          => open,                  --gut
+                test_out             => open,                  --?
+                tl_cfg_add           => TL_CFG_ADD,            --gut
+                tl_cfg_ctl           => TL_CFG_CTL,            --gut
+                tl_cfg_ctl_wr        => open,                  --?
+                tl_cfg_sts           => open,                  --?
+                tl_cfg_sts_wr        => open,                  --?
+                tx_cred0             => open,                  --?
+                tx_fifo_empty0       => open,                  --?  --interesting
+                tx_fifo_full0        => open,                  --?  --interesting
+                tx_fifo_rdptr0       => open,                  --?  --interesting
+                tx_fifo_wrptr0       => open,                  --?  --interesting
+                tx_out0              => pcie_tx(0),            --gut
+                tx_out1              => pcie_tx(1),            --gut
+                tx_out2              => pcie_tx(2),            --gut
+                tx_out3              => pcie_tx(3),            --gut
+                tx_st_ready0         => tx_qw_av_st_rdy,       --gut
+                txcompl0_ext         => open,                  --gut      
+                txcompl1_ext         => open,                  --gut      
+                txcompl2_ext         => open,                  --gut      
+                txcompl3_ext         => open,                  --gut      
+                txdata0_ext          => open,                  --gut      
+                txdata1_ext          => open,                  --gut      
+                txdata2_ext          => open,                  --gut      
+                txdata3_ext          => open,                  --gut      
+                txdatak0_ext         => open,                  --gut      
+                txdatak1_ext         => open,                  --gut      
+                txdatak2_ext         => open,                  --gut      
+                txdatak3_ext         => open,                  --gut      
+                txdetectrx_ext       => open,                  --gut      
+                txelecidle0_ext      => open,                  --gut      
+                txelecidle1_ext      => open,                  --gut      
+                txelecidle2_ext      => open,                  --gut      
+                txelecidle3_ext      => open                   --gut      
    );
+   
+   
+   comp_altpcie_reconfig_3cgx : altpcie_reconfig_3cgx 
+   port map (
+      busy                       => busy_altgxb_reconfig,  
+      offset_cancellation_reset  => NOT RESET_N, 
+      reconfig_clk               => clk_50, 
+      reconfig_fromgxb           => reconfig_fromgxb,
+      reconfig_togxb             => reconfig_togxb
+      );
+      
+   comp :  pcie_phy_rs_hip
+   port map(
+      app_rstn    => open,
+      crst        => crst,
+      dlup_exit   => dlup_exit,
+      hotrst_exit => hotrst_exit,
+      l2_exit     => l2_exit,
+      ltssm       => ltssm,
+      npor        => npor_serdes_pll_locked,
+      pld_clk     => pld_clk,
+      srst        => srst,
+      test_sim    => '0'
+      );   
+   
 
    comp_sync_reg : sync_reg
       port map (
@@ -426,10 +500,11 @@ begin
                 av_st_source_ready         => RX_ST_READY0,
                 av_st_source_valid         => RX_ST_VALID0,
                 clock_sink_clk             => PLD_CLK,
-                reset_sink_reset           => word_conversion_reset_n_reg,
+                reset_sink_reset           => '1',--word_conversion_reset_n_reg,
                 clock_source_clk           => open,
                 reset_source_reset_req     => open
    );
+	
    
    comp_dword_to_qword : dword_to_qword
       port map (
@@ -446,13 +521,9 @@ begin
                 av_st_source_ready         => tx_qw_av_st_rdy,
                 av_st_source_valid         => tx_qw_av_st_vld,
                 clock_sink_clk             => PLD_CLK,
-                reset_sink_reset           => word_conversion_reset_n_reg,
+                reset_sink_reset           => '1',--word_conversion_reset_n_reg,
                 clock_source_clk           => open,
                 reset_source_reset_req     => open
    );
-
    
-
-
-
 end architecture rtl;

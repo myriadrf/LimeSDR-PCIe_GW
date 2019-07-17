@@ -3065,6 +3065,6 @@ END RTL;
 -- Retrieval info: GEN_FILE: TYPE_NORMAL pcie_phy_serdes.vhd TRUE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL pcie_phy_serdes.ppf TRUE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL pcie_phy_serdes.inc FALSE
--- Retrieval info: GEN_FILE: TYPE_NORMAL pcie_phy_serdes.cmp FALSE
+-- Retrieval info: GEN_FILE: TYPE_NORMAL pcie_phy_serdes.cmp TRUE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL pcie_phy_serdes.bsf FALSE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL pcie_phy_serdes_inst.vhd FALSE

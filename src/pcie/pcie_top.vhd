@@ -163,104 +163,128 @@ architecture arch of pcie_top is
    signal inst1_cntrl_writer_data      : std_logic_vector(511 downto 0); 
    signal inst1_cntrl_writer_valid     : std_logic := '0';  
    signal inst1_cntrl_reader_data      : std_logic_vector(511 downto 0); 
-   signal inst1_cntrl_reader_valid     : std_logic;   
+   signal inst1_cntrl_reader_valid     : std_logic;
+
+   signal clk125                       : std_logic;
+   signal clk50                        : std_logic;
+   signal pll_locked                   : std_logic;
    
-   --------------- TEMPORARY PLACEHOLDERS -- NEED TO BE DELETED ----
-   --Stream 1 endpoint FIFO 0 (Host->FPGA) 
-   signal   H2F_S1_0_rdclk       : std_logic := '0';
-   signal   H2F_S1_0_aclrn       : std_logic := '0';
-   signal   H2F_S1_0_rd          : std_logic := '0';
-   signal   H2F_S1_0_rdata       : std_logic_vector(g_H2F_S1_0_RWIDTH-1 downto 0);
-   signal   H2F_S1_0_rempty      : std_logic := '0';
-   signal   H2F_S1_0_rdusedw     : std_logic_vector(g_H2F_S1_0_RDUSEDW_WIDTH-1 downto 0);
-   --Stream 1 endpoint FIFO 1 (Host->FPGA) 
-   signal   H2F_S1_1_rdclk       :  std_logic := '0';
-   signal   H2F_S1_1_aclrn       :  std_logic := '0';
-   signal   H2F_S1_1_rd          :  std_logic := '0';
-   signal   H2F_S1_1_rdata       :  std_logic_vector(g_H2F_S1_1_RWIDTH-1 downto 0);
-   signal   H2F_S1_1_rempty      :  std_logic := '0';
-   signal   H2F_S1_1_rdusedw     :  std_logic_vector(g_H2F_S1_1_RDUSEDW_WIDTH-1 downto 0);
-   --Stream 2 endpoint FIFO 0 (Host->FPGA) 
-   signal   H2F_S2_0_rdclk       :  std_logic := '0';
-   signal   H2F_S2_0_aclrn       :  std_logic := '0';
-   signal   H2F_S2_0_rd          :  std_logic := '0';
-   signal   H2F_S2_0_rdata       :  std_logic_vector(g_H2F_S2_0_RWIDTH-1 downto 0);
-   signal   H2F_S2_0_rempty      :  std_logic := '0';
-   signal   H2F_S2_0_rdusedw     :  std_logic_vector(g_H2F_S2_0_RDUSEDW_WIDTH-1 downto 0);
-   --Stream 2 endpoint FIFO 1 (Host->FPGA) 
-   signal   H2F_S2_1_rdclk       :  std_logic := '0';
-   signal   H2F_S2_1_aclrn       :  std_logic := '0';
-   signal   H2F_S2_1_rd          :  std_logic := '0';
-   signal   H2F_S2_1_rdata       :  std_logic_vector(g_H2F_S2_1_RWIDTH-1 downto 0);
-   signal   H2F_S2_1_rempty      :  std_logic := '0';
-   signal   H2F_S2_1_rdusedw     :  std_logic_vector(g_H2F_S2_1_RDUSEDW_WIDTH-1 downto 0);  
-   --Stream 1 endpoint FIFO (FPGA->Host)
-   signal   F2H_S1_wclk          :  std_logic := '0';
-   signal   F2H_S1_aclrn         :  std_logic := '0';
-   signal   F2H_S1_wr            :  std_logic := '0';
-   signal   F2H_S1_wdata         :  std_logic_vector(g_F2H_S1_WWIDTH-1 downto 0);
-   signal   F2H_S1_wfull         :  std_logic := '0';
-   signal   F2H_S1_wrusedw       :  std_logic_vector(g_F2H_S1_WRUSEDW_WIDTH-1 downto 0);      
-   --Stream 2 endpoint FIFO (FPGA->Host)
-   signal   F2H_S2_wclk          :  std_logic := '0';
-   signal   F2H_S2_aclrn         :  std_logic := '0';
-   signal   F2H_S2_wr            :  std_logic := '0';
-   signal   F2H_S2_wdata         :  std_logic_vector(g_F2H_S2_WWIDTH-1 downto 0);
-   signal   F2H_S2_wfull         :  std_logic := '0';
-   signal   F2H_S2_wrusedw       :  std_logic_vector(g_F2H_S2_WRUSEDW_WIDTH-1 downto 0);
-   
-   signal   F2H_S1_open          :  std_logic := '0';
-   signal   F2H_S2_open          :  std_logic := '0';
-   signal   H2F_S1_sel           :  std_logic := '0';   -- 0 - S1_0, 1 - S1_1
-   signal   H2F_S2_sel           :  std_logic := '0';   -- 0 - S2_0, 1 - S2_1
+--   --------------- TEMPORARY PLACEHOLDERS -- NEED TO BE DELETED ----
+--   --Stream 1 endpoint FIFO 0 (Host->FPGA) 
+--   signal   H2F_S1_0_rdclk       : std_logic := '0';
+--   signal   H2F_S1_0_aclrn       : std_logic := '0';
+--   signal   H2F_S1_0_rd          : std_logic := '0';
+--   signal   H2F_S1_0_rdata       : std_logic_vector(g_H2F_S1_0_RWIDTH-1 downto 0);
+--   signal   H2F_S1_0_rempty      : std_logic := '0';
+--   signal   H2F_S1_0_rdusedw     : std_logic_vector(g_H2F_S1_0_RDUSEDW_WIDTH-1 downto 0);
+--   --Stream 1 endpoint FIFO 1 (Host->FPGA) 
+--   signal   H2F_S1_1_rdclk       :  std_logic := '0';
+--   signal   H2F_S1_1_aclrn       :  std_logic := '0';
+--   signal   H2F_S1_1_rd          :  std_logic := '0';
+--   signal   H2F_S1_1_rdata       :  std_logic_vector(g_H2F_S1_1_RWIDTH-1 downto 0);
+--   signal   H2F_S1_1_rempty      :  std_logic := '0';
+--   signal   H2F_S1_1_rdusedw     :  std_logic_vector(g_H2F_S1_1_RDUSEDW_WIDTH-1 downto 0);
+--   --Stream 2 endpoint FIFO 0 (Host->FPGA) 
+--   signal   H2F_S2_0_rdclk       :  std_logic := '0';
+--   signal   H2F_S2_0_aclrn       :  std_logic := '0';
+--   signal   H2F_S2_0_rd          :  std_logic := '0';
+--   signal   H2F_S2_0_rdata       :  std_logic_vector(g_H2F_S2_0_RWIDTH-1 downto 0);
+--   signal   H2F_S2_0_rempty      :  std_logic := '0';
+--   signal   H2F_S2_0_rdusedw     :  std_logic_vector(g_H2F_S2_0_RDUSEDW_WIDTH-1 downto 0);
+--   --Stream 2 endpoint FIFO 1 (Host->FPGA) 
+--   signal   H2F_S2_1_rdclk       :  std_logic := '0';
+--   signal   H2F_S2_1_aclrn       :  std_logic := '0';
+--   signal   H2F_S2_1_rd          :  std_logic := '0';
+--   signal   H2F_S2_1_rdata       :  std_logic_vector(g_H2F_S2_1_RWIDTH-1 downto 0);
+--   signal   H2F_S2_1_rempty      :  std_logic := '0';
+--   signal   H2F_S2_1_rdusedw     :  std_logic_vector(g_H2F_S2_1_RDUSEDW_WIDTH-1 downto 0);  
+--   --Stream 1 endpoint FIFO (FPGA->Host)
+--   signal   F2H_S1_wclk          :  std_logic := '0';
+--   signal   F2H_S1_aclrn         :  std_logic := '0';
+--   signal   F2H_S1_wr            :  std_logic := '0';
+--   signal   F2H_S1_wdata         :  std_logic_vector(g_F2H_S1_WWIDTH-1 downto 0);
+--   signal   F2H_S1_wfull         :  std_logic := '0';
+--   signal   F2H_S1_wrusedw       :  std_logic_vector(g_F2H_S1_WRUSEDW_WIDTH-1 downto 0);      
+--   --Stream 2 endpoint FIFO (FPGA->Host)
+--   signal   F2H_S2_wclk          :  std_logic := '0';
+--   signal   F2H_S2_aclrn         :  std_logic := '0';
+--   signal   F2H_S2_wr            :  std_logic := '0';
+--   signal   F2H_S2_wdata         :  std_logic_vector(g_F2H_S2_WWIDTH-1 downto 0);
+--   signal   F2H_S2_wfull         :  std_logic := '0';
+--   signal   F2H_S2_wrusedw       :  std_logic_vector(g_F2H_S2_WRUSEDW_WIDTH-1 downto 0);
+--   
+--   signal   F2H_S1_open          :  std_logic := '0';
+--   signal   F2H_S2_open          :  std_logic := '0';
+--   signal   H2F_S1_sel           :  std_logic := '0';   -- 0 - S1_0, 1 - S1_1
+--   signal   H2F_S2_sel           :  std_logic := '0';   -- 0 - S2_0, 1 - S2_1
 
    -----------------------------------------------------------------
-   
-   
 
+   component pll_pcie is 
+   port (
+      areset   : in  std_logic;
+      inclk0   : in  std_logic;
+      c0       : out std_logic;
+      c1       : out std_logic;
+      locked   : out std_logic
+   );
+   end component;
+   
 begin
 -- ----------------------------------------------------------------------------
 -- Reset logic
 -- ----------------------------------------------------------------------------  
    -- Reset signal with synchronous removal to clk clock domain, 
    sync_reg0 : entity work.sync_reg 
-   port map(clk, H2F_S0_0_aclrn, '1', H2F_S0_0_sclrn);
+   port map(clk125, H2F_S0_0_aclrn, '1', H2F_S0_0_sclrn);
    
    sync_reg1 : entity work.sync_reg 
-   port map(clk, H2F_S0_1_aclrn, '1', H2F_S0_1_sclrn); 
+   port map(clk125, H2F_S0_1_aclrn, '1', H2F_S0_1_sclrn); 
    
-   sync_reg2 : entity work.sync_reg 
-   port map(clk, H2F_S1_0_aclrn, '1', H2F_S1_0_sclrn);
-   
-   sync_reg3 : entity work.sync_reg 
-   port map(clk, H2F_S1_1_aclrn, '1', H2F_S1_1_sclrn);
-   
-   sync_reg4 : entity work.sync_reg 
-   port map(clk, H2F_S2_0_aclrn, '1', H2F_S2_0_sclrn);
-   
-   sync_reg5 : entity work.sync_reg 
-   port map(clk, H2F_S2_1_aclrn, '1', H2F_S2_1_sclrn);
+--   sync_reg2 : entity work.sync_reg 
+--   port map(clk125, H2F_S1_0_aclrn, '1', H2F_S1_0_sclrn);
+--   
+--   sync_reg3 : entity work.sync_reg 
+--   port map(clk125, H2F_S1_1_aclrn, '1', H2F_S1_1_sclrn);
+--   
+--   sync_reg4 : entity work.sync_reg 
+--   port map(clk125, H2F_S2_0_aclrn, '1', H2F_S2_0_sclrn);
+--   
+--   sync_reg5 : entity work.sync_reg 
+--   port map(clk125, H2F_S2_1_aclrn, '1', H2F_S2_1_sclrn);
      
 -- ----------------------------------------------------------------------------
 -- Sync registers
 -- ----------------------------------------------------------------------------   
    sync_reg6 : entity work.sync_reg 
-   port map(clk, reset_n, H2F_S0_sel, H2F_S0_sel_sync);
+   port map(clk125, reset_n, H2F_S0_sel, H2F_S0_sel_sync);
    
-   sync_reg7 : entity work.sync_reg 
-   port map(clk, reset_n, H2F_S1_sel, H2F_S1_sel_sync);
-   
-   sync_reg8 : entity work.sync_reg 
-   port map(clk, reset_n, H2F_S2_sel, H2F_S2_sel_sync);
+--   sync_reg7 : entity work.sync_reg 
+--   port map(clk125, reset_n, H2F_S1_sel, H2F_S1_sel_sync);
+--   
+--   sync_reg8 : entity work.sync_reg 
+--   port map(clk125, reset_n, H2F_S2_sel, H2F_S2_sel_sync);
+
+   inst0_pll_pcie : pll_pcie 
+   port map (
+      areset   => NOT reset_n,
+      inclk0   => clk,
+      c0       => clk125,
+      c1       => clk50,
+      locked   => pll_locked
+   );
+
 
    
--- ----------------------------------------------------------------------------
--- Litepcie core
--- ---------------------------------------------------------------------------- 
+ ----------------------------------------------------------------------------
+ --Litepcie core
+ ---------------------------------------------------------------------------- 
    inst1_litepcie_top : entity work.litepcie_top
    port map (
       -- Internal clock
-      clk125               => clk,
+      clk50                => clk50, 
+      clk125               => clk125,
+      reset_n              => pll_locked, 
       -- PCIe 
       pcie_x4_rst_n        => pcie_perstn,
       pcie_x4_refclk       => pcie_refclk,
@@ -272,16 +296,16 @@ begin
       from_dma_writer0     => inst1_from_dma_writer0, 
       to_dma_reader0       => inst1_to_dma_reader0,
       from_dma_reader0     => inst1_from_dma_reader0,
-         -- dma_writer = HOST -> FPGA, dma_reader = FPGA->HOST
-      to_dma_writer1       => inst1_to_dma_writer1,
-      from_dma_writer1     => inst1_from_dma_writer1, 
-      to_dma_reader1       => inst1_to_dma_reader1,
-      from_dma_reader1     => inst1_from_dma_reader1,
-         -- dma_writer = HOST -> FPGA, dma_reader = FPGA->HOST
-      to_dma_writer2       => inst1_to_dma_writer2,
-      from_dma_writer2     => inst1_from_dma_writer2,
-      to_dma_reader2       => inst1_to_dma_reader2,
-      from_dma_reader2     => inst1_from_dma_reader2,    
+--         -- dma_writer = HOST -> FPGA, dma_reader = FPGA->HOST
+--      to_dma_writer1       => inst1_to_dma_writer1,
+--      from_dma_writer1     => inst1_from_dma_writer1, 
+--      to_dma_reader1       => inst1_to_dma_reader1,
+--      from_dma_reader1     => inst1_from_dma_reader1,
+--         -- dma_writer = HOST -> FPGA, dma_reader = FPGA->HOST
+--      to_dma_writer2       => inst1_to_dma_writer2,
+--      from_dma_writer2     => inst1_from_dma_writer2,
+--      to_dma_reader2       => inst1_to_dma_reader2,
+--      from_dma_reader2     => inst1_from_dma_reader2,    
       -- Control registers
          -- cntrl_writer = HOST -> FPGA, cntrl_reader = FPGA->HOST
       cntrl_enable         => inst1_cntrl_enable,      
@@ -292,7 +316,7 @@ begin
    );
    
   
-   pcie_bus_clk <= clk;
+   pcie_bus_clk <= clk125;
 
 -- ----------------------------------------------------------------------------
 -- For Stream S0 endpoint, Host->FPGA
@@ -307,7 +331,7 @@ begin
       g_BUFF_1_RDUSEDW_WIDTH  => c_H2F_S0_1_RDUSEDW_WIDTH
    )
    port map(
-      clk               => clk,
+      clk               => clk125,
       reset_n           => inst1_from_dma_writer0.enable,
       --DMA 
       to_dma_writer     => inst1_to_dma_writer0,
@@ -343,7 +367,7 @@ begin
 --      g_BUFF_1_RDUSEDW_WIDTH  => c_H2F_S1_1_RDUSEDW_WIDTH
 --   )
 --   port map(
---      clk               => clk,
+--      clk               => clk125,
 --      reset_n           => inst1_from_dma_writer1.enable,
 --      --DMA 
 --      to_dma_writer     => inst1_to_dma_writer1,
@@ -379,7 +403,7 @@ begin
 --      g_BUFF_1_RDUSEDW_WIDTH  => c_H2F_S2_1_RDUSEDW_WIDTH
 --   )
 --   port map(
---      clk               => clk,
+--      clk               => clk125,
 --      reset_n           => inst1_from_dma_writer2.enable,
 --      --DMA 
 --      to_dma_writer     => inst1_to_dma_writer2,
@@ -412,7 +436,7 @@ begin
       g_BUFF_RDUSEDW_WIDTH => c_H2F_C0_RDUSEDW_WIDTH     
    )
    port map(
-      clk            => clk,
+      clk            => clk125,
       reset_n        => reset_n,
       -- Control endpoint
       cntrl_valid    => inst1_cntrl_writer_valid,
@@ -436,7 +460,7 @@ begin
       g_BUFF_WRUSEDW_WIDTH => c_F2H_S0_WRUSEDW_WIDTH  
    )
    port map(
-      clk               => clk,
+      clk               => clk125,
       reset_n           => inst1_from_dma_reader0.enable,
       --DMA 
       to_dma_reader     => inst1_to_dma_reader0,
@@ -460,7 +484,7 @@ begin
 --      g_BUFF_WRUSEDW_WIDTH => c_F2H_S1_WRUSEDW_WIDTH  
 --   )
 --   port map(
---      clk               => clk,
+--      clk               => clk125,
 --      reset_n           => inst1_from_dma_reader1.enable,
 --      --DMA 
 --      to_dma_reader     => inst1_to_dma_reader1,
@@ -484,7 +508,7 @@ begin
 --      g_BUFF_WRUSEDW_WIDTH => c_F2H_S2_WRUSEDW_WIDTH  
 --   )
 --   port map(
---      clk               => clk,
+--      clk               => clk125,
 --      reset_n           => inst1_from_dma_reader2.enable,
 --      --DMA 
 --      to_dma_reader     => inst1_to_dma_reader2,
@@ -508,7 +532,7 @@ begin
       g_BUFF_WRUSEDW_WIDTH => c_F2H_C0_WRUSEDW_WIDTH   
    )
    port map(
-      clk            => clk,
+      clk            => clk125,
       reset_n        => reset_n,
       -- Control endpoint
       cntrl_valid    => inst1_cntrl_reader_valid,
@@ -526,8 +550,8 @@ begin
 -- Output ports
 -- ----------------------------------------------------------------------------    
    F2H_S0_open <= inst1_from_dma_reader0.enable;
-   F2H_S1_open <= inst1_from_dma_reader1.enable;
-   F2H_S2_open <= inst1_from_dma_reader2.enable;
+--   F2H_S1_open <= inst1_from_dma_reader1.enable;
+--   F2H_S2_open <= inst1_from_dma_reader2.enable;
    
 end arch;
 

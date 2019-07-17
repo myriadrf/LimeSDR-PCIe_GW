@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_cpu' in SOPC Builder design 'lms_ctr'
  * SOPC Builder design path: ../../lms_ctr.sopcinfo
  *
- * Generated: Fri Nov 30 14:04:41 EET 2018
+ * Generated: Wed Jul 17 15:32:05 EEST 2019
  */
 
 /*
@@ -66,7 +66,7 @@
  */
 
 #define OC_MEM_REGION_BASE 0x8020
-#define OC_MEM_REGION_SPAN 32736
+#define OC_MEM_REGION_SPAN 23520
 #define RESET_REGION_BASE 0x8000
 #define RESET_REGION_SPAN 32
 

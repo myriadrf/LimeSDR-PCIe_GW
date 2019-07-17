@@ -131,7 +131,7 @@ set_location_assignment PIN_K22 -to FPGA_LED5
 set_location_assignment PIN_H20 -to FPGA_LED6
 set_global_assignment -name OPTIMIZATION_MODE "AGGRESSIVE PERFORMANCE"
 set_global_assignment -name ENABLE_SIGNALTAP OFF
-set_global_assignment -name USE_SIGNALTAP_FILE debug.stp
+set_global_assignment -name USE_SIGNALTAP_FILE stpFIFOS.stp
 set_location_assignment PIN_G16 -to FPGA_I2C_SDA
 set_location_assignment PIN_G17 -to FPGA_I2C_SCL
 set_location_assignment PIN_J4 -to FPGA_AS_NCSO
@@ -730,6 +730,32 @@ set_location_assignment PLL_6 -to "pcie_top:inst2_pcie_top|altpll:altpll_inst0|p
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name REMOVE_REDUNDANT_LOGIC_CELLS ON
+set_global_assignment -name ALLOW_SHIFT_REGISTER_MERGING_ACROSS_HIERARCHIES ALWAYS
+set_global_assignment -name AUTO_RAM_RECOGNITION ON
+set_global_assignment -name AUTO_RAM_TO_LCELL_CONVERSION ON
+set_global_assignment -name AUTO_RESOURCE_SHARING ON
+set_global_assignment -name PRE_MAPPING_RESYNTHESIS ON
+set_global_assignment -name ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP ON
+set_global_assignment -name MAX_RAM_BLOCKS_M4K 120
+set_global_assignment -name SMART_RECOMPILE OFF
+set_global_assignment -name ALLOW_ANY_ROM_SIZE_FOR_RECOGNITION OFF
+set_global_assignment -name ALLOW_ANY_RAM_SIZE_FOR_RECOGNITION OFF
+set_global_assignment -name ALLOW_ANY_SHIFT_REGISTER_SIZE_FOR_RECOGNITION OFF
+set_global_assignment -name ROUTER_CLOCKING_TOPOLOGY_ANALYSIS ON
+set_global_assignment -name ROUTER_EFFORT_MULTIPLIER 4
+set_global_assignment -name PHYSICAL_SYNTHESIS_EFFORT EXTRA
+set_global_assignment -name FITTER_EFFORT "AUTO FIT"
+set_global_assignment -name FITTER_AGGRESSIVE_ROUTABILITY_OPTIMIZATION ALWAYS
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC_FOR_AREA ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ON
+set_global_assignment -name SDC_FILE LMS7002_timing.sdc
+set_global_assignment -name SDC_FILE lms7_trx_timing.sdc
+set_global_assignment -name QIP_FILE ip/ddr2/ddr2.qip
+set_global_assignment -name QIP_FILE lms_ctr/synthesis/lms_ctr.qip
+set_global_assignment -name QIP_FILE ip/pcie_core/pcie_phy.qip
+set_global_assignment -name SDC_FILE Clock_groups.sdc
+set_global_assignment -name VHDL_FILE ip/pcie_core/pcie_phy_examples/chaining_dma/pcie_phy_rs_hip.vhd
 set_global_assignment -name VHDL_FILE src/pcie/qword_to_dword.vhd
 set_global_assignment -name VHDL_FILE src/pcie/pcie_phy_top.vhd
 set_global_assignment -name VHDL_FILE src/pcie/dword_to_qword.vhd
@@ -782,7 +808,6 @@ set_global_assignment -name VHDL_FILE src/tx_path_top/bit_unpack/synth/unpack_64
 set_global_assignment -name VHDL_FILE src/tx_path_top/bit_unpack/synth/unpack_64_to_48.vhd
 set_global_assignment -name VHDL_FILE src/tx_path_top/bit_unpack/synth/bit_unpack_64.vhd
 set_global_assignment -name VHDL_FILE src/tx_pll_top/synth/tx_pll_top.vhd
-set_global_assignment -name SDC_FILE LMS7002_timing.sdc
 set_global_assignment -name VHDL_FILE src/altera_inst/lpm_cnt_inst.vhd
 set_global_assignment -name VHDL_FILE src/rx_path_top/rx_path/synth/rx_path_top.vhd
 set_global_assignment -name VHDL_FILE src/rx_path_top/bit_pack/synth/pack_56_to_64.vhd
@@ -798,9 +823,6 @@ set_global_assignment -name QIP_FILE ip/pll_rx/pll_rx.qip
 set_global_assignment -name QIP_FILE ip/pll_tx/pll_tx.qip
 set_global_assignment -name BDF_FILE symbols/pll_block_tx.bdf
 set_global_assignment -name BDF_FILE symbols/pll_block_rx.bdf
-set_global_assignment -name SDC_FILE lms7_trx_timing.sdc
-set_global_assignment -name QIP_FILE ip/ddr2/ddr2.qip
-set_global_assignment -name QIP_FILE lms_ctr/synthesis/lms_ctr.qip
 set_global_assignment -name VHDL_FILE src/general/FPGA_LED2_ctrl.vhd
 set_global_assignment -name VHDL_FILE src/general/FPGA_LED1_cntrl.vhd
 set_global_assignment -name VHDL_FILE src/spi/tstcfg.vhd
@@ -838,45 +860,8 @@ set_global_assignment -name QIP_FILE ip/pll_reconfig_module/pll_reconfig_module.
 set_global_assignment -name VHDL_FILE src/nios_cpu/nios_cpu.vhd
 set_global_assignment -name VHDL_FILE src/testing/pct_transfer_v2.vhd
 set_global_assignment -name QIP_FILE software/lms_ctr_app/mem_init/meminit.qip
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_uart.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_sysid_qsys_0.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_switch.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_spi_lms.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_oc_mem.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_nios2_cpu_cpu_test_bench.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_nios2_cpu_cpu_debug_slave_wrapper.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_nios2_cpu_cpu_debug_slave_tck.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_nios2_cpu_cpu_debug_slave_sysclk.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_nios2_cpu_cpu.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_nios2_cpu.v -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_rsp_mux_001.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_rsp_mux.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_rsp_demux.sv -library lms_ctr
 set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_router_004.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_router_002.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_router_001.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_router.sv -library lms_ctr
 set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_cmd_mux_002.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_cmd_mux.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_cmd_demux_001.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_cmd_demux.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_avalon_st_adapter_error_adapter_0.sv -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0_avalon_st_adapter.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_mm_interconnect_0.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_lms_ctr_gpio.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_leds.v -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/lms_ctr_irq_mapper.sv -library lms_ctr
-set_global_assignment -name VHDL_FILE lms_ctr/synthesis/submodules/avfifo.vhd -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/altera_reset_synchronizer.v -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/altera_reset_controller.v -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/altera_merlin_slave_translator.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/altera_merlin_slave_agent.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/altera_merlin_master_translator.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/altera_merlin_master_agent.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/altera_merlin_burst_uncompressor.sv -library lms_ctr
-set_global_assignment -name SYSTEMVERILOG_FILE lms_ctr/synthesis/submodules/altera_merlin_arbitrator.sv -library lms_ctr
-set_global_assignment -name VERILOG_FILE lms_ctr/synthesis/submodules/altera_avalon_sc_fifo.v -library lms_ctr
-set_global_assignment -name VHDL_FILE lms_ctr/synthesis/lms_ctr.vhd -library lms_ctr
 set_global_assignment -name QIP_FILE ip/fifo_8b/fifo_8b.qip
 set_global_assignment -name VHDL_FILE src/testing/pct_transfer.vhd
 set_global_assignment -name VHDL_FILE src/data_manipulation/decompress.vhd
@@ -930,11 +915,11 @@ set_global_assignment -name VHDL_FILE src/tx_path_top/tx_path/synth/tx_path_top.
 set_global_assignment -name VHDL_FILE src/tx_path_top/tx_path/synth/sync_fifo_rw.vhd
 set_global_assignment -name VHDL_FILE src/general/gpio_ctrl_top.vhd
 set_global_assignment -name VHDL_FILE src/general/gpio_ctrl.vhd
-set_global_assignment -name SDC_FILE Clock_groups.sdc
 set_global_assignment -name VHDL_FILE src/testing/rxiq_check.vhd
 set_global_assignment -name VHDL_FILE src/testing/deinterleave_ch.vhd
-set_global_assignment -name QIP_FILE ip/pcie_core/pcie_phy.qip
-set_global_assignment -name REMOVE_REDUNDANT_LOGIC_CELLS ON
-set_global_assignment -name ALLOW_SHIFT_REGISTER_MERGING_ACROSS_HIERARCHIES ALWAYS
-set_global_assignment -name AUTO_RAM_RECOGNITION ON
+set_global_assignment -name QIP_FILE ip/pll_pcie/pll_pcie.qip
+set_global_assignment -name SIGNALTAP_FILE output_files/stp2.stp
+set_global_assignment -name SIGNALTAP_FILE stp.stp
+set_global_assignment -name VHDL_FILE src/general/fifo_inst_logic.vhd
+set_global_assignment -name SIGNALTAP_FILE stpFIFOS.stp
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

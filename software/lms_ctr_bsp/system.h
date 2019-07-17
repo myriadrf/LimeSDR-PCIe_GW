@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_cpu' in SOPC Builder design 'lms_ctr'
  * SOPC Builder design path: ../../lms_ctr.sopcinfo
  *
- * Generated: Fri Nov 30 14:04:41 EET 2018
+ * Generated: Wed Jul 17 15:32:05 EEST 2019
  */
 
 /*
@@ -299,8 +299,8 @@
 #define OC_MEM_READ_DURING_WRITE_MODE "DONT_CARE"
 #define OC_MEM_SINGLE_CLOCK_OP 0
 #define OC_MEM_SIZE_MULTIPLE 1
-#define OC_MEM_SIZE_VALUE 32768
-#define OC_MEM_SPAN 32768
+#define OC_MEM_SIZE_VALUE 23552
+#define OC_MEM_SPAN 23552
 #define OC_MEM_TYPE "altera_avalon_onchip_memory2"
 #define OC_MEM_WRITABLE 1
 
@@ -468,7 +468,7 @@
 #define SYSID_QSYS_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_QSYS_0_NAME "/dev/sysid_qsys_0"
 #define SYSID_QSYS_0_SPAN 8
-#define SYSID_QSYS_0_TIMESTAMP 1455636742
+#define SYSID_QSYS_0_TIMESTAMP 1563366344
 #define SYSID_QSYS_0_TYPE "altera_avalon_sysid_qsys"
 
 

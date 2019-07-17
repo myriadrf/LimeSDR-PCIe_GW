@@ -91,12 +91,30 @@ unsigned char Check_many_blocks (unsigned char block_size)
  */
 void getFifoData(uint8_t *buf, uint8_t k)
 {
+
 	uint8_t cnt = 0;
 
+	for(cnt=0; cnt<k; cnt=cnt+4)
+	{
+		buf[cnt+3] = IORD(AV_FIFO_INT_0_BASE, 1);	// Read Data from FIFO
+		buf[cnt+2] = IORD(AV_FIFO_INT_0_BASE, 1);	// Read Data from FIFO
+		buf[cnt+1] = IORD(AV_FIFO_INT_0_BASE, 1);	// Read Data from FIFO
+		buf[cnt] = IORD(AV_FIFO_INT_0_BASE, 1);	// Read Data from FIFO
+	};
+	/* ORIGINAL
 	for(cnt=0; cnt<k; cnt++)
 	{
 		buf[cnt] = IORD(AV_FIFO_INT_0_BASE, 1);	// Read Data from FIFO
 	};
+	*/
+	/* DEBUG
+	// debug qword byte endianness switch
+	for(uint8_t bigcnt=1; bigcnt<17; bigcnt++){
+		for(uint8_t smallcnt=0; smallcnt <4; smallcnt++)
+			buf[bigcnt*4 - smallcnt - 1] = IORD(AV_FIFO_INT_0_BASE, 1);
+	}
+	*/
+
 }
 
 
