@@ -70,6 +70,7 @@ entity rxtx_top is
       tx_in_pct_data          : in     std_logic_vector(TX_IN_PCT_DATA_W-1 downto 0);
       tx_in_pct_rdempty       : in     std_logic;
       tx_in_pct_rdusedw       : in     std_logic_vector(TX_IN_PCT_RDUSEDW_W-1 downto 0);
+		tx_in_pct_reset_n_req   : out    std_logic;
       
       -- WFM Player
       wfm_pll_ref_clk         : in     std_logic;
@@ -223,7 +224,8 @@ begin
       --fifo ports
       fifo_rdreq           => tx_in_pct_rdreq,
       fifo_data            => tx_in_pct_data,
-      fifo_rdempty         => tx_in_pct_rdempty
+      fifo_rdempty         => tx_in_pct_rdempty,
+		fifo_reset_n_req		=> TX_IN_PCT_RESET_N_REQ
       );
       
       

@@ -31,7 +31,7 @@ entity lms7_trx_top is
       -- Host related
       g_HOST2FPGA_S0_0_SIZE   : integer := 4096;   -- Stream, Host->FPGA, TX FIFO size in bytes, 
       g_HOST2FPGA_S0_1_SIZE   : integer := 4096;   -- Stream, Host->FPGA, WFM FIFO size in bytes
-      g_FPGA2HOST_S0_0_SIZE   : integer := 8192;   -- Stream, FPGA->Host, FIFO size in bytes
+      g_FPGA2HOST_S0_0_SIZE   : integer := 2048;   -- Stream, FPGA->Host, FIFO size in bytes
       g_HOST2FPGA_C0_0_SIZE   : integer := 1024;   -- Control, Host->FPGA, FIFO size in bytes
       g_FPGA2HOST_C0_0_SIZE   : integer := 1024;   -- Control, FPGA->Host, FIFO size in bytes
       -- TX interface 
@@ -468,7 +468,7 @@ begin
       g_F2H_C0_WWIDTH            => c_F2H_C0_WWIDTH 
    )
    port map(
-      clk            => CLK125_FPGA,    -- Input clock for PLL
+      clk            		=> CLK125_FPGA,    -- Input clock for PLL
       reset_n              => reset_n,
       -- PCIe interface
       pcie_perstn          => PCIE_PERSTN, 
@@ -477,7 +477,7 @@ begin
       pcie_tx              => PCIE_HSI_IC,
       pcie_bus_clk         => open,  -- PCIe data clock output
       
-      H2F_S0_sel         => inst0_from_fpgacfg.wfm_load,
+      H2F_S0_sel           => inst0_from_fpgacfg.wfm_load,
       --Stream endpoint FIFO (Host->FPGA) 
       H2F_S0_0_rdclk       => inst1_txpll_c1,
       H2F_S0_0_aclrn       => inst6_tx_in_pct_reset_n_req,
@@ -647,6 +647,7 @@ begin
       RX_PCT_BUFF_WRUSEDW_W   => c_F2H_S0_WRUSEDW_WIDTH, --bus width in bits 
       
       -- WFM
+      WFM_IN_PCT_RDUSEDW_W    => c_H2F_S0_1_RDUSEDW_WIDTH,
       --DDR2 controller parameters
       WFM_CNTRL_RATE          => 1, --1 - full rate, 2 - half rate
       WFM_CNTRL_BUS_SIZE      => 16,
@@ -676,6 +677,7 @@ begin
       tx_in_pct_data          => inst2_H2F_S0_0_rdata,
       tx_in_pct_rdempty       => inst2_H2F_S0_0_rempty,
       tx_in_pct_rdusedw       => inst2_H2F_S0_0_rdusedw,
+		tx_in_pct_reset_n_req   => inst6_tx_in_pct_reset_n_req,
       
       -- WFM Player
       wfm_pll_ref_clk         => CLK50_FPGA,

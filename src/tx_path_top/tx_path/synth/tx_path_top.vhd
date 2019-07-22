@@ -60,7 +60,8 @@ entity tx_path_top is
       --FIFO ports
       fifo_rdreq           : out std_logic;
       fifo_data            : in std_logic_vector(g_FIFO_DATA_W-1 downto 0);
-      fifo_rdempty         : in std_logic
+      fifo_rdempty         : in std_logic;
+		fifo_reset_n_req		: out std_logic
       );
 end tx_path_top;
 
@@ -350,7 +351,7 @@ inst0_one_pct_fifo : entity work.one_pct_fifo
       smpl_buff_rdreq   => inst2_fifo_rdreq
         );
         
-        
+FIFO_RESET_N_REQ	    <= inst1_in_pct_reset_n_req;        
 pct_rdy_combined_vect <= inst1_in_pct_buff_rdy & inst1_smpl_buff_wrfull;
         
                
