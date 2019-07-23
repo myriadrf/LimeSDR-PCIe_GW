@@ -1093,14 +1093,14 @@ wire [65:0] pcie_dma_tx_fifo_syncfifo_din;
 wire [65:0] pcie_dma_tx_fifo_syncfifo_dout;
 reg [10:0] pcie_dma_tx_fifo_level0 = 11'd0;
 reg pcie_dma_tx_fifo_replace = 1'd0;
-reg [9:0] pcie_dma_tx_fifo_produce = 10'd0;
-reg [9:0] pcie_dma_tx_fifo_consume = 10'd0;
-reg [9:0] pcie_dma_tx_fifo_wrport_adr = 10'd0;
+reg [8:0] pcie_dma_tx_fifo_produce = 9'd0;
+reg [8:0] pcie_dma_tx_fifo_consume = 9'd0;
+reg [8:0] pcie_dma_tx_fifo_wrport_adr = 9'd0;
 wire [65:0] pcie_dma_tx_fifo_wrport_dat_r;
 wire pcie_dma_tx_fifo_wrport_we;
 wire [65:0] pcie_dma_tx_fifo_wrport_dat_w;
 wire pcie_dma_tx_fifo_do_read;
-wire [9:0] pcie_dma_tx_fifo_rdport_adr;
+wire [8:0] pcie_dma_tx_fifo_rdport_adr;
 wire [65:0] pcie_dma_tx_fifo_rdport_dat_r;
 wire pcie_dma_tx_fifo_rdport_re;
 wire [10:0] pcie_dma_tx_fifo_level1;
@@ -1130,14 +1130,14 @@ wire [65:0] pcie_dma_rx_fifo_syncfifo_din;
 wire [65:0] pcie_dma_rx_fifo_syncfifo_dout;
 reg [10:0] pcie_dma_rx_fifo_level0 = 11'd0;
 reg pcie_dma_rx_fifo_replace = 1'd0;
-reg [9:0] pcie_dma_rx_fifo_produce = 10'd0;
-reg [9:0] pcie_dma_rx_fifo_consume = 10'd0;
-reg [9:0] pcie_dma_rx_fifo_wrport_adr = 10'd0;
+reg [8:0] pcie_dma_rx_fifo_produce = 9'd0;
+reg [8:0] pcie_dma_rx_fifo_consume = 9'd0;
+reg [8:0] pcie_dma_rx_fifo_wrport_adr = 9'd0;
 wire [65:0] pcie_dma_rx_fifo_wrport_dat_r;
 wire pcie_dma_rx_fifo_wrport_we;
 wire [65:0] pcie_dma_rx_fifo_wrport_dat_w;
 wire pcie_dma_rx_fifo_do_read;
-wire [9:0] pcie_dma_rx_fifo_rdport_adr;
+wire [8:0] pcie_dma_rx_fifo_rdport_adr;
 wire [65:0] pcie_dma_rx_fifo_rdport_dat_r;
 wire pcie_dma_rx_fifo_rdport_re;
 wire [10:0] pcie_dma_rx_fifo_level1;
@@ -1391,14 +1391,14 @@ wire [165:0] subfragments_syncfifo0_syncfifo0_din;
 wire [165:0] subfragments_syncfifo0_syncfifo0_dout;
 reg [9:0] subfragments_syncfifo0_level0 = 10'd0;
 reg subfragments_syncfifo0_replace = 1'd0;
-reg [8:0] subfragments_syncfifo0_produce = 9'd0;
-reg [8:0] subfragments_syncfifo0_consume = 9'd0;
-reg [8:0] subfragments_syncfifo0_wrport_adr = 9'd0;
+reg [6:0] subfragments_syncfifo0_produce = 7'd0;
+reg [6:0] subfragments_syncfifo0_consume = 7'd0;
+reg [6:0] subfragments_syncfifo0_wrport_adr = 7'd0;
 wire [165:0] subfragments_syncfifo0_wrport_dat_r;
 wire subfragments_syncfifo0_wrport_we;
 wire [165:0] subfragments_syncfifo0_wrport_dat_w;
 wire subfragments_syncfifo0_do_read;
-wire [8:0] subfragments_syncfifo0_rdport_adr;
+wire [6:0] subfragments_syncfifo0_rdport_adr;
 wire [165:0] subfragments_syncfifo0_rdport_dat_r;
 wire subfragments_syncfifo0_rdport_re;
 wire [9:0] subfragments_syncfifo0_level1;
@@ -1464,14 +1464,14 @@ wire [165:0] subfragments_syncfifo1_syncfifo1_din;
 wire [165:0] subfragments_syncfifo1_syncfifo1_dout;
 reg [9:0] subfragments_syncfifo1_level0 = 10'd0;
 reg subfragments_syncfifo1_replace = 1'd0;
-reg [8:0] subfragments_syncfifo1_produce = 9'd0;
-reg [8:0] subfragments_syncfifo1_consume = 9'd0;
-reg [8:0] subfragments_syncfifo1_wrport_adr = 9'd0;
+reg [6:0] subfragments_syncfifo1_produce = 7'd0;
+reg [6:0] subfragments_syncfifo1_consume = 7'd0;
+reg [6:0] subfragments_syncfifo1_wrport_adr = 7'd0;
 wire [165:0] subfragments_syncfifo1_wrport_dat_r;
 wire subfragments_syncfifo1_wrport_we;
 wire [165:0] subfragments_syncfifo1_wrport_dat_w;
 wire subfragments_syncfifo1_do_read;
-wire [8:0] subfragments_syncfifo1_rdport_adr;
+wire [6:0] subfragments_syncfifo1_rdport_adr;
 wire [165:0] subfragments_syncfifo1_rdport_dat_r;
 wire subfragments_syncfifo1_rdport_re;
 wire [9:0] subfragments_syncfifo1_level1;
@@ -1537,14 +1537,14 @@ wire [165:0] subfragments_syncfifo2_syncfifo2_din;
 wire [165:0] subfragments_syncfifo2_syncfifo2_dout;
 reg [9:0] subfragments_syncfifo2_level0 = 10'd0;
 reg subfragments_syncfifo2_replace = 1'd0;
-reg [8:0] subfragments_syncfifo2_produce = 9'd0;
-reg [8:0] subfragments_syncfifo2_consume = 9'd0;
-reg [8:0] subfragments_syncfifo2_wrport_adr = 9'd0;
+reg [6:0] subfragments_syncfifo2_produce = 7'd0;
+reg [6:0] subfragments_syncfifo2_consume = 7'd0;
+reg [6:0] subfragments_syncfifo2_wrport_adr = 7'd0;
 wire [165:0] subfragments_syncfifo2_wrport_dat_r;
 wire subfragments_syncfifo2_wrport_we;
 wire [165:0] subfragments_syncfifo2_wrport_dat_w;
 wire subfragments_syncfifo2_do_read;
-wire [8:0] subfragments_syncfifo2_rdport_adr;
+wire [6:0] subfragments_syncfifo2_rdport_adr;
 wire [165:0] subfragments_syncfifo2_rdport_dat_r;
 wire subfragments_syncfifo2_rdport_re;
 wire [9:0] subfragments_syncfifo2_level1;
@@ -1610,14 +1610,14 @@ wire [165:0] subfragments_syncfifo3_syncfifo3_din;
 wire [165:0] subfragments_syncfifo3_syncfifo3_dout;
 reg [9:0] subfragments_syncfifo3_level0 = 10'd0;
 reg subfragments_syncfifo3_replace = 1'd0;
-reg [8:0] subfragments_syncfifo3_produce = 9'd0;
-reg [8:0] subfragments_syncfifo3_consume = 9'd0;
-reg [8:0] subfragments_syncfifo3_wrport_adr = 9'd0;
+reg [6:0] subfragments_syncfifo3_produce = 7'd0;
+reg [6:0] subfragments_syncfifo3_consume = 7'd0;
+reg [6:0] subfragments_syncfifo3_wrport_adr = 7'd0;
 wire [165:0] subfragments_syncfifo3_wrport_dat_r;
 wire subfragments_syncfifo3_wrport_we;
 wire [165:0] subfragments_syncfifo3_wrport_dat_w;
 wire subfragments_syncfifo3_do_read;
-wire [8:0] subfragments_syncfifo3_rdport_adr;
+wire [6:0] subfragments_syncfifo3_rdport_adr;
 wire [165:0] subfragments_syncfifo3_rdport_dat_r;
 wire subfragments_syncfifo3_rdport_re;
 wire [9:0] subfragments_syncfifo3_level1;
@@ -3137,7 +3137,7 @@ assign subfragments_syncfifo0_re = subfragments_syncfifo0_source_ready;
 assign subfragments_syncfifo0_syncfifo0_re = (subfragments_syncfifo0_syncfifo0_readable & ((~subfragments_syncfifo0_readable) | subfragments_syncfifo0_re));
 assign subfragments_syncfifo0_level1 = (subfragments_syncfifo0_level0 + subfragments_syncfifo0_readable);
 always @(*) begin
-	subfragments_syncfifo0_wrport_adr <= 9'd0;
+	subfragments_syncfifo0_wrport_adr <= 7'd0;
 	if (subfragments_syncfifo0_replace) begin
 		subfragments_syncfifo0_wrport_adr <= (subfragments_syncfifo0_produce - 1'd1);
 	end else begin
@@ -3185,7 +3185,7 @@ assign subfragments_syncfifo1_re = subfragments_syncfifo1_source_ready;
 assign subfragments_syncfifo1_syncfifo1_re = (subfragments_syncfifo1_syncfifo1_readable & ((~subfragments_syncfifo1_readable) | subfragments_syncfifo1_re));
 assign subfragments_syncfifo1_level1 = (subfragments_syncfifo1_level0 + subfragments_syncfifo1_readable);
 always @(*) begin
-	subfragments_syncfifo1_wrport_adr <= 9'd0;
+	subfragments_syncfifo1_wrport_adr <= 7'd0;
 	if (subfragments_syncfifo1_replace) begin
 		subfragments_syncfifo1_wrport_adr <= (subfragments_syncfifo1_produce - 1'd1);
 	end else begin
@@ -3233,7 +3233,7 @@ assign subfragments_syncfifo2_re = subfragments_syncfifo2_source_ready;
 assign subfragments_syncfifo2_syncfifo2_re = (subfragments_syncfifo2_syncfifo2_readable & ((~subfragments_syncfifo2_readable) | subfragments_syncfifo2_re));
 assign subfragments_syncfifo2_level1 = (subfragments_syncfifo2_level0 + subfragments_syncfifo2_readable);
 always @(*) begin
-	subfragments_syncfifo2_wrport_adr <= 9'd0;
+	subfragments_syncfifo2_wrport_adr <= 7'd0;
 	if (subfragments_syncfifo2_replace) begin
 		subfragments_syncfifo2_wrport_adr <= (subfragments_syncfifo2_produce - 1'd1);
 	end else begin
@@ -3281,7 +3281,7 @@ assign subfragments_syncfifo3_re = subfragments_syncfifo3_source_ready;
 assign subfragments_syncfifo3_syncfifo3_re = (subfragments_syncfifo3_syncfifo3_readable & ((~subfragments_syncfifo3_readable) | subfragments_syncfifo3_re));
 assign subfragments_syncfifo3_level1 = (subfragments_syncfifo3_level0 + subfragments_syncfifo3_readable);
 always @(*) begin
-	subfragments_syncfifo3_wrport_adr <= 9'd0;
+	subfragments_syncfifo3_wrport_adr <= 7'd0;
 	if (subfragments_syncfifo3_replace) begin
 		subfragments_syncfifo3_wrport_adr <= (subfragments_syncfifo3_produce - 1'd1);
 	end else begin
@@ -3924,7 +3924,7 @@ assign pcie_dma_tx_fifo_re = pcie_dma_tx_fifo_source_ready;
 assign pcie_dma_tx_fifo_syncfifo_re = (pcie_dma_tx_fifo_syncfifo_readable & ((~pcie_dma_tx_fifo_readable) | pcie_dma_tx_fifo_re));
 assign pcie_dma_tx_fifo_level1 = (pcie_dma_tx_fifo_level0 + pcie_dma_tx_fifo_readable);
 always @(*) begin
-	pcie_dma_tx_fifo_wrport_adr <= 10'd0;
+	pcie_dma_tx_fifo_wrport_adr <= 9'd0;
 	if (pcie_dma_tx_fifo_replace) begin
 		pcie_dma_tx_fifo_wrport_adr <= (pcie_dma_tx_fifo_produce - 1'd1);
 	end else begin
@@ -3954,7 +3954,7 @@ assign pcie_dma_rx_fifo_re = pcie_dma_rx_fifo_source_ready;
 assign pcie_dma_rx_fifo_syncfifo_re = (pcie_dma_rx_fifo_syncfifo_readable & ((~pcie_dma_rx_fifo_readable) | pcie_dma_rx_fifo_re));
 assign pcie_dma_rx_fifo_level1 = (pcie_dma_rx_fifo_level0 + pcie_dma_rx_fifo_readable);
 always @(*) begin
-	pcie_dma_rx_fifo_wrport_adr <= 10'd0;
+	pcie_dma_rx_fifo_wrport_adr <= 9'd0;
 	if (pcie_dma_rx_fifo_replace) begin
 		pcie_dma_rx_fifo_wrport_adr <= (pcie_dma_rx_fifo_produce - 1'd1);
 	end else begin
@@ -5471,12 +5471,12 @@ always @(posedge sys_clk) begin
 		pcie_dma_re <= 1'd0;
 		pcie_dma_tx_fifo_readable <= 1'd0;
 		pcie_dma_tx_fifo_level0 <= 11'd0;
-		pcie_dma_tx_fifo_produce <= 10'd0;
-		pcie_dma_tx_fifo_consume <= 10'd0;
+		pcie_dma_tx_fifo_produce <= 9'd0;
+		pcie_dma_tx_fifo_consume <= 9'd0;
 		pcie_dma_rx_fifo_readable <= 1'd0;
 		pcie_dma_rx_fifo_level0 <= 11'd0;
-		pcie_dma_rx_fifo_produce <= 10'd0;
-		pcie_dma_rx_fifo_consume <= 10'd0;
+		pcie_dma_rx_fifo_produce <= 9'd0;
+		pcie_dma_rx_fifo_consume <= 9'd0;
 		pcie_msi_storage_full <= 32'd0;
 		pcie_msi_re <= 1'd0;
 		pcie_msi_status <= 32'd0;
@@ -5494,20 +5494,20 @@ always @(posedge sys_clk) begin
 		subfragments_tags_consume1 <= 5'd0;
 		subfragments_syncfifo0_readable <= 1'd0;
 		subfragments_syncfifo0_level0 <= 10'd0;
-		subfragments_syncfifo0_produce <= 9'd0;
-		subfragments_syncfifo0_consume <= 9'd0;
+		subfragments_syncfifo0_produce <= 7'd0;
+		subfragments_syncfifo0_consume <= 7'd0;
 		subfragments_syncfifo1_readable <= 1'd0;
 		subfragments_syncfifo1_level0 <= 10'd0;
-		subfragments_syncfifo1_produce <= 9'd0;
-		subfragments_syncfifo1_consume <= 9'd0;
+		subfragments_syncfifo1_produce <= 7'd0;
+		subfragments_syncfifo1_consume <= 7'd0;
 		subfragments_syncfifo2_readable <= 1'd0;
 		subfragments_syncfifo2_level0 <= 10'd0;
-		subfragments_syncfifo2_produce <= 9'd0;
-		subfragments_syncfifo2_consume <= 9'd0;
+		subfragments_syncfifo2_produce <= 7'd0;
+		subfragments_syncfifo2_consume <= 7'd0;
 		subfragments_syncfifo3_readable <= 1'd0;
 		subfragments_syncfifo3_level0 <= 10'd0;
-		subfragments_syncfifo3_produce <= 9'd0;
-		subfragments_syncfifo3_consume <= 9'd0;
+		subfragments_syncfifo3_produce <= 7'd0;
+		subfragments_syncfifo3_consume <= 7'd0;
 		subfragments_tag_init <= 2'd0;
 		subfragments_grant <= 1'd0;
 		subfragments_status0_first <= 1'd1;
@@ -5553,7 +5553,7 @@ end
 
 assign litepciecore_sram_dat_r = mem[memadr];
 
-(* ramstyle = "LOGIC" *) reg [7:0] mem_1[0:43];
+(* ramstyle = "placeholderLOGIC" *) reg [7:0] mem_1[0:43];
 reg [5:0] memadr_1;
 always @(posedge sys_clk) begin
 	memadr_1 <= litepciecore_adr;
@@ -5581,7 +5581,7 @@ end
 assign pcie_phy_tx_cdc_wrport_dat_r = storage[memadr_2];
 assign pcie_phy_tx_cdc_rdport_dat_r = storage[memadr_3];
 
-(* ramstyle = "LOGIC" *) reg [73:0] storage_1[0:31];
+(* ramstyle = "placeholderLOGIC" *) reg [73:0] storage_1[0:31];
 reg [4:0] memadr_4;
 reg [4:0] memadr_5;
 always @(posedge pcie_clk) begin
@@ -5597,7 +5597,7 @@ end
 assign pcie_phy_rx_cdc_wrport_dat_r = storage_1[memadr_4];
 assign pcie_phy_rx_cdc_rdport_dat_r = storage_1[memadr_5];
 
-(* ramstyle = "LOGIC" *) reg [9:0] storage_2[0:3];
+(* ramstyle = "placeholderLOGIC" *) reg [9:0] storage_2[0:3];
 reg [1:0] memadr_6;
 reg [1:0] memadr_7;
 always @(posedge sys_clk) begin
@@ -5613,7 +5613,7 @@ end
 assign pcie_phy_msi_cdc_wrport_dat_r = storage_2[memadr_6];
 assign pcie_phy_msi_cdc_rdport_dat_r = storage_2[memadr_7];
 
-(* ramstyle = "LOGIC" *) reg [73:0] storage_3[0:3];
+(* ramstyle = "placeholderLOGIC" *) reg [73:0] storage_3[0:3];
 reg [73:0] memdat;
 always @(posedge pcie_clk) begin
 	if (pcie_phy_buf_wrport_we)
@@ -5689,7 +5689,7 @@ end
 assign pcie_dma_reader_fifo_wrport_dat_r = memdat_5;
 assign pcie_dma_reader_fifo_rdport_dat_r = memdat_6;
 
-reg [65:0] storage_8[0:1023];
+reg [65:0] storage_8[0:511];
 reg [65:0] memdat_7;
 reg [65:0] memdat_8;
 always @(posedge sys_clk) begin
@@ -5706,7 +5706,7 @@ end
 assign pcie_dma_tx_fifo_wrport_dat_r = memdat_7;
 assign pcie_dma_tx_fifo_rdport_dat_r = memdat_8;
 
-reg [65:0] storage_9[0:1023];
+reg [65:0] storage_9[0:511];
 reg [65:0] memdat_9;
 reg [65:0] memdat_10;
 always @(posedge sys_clk) begin
@@ -5810,69 +5810,69 @@ end
 assign subfragments_tags_wrport_dat_r1 = memdat_13;
 assign subfragments_tags_rdport_dat_r1 = memdat_14;
 
-reg [165:0] storage_12[0:511];
+reg [165:0] storage_12[0:63];
 reg [165:0] memdat_15;
 reg [165:0] memdat_16;
 always @(posedge sys_clk) begin
 	if (subfragments_syncfifo0_wrport_we)
-		storage_12[subfragments_syncfifo0_wrport_adr] <= subfragments_syncfifo0_wrport_dat_w;
-	memdat_15 <= storage_12[subfragments_syncfifo0_wrport_adr];
+		storage_12[subfragments_syncfifo0_wrport_adr[5:0]] <= subfragments_syncfifo0_wrport_dat_w;
+	memdat_15 <= storage_12[subfragments_syncfifo0_wrport_adr[5:0]];
 end
 
 always @(posedge sys_clk) begin
 	if (subfragments_syncfifo0_rdport_re)
-		memdat_16 <= storage_12[subfragments_syncfifo0_rdport_adr];
+		memdat_16 <= storage_12[subfragments_syncfifo0_rdport_adr[5:0]];
 end
 
 assign subfragments_syncfifo0_wrport_dat_r = memdat_15;
 assign subfragments_syncfifo0_rdport_dat_r = memdat_16;
 
-reg [165:0] storage_13[0:511];
+reg [165:0] storage_13[0:63];
 reg [165:0] memdat_17;
 reg [165:0] memdat_18;
 always @(posedge sys_clk) begin
 	if (subfragments_syncfifo1_wrport_we)
-		storage_13[subfragments_syncfifo1_wrport_adr] <= subfragments_syncfifo1_wrport_dat_w;
-	memdat_17 <= storage_13[subfragments_syncfifo1_wrport_adr];
+		storage_13[subfragments_syncfifo1_wrport_adr[5:0]] <= subfragments_syncfifo1_wrport_dat_w;
+	memdat_17 <= storage_13[subfragments_syncfifo1_wrport_adr[5:0]];
 end
 
 always @(posedge sys_clk) begin
 	if (subfragments_syncfifo1_rdport_re)
-		memdat_18 <= storage_13[subfragments_syncfifo1_rdport_adr];
+		memdat_18 <= storage_13[subfragments_syncfifo1_rdport_adr[5:0]];
 end
 
 assign subfragments_syncfifo1_wrport_dat_r = memdat_17;
 assign subfragments_syncfifo1_rdport_dat_r = memdat_18;
 
-reg [165:0] storage_14[0:511];
+reg [165:0] storage_14[0:63];
 reg [165:0] memdat_19;
 reg [165:0] memdat_20;
 always @(posedge sys_clk) begin
 	if (subfragments_syncfifo2_wrport_we)
-		storage_14[subfragments_syncfifo2_wrport_adr] <= subfragments_syncfifo2_wrport_dat_w;
-	memdat_19 <= storage_14[subfragments_syncfifo2_wrport_adr];
+		storage_14[subfragments_syncfifo2_wrport_adr[5:0]] <= subfragments_syncfifo2_wrport_dat_w;
+	memdat_19 <= storage_14[subfragments_syncfifo2_wrport_adr[5:0]];
 end
 
 always @(posedge sys_clk) begin
 	if (subfragments_syncfifo2_rdport_re)
-		memdat_20 <= storage_14[subfragments_syncfifo2_rdport_adr];
+		memdat_20 <= storage_14[subfragments_syncfifo2_rdport_adr[5:0]];
 end
 
 assign subfragments_syncfifo2_wrport_dat_r = memdat_19;
 assign subfragments_syncfifo2_rdport_dat_r = memdat_20;
 
-reg [165:0] storage_15[0:511];
+reg [165:0] storage_15[0:63];
 reg [165:0] memdat_21;
 reg [165:0] memdat_22;
 always @(posedge sys_clk) begin
 	if (subfragments_syncfifo3_wrport_we)
-		storage_15[subfragments_syncfifo3_wrport_adr] <= subfragments_syncfifo3_wrport_dat_w;
-	memdat_21 <= storage_15[subfragments_syncfifo3_wrport_adr];
+		storage_15[subfragments_syncfifo3_wrport_adr[5:0]] <= subfragments_syncfifo3_wrport_dat_w;
+	memdat_21 <= storage_15[subfragments_syncfifo3_wrport_adr[5:0]];
 end
 
 always @(posedge sys_clk) begin
 	if (subfragments_syncfifo3_rdport_re)
-		memdat_22 <= storage_15[subfragments_syncfifo3_rdport_adr];
+		memdat_22 <= storage_15[subfragments_syncfifo3_rdport_adr[5:0]];
 end
 
 assign subfragments_syncfifo3_wrport_dat_r = memdat_21;
