@@ -2,3 +2,9 @@ Release 2.11 (2019-05-07)
 ==========================
 TX path changes:
 - Modified txiq module to output zero samples if FIFO is empty after enable
+
+Release 2.12 (2019-10-01)
+==========================
+Programming file changes:
+- Changed Active Serial configuration frequency from 20MHz to 40MHz. 
+- Added bitstream compression option in .jic file generation
